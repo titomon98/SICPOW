@@ -72081,7 +72081,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\JoshuaDIH\Documents\Universidad\Proyecto de Carrera\Ministerio_Salud\resources\assets\js\app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\josea\Desktop\Proyecto Censo\VersionFinal\SICPOW\resources\assets\js\app.js */"./resources/assets/js/app.js");
 
 
 /***/ })
