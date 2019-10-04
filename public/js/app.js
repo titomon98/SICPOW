@@ -2089,8 +2089,81 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2147,21 +2220,369 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    var _ref;
-
-    return _ref = {
-      varMunicipio: null,
-      charMunicipio: null,
-      prueba1: []
-    }, _defineProperty(_ref, "varMunicipio", []), _defineProperty(_ref, "varTotalMunicipios", []), _ref;
+    return {
+      varMujeres: null,
+      //aqui se hace referencia al html
+      charMujeres: null,
+      //aqui se guarda el grafico
+      mujeres: [],
+      //aqui se guardan todos los datos
+      varTotalMujeres: [],
+      //total del texto chiquito que aparece abajo
+      varMesMujeres: [],
+      //texto chiquito que aparece abajo
+      varMujeresN: null,
+      //aqui se hace referencia al html
+      charMujeresN: null,
+      //aqui se guarda el grafico
+      mujeresN: [],
+      //aqui se guardan todos los datos
+      varTotalMujeresN: [],
+      //total del texto chiquito que aparece abajo
+      varMesMujeresN: [],
+      varHombres: null,
+      charHombres: null,
+      hombres: [],
+      varTotalHombres: [],
+      varMesHombres: [],
+      varHombresN: null,
+      charHombresN: null,
+      hombresN: [],
+      varTotalHombresN: [],
+      varMesHombresN: [],
+      varFallecidos: null,
+      charFallecidos: null,
+      fallecidos: [],
+      varTotalFallecidos: [],
+      varMesFallecidos: [],
+      varMunicipios: null,
+      charMunicipios: null,
+      municipios: [],
+      varTotalMunicipios: [],
+      varMesMunicipios: [],
+      varEntidad: null,
+      charEntidad: null,
+      entidad: [],
+      varTotalEntidad: [],
+      varMesEntidad: []
+    };
   },
   methods: {
+    getMujeres: function getMujeres() {
+      var me = this;
+      var url = '/dashboard';
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+        me.mujeres = respuesta.mujeres;
+        me.loadMujeres();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    loadMujeres: function loadMujeres() {
+      var me = this;
+      me.mujeres.map(function (x) {
+        if (x.mes == 1) {
+          me.varMesMujeres.push('Enero');
+        } else if (x.mes == 2) {
+          me.varMesMujeres.push('Febrero');
+        } else if (x.mes == 3) {
+          me.varMesMujeres.push('Marzo');
+        } else if (x.mes == 4) {
+          me.varMesMujeres.push('Abril');
+        } else if (x.mes == 5) {
+          me.varMesMujeres.push('Mayo');
+        } else if (x.mes == 6) {
+          me.varMesMujeres.push('Junio');
+        } else if (x.mes == 7) {
+          me.varMesMujeres.push('Julio');
+        } else if (x.mes == 8) {
+          me.varMesMujeres.push('Agosto');
+        } else if (x.mes == 9) {
+          me.varMesMujeres.push('Septiembre');
+        } else if (x.mes == 10) {
+          me.varMesMujeres.push('Octubre');
+        } else if (x.mes == 11) {
+          me.varMesMujeres.push('Noviembre');
+        } else if (x.mes == 12) {
+          me.varMesMujeres.push('Diciembre');
+        }
+
+        me.varTotalMujeres.push(x.total);
+      });
+      me.varMujeres = document.getElementById('mujeres').getContext('2d');
+      me.charMujeres = new Chart(me.varMujeres, {
+        type: 'bar',
+        data: {
+          labels: me.varMesMujeres,
+          datasets: [{
+            label: 'Personas',
+            data: me.varTotalMujeres,
+            backgroundColor: 'rgba(255, 99, 132, 1)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+    },
+    getMujeresN: function getMujeresN() {
+      var me = this;
+      var url = '/dashboard';
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+        me.mujeresN = respuesta.mujeresN;
+        me.loadMujeresN();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    loadMujeresN: function loadMujeresN() {
+      var me = this;
+      me.mujeresN.map(function (x) {
+        if (x.mes == 1) {
+          me.varMesMujeresN.push('Enero');
+        } else if (x.mes == 2) {
+          me.varMesMujeresN.push('Febrero');
+        } else if (x.mes == 3) {
+          me.varMesMujeresN.push('Marzo');
+        } else if (x.mes == 4) {
+          me.varMesMujeresN.push('Abril');
+        } else if (x.mes == 5) {
+          me.varMesMujeresN.push('Mayo');
+        } else if (x.mes == 6) {
+          me.varMesMujeresN.push('Junio');
+        } else if (x.mes == 7) {
+          me.varMesMujeresN.push('Julio');
+        } else if (x.mes == 8) {
+          me.varMesMujeresN.push('Agosto');
+        } else if (x.mes == 9) {
+          me.varMesMujeresN.push('Septiembre');
+        } else if (x.mes == 10) {
+          me.varMesMujeresN.push('Octubre');
+        } else if (x.mes == 11) {
+          me.varMesMujeresN.push('Noviembre');
+        } else if (x.mes == 12) {
+          me.varMesMujeresN.push('Diciembre');
+        }
+
+        me.varTotalMujeresN.push(x.total);
+      });
+      me.varMujeresN = document.getElementById('mujeresN').getContext('2d');
+      me.charMujeresN = new Chart(me.varMujeresN, {
+        type: 'bar',
+        data: {
+          labels: me.varMesMujeresN,
+          datasets: [{
+            label: 'Personas',
+            data: me.varTotalMujeresN,
+            backgroundColor: 'rgba(255, 99, 132, 1)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+    },
+    getHombres: function getHombres() {
+      var me = this;
+      var url = '/dashboard';
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+        me.hombres = respuesta.hombres;
+        me.loadHombres();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    loadHombres: function loadHombres() {
+      var me = this;
+      me.hombres.map(function (x) {
+        if (x.mes == 1) {
+          me.varMesHombres.push('Enero');
+        } else if (x.mes == 2) {
+          me.varMesHombres.push('Febrero');
+        } else if (x.mes == 3) {
+          me.varMesHombres.push('Marzo');
+        } else if (x.mes == 4) {
+          me.varMesHombres.push('Abril');
+        } else if (x.mes == 5) {
+          me.varMesHombres.push('Mayo');
+        } else if (x.mes == 6) {
+          me.varMesHombres.push('Junio');
+        } else if (x.mes == 7) {
+          me.varMesHombres.push('Julio');
+        } else if (x.mes == 8) {
+          me.varMesHombres.push('Agosto');
+        } else if (x.mes == 9) {
+          me.varMesHombres.push('Septiembre');
+        } else if (x.mes == 10) {
+          me.varMesHombres.push('Octubre');
+        } else if (x.mes == 11) {
+          me.varMesHombres.push('Noviembre');
+        } else if (x.mes == 12) {
+          me.varMesHombres.push('Diciembre');
+        }
+
+        me.varTotalHombres.push(x.total);
+      });
+      me.varHombres = document.getElementById('hombres').getContext('2d');
+      me.charHombres = new Chart(me.varHombres, {
+        type: 'bar',
+        data: {
+          labels: me.varMesHombres,
+          datasets: [{
+            label: 'Personas',
+            data: me.varTotalHombres,
+            backgroundColor: 'rgba(132, 99, 255, 1)',
+            borderColor: 'rgba(132, 99, 255, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+    },
+    getHombresN: function getHombresN() {
+      var me = this;
+      var url = '/dashboard';
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+        me.hombresN = respuesta.hombresN;
+        me.loadHombresN();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    loadHombresN: function loadHombresN() {
+      var me = this;
+      me.hombresN.map(function (x) {
+        if (x.mes == 1) {
+          me.varMesHombresN.push('Enero');
+        } else if (x.mes == 2) {
+          me.varMesHombresN.push('Febrero');
+        } else if (x.mes == 3) {
+          me.varMesHombresN.push('Marzo');
+        } else if (x.mes == 4) {
+          me.varMesHombresN.push('Abril');
+        } else if (x.mes == 5) {
+          me.varMesHombresN.push('Mayo');
+        } else if (x.mes == 6) {
+          me.varMesHombresN.push('Junio');
+        } else if (x.mes == 7) {
+          me.varMesHombresN.push('Julio');
+        } else if (x.mes == 8) {
+          me.varMesHombresN.push('Agosto');
+        } else if (x.mes == 9) {
+          me.varMesHombresN.push('Septiembre');
+        } else if (x.mes == 10) {
+          me.varMesHombresN.push('Octubre');
+        } else if (x.mes == 11) {
+          me.varMesHombresN.push('Noviembre');
+        } else if (x.mes == 12) {
+          me.varMesHombresN.push('Diciembre');
+        }
+
+        me.varTotalHombresN.push(x.total);
+      });
+      me.varHombresN = document.getElementById('hombresN').getContext('2d');
+      me.charHombresN = new Chart(me.varHombresN, {
+        type: 'bar',
+        data: {
+          labels: me.varMesHombresN,
+          datasets: [{
+            label: 'Personas',
+            data: me.varTotalHombresN,
+            backgroundColor: 'rgba(132, 99, 255, 1)',
+            borderColor: 'rgba(132, 99, 255, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+    },
+    getFallecidos: function getFallecidos() {
+      var me = this;
+      var url = '/dashboard';
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+        me.fallecidos = respuesta.fallecidos;
+        me.loadFallecidos();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    loadFallecidos: function loadFallecidos() {
+      var me = this;
+      me.fallecidos.map(function (x) {
+        me.varMesFallecidos.push(x.mes);
+        me.varTotalFallecidos.push(x.fallecidos);
+      });
+      me.varFallecidos = document.getElementById('fallecidos').getContext('2d');
+      me.charFallecidos = new Chart(me.varFallecidos, {
+        type: 'bar',
+        data: {
+          labels: me.varMesFallecidos,
+          datasets: [{
+            label: 'Personas',
+            //criterio que se esta evaluando
+            data: me.varTotalFallecidos,
+            //totales de datos
+            backgroundColor: 'rgba(0, 0, 0, 1)',
+            //color de la barra
+            borderColor: 'rgba(0, 0, 0, 1)',
+            //color de la orilla
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+    },
     getMunicipios: function getMunicipios() {
       var me = this;
       var url = '/dashboard';
       axios.get(url).then(function (response) {
         var respuesta = response.data;
-        me.prueba1 = respuesta.prueba1;
+        me.municipios = respuesta.municipios;
         me.loadMunicipios();
       })["catch"](function (error) {
         console.log(error);
@@ -2169,19 +2590,69 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     loadMunicipios: function loadMunicipios() {
       var me = this;
-      me.prueba1.map(function (x) {
+      me.municipios.map(function (x) {
+        me.varMesMunicipios.push(x.municipio);
         me.varTotalMunicipios.push(x.total);
       });
-      me.varMunicipio = document.getElementById('prueba1').getContext('2d');
-      me.charMunicipio = new Chart(me.varMunicipio, {
+      me.varMunicipios = document.getElementById('municipios').getContext('2d');
+      me.charMunicipios = new Chart(me.varMunicipios, {
         type: 'bar',
         data: {
-          labels: me.varTotalMunicipios,
+          labels: me.varMesMunicipios,
           datasets: [{
-            label: 'Municipios',
+            label: 'Personas',
+            //criterio que se esta evaluando
             data: me.varTotalMunicipios,
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 0.2)',
+            //totales de datos
+            backgroundColor: 'rgba(51,255,51,1)',
+            //color de la barra
+            borderColor: 'rgba(51,255,51,1)',
+            //color de la orilla
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+    },
+    getEntidad: function getEntidad() {
+      var me = this;
+      var url = '/dashboard';
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+        me.entidad = respuesta.entidad;
+        me.loadEntidad();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    loadEntidad: function loadEntidad() {
+      var me = this;
+      me.entidad.map(function (x) {
+        me.varMesEntidad.push(x.entidad);
+        me.varTotalEntidad.push(x.total);
+      });
+      me.varEntidad = document.getElementById('entidad').getContext('2d');
+      me.charEntidad = new Chart(me.varEntidad, {
+        type: 'bar',
+        data: {
+          labels: me.varMesEntidad,
+          datasets: [{
+            label: 'Personas',
+            //criterio que se esta evaluando
+            data: me.varTotalEntidad,
+            //totales de datos
+            backgroundColor: 'rgba(51,255,51,1)',
+            //color de la barra
+            borderColor: 'rgba(51,255,51,1)',
+            //color de la orilla
             borderWidth: 1
           }]
         },
@@ -2198,7 +2669,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   mounted: function mounted() {
+    this.getMujeres();
+    this.getHombres();
+    this.getFallecidos();
     this.getMunicipios();
+    this.getMujeresN();
+    this.getHombresN();
+    this.getEntidad();
   }
 });
 
@@ -2215,6 +2692,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2377,7 +2865,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       offset: 3,
       criterio: 'nombre',
       buscar: '',
-      arrayComunidad: []
+      arrayComunidad: [],
+      idmunicipio: 0,
+      arrayMunicipio: []
     };
   },
   computed: {
@@ -2423,14 +2913,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log(error);
       });
     },
+    MunicipioS: function MunicipioS() {
+      this.idmunicipio;
+      this.selectComunidad();
+    },
+    selectMunicipio: function selectMunicipio() {
+      var me = this;
+      var url = '/municipio/selectMunicipio';
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+        me.arrayMunicipio = respuesta.municipios;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
     selectComunidad: function selectComunidad() {
       var me = this;
-      var url = '/comunidad/selectComunidadD';
+      var url = '/comunidad/selectComunidadD/' + this.idmunicipio + '/';
       axios.get(url).then(function (response) {
         var respuesta = response.data;
         me.arrayComunidad = respuesta.comunidades;
-      })["catch"](function (error) {
-        console.log(error);
       });
     },
     cambiarPagina: function cambiarPagina(page, buscar, criterio) {
@@ -2552,9 +3054,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.modal = 0;
       this.tituloModal = '';
       this.idcomunidad = 0;
+      this.idmunicipio = 0;
       this.tipoAccion = 0;
       this.nombre = '';
       this.errorDistrito = 0;
+      this.arrayComunidad = [];
     },
     abrirModal: function abrirModal(modelo, accion) {
       var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
@@ -2568,6 +3072,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   this.modal = 1;
                   this.tituloModal = 'Registrar distrito';
                   this.idcomunidad = 0;
+                  this.idmunicipio = 0;
                   this.nombre = '';
                   this.tipoAccion = 1;
                   break;
@@ -2579,6 +3084,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   this.tituloModal = 'Actualizar distrito';
                   this.tipoAccion = 2;
                   this.id = data['id'];
+                  this.idmunicipio = data['idmunicipio'];
                   this.idcomunidad = data['idcomunidad'];
                   this.nombre = data['nombre'];
                   break;
@@ -2587,6 +3093,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
       }
 
+      this.selectMunicipio();
       this.selectComunidad();
     }
   },
@@ -3800,6 +4307,104 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3820,7 +4425,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       detalle_vivienda_id: 0,
       created_at: '',
       updated_at: '',
-      arrayFamilia: [],
+      arrayFamilia: '',
+      usuario_nombre: '',
+      municipio_nombre: '',
+      comunidad_nombre: '',
+      distrito_nombre: '',
+      entidad_salud_nombre: '',
       arrayUsuario: [],
       arrayMunicipio: [],
       arrayComunidad: [],
@@ -3994,6 +4604,289 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: {
+    listarVivienda: function listarVivienda(page, buscar, criterio) {
+      var me = this;
+      var url = '/vivienda?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+        me.arrayVivienda1 = respuesta.viviendas.data;
+        me.pagination_viv = respuesta.pagination;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    cambiarPagina_viv: function cambiarPagina_viv(page, buscar, criterio) {
+      var me = this; //Actualiza la pagina
+
+      me.pagination_viv.current_page = page; //Peticion para ver la pagina
+
+      me.listarVivienda(page, buscar, criterio);
+    },
+    registrarVivienda: function registrarVivienda() {
+      if (this.validarVivienda()) {
+        return;
+      }
+
+      var me = this;
+      axios.post('/vivienda/registrar', {
+        'numvivienda': this.numvivienda,
+        'direccion': this.direccion,
+        'idtenencia': this.idtenencia,
+        'idtipovivienda': this.idtipovivienda,
+        'idambiente': this.idambiente,
+        'idcocina': this.idcocina,
+        'idtecho': this.idtecho,
+        'idpared': this.idpared,
+        'idpiso': this.idpiso,
+        'idaguaabast': this.idaguaabast,
+        'idaguatrat': this.idaguatrat,
+        'ideliminexcretas': this.ideliminexcretas,
+        'ideliminbasura': this.ideliminbasura,
+        'idanimalubic': this.idanimalubic,
+        'idanimalcondlugar': this.idanimalcondlugar,
+        'perros': this.perros,
+        'gatos': this.gatos,
+        'electricidad': this.electricidad,
+        'telefonia': this.telefonia,
+        'radio': this.radio,
+        'otratenencia': this.otratenencia,
+        'otrotecho': this.otrotecho,
+        'otrapared': this.otrapared,
+        'otropiso': this.otropiso,
+        'otroabastagua': this.otroabastagua,
+        'otroelimexcretas': this.otroelimexcretas,
+        'otroelimbasura': this.otroelimbasura,
+        'otroservicios': this.otroservicios
+      }).then(function (response) {
+        me.cerrarModal();
+        me.listarVivienda(1, '', 'numvivienda');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    actualizarVivienda: function actualizarVivienda() {
+      if (this.validarVivienda()) {
+        return;
+      }
+
+      var me = this;
+      axios.put('/vivienda/actualizar', {
+        'numvivienda': this.numvivienda,
+        'direccion': this.direccion,
+        'idtenencia': this.idtenencia,
+        'idtipovivienda': this.idtipovivienda,
+        'idambiente': this.idambiente,
+        'idcocina': this.idcocina,
+        'idtecho': this.idtecho,
+        'idpared': this.idpared,
+        'idpiso': this.idpiso,
+        'idaguaabast': this.idaguaabast,
+        'idaguatrat': this.idaguatrat,
+        'ideliminexcretas': this.ideliminexcretas,
+        'ideliminbasura': this.ideliminbasura,
+        'idanimalubic': this.idanimalubic,
+        'idanimalcondlugar': this.idanimalcondlugar,
+        'perros': this.perros,
+        'gatos': this.gatos,
+        'electricidad': this.electricidad,
+        'telefonia': this.telefonia,
+        'radio': this.radio,
+        'otratenencia': this.otratenencia,
+        'otrotecho': this.otrotecho,
+        'otrapared': this.otrapared,
+        'otropiso': this.otropiso,
+        'otroabastagua': this.otroabastagua,
+        'otroelimexcretas': this.otroelimexcretas,
+        'otroelimbasura': this.otroelimbasura,
+        'otroservicios': this.otroservicios,
+        'id': this.id
+      }).then(function (response) {
+        me.cerrarModal();
+        me.listarVivienda(1, '', 'numvivienda');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    desactivarVivienda: function desactivarVivienda(id) {
+      var _this = this;
+
+      swal.fire({
+        title: 'Esta seguro de desactivar esta vivienda?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false,
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          var me = _this;
+          axios.put('/vivienda/desactivar', {
+            'id': id
+          }).then(function (response) {
+            me.listarVivienda(1, '', 'numvivienda');
+            swal.fire('Desactivado!', 'La vivienda ha sido desactivada con éxito.', 'success');
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else if ( // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.cancel) {
+          swal.fire('Accion cancelada', 'La vivienda sigue activa', 'error');
+        }
+      });
+    },
+    activarVivienda: function activarVivienda(id) {
+      var _this2 = this;
+
+      swal.fire({
+        title: 'Esta seguro de activar esta Vivienda?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false,
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          var me = _this2;
+          axios.put('/vivienda/activar', {
+            'id': id
+          }).then(function (response) {
+            me.listarVivienda(1, '', 'numvivienda');
+            swal.fire('Activado!', 'El registro ha sido activado con éxito.', 'success');
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else if ( // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.cancel) {
+          swal.fire('Accion cancelada', 'La vivienda sigue inactiva', 'error');
+        }
+      });
+    },
+    validarVivienda: function validarVivienda() {
+      this.errorVivienda = 0;
+      this.errorMostrarMsjVivienda = [];
+      if (!this.numvivienda) this.errorMostrarMsjVivienda.push("El numero de la vivienda no puede estar vacio.");
+      if (!this.direccion) this.errorMostrarMsjVivienda.push("La direccion de la vivienda no puede estar vacia.");
+      if (this.idtenencia == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de tenencia de la vivienda.");
+      if (this.idtipovivienda == 0) this.errorMostrarMsjVivienda.push("Seleccione un tipo de la vivienda.");
+      if (this.idambiente == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de ambiente de la vivienda.");
+      if (this.idcocina == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de cocina de la vivienda.");
+      if (this.idtecho == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de techo de la vivienda.");
+      if (this.idpared == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de pared de la vivienda.");
+      if (this.idpiso == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de piso de la vivienda.");
+      if (this.idaguaabast == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de abastecimiento de agua.");
+      if (this.idaguatrat == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de tratamiento de agua.");
+      if (this.ideliminexcretas == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de eliminacion de excretas.");
+      if (this.ideliminbasura == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de eliminacion de basura.");
+      if (this.idanimalubic == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de ubicacion de la mascota/s.");
+      if (this.idanimalcondlugar == 0) this.errorMostrarMsjVivienda.push("Seleccione la condicion del lugar de la mascota/s.");
+      if (this.idtenencia == 4 && !this.otratenencia) this.errorMostrarMsjVivienda.push("Especifique la tenencia de la vivienda.");
+      if (this.idtecho == 6 && !this.otrotecho) this.errorMostrarMsjVivienda.push("Especifique la tipo de techo.");
+      if (this.idpared == 7 && !this.otrapared) this.errorMostrarMsjVivienda.push("Especifique la tipo de pared.");
+      if (this.idpiso == 6 && !this.otropiso) this.errorMostrarMsjVivienda.push("Especifique la tipo de piso.");
+      if (this.idaguaabast == 6 && !this.otroabastagua) this.errorMostrarMsjVivienda.push("Especifique la tipo de abastecimiento de agua.");
+      if (this.ideliminexcretas == 5 && !this.otroelimexcretas) this.errorMostrarMsjVivienda.push("Especifique la tipo de eliminacion de excretas.");
+      if (this.ideliminbasura == 6 && !this.otroelimbasura) this.errorMostrarMsjVivienda.push("Especifique la tipo de eliminacion final de basura.");
+      if (!this.perros) this.errorMostrarMsjVivienda.push("Para el numero de perros por lo menos debe colocar 0.");
+      if (!this.gatos) this.errorMostrarMsjVivienda.push("Para el numero de gatos por lo menos debe colocar 0.");
+      if (!this.radio) this.errorMostrarMsjVivienda.push("Debe colocar que emisora radial escucha.");
+      if (!this.otroservicios) this.errorMostrarMsjVivienda.push("Para otros servicios, debe colocar por lo menos ninguno.");
+      if (this.errorMostrarMsjVivienda.length) this.errorVivienda = 1;
+      return this.errorVivienda;
+    },
+    cerrarModal: function cerrarModal() {
+      this.modal = 0;
+      this.tituloModal = '';
+      this.numvivienda = 0;
+      this.fecha = '';
+      this.direccion = '';
+      this.idtenencia = 0, this.idtipovivienda = 0, this.idambiente = 0, this.idcocina = 0, this.idtecho = 0, this.idpared = 0, this.idpiso = 0, this.idaguaabast = 0, this.idaguatrat = 0, this.ideliminexcretas = 0, this.ideliminbasura = 0, this.idanimalubic = 0, this.idanimalcondlugar = 0, this.perros = 0, this.gatos = 0, this.electricidad = 0, this.telefonia = 0, this.radio = '', this.otratenencia = '', this.otrotecho = '', this.otrapared = '', this.otropiso = '', this.otroabastagua = '', this.otroelimexcretas = '', this.otroelimbasura = '', this.otroservicios = '', this.tipoAccion = 0;
+      this.errorVivienda = 0;
+    },
+    abrirModal: function abrirModal(modelo, accion) {
+      var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+
+      switch (modelo) {
+        case "vivienda":
+          {
+            switch (accion) {
+              case 'registrar':
+                {
+                  this.modal = 1;
+                  this.tituloModal = 'Registrar Vivienda';
+                  this.numvivienda = 0;
+                  this.fecha = '';
+                  this.direccion = '';
+                  this.idtenencia = 0, this.idtipovivienda = 0, this.idambiente = 0, this.idcocina = 0, this.idtecho = 0, this.idpared = 0, this.idpiso = 0, this.idaguaabast = 0, this.idaguatrat = 0, this.ideliminexcretas = 0, this.ideliminbasura = 0, this.idanimalubic = 0, this.idanimalcondlugar = 0, this.perros = 0, this.gatos = 0, this.electricidad = 0, this.telefonia = 0, this.radio = '', this.otratenencia = '', this.otrotecho = '', this.otrapared = '', this.otropiso = '', this.otroabastagua = '', this.otroelimexcretas = '', this.otroelimbasura = '', this.otroservicios = '', this.tipoAccion = 1;
+                  break;
+                }
+
+              case 'actualizar':
+                {
+                  this.modal = 1;
+                  this.tituloModal = 'Actualizar Vivienda';
+                  this.tipoAccion = 2;
+                  this.id = data['id'];
+                  this.numvivienda = data['numvivienda'];
+                  this.fecha = data['fecha'];
+                  this.direccion = data['direccion'];
+                  this.idtenencia = data['tenencia'];
+                  this.idtipovivienda = data['tipovivienda'];
+                  this.idambiente = data['ambiente'];
+                  this.idcocina = data['cocina'];
+                  this.idtecho = data['techo'];
+                  this.idpared = data['pared'];
+                  this.idpiso = data['piso'];
+                  this.idaguaabast = data['aguaabastecimiento'];
+                  this.idaguatrat = data['aguatrat'];
+                  this.ideliminexcretas = data['eliminexcretas'];
+                  this.ideliminbasura = data['eliminbasura'];
+                  this.idanimalubic = data['animalubic'];
+                  this.idanimalcondlugar = data['animalcondlugar'];
+                  this.perros = data['perros'];
+                  this.gatos = data['gatos'];
+                  this.electricidad = data['electricidad'];
+                  this.telefonia = data['telefonia'];
+                  this.radio = data['radio'];
+                  this.otratenencia = data['otratenencia'];
+                  this.otrotecho = data['otrotecho'];
+                  this.otrapared = data['otrapared'];
+                  this.otropiso = data['otropiso'];
+                  this.otroabastagua = data['otroabastagua'];
+                  this.otroelimexcretas = data['otroelimexcretas'];
+                  this.otroelimbasura = data['otroelimbasura'];
+                  this.otroservicios = data['otroservicios'];
+                  break;
+                }
+            }
+          }
+      }
+    },
+    habilitar: function habilitar(tbid, habil) {
+      if (habil == true) {
+        document.getElementById(tbid).disabled = false;
+      } else if (habil == false) {
+        document.getElementById(tbid).value = '';
+        document.getElementById(tbid).disabled = true;
+      } else if (habil == 'todos') {
+        document.getElementById("tbo01").disabled = true;
+        document.getElementById("tbo02").disabled = true;
+        document.getElementById("tbo03").disabled = true;
+        document.getElementById("tbo04").disabled = true;
+        document.getElementById("tbo05").disabled = true;
+        document.getElementById("tbo06").disabled = true;
+        document.getElementById("tbo07").disabled = true;
+      }
+    },
     listarFamilia: function listarFamilia(page, buscar, criterio) {
       var me = this;
       var url = '/familia?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
@@ -4012,6 +4905,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       me.listarFamilia(page, buscar, criterio);
     },
+    MunicipioSelect: function MunicipioSelect() {
+      this.municipio_id;
+      this.selectComunidad();
+    },
     selectMunicipio: function selectMunicipio() {
       var me = this;
       var url = '/Municipiofam';
@@ -4024,7 +4921,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     selectComunidad: function selectComunidad() {
       var me = this;
-      var url = '/Comunidadfam';
+      var url = '/Comunidadfam/' + this.municipio_id + '/';
       axios.get(url).then(function (response) {
         var respuesta = response.data;
         me.arrayComunidad = respuesta.comunidades;
@@ -4032,14 +4929,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log(error);
       });
     },
-    getDatosComunidad: function getDatosComunidad(val1) {
-      var me = this;
-      me.loading = true;
-      me.idcomunidad = val1.id;
+    ComunidadSelect: function ComunidadSelect() {
+      this.comunidad_id;
+      this.selectDistrito();
     },
     selectDistrito: function selectDistrito() {
       var me = this;
-      var url = '/Distritofam';
+      var url = '/Distritofam/' + this.comunidad_id + '/';
       axios.get(url).then(function (response) {
         var respuesta = response.data;
         me.arrayDistrito = respuesta.distritos;
@@ -4063,6 +4959,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.get(url).then(function (response) {
         var respuesta = response.data;
         me.arrayVivienda2 = respuesta.viviendas;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    selectUsuario: function selectUsuario() {
+      var me = this;
+      var url = '/entidads';
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+        me.arrayUsuario = respuesta.usuarios;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -4173,8 +5079,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       me.boolpersona = 'agregar';
       this.selectVivienda();
       this.selectMunicipio();
-      this.selectComunidad();
-      this.selectDistrito();
       this.selectEntidad();
       this.selectParentesco();
       this.selectPueblo();
@@ -4368,6 +5272,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     ocultarDetalle: function ocultarDetalle() {
       var me = this;
       this.listado = 1;
+      this.familia_id = 0;
       this.num_familia = 0;
       this.municipio_id = 0;
       this.comunidad_id = 0;
@@ -4377,6 +5282,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.detalle_vivienda_id = 0;
       this.num_vivienda = 0;
       this.arrayDetalle = [];
+      this.municipio_nombre = '';
+      this.comunidad_nombre = '';
+      this.distrito_nombre = '';
+      this.usuario_nombre = '';
+      this.entidad_salud_nombre = '';
       me.arrayPersona = [];
       me.persona_id = 0;
       me.nombres = '';
@@ -4416,10 +5326,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     editarFamilia: function editarFamilia(id) {
       var me = this;
-      this.boolpersona = 'agregar';
       this.permanencia_id = 6;
       this.pais_id = 8;
-      this.puesto_comunidad_id = 3; //Obtener datos de familia
+      this.puesto_comunidad_id = 3;
+      this.selectVivienda();
+      this.selectEntidad();
+      this.selectParentesco();
+      this.selectPueblo();
+      this.selectComlinguistica();
+      this.selectEscolaridad();
+      this.selectDiscapacidad();
+      this.selectOcupacion();
+      this.selectPermanencia();
+      this.selectPais();
+      this.selectPuestoCom(); //Obtener datos de familia
 
       var arrayFamiliaT = [];
       var url = '/familia/obtenerFamilia?id=' + id;
@@ -4437,7 +5357,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         me.num_vivienda = arrayFamiliaT[0]['num_vivienda'];
       })["catch"](function (error) {
         console.log(error);
-      }); //Obtener datos de personas
+      });
+      this.selectMunicipio();
+      this.municipio_id;
+      this.selectComunidad();
+      this.comunidad_id;
+      this.selectDistrito(); //Obtener datos de personas
 
       var url = '/familia/obtenerPersonas?id=' + id;
       axios.get(url).then(function (response) {
@@ -4452,10 +5377,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       })["catch"](function (error) {
         console.log(error);
       });
+      this.listado = 2;
+    },
+    verListadoFamilia: function verListadoFamilia(id) {
+      var me = this;
+      this.permanencia_id = 6;
+      this.pais_id = 8;
+      this.puesto_comunidad_id = 3;
+      this.selectUsuario();
       this.selectVivienda();
-      this.selectMunicipio();
-      this.selectComunidad();
-      this.selectDistrito();
       this.selectEntidad();
       this.selectParentesco();
       this.selectPueblo();
@@ -4465,11 +5395,51 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.selectOcupacion();
       this.selectPermanencia();
       this.selectPais();
-      this.selectPuestoCom();
-      this.listado = 2;
+      this.selectPuestoCom(); //Obtener datos de familia
+
+      var arrayFamiliaT = [];
+      var url = '/familia/obtenerFamilia?id=' + id;
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+        arrayFamiliaT = respuesta.familias;
+        me.familia_id = arrayFamiliaT[0]['familia_id'];
+        me.num_familia = arrayFamiliaT[0]['num_familia'];
+        me.municipio_id = arrayFamiliaT[0]['municipio_id'];
+        me.comunidad_id = arrayFamiliaT[0]['comunidad_id'];
+        me.distrito_id = arrayFamiliaT[0]['distrito_id'];
+        me.entidad_salud_id = arrayFamiliaT[0]['entidad_salud_id'];
+        me.sector = arrayFamiliaT[0]['sector'];
+        me.detalle_vivienda_id = arrayFamiliaT[0]['detalle_vivienda_id'];
+        me.num_vivienda = arrayFamiliaT[0]['num_vivienda'];
+        me.usuario_nombre = arrayFamiliaT[0]['CUI'] + ' ' + arrayFamiliaT[0]['nombre'] + ', ' + arrayFamiliaT[0]['correo'] + ', ' + arrayFamiliaT[0]['telefono'];
+        me.municipio_nombre = arrayFamiliaT[0]['nombre_municipio'];
+        me.comunidad_nombre = arrayFamiliaT[0]['nombre_comunidad'];
+        me.distrito_nombre = arrayFamiliaT[0]['nombre_distrito'];
+        me.entidad_salud_nombre = arrayFamiliaT[0]['nombre_entidad_salud'];
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      this.selectMunicipio();
+      this.selectComunidad();
+      this.selectDistrito(); //Obtener datos de personas
+
+      var url = '/familia/obtenerPersonas?id=' + id;
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+        me.arrayDetalle = respuesta.personas;
+        me.total_personas = me.arrayDetalle.length;
+
+        for (var i = 0; i < me.arrayDetalle.length; i++) {
+          me.edad = me.calcularEdad(me.arrayDetalle[i].nacimiento);
+          me.arrayDetalle[i].edad = me.edad;
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      this.listado = 3;
     },
     desactivarFamilia: function desactivarFamilia(id) {
-      var _this = this;
+      var _this3 = this;
 
       swal.fire({
         title: 'Esta seguro de desactivar esta familia?',
@@ -4485,7 +5455,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         reverseButtons: true
       }).then(function (result) {
         if (result.value) {
-          var me = _this;
+          var me = _this3;
           axios.put('/familia/desactivar', {
             'id': id
           }).then(function (response) {
@@ -4499,7 +5469,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     activarFamilia: function activarFamilia(id) {
-      var _this2 = this;
+      var _this4 = this;
 
       swal.fire({
         title: 'Esta seguro de activar esta familia?',
@@ -4515,7 +5485,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         reverseButtons: true
       }).then(function (result) {
         if (result.value) {
-          var me = _this2;
+          var me = _this4;
           axios.put('/familia/activar', {
             'id': id
           }).then(function (response) {
@@ -4667,13 +5637,48 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           'id': this.persona_id
         }).then(function (response) {
           me.listadoPersona();
+          me.persona_id = 0;
+          me.nombres = '';
+          me.apellidos = '';
+          me.apellido_casada = '';
+          me.lider = 0;
+          me.sexo = 0;
+          me.nacimiento = '';
+          me.edad = 0;
+          me.CUI = '';
+          me.parentesco_id = 0;
+          me.parentesco_nombre = '';
+          me.pueblo_id = 0;
+          me.pueblo_nombre = '';
+          me.comlinguistica_id = 0;
+          me.comlinguistica_nombre = '';
+          me.alfabetismo = 0;
+          me.escolaridad_id = 0;
+          me.escolaridad_nombre = '';
+          me.discapacidad_id = 0;
+          me.discapacidad_nombre = '';
+          me.ocupacion_id = 0;
+          me.ocupacion_nombre = '';
+          me.migracion = 0;
+          me.permanencia_id = 6;
+          me.permanencia_nombre = '';
+          me.commigracion = '';
+          me.munmigracion = '';
+          me.depmigracion = '';
+          me.pais_id = 8;
+          me.pais_nombre = '';
+          me.puesto_comunidad_id = 3;
+          me.puestocom_nombre = '';
+          me.mortalidad = 0;
+          me.fechamortalidad = '';
+          me.boolpersona = 'agregar';
         })["catch"](function (error) {
           console.log(error);
         });
       }
     },
     desactivarPersona: function desactivarPersona(id) {
-      var _this3 = this;
+      var _this5 = this;
 
       swal.fire({
         title: 'Esta seguro de desactivar esta familia?',
@@ -4689,7 +5694,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         reverseButtons: true
       }).then(function (result) {
         if (result.value) {
-          var me = _this3;
+          var me = _this5;
           axios.put('/familia/desactivarPersona', {
             'id': id
           }).then(function (response) {
@@ -4702,7 +5707,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     activarPersona: function activarPersona(id) {
-      var _this4 = this;
+      var _this6 = this;
 
       swal.fire({
         title: 'Esta seguro de activar esta familia?',
@@ -4718,7 +5723,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         reverseButtons: true
       }).then(function (result) {
         if (result.value) {
-          var me = _this4;
+          var me = _this6;
           axios.put('/familia/activarPersona', {
             'id': id
           }).then(function (response) {
@@ -4729,289 +5734,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         } else if ( // Read more about handling dismissals
         result.dismiss === swal.DismissReason.cancel) {}
       });
-    },
-    listarVivienda: function listarVivienda(page, buscar, criterio) {
-      var me = this;
-      var url = '/vivienda?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
-      axios.get(url).then(function (response) {
-        var respuesta = response.data;
-        me.arrayVivienda1 = respuesta.viviendas.data;
-        me.pagination_viv = respuesta.pagination;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    cambiarPagina_viv: function cambiarPagina_viv(page, buscar, criterio) {
-      var me = this; //Actualiza la pagina
-
-      me.pagination_viv.current_page = page; //Peticion para ver la pagina
-
-      me.listarVivienda(page, buscar, criterio);
-    },
-    registrarVivienda: function registrarVivienda() {
-      if (this.validarVivienda()) {
-        return;
-      }
-
-      var me = this;
-      axios.post('/vivienda/registrar', {
-        'numvivienda': this.numvivienda,
-        'direccion': this.direccion,
-        'idtenencia': this.idtenencia,
-        'idtipovivienda': this.idtipovivienda,
-        'idambiente': this.idambiente,
-        'idcocina': this.idcocina,
-        'idtecho': this.idtecho,
-        'idpared': this.idpared,
-        'idpiso': this.idpiso,
-        'idaguaabast': this.idaguaabast,
-        'idaguatrat': this.idaguatrat,
-        'ideliminexcretas': this.ideliminexcretas,
-        'ideliminbasura': this.ideliminbasura,
-        'idanimalubic': this.idanimalubic,
-        'idanimalcondlugar': this.idanimalcondlugar,
-        'perros': this.perros,
-        'gatos': this.gatos,
-        'electricidad': this.electricidad,
-        'telefonia': this.telefonia,
-        'radio': this.radio,
-        'otratenencia': this.otratenencia,
-        'otrotecho': this.otrotecho,
-        'otrapared': this.otrapared,
-        'otropiso': this.otropiso,
-        'otroabastagua': this.otroabastagua,
-        'otroelimexcretas': this.otroelimexcretas,
-        'otroelimbasura': this.otroelimbasura,
-        'otroservicios': this.otroservicios
-      }).then(function (response) {
-        me.cerrarModal();
-        me.listarVivienda(1, '', 'numvivienda');
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    actualizarVivienda: function actualizarVivienda() {
-      if (this.validarVivienda()) {
-        return;
-      }
-
-      var me = this;
-      axios.put('/vivienda/actualizar', {
-        'numvivienda': this.numvivienda,
-        'direccion': this.direccion,
-        'idtenencia': this.idtenencia,
-        'idtipovivienda': this.idtipovivienda,
-        'idambiente': this.idambiente,
-        'idcocina': this.idcocina,
-        'idtecho': this.idtecho,
-        'idpared': this.idpared,
-        'idpiso': this.idpiso,
-        'idaguaabast': this.idaguaabast,
-        'idaguatrat': this.idaguatrat,
-        'ideliminexcretas': this.ideliminexcretas,
-        'ideliminbasura': this.ideliminbasura,
-        'idanimalubic': this.idanimalubic,
-        'idanimalcondlugar': this.idanimalcondlugar,
-        'perros': this.perros,
-        'gatos': this.gatos,
-        'electricidad': this.electricidad,
-        'telefonia': this.telefonia,
-        'radio': this.radio,
-        'otratenencia': this.otratenencia,
-        'otrotecho': this.otrotecho,
-        'otrapared': this.otrapared,
-        'otropiso': this.otropiso,
-        'otroabastagua': this.otroabastagua,
-        'otroelimexcretas': this.otroelimexcretas,
-        'otroelimbasura': this.otroelimbasura,
-        'otroservicios': this.otroservicios,
-        'id': this.id
-      }).then(function (response) {
-        me.cerrarModal();
-        me.listarVivienda(1, '', 'numvivienda');
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    desactivarVivienda: function desactivarVivienda(id) {
-      var _this5 = this;
-
-      swal.fire({
-        title: 'Esta seguro de desactivar esta vivienda?',
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Aceptar!',
-        cancelButtonText: 'Cancelar',
-        confirmButtonClass: 'btn btn-success',
-        cancelButtonClass: 'btn btn-danger',
-        buttonsStyling: false,
-        reverseButtons: true
-      }).then(function (result) {
-        if (result.value) {
-          var me = _this5;
-          axios.put('/vivienda/desactivar', {
-            'id': id
-          }).then(function (response) {
-            me.listarVivienda(1, '', 'numvivienda');
-            swal.fire('Desactivado!', 'La vivienda ha sido desactivada con éxito.', 'success');
-          })["catch"](function (error) {
-            console.log(error);
-          });
-        } else if ( // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.cancel) {
-          swal.fire('Accion cancelada', 'La vivienda sigue activa', 'error');
-        }
-      });
-    },
-    activarVivienda: function activarVivienda(id) {
-      var _this6 = this;
-
-      swal.fire({
-        title: 'Esta seguro de activar esta Vivienda?',
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Aceptar!',
-        cancelButtonText: 'Cancelar',
-        confirmButtonClass: 'btn btn-success',
-        cancelButtonClass: 'btn btn-danger',
-        buttonsStyling: false,
-        reverseButtons: true
-      }).then(function (result) {
-        if (result.value) {
-          var me = _this6;
-          axios.put('/vivienda/activar', {
-            'id': id
-          }).then(function (response) {
-            me.listarVivienda(1, '', 'numvivienda');
-            swal.fire('Activado!', 'El registro ha sido activado con éxito.', 'success');
-          })["catch"](function (error) {
-            console.log(error);
-          });
-        } else if ( // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.cancel) {
-          swal.fire('Accion cancelada', 'La vivienda sigue inactiva', 'error');
-        }
-      });
-    },
-    validarVivienda: function validarVivienda() {
-      this.errorVivienda = 0;
-      this.errorMostrarMsjVivienda = [];
-      if (!this.numvivienda) this.errorMostrarMsjVivienda.push("El numero de la vivienda no puede estar vacio.");
-      if (!this.direccion) this.errorMostrarMsjVivienda.push("La direccion de la vivienda no puede estar vacia.");
-      if (this.idtenencia == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de tenencia de la vivienda.");
-      if (this.idtipovivienda == 0) this.errorMostrarMsjVivienda.push("Seleccione un tipo de la vivienda.");
-      if (this.idambiente == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de ambiente de la vivienda.");
-      if (this.idcocina == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de cocina de la vivienda.");
-      if (this.idtecho == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de techo de la vivienda.");
-      if (this.idpared == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de pared de la vivienda.");
-      if (this.idpiso == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de piso de la vivienda.");
-      if (this.idaguaabast == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de abastecimiento de agua.");
-      if (this.idaguatrat == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de tratamiento de agua.");
-      if (this.ideliminexcretas == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de eliminacion de excretas.");
-      if (this.ideliminbasura == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de eliminacion de basura.");
-      if (this.idanimalubic == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de ubicacion de la mascota/s.");
-      if (this.idanimalcondlugar == 0) this.errorMostrarMsjVivienda.push("Seleccione la condicion del lugar de la mascota/s.");
-      if (this.idtenencia == 4 && !this.otratenencia) this.errorMostrarMsjVivienda.push("Especifique la tenencia de la vivienda.");
-      if (this.idtecho == 6 && !this.otrotecho) this.errorMostrarMsjVivienda.push("Especifique la tipo de techo.");
-      if (this.idpared == 7 && !this.otrapared) this.errorMostrarMsjVivienda.push("Especifique la tipo de pared.");
-      if (this.idpiso == 6 && !this.otropiso) this.errorMostrarMsjVivienda.push("Especifique la tipo de piso.");
-      if (this.idaguaabast == 6 && !this.otroabastagua) this.errorMostrarMsjVivienda.push("Especifique la tipo de abastecimiento de agua.");
-      if (this.ideliminexcretas == 5 && !this.otroelimexcretas) this.errorMostrarMsjVivienda.push("Especifique la tipo de eliminacion de excretas.");
-      if (this.ideliminbasura == 6 && !this.otroelimbasura) this.errorMostrarMsjVivienda.push("Especifique la tipo de eliminacion final de basura.");
-      if (!this.perros) this.errorMostrarMsjVivienda.push("Para el numero de perros por lo menos debe colocar 0.");
-      if (!this.gatos) this.errorMostrarMsjVivienda.push("Para el numero de gatos por lo menos debe colocar 0.");
-      if (!this.radio) this.errorMostrarMsjVivienda.push("Debe colocar que emisora radial escucha.");
-      if (!this.otroservicios) this.errorMostrarMsjVivienda.push("Para otros servicios, debe colocar por lo menos ninguno.");
-      if (this.errorMostrarMsjVivienda.length) this.errorVivienda = 1;
-      return this.errorVivienda;
-    },
-    cerrarModal: function cerrarModal() {
-      this.modal = 0;
-      this.tituloModal = '';
-      this.numvivienda = 0;
-      this.fecha = '';
-      this.direccion = '';
-      this.idtenencia = 0, this.idtipovivienda = 0, this.idambiente = 0, this.idcocina = 0, this.idtecho = 0, this.idpared = 0, this.idpiso = 0, this.idaguaabast = 0, this.idaguatrat = 0, this.ideliminexcretas = 0, this.ideliminbasura = 0, this.idanimalubic = 0, this.idanimalcondlugar = 0, this.perros = 0, this.gatos = 0, this.electricidad = 0, this.telefonia = 0, this.radio = '', this.otratenencia = '', this.otrotecho = '', this.otrapared = '', this.otropiso = '', this.otroabastagua = '', this.otroelimexcretas = '', this.otroelimbasura = '', this.otroservicios = '', this.tipoAccion = 0;
-      this.errorVivienda = 0;
-    },
-    abrirModal: function abrirModal(modelo, accion) {
-      var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-
-      switch (modelo) {
-        case "vivienda":
-          {
-            switch (accion) {
-              case 'registrar':
-                {
-                  this.modal = 1;
-                  this.tituloModal = 'Registrar Vivienda';
-                  this.numvivienda = 0;
-                  this.fecha = '';
-                  this.direccion = '';
-                  this.idtenencia = 0, this.idtipovivienda = 0, this.idambiente = 0, this.idcocina = 0, this.idtecho = 0, this.idpared = 0, this.idpiso = 0, this.idaguaabast = 0, this.idaguatrat = 0, this.ideliminexcretas = 0, this.ideliminbasura = 0, this.idanimalubic = 0, this.idanimalcondlugar = 0, this.perros = 0, this.gatos = 0, this.electricidad = 0, this.telefonia = 0, this.radio = '', this.otratenencia = '', this.otrotecho = '', this.otrapared = '', this.otropiso = '', this.otroabastagua = '', this.otroelimexcretas = '', this.otroelimbasura = '', this.otroservicios = '', this.tipoAccion = 1;
-                  break;
-                }
-
-              case 'actualizar':
-                {
-                  this.modal = 1;
-                  this.tituloModal = 'Actualizar Vivienda';
-                  this.tipoAccion = 2;
-                  this.id = data['id'];
-                  this.numvivienda = data['numvivienda'];
-                  this.fecha = data['fecha'];
-                  this.direccion = data['direccion'];
-                  this.idtenencia = data['tenencia'];
-                  this.idtipovivienda = data['tipovivienda'];
-                  this.idambiente = data['ambiente'];
-                  this.idcocina = data['cocina'];
-                  this.idtecho = data['techo'];
-                  this.idpared = data['pared'];
-                  this.idpiso = data['piso'];
-                  this.idaguaabast = data['aguaabastecimiento'];
-                  this.idaguatrat = data['aguatrat'];
-                  this.ideliminexcretas = data['eliminexcretas'];
-                  this.ideliminbasura = data['eliminbasura'];
-                  this.idanimalubic = data['animalubic'];
-                  this.idanimalcondlugar = data['animalcondlugar'];
-                  this.perros = data['perros'];
-                  this.gatos = data['gatos'];
-                  this.electricidad = data['electricidad'];
-                  this.telefonia = data['telefonia'];
-                  this.radio = data['radio'];
-                  this.otratenencia = data['otratenencia'];
-                  this.otrotecho = data['otrotecho'];
-                  this.otrapared = data['otrapared'];
-                  this.otropiso = data['otropiso'];
-                  this.otroabastagua = data['otroabastagua'];
-                  this.otroelimexcretas = data['otroelimexcretas'];
-                  this.otroelimbasura = data['otroelimbasura'];
-                  this.otroservicios = data['otroservicios'];
-                  break;
-                }
-            }
-          }
-      }
-    },
-    habilitar: function habilitar(tbid, habil) {
-      if (habil == true) {
-        document.getElementById(tbid).disabled = false;
-      } else if (habil == false) {
-        document.getElementById(tbid).value = '';
-        document.getElementById(tbid).disabled = true;
-      } else if (habil == 'todos') {
-        document.getElementById("tbo01").disabled = true;
-        document.getElementById("tbo02").disabled = true;
-        document.getElementById("tbo03").disabled = true;
-        document.getElementById("tbo04").disabled = true;
-        document.getElementById("tbo05").disabled = true;
-        document.getElementById("tbo06").disabled = true;
-        document.getElementById("tbo07").disabled = true;
-      }
     }
   },
   mounted: function mounted() {
@@ -5753,6 +6475,250 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5762,6 +6728,9 @@ __webpack_require__.r(__webpack_exports__);
       modal: 0,
       modalComunidad: 0,
       modalDistrito: 0,
+      modalServiciosM: 0,
+      modalServiciosC: 0,
+      modalServiciosD: 0,
       tituloModal: '',
       tipoAccion: 0,
       errorReporte: 0,
@@ -5775,8 +6744,7 @@ __webpack_require__.r(__webpack_exports__);
       arrayComunidad: [],
       iddistrito: 0,
       arrayDistrito: [],
-      idservicios: 0,
-      arrayServicios: []
+      idservicios: 0
     };
   },
   computed: {},
@@ -5875,8 +6843,18 @@ __webpack_require__.r(__webpack_exports__);
         if (!this.idmunicipio) this.errorMostrarMsjReporte.push("El municipio no puede estar vacio");
         if (!this.idmunicipio) this.errorMostrarMsjReporte.push("La comunidad no puede estar vacia");
         if (!this.idmunicipio) this.errorMostrarMsjReporte.push("El distrito no puede estar vacio");
-      } else if (this.filtro == 4) {
+      } else if (this.filtro == 11) {
         if (!this.idmunicipio) this.errorMostrarMsjReporte.push("El municipio no puede estar vacio");
+        if (!this.idservicios) this.errorMostrarMsjReporte.push("Debe elegir un servicio");
+      } else if (this.filtro == 12) {
+        if (!this.idmunicipio) this.errorMostrarMsjReporte.push("El municipio no puede estar vacio");
+        if (!this.idcomunidad) this.errorMostrarMsjReporte.push("La comunidad no puede estar vacia");
+        if (!this.idservicios) this.errorMostrarMsjReporte.push("Debe elegir un servicio");
+      } else if (this.filtro == 13) {
+        if (!this.idmunicipio) this.errorMostrarMsjReporte.push("El municipio no puede estar vacio");
+        if (!this.idcomunidad) this.errorMostrarMsjReporte.push("La comunidad no puede estar vacia");
+        if (!this.iddistrito) this.errorMostrarMsjReporte.push("El distrito no puede estar vacio");
+        if (!this.idservicios) this.errorMostrarMsjReporte.push("Debe elegir un servicio");
       }
 
       if (this.errorMostrarMsjReporte.length) this.errorReporte = 1;
@@ -5901,6 +6879,9 @@ __webpack_require__.r(__webpack_exports__);
       this.idservicios = 0;
       this.modalComunidad = 0;
       this.modalDistrito = 0;
+      this.modalServiciosM = 0;
+      this.modalServiciosC = 0;
+      this.modalServiciosD = 0;
       this.arrayMunicipio = [];
       this.arrayComunidad = [];
       this.arrayDistrito = [];
@@ -6152,6 +7133,48 @@ __webpack_require__.r(__webpack_exports__);
             this.nombre = '';
             this.tipoAccion = 8;
             this.filtro = 1;
+            break;
+          }
+      }
+
+      this.selectMunicipio();
+    },
+    abrirModalMServicios: function abrirModalMServicios(modelo, accion) {
+      switch (modelo) {
+        case "servicios":
+          {
+            this.modalServiciosM = 1;
+            this.tituloModal = 'Reporte Servicios';
+            this.tipoAccion = 9;
+            this.filtro = 11;
+            break;
+          }
+      }
+
+      this.selectMunicipio();
+    },
+    abrirModalCServicios: function abrirModalCServicios(modelo, accion) {
+      switch (modelo) {
+        case "servicios":
+          {
+            this.modalServiciosC = 1;
+            this.tituloModal = 'Reporte Servicios';
+            this.tipoAccion = 9;
+            this.filtro = 12;
+            break;
+          }
+      }
+
+      this.selectMunicipio();
+    },
+    abrirModalDServicios: function abrirModalDServicios(modelo, accion) {
+      switch (modelo) {
+        case "servicios":
+          {
+            this.modalServiciosD = 1;
+            this.tituloModal = 'Reporte Servicios';
+            this.tipoAccion = 9;
+            this.filtro = 13;
             break;
           }
       }
@@ -44435,7 +45458,7 @@ var staticRenderFns = [
     return _c("main", { staticClass: "main" }, [
       _c("ol", { staticClass: "breadcrumb" }, [
         _c("li", { staticClass: "breadcrumb-item" }, [
-          _c("a", { attrs: { href: "/" } }, [_vm._v("Escritorio")])
+          _c("a", { attrs: { href: "/main" } }, [_vm._v(" Escritorio")])
         ])
       ]),
       _vm._v(" "),
@@ -44443,44 +45466,154 @@ var staticRenderFns = [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }),
           _vm._v(" "),
-          _c("div", { staticClass: "car-body" }, [
+          _c("div", { staticClass: "card-body" }, [
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-md-6" }, [
-                _c("div", { staticClass: "card card-chart" }, [
-                  _c("div", { staticClass: "card-header" }, [
-                    _c("h4", [_vm._v(" Prueba1 ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-content" }, [
-                    _c("div", { staticClass: "ct-chart" }, [
-                      _c("canvas", { attrs: { id: "prueba1" } })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-footer" }, [
-                    _c("p", [_vm._v("Prueba con datos random 1 ")])
+                _c("div", { staticClass: "card-header" }, [
+                  _c("h4", [_vm._v("Mujeres")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-content" }, [
+                  _c("div", { staticClass: "ct-chart" }, [
+                    _c("canvas", { attrs: { id: "mujeres" } })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-footer" }, [
+                  _c("p", [
+                    _vm._v(
+                      "Mujeres registradas a nivel departamental por mes de ingreso"
+                    )
                   ])
                 ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-6" }, [
-                _c("div", { staticClass: "card card-chart" }, [
-                  _c("div", { staticClass: "card-header" }, [
-                    _c("h4", [_vm._v(" Prueba2 ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-content" }, [
-                    _c("div", { staticClass: "ct-chart" }, [
-                      _c("canvas", { attrs: { id: "prueba1" } })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-footer" }, [
-                    _c("p", [_vm._v("Prueba con datos random 2 ")])
+                _c("div", { staticClass: "card-header" }, [
+                  _c("h4", [_vm._v("Hombres")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-content" }, [
+                  _c("div", { staticClass: "ct-chart" }, [
+                    _c("canvas", { attrs: { id: "hombres" } })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-footer" }, [
+                  _c("p", [
+                    _vm._v(
+                      "Hombres registrados a nivel departamental por mes de ingreso"
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c("h4", [_vm._v("Fallecidos")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-content" }, [
+                  _c("div", { staticClass: "ct-chart" }, [
+                    _c("canvas", { attrs: { id: "fallecidos" } })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-footer" }, [
+                  _c("p", [
+                    _vm._v(
+                      "Fallecidos registrados a nivel departamental por mes de fallecimiento"
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c("h4", [_vm._v("Municipios")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-content" }, [
+                  _c("div", { staticClass: "ct-chart" }, [
+                    _c("canvas", { attrs: { id: "municipios" } })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-footer" }, [
+                  _c("p", [
+                    _vm._v(
+                      "Personas registradas a nivel departamental por municipio"
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c("h4", [_vm._v("Nacimiento mujeres")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-content" }, [
+                  _c("div", { staticClass: "ct-chart" }, [
+                    _c("canvas", { attrs: { id: "mujeresN" } })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-footer" }, [
+                  _c("p", [
+                    _vm._v(
+                      "Mujeres nacidas a nivel departamental por mes de nacimiento"
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c("h4", [_vm._v("Nacimiento hombres")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-content" }, [
+                  _c("div", { staticClass: "ct-chart" }, [
+                    _c("canvas", { attrs: { id: "hombresN" } })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-footer" }, [
+                  _c("p", [
+                    _vm._v(
+                      "Hombres nacidos a nivel departamental por mes de nacimiento"
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c("h4", [_vm._v("Entidades de salud")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-content" }, [
+                  _c("div", { staticClass: "ct-chart" }, [
+                    _c("canvas", { attrs: { id: "entidad" } })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-footer" }, [
+                  _c("p", [
+                    _vm._v(
+                      "Personas registradas a nivel departamental por entidad de salud"
+                    )
                   ])
                 ])
               ])
             ])
+          ]),
+          _vm._v(" "),
+          _c("h6", [
+            _vm._v(
+              "Para informacion detallada, consultar el apartado de reportes"
+            )
           ])
         ])
       ])
@@ -44699,6 +45832,12 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
+                    _c("td", {
+                      domProps: {
+                        textContent: _vm._s(distritos.nombre_municipio)
+                      }
+                    }),
+                    _vm._v(" "),
                     _c("td", [
                       distritos.condicion == "1"
                         ? _c("div", [
@@ -44877,6 +46016,73 @@ var render = function() {
                             staticClass: "col-md-3 form-control-label",
                             attrs: { for: "text-input" }
                           },
+                          [_vm._v("Municipio")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-9" }, [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.idmunicipio,
+                                  expression: "idmunicipio"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              on: {
+                                change: [
+                                  function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.idmunicipio = $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  },
+                                  function($event) {
+                                    return _vm.MunicipioS()
+                                  }
+                                ]
+                              }
+                            },
+                            [
+                              _c(
+                                "option",
+                                { attrs: { value: "0", disabled: "" } },
+                                [_vm._v("Seleccione")]
+                              ),
+                              _vm._v(" "),
+                              _vm._l(_vm.arrayMunicipio, function(municipio) {
+                                return _c("option", {
+                                  key: municipio.id,
+                                  domProps: {
+                                    value: municipio.id,
+                                    textContent: _vm._s(municipio.nombre)
+                                  }
+                                })
+                              })
+                            ],
+                            2
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group row" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-md-3 form-control-label",
+                            attrs: { for: "text-input" }
+                          },
                           [_vm._v("Comunidad")]
                         ),
                         _vm._v(" "),
@@ -44922,11 +46128,7 @@ var render = function() {
                                   key: comunidad.id,
                                   domProps: {
                                     value: comunidad.id,
-                                    textContent: _vm._s(
-                                      comunidad.nombre +
-                                        "-" +
-                                        comunidad.municipio
-                                    )
+                                    textContent: _vm._s(comunidad.nombre)
                                   }
                                 })
                               })
@@ -45088,6 +46290,8 @@ var staticRenderFns = [
         _c("th", [_vm._v("Nombre")]),
         _vm._v(" "),
         _c("th", [_vm._v("Comunidad")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Municipio")]),
         _vm._v(" "),
         _c("th", [_vm._v("Estado")])
       ])
@@ -45728,7 +46932,45 @@ var render = function() {
           _c("div", { staticClass: "form-group row" }, [
             _c("div", { staticClass: "col-md-6" }, [
               _c("div", { staticClass: "input-group" }, [
-                _vm._m(1),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.criterio_viv,
+                        expression: "criterio_viv"
+                      }
+                    ],
+                    staticClass: "form-control col-md-3",
+                    attrs: { id: "opcion", name: "opcion" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.criterio_viv = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "numvivienda" } }, [
+                      _vm._v("Numero de Vivienda")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "direccion" } }, [
+                      _vm._v("Direccion")
+                    ])
+                  ]
+                ),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -45786,109 +47028,115 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c(
-            "table",
-            { staticClass: "table table-bordered table-striped table-sm" },
-            [
-              _vm._m(2),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.arrayVivienda1, function(viviendas) {
-                  return _c("tr", { key: viviendas.id }, [
-                    _c(
-                      "td",
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-warning btn-sm",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                return _vm.abrirModal(
-                                  "vivienda",
-                                  "actualizar",
-                                  viviendas
-                                )
+          _c("div", { staticClass: "table-responsive" }, [
+            _c(
+              "table",
+              { staticClass: "table table-bordered table-striped table-sm" },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.arrayVivienda1, function(viviendas) {
+                    return _c("tr", { key: viviendas.id }, [
+                      _c(
+                        "td",
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-warning btn-sm",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.abrirModal(
+                                    "vivienda",
+                                    "actualizar",
+                                    viviendas
+                                  )
+                                }
                               }
-                            }
-                          },
-                          [_c("i", { staticClass: "icon-pencil" })]
-                        ),
-                        _vm._v("  \n                                "),
-                        viviendas.condicion
-                          ? [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-danger btn-sm",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.desactivarVivienda(
-                                        viviendas.id
-                                      )
+                            },
+                            [_c("i", { staticClass: "icon-pencil" })]
+                          ),
+                          _vm._v("  \n                                    "),
+                          viviendas.condicion
+                            ? [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger btn-sm",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.desactivarVivienda(
+                                          viviendas.id
+                                        )
+                                      }
                                     }
-                                  }
-                                },
-                                [_c("i", { staticClass: "icon-trash" })]
-                              )
-                            ]
-                          : [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-info btn-sm",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.activarVivienda(viviendas.id)
+                                  },
+                                  [_c("i", { staticClass: "icon-trash" })]
+                                )
+                              ]
+                            : [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-info btn-sm",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.activarVivienda(viviendas.id)
+                                      }
                                     }
-                                  }
-                                },
-                                [_c("i", { staticClass: "icon-check" })]
+                                  },
+                                  [_c("i", { staticClass: "icon-check" })]
+                                )
+                              ]
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(viviendas.numvivienda) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(viviendas.created_at) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(viviendas.updated_at) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(viviendas.direccion) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", [
+                        viviendas.condicion == "1"
+                          ? _c("div", [
+                              _c(
+                                "span",
+                                { staticClass: "badge badge-success" },
+                                [_vm._v("Activo")]
                               )
-                            ]
-                      ],
-                      2
-                    ),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(viviendas.numvivienda) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(viviendas.created_at) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(viviendas.updated_at) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(viviendas.direccion) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", [
-                      viviendas.condicion == "1"
-                        ? _c("div", [
-                            _c("span", { staticClass: "badge badge-success" }, [
-                              _vm._v("Activo")
                             ])
-                          ])
-                        : _c("div", [
-                            _c("span", { staticClass: "badge badge-danger" }, [
-                              _vm._v("Inactivo")
+                          : _c("div", [
+                              _c(
+                                "span",
+                                { staticClass: "badge badge-danger" },
+                                [_vm._v("Inactivo")]
+                              )
                             ])
-                          ])
+                      ])
                     ])
-                  ])
-                }),
-                0
-              )
-            ]
-          ),
+                  }),
+                  0
+                )
+              ]
+            )
+          ]),
           _vm._v(" "),
           _c("nav", [
             _c(
@@ -46042,7 +47290,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Numero de Vivienda")]
+                        [_vm._v("Numero de Vivienda:")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -46077,7 +47325,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Direccion")]
+                        [_vm._v("Direccion:")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -46115,7 +47363,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Tenencia de la Vivienda")]
+                        [_vm._v("Tenencia de la Vivienda:")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-5" }, [
@@ -46257,7 +47505,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Tipo Vivienda")]
+                        [_vm._v("Tipo Vivienda:")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -46318,7 +47566,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Ambientes de la Vivienda")]
+                        [_vm._v("Ambientes de la Vivienda:")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -46397,7 +47645,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Tipo de cocina")]
+                        [_vm._v("Tipo de cocina:")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -46601,7 +47849,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Techo")]
+                        [_vm._v("Techo:")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-6" }, [
@@ -46793,7 +48041,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Pared")]
+                        [_vm._v("Pared:")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -47008,7 +48256,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Piso")]
+                        [_vm._v("Piso:")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -47198,7 +48446,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Abastecimiento de Agua")]
+                        [_vm._v("Abastecimiento de Agua:")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -47388,7 +48636,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Tratamiento de Aguas Servidas")]
+                        [_vm._v("Tratamiento de Aguas Servidas:")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -47489,7 +48737,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Eliminación Final de Excretas")]
+                        [_vm._v("Eliminación Final de Excretas:")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -47664,7 +48912,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Eliminación de Basura")]
+                        [_vm._v("Eliminación de Basura:")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -47866,7 +49114,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Ubicación de los Animales Domésticos")]
+                        [_vm._v("Ubicación de los Animales Domésticos:")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -47925,7 +49173,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "Condiciones del lugar de los Animales Domésticos"
+                            "Condiciones del lugar de los Animales Domésticos:"
                           )
                         ]
                       ),
@@ -47988,7 +49236,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("No. de Perros")]
+                        [_vm._v("No. de Perros:")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-3" }, [
@@ -48021,7 +49269,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("No. de Gatos")]
+                        [_vm._v("No. de Gatos:")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-3" }, [
@@ -48056,7 +49304,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Otra informacion relacionada")]
+                        [_vm._v("Otra informacion relacionada:")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-5" }, [
@@ -48179,7 +49427,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Otros servicios")]
+                        [_vm._v("Otros servicios:")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -48293,8 +49541,6 @@ var render = function() {
         )
       ]
     ),
-    _vm._v(" "),
-    _vm._m(3),
     _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
       _c(
@@ -48443,7 +49689,7 @@ var render = function() {
                           "table table-bordered table-striped table-sm"
                       },
                       [
-                        _vm._m(4),
+                        _vm._m(2),
                         _vm._v(" "),
                         _vm.arrayFamilia.length
                           ? _c(
@@ -48453,6 +49699,22 @@ var render = function() {
                                   _c(
                                     "td",
                                     [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-success btn-sm",
+                                          attrs: { type: "button" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.verListadoFamilia(
+                                                familia.id
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_c("i", { staticClass: "icon-eye" })]
+                                      ),
+                                      _vm._v(" "),
                                       _c(
                                         "button",
                                         {
@@ -48705,7 +49967,7 @@ var render = function() {
                   _c("div", { staticClass: "form-group row border" }, [
                     _c("div", { staticClass: "col-md-3" }, [
                       _c("label", { attrs: { for: "" } }, [
-                        _vm._v("Numero familia")
+                        _vm._v("Numero familia:")
                       ]),
                       _vm._v(" "),
                       _c("input", {
@@ -48733,7 +49995,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-3" }, [
                       _c("label", { attrs: { for: "" } }, [
-                        _vm._v("Municipio")
+                        _vm._v("Municipio:")
                       ]),
                       _vm._v(" "),
                       _c(
@@ -48749,19 +50011,24 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.municipio_id = $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            }
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.municipio_id = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              },
+                              function($event) {
+                                return _vm.MunicipioSelect()
+                              }
+                            ]
                           }
                         },
                         [
@@ -48787,7 +50054,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-3" }, [
                       _c("label", { attrs: { for: "" } }, [
-                        _vm._v("Comunidad")
+                        _vm._v("Comunidad:")
                       ]),
                       _vm._v(" "),
                       _c(
@@ -48803,19 +50070,24 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.comunidad_id = $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            }
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.comunidad_id = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              },
+                              function($event) {
+                                return _vm.ComunidadSelect()
+                              }
+                            ]
                           }
                         },
                         [
@@ -48840,7 +50112,9 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-3" }, [
-                      _c("label", { attrs: { for: "" } }, [_vm._v("Distrito")]),
+                      _c("label", { attrs: { for: "" } }, [
+                        _vm._v("Distrito:")
+                      ]),
                       _vm._v(" "),
                       _c(
                         "select",
@@ -48882,7 +50156,7 @@ var render = function() {
                               key: distritos.id,
                               domProps: {
                                 value: distritos.id,
-                                textContent: _vm._s(distritos.nombre_distrito)
+                                textContent: _vm._s(distritos.nombre)
                               }
                             })
                           })
@@ -48892,7 +50166,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-3" }, [
-                      _c("label", [_vm._v("Area de Salud")]),
+                      _c("label", [_vm._v("Area de Salud:")]),
                       _vm._v(" "),
                       _c(
                         "select",
@@ -48948,7 +50222,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-3" }, [
-                      _c("label", { attrs: { for: "" } }, [_vm._v("Sector")]),
+                      _c("label", { attrs: { for: "" } }, [_vm._v("Sector:")]),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -48975,7 +50249,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-3" }, [
                       _c("label", { attrs: { for: "" } }, [
-                        _vm._v("Numero de Vivienda")
+                        _vm._v("Numero de Vivienda:")
                       ]),
                       _vm._v(" "),
                       _c(
@@ -50226,7 +51500,7 @@ var render = function() {
                               "table table-bordered table_stripered trable-sm"
                           },
                           [
-                            _vm._m(5),
+                            _vm._m(3),
                             _vm._v(" "),
                             _vm.arrayDetalle.length
                               ? _c(
@@ -50467,7 +51741,7 @@ var render = function() {
                                         }
                                       },
                                       [
-                                        _vm._m(6),
+                                        _vm._m(4),
                                         _vm._v(" "),
                                         _c("td", {
                                           domProps: {
@@ -50481,7 +51755,7 @@ var render = function() {
                                   ],
                                   2
                                 )
-                              : _c("tbody", [_vm._m(7)])
+                              : _c("tbody", [_vm._m(5)])
                           ]
                         )
                       ])
@@ -50571,19 +51845,24 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.municipio_id = $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            }
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.municipio_id = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              },
+                              function($event) {
+                                return _vm.MunicipioSelect()
+                              }
+                            ]
                           }
                         },
                         [
@@ -50625,19 +51904,24 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.comunidad_id = $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            }
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.comunidad_id = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              },
+                              function($event) {
+                                return _vm.ComunidadSelect()
+                              }
+                            ]
                           }
                         },
                         [
@@ -50704,7 +51988,7 @@ var render = function() {
                               key: distritos.id,
                               domProps: {
                                 value: distritos.id,
-                                textContent: _vm._s(distritos.nombre_distrito)
+                                textContent: _vm._s(distritos.nombre)
                               }
                             })
                           })
@@ -52068,7 +53352,7 @@ var render = function() {
                               "table table-bordered table_stripered trable-sm"
                           },
                           [
-                            _vm._m(8),
+                            _vm._m(6),
                             _vm._v(" "),
                             _vm.arrayDetalle.length
                               ? _c(
@@ -52375,7 +53659,7 @@ var render = function() {
                                         }
                                       },
                                       [
-                                        _vm._m(9),
+                                        _vm._m(7),
                                         _vm._v(" "),
                                         _c("td", {
                                           domProps: {
@@ -52389,7 +53673,7 @@ var render = function() {
                                   ],
                                   2
                                 )
-                              : _c("tbody", [_vm._m(10)])
+                              : _c("tbody", [_vm._m(8)])
                           ]
                         )
                       ])
@@ -52429,6 +53713,381 @@ var render = function() {
                   ])
                 ])
               ]
+            : _vm.listado == 3
+            ? [
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "form-group row border" }, [
+                    _c("div", { staticClass: "col-md-3" }, [
+                      _c("label", { attrs: { for: "" } }, [
+                        _vm._v("Numero familia:")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", {
+                        domProps: { textContent: _vm._s(_vm.num_familia) }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-3" }, [
+                      _c("label", { attrs: { for: "" } }, [
+                        _vm._v("Municipio:")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", {
+                        domProps: { textContent: _vm._s(_vm.municipio_nombre) }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-3" }, [
+                      _c("label", { attrs: { for: "" } }, [
+                        _vm._v("Comunidad:")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", {
+                        domProps: { textContent: _vm._s(_vm.comunidad_nombre) }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-3" }, [
+                      _c("label", { attrs: { for: "" } }, [
+                        _vm._v("Distrito:")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", {
+                        domProps: { textContent: _vm._s(_vm.distrito_nombre) }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-3" }, [
+                      _c("label", [_vm._v("Area de Salud:")]),
+                      _vm._v(" "),
+                      _c("p", {
+                        domProps: {
+                          textContent: _vm._s(_vm.entidad_salud_nombre)
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-3" }, [
+                      _c("label", { attrs: { for: "" } }, [_vm._v("Sector:")]),
+                      _vm._v(" "),
+                      _c("p", { domProps: { textContent: _vm._s(_vm.sector) } })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-3" }, [
+                      _c("label", { attrs: { for: "" } }, [
+                        _vm._v("Numero de Vivienda:")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", {
+                        domProps: { textContent: _vm._s(_vm.num_vivienda) }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-3" }, [
+                      _c("label", { attrs: { for: "" } }, [_vm._v("Usuario:")]),
+                      _vm._v(" "),
+                      _c("p", {
+                        domProps: { textContent: _vm._s(_vm.usuario_nombre) }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group row border",
+                      staticStyle: {
+                        direction: "ltr",
+                        height: "250px",
+                        overflow: "scroll"
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "table-responsive col-md-12" }, [
+                        _c(
+                          "table",
+                          {
+                            staticClass:
+                              "table table-bordered table_stripered trable-sm"
+                          },
+                          [
+                            _vm._m(9),
+                            _vm._v(" "),
+                            _vm.arrayDetalle.length
+                              ? _c(
+                                  "tbody",
+                                  [
+                                    _vm._l(_vm.arrayDetalle, function(detalle) {
+                                      return _c(
+                                        "tr",
+                                        { key: detalle.persona_id },
+                                        [
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.nombres
+                                              )
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.apellidos
+                                              )
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.apellido_casada
+                                              )
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            detalle.sexo == "0"
+                                              ? _c("div", [_vm._v("Mujer")])
+                                              : _vm._e(),
+                                            detalle.sexo == "1"
+                                              ? _c("div", [_vm._v("Hombre")])
+                                              : _vm._e()
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.nacimiento
+                                              )
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(detalle.edad)
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(detalle.CUI)
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            detalle.lider == "0"
+                                              ? _c("div", [_vm._v("Falso")])
+                                              : _vm._e(),
+                                            detalle.lider == "1"
+                                              ? _c("div", [_vm._v("Verdadero")])
+                                              : _vm._e()
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.puestocom_nombre
+                                              )
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.parentesco_nombre
+                                              )
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.pueblo_nombre
+                                              )
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.comlinguistica_nombre
+                                              )
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            detalle.alfabetismo == "0"
+                                              ? _c("div", [_vm._v("Falso")])
+                                              : _vm._e(),
+                                            detalle.alfabetismo == "1"
+                                              ? _c("div", [
+                                                  _vm._v("Es analfabeta")
+                                                ])
+                                              : _vm._e()
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.escolaridad_nombre
+                                              )
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.discapacidad_nombre
+                                              )
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.ocupacion_nombre
+                                              )
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            detalle.migracion == "0"
+                                              ? _c("div", [
+                                                  _vm._v("No ha viajado")
+                                                ])
+                                              : _vm._e(),
+                                            detalle.migracion == "1"
+                                              ? _c("div", [
+                                                  _vm._v("Ha viajado")
+                                                ])
+                                              : _vm._e()
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.permanencia_nombre
+                                              )
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.commigracion
+                                              )
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.munmigracion
+                                              )
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.depmigracion
+                                              )
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.pais_nombre
+                                              )
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            detalle.mortalidad == "0"
+                                              ? _c("div", [_vm._v("Falso")])
+                                              : _vm._e(),
+                                            detalle.mortalidad == "1"
+                                              ? _c("div", [
+                                                  _vm._v("Ha fallecido")
+                                                ])
+                                              : _vm._e()
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.fechamortalidad
+                                              )
+                                            }
+                                          })
+                                        ]
+                                      )
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "tr",
+                                      {
+                                        staticStyle: {
+                                          "background-color": "#CEECF5"
+                                        }
+                                      },
+                                      [
+                                        _vm._m(10),
+                                        _vm._v(" "),
+                                        _c("td", {
+                                          domProps: {
+                                            textContent: _vm._s(
+                                              _vm.total_personas
+                                            )
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ],
+                                  2
+                                )
+                              : _c("tbody", [_vm._m(11)])
+                          ]
+                        )
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-secondary",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.ocultarDetalle()
+                            }
+                          }
+                        },
+                        [_vm._v("Cerrar")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-warning btn-sm",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.editarFamilia(_vm.familia_id)
+                            }
+                          }
+                        },
+                        [_vm._v("Editar Familia")]
+                      )
+                    ])
+                  ])
+                ])
+              ]
             : _vm._e()
         ],
         2
@@ -52451,25 +54110,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "select",
-      {
-        staticClass: "form-control col-md-3",
-        attrs: { id: "opcion", name: "opcion" }
-      },
-      [
-        _c("option", { attrs: { value: "numvivienda" } }, [
-          _vm._v("Numero de Vivienda")
-        ]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "direccion" } }, [_vm._v("Direccion")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", [_vm._v("Opciones")]),
@@ -52485,81 +54125,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("Estado")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        staticStyle: { display: "none" },
-        attrs: {
-          id: "modalEliminar",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "myModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass: "modal-dialog modal-danger",
-            attrs: { role: "document" }
-          },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c("h4", { staticClass: "modal-title" }, [
-                  _vm._v("Eliminar Categoría")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("p", [_vm._v("Estas seguro de eliminar la categoría?")])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Cerrar")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  { staticClass: "btn btn-danger", attrs: { type: "button" } },
-                  [_vm._v("Eliminar")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
   },
   function() {
     var _vm = this
@@ -52733,6 +54298,78 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { attrs: { colspan: "25" } }, [
+        _vm._v("No hay personas agregadas")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Nombres")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Apellidos")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Apellido de Casada")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Sexo")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Fecha de Nacimiento")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Edad")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("CUI")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Lider")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Puesto Comunidad")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Parentesco")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Pueblos")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Comunidad Linguistica")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Alfabetismo")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Escolaridad")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Discapacidad")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Ocupacion")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Migracion")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Permanencia de Migracion")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Comunidad de Migracion")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Municipio de Migracion")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Departamento de Migracion")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Pais de Migracion")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Mortalidad")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Fecha Fallecimiento")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "23", align: "right" } }, [
+      _c("strong", [_vm._v("Total de Personas")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { attrs: { colspan: "24" } }, [
         _vm._v("No hay personas agregadas")
       ])
     ])
@@ -53828,7 +55465,7 @@ var render = function() {
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {
-                          return _vm.abrirModalM("servicios", 1)
+                          return _vm.abrirModalMServicios("servicios", 1)
                         }
                       }
                     },
@@ -53848,7 +55485,7 @@ var render = function() {
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {
-                          return _vm.abrirModalC("servicios", 2)
+                          return _vm.abrirModalCServicios("servicios", 2)
                         }
                       }
                     },
@@ -53868,7 +55505,7 @@ var render = function() {
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {
-                          return _vm.abrirModalD("servicios", 3)
+                          return _vm.abrirModalDServicios("servicios", 3)
                         }
                       }
                     },
@@ -54920,6 +56557,1491 @@ var render = function() {
                             })
                           ],
                           2
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.errorReporte,
+                            expression: "errorReporte"
+                          }
+                        ],
+                        staticClass: "form-group row div-error"
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "text-center text-error" },
+                          _vm._l(_vm.errorMostrarMsjReporte, function(error) {
+                            return _c("div", {
+                              key: error,
+                              domProps: { textContent: _vm._s(error) }
+                            })
+                          }),
+                          0
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.cerrarModal()
+                      }
+                    }
+                  },
+                  [_vm._v("Cerrar")]
+                ),
+                _vm._v(" "),
+                _vm.tipoAccion == 1
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRJefe()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 2
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRViviendas()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 3
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRSexo()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 4
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarREdad()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 5
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRDiscapacidad()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 6
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarROcupacion()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 7
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRMigracion()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 8
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRFallecidos()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 9
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRServicios()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e()
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        class: { mostrar: _vm.modalServiciosM },
+        staticStyle: { display: "none" },
+        attrs: {
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "myModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-primary modal-lg",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c("h4", {
+                  staticClass: "modal-title",
+                  domProps: { textContent: _vm._s(_vm.tituloModal) }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: { type: "button", "aria-label": "Close" },
+                    on: {
+                      click: function($event) {
+                        return _vm.cerrarModal()
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "form",
+                  {
+                    staticClass: "form-horizontal",
+                    attrs: {
+                      action: "",
+                      method: "post",
+                      enctype: "multipart/form-data"
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
+                        [_vm._v("Municipio")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-9" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.idmunicipio,
+                                expression: "idmunicipio"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.idmunicipio = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { value: "0", disabled: "" } },
+                              [_vm._v("Seleccione")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.arrayMunicipio, function(municipio) {
+                              return _c("option", {
+                                key: municipio.id,
+                                domProps: {
+                                  value: municipio.id,
+                                  textContent: _vm._s(municipio.nombre)
+                                }
+                              })
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
+                        [_vm._v("Servicios")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-9" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.idservicios,
+                                expression: "idservicios"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.idservicios = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { value: "0", disabled: "" } },
+                              [_vm._v("Seleccione")]
+                            ),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1" } }, [
+                              _vm._v("Tenencia de la vivienda")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("Tipo de vivienda")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "3" } }, [
+                              _vm._v("Separacion de ambientes")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "4" } }, [
+                              _vm._v("Ubicacion y tipo de cocina")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "5" } }, [
+                              _vm._v("Techo")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "6" } }, [
+                              _vm._v("Pared")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "7" } }, [
+                              _vm._v("Piso")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "8" } }, [
+                              _vm._v("Abastecimiento de agua")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "9" } }, [
+                              _vm._v("Tratamiento de aguas servidas")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "10" } }, [
+                              _vm._v("Eliminacion final de excretas")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "11" } }, [
+                              _vm._v("Eliminacion final de basura")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "12" } }, [
+                              _vm._v("Ubicacion de animales domesticos")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "13" } }, [
+                              _vm._v(
+                                "Condiciones dell lugar de los animales domesticos"
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "14" } }, [
+                              _vm._v("Zoonosis")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "15" } }, [
+                              _vm._v("Otros servicios")
+                            ])
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.errorReporte,
+                            expression: "errorReporte"
+                          }
+                        ],
+                        staticClass: "form-group row div-error"
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "text-center text-error" },
+                          _vm._l(_vm.errorMostrarMsjReporte, function(error) {
+                            return _c("div", {
+                              key: error,
+                              domProps: { textContent: _vm._s(error) }
+                            })
+                          }),
+                          0
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.cerrarModal()
+                      }
+                    }
+                  },
+                  [_vm._v("Cerrar")]
+                ),
+                _vm._v(" "),
+                _vm.tipoAccion == 1
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRJefe()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 2
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRViviendas()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 3
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRSexo()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 4
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarREdad()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 5
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRDiscapacidad()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 6
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarROcupacion()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 7
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRMigracion()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 8
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRFallecidos()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 9
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRServicios()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e()
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        class: { mostrar: _vm.modalServiciosC },
+        staticStyle: { display: "none" },
+        attrs: {
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "myModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-primary modal-lg",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c("h4", {
+                  staticClass: "modal-title",
+                  domProps: { textContent: _vm._s(_vm.tituloModal) }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: { type: "button", "aria-label": "Close" },
+                    on: {
+                      click: function($event) {
+                        return _vm.cerrarModal()
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "form",
+                  {
+                    staticClass: "form-horizontal",
+                    attrs: {
+                      action: "",
+                      method: "post",
+                      enctype: "multipart/form-data"
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
+                        [_vm._v("Municipio")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-9" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.idmunicipio,
+                                expression: "idmunicipio"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.idmunicipio = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                },
+                                function($event) {
+                                  return _vm.MunicipioS()
+                                }
+                              ]
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { value: "0", disabled: "" } },
+                              [_vm._v("Seleccione")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.arrayMunicipio, function(municipio) {
+                              return _c("option", {
+                                key: municipio.id,
+                                domProps: {
+                                  value: municipio.id,
+                                  textContent: _vm._s(municipio.nombre)
+                                }
+                              })
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
+                        [_vm._v("Comunidad")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-9" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.idcomunidad,
+                                expression: "idcomunidad"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.idcomunidad = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { value: "0", disabled: "" } },
+                              [_vm._v("Seleccione")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.arrayComunidad, function(comunidad) {
+                              return _c("option", {
+                                key: comunidad.id,
+                                domProps: {
+                                  value: comunidad.id,
+                                  textContent: _vm._s(comunidad.nombre)
+                                }
+                              })
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
+                        [_vm._v("Servicios")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-9" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.idservicios,
+                                expression: "idservicios"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.idservicios = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { value: "0", disabled: "" } },
+                              [_vm._v("Seleccione")]
+                            ),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1" } }, [
+                              _vm._v("Tenencia de la vivienda")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("Tipo de vivienda")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "3" } }, [
+                              _vm._v("Separacion de ambientes")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "4" } }, [
+                              _vm._v("Ubicacion y tipo de cocina")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "5" } }, [
+                              _vm._v("Techo")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "6" } }, [
+                              _vm._v("Pared")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "7" } }, [
+                              _vm._v("Piso")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "8" } }, [
+                              _vm._v("Abastecimiento de agua")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "9" } }, [
+                              _vm._v("Tratamiento de aguas servidas")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "10" } }, [
+                              _vm._v("Eliminacion final de excretas")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "11" } }, [
+                              _vm._v("Eliminacion final de basura")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "12" } }, [
+                              _vm._v("Ubicacion de animales domesticos")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "13" } }, [
+                              _vm._v(
+                                "Condiciones del lugar de los animales domesticos"
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "14" } }, [
+                              _vm._v("Zoonosis")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "15" } }, [
+                              _vm._v("Otros servicios")
+                            ])
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.errorReporte,
+                            expression: "errorReporte"
+                          }
+                        ],
+                        staticClass: "form-group row div-error"
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "text-center text-error" },
+                          _vm._l(_vm.errorMostrarMsjReporte, function(error) {
+                            return _c("div", {
+                              key: error,
+                              domProps: { textContent: _vm._s(error) }
+                            })
+                          }),
+                          0
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.cerrarModal()
+                      }
+                    }
+                  },
+                  [_vm._v("Cerrar")]
+                ),
+                _vm._v(" "),
+                _vm.tipoAccion == 1
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRJefe()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 2
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRViviendas()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 3
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRSexo()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 4
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarREdad()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 5
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRDiscapacidad()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 6
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarROcupacion()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 7
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRMigracion()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 8
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRFallecidos()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 9
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cargarRServicios()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e()
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        class: { mostrar: _vm.modalServiciosD },
+        staticStyle: { display: "none" },
+        attrs: {
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "myModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-primary modal-lg",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c("h4", {
+                  staticClass: "modal-title",
+                  domProps: { textContent: _vm._s(_vm.tituloModal) }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: { type: "button", "aria-label": "Close" },
+                    on: {
+                      click: function($event) {
+                        return _vm.cerrarModal()
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "form",
+                  {
+                    staticClass: "form-horizontal",
+                    attrs: {
+                      action: "",
+                      method: "post",
+                      enctype: "multipart/form-data"
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
+                        [_vm._v("Municipio")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-9" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.idmunicipio,
+                                expression: "idmunicipio"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.idmunicipio = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                },
+                                function($event) {
+                                  return _vm.MunicipioS()
+                                }
+                              ]
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { value: "0", disabled: "" } },
+                              [_vm._v("Seleccione")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.arrayMunicipio, function(municipio) {
+                              return _c("option", {
+                                key: municipio.id,
+                                domProps: {
+                                  value: municipio.id,
+                                  textContent: _vm._s(municipio.nombre)
+                                }
+                              })
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
+                        [_vm._v("Comunidad")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-9" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.idcomunidad,
+                                expression: "idcomunidad"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.idcomunidad = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                },
+                                function($event) {
+                                  return _vm.ComunidadS()
+                                }
+                              ]
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { value: "0", disabled: "" } },
+                              [_vm._v("Seleccione")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.arrayComunidad, function(comunidad) {
+                              return _c("option", {
+                                key: comunidad.id,
+                                domProps: {
+                                  value: comunidad.id,
+                                  textContent: _vm._s(comunidad.nombre)
+                                }
+                              })
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
+                        [_vm._v("Distrito")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-9" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.iddistrito,
+                                expression: "iddistrito"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.iddistrito = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { value: "0", disabled: "" } },
+                              [_vm._v("Seleccione")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.arrayDistrito, function(distrito) {
+                              return _c("option", {
+                                key: distrito.id,
+                                domProps: {
+                                  value: distrito.id,
+                                  textContent: _vm._s(distrito.nombre)
+                                }
+                              })
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
+                        [_vm._v("Servicios")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-9" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.idservicios,
+                                expression: "idservicios"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.idservicios = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { value: "0", disabled: "" } },
+                              [_vm._v("Seleccione")]
+                            ),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1" } }, [
+                              _vm._v("Tenencia de la vivienda")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("Tipo de vivienda")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "3" } }, [
+                              _vm._v("Separacion de ambientes")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "4" } }, [
+                              _vm._v("Ubicacion y tipo de cocina")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "5" } }, [
+                              _vm._v("Techo")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "6" } }, [
+                              _vm._v("Pared")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "7" } }, [
+                              _vm._v("Piso")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "8" } }, [
+                              _vm._v("Abastecimiento de agua")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "9" } }, [
+                              _vm._v("Tratamiento de aguas servidas")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "10" } }, [
+                              _vm._v("Eliminacion final de excretas")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "11" } }, [
+                              _vm._v("Eliminacion final de basura")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "12" } }, [
+                              _vm._v("Ubicacion de animales domesticos")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "13" } }, [
+                              _vm._v(
+                                "Condiciones dell lugar de los animales domesticos"
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "14" } }, [
+                              _vm._v("Zoonosis")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "15" } }, [
+                              _vm._v("Otros servicios")
+                            ])
+                          ]
                         )
                       ])
                     ]),
@@ -56613,7 +59735,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { type: "number", min: "0" },
+                          attrs: { type: "number" },
                           domProps: { value: _vm.numvivienda },
                           on: {
                             input: function($event) {
@@ -72081,7 +75203,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\josea\Desktop\Proyecto Censo\VersionFinal\SICPOW\resources\assets\js\app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\JoshuaDIH\Documents\Universidad\Proyecto de Carrera\Ministerio_Salud\resources\assets\js\app.js */"./resources/assets/js/app.js");
 
 
 /***/ })

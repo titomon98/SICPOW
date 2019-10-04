@@ -83,7 +83,7 @@
 <body>
     <img src="./img/logoDS.png" class="derecha"><br>
     <div>
-        <h3>Coordinación de Técnicos en Salud Rural</h3>
+        <h3>Dirección Departamental de Salud de Quetzaltenango</h3>
         <h3>Quetzaltenango</h3>
         <h3><span class="izquierda">{{now()}}</span></h3><br>
         <h3>Lista de personas por edad</h3>
@@ -105,10 +105,24 @@
                     <td>{{$e->nombres}}</td>
                     <td>{{$e->apellidos}}</td>
                     <td><?php 
-                    $c = date('Y'); $y = date('Y', strtotime($e->nacimiento));
-                    $ed = $c-$y;
-                    echo $ed;
-                    if ($ed > 17)
+                    $anio = date('Y'); 
+                    $year = date('Y', strtotime($e->nacimiento));
+
+                    $mes = date('m');
+                    $month = date('m', strtotime($e->nacimiento));
+
+                    $dia = date('d');
+                    $day = date('d', strtotime($e->nacimiento));
+
+                    $difa = $anio - $year;
+                    $difm = $mes - $month;
+                    $difd = $dia - $day;
+
+                    if ($difm < 0 || $difd < 0)
+                        $difa--;
+
+                    echo $difa;
+                    if ($difa > 17)
                     $cont1 = $cont1 + 1;
                     else
                     $cont2 = $cont2 + 1;

@@ -19,59 +19,61 @@
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <select class="form-control col-md-3" id="opcion" name="opcion">
-                                    <option value="numvivienda">Numero de Vivienda</option>
-                                    <option value="direccion">Direccion</option>
+                                    <select class="form-control col-md-3" id="opcion" name="opcion" v-model="criterio_viv">
+                                        <option value="numvivienda">Numero de Vivienda</option>
+                                        <option value="direccion">Direccion</option>
                                     </select>
                                     <input type="text" v-model="buscar_viv" @keyup.enter="listarVivienda(1,buscar_viv,criterio_viv)" class="form-control" placeholder="Vivienda a buscar">
                                     <button type="submit" @click="listarVivienda(1,buscar_viv,criterio_viv)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                 </div>
                             </div>
                         </div>
-                        <table class="table table-bordered table-striped table-sm">
-                            <thead>
-                                <tr>
-                                    <th>Opciones</th>
-                                    <th>Numero de Vivienda</th>
-                                    <th>Fecha Inicial</th>
-                                    <th>Fecha de Actualizacion</th>
-                                    <th>Direccion</th>
-                                    <th>Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="viviendas in arrayVivienda1" :key="viviendas.id">
-                                    <td>
-                                        <button type="button" @click="abrirModal('vivienda', 'actualizar', viviendas)" class="btn btn-warning btn-sm">
-                                        <i class="icon-pencil"></i>
-                                        </button> &nbsp;
-                                        <template v-if="viviendas.condicion">
-                                            <button type="button" class="btn btn-danger btn-sm" @click="desactivarVivienda(viviendas.id)">
-                                            <i class="icon-trash"></i>
-                                            </button>
-                                        </template>
-                                        <template v-else>
-                                            <button type="button" class="btn btn-info btn-sm" @click="activarVivienda(viviendas.id)">
-                                            <i class="icon-check"></i>
-                                            </button>
-                                        </template>
-                                    </td>
-                                    <td v-text="viviendas.numvivienda"></td>
-                                    <td v-text="viviendas.created_at"></td>
-                                    <td v-text="viviendas.updated_at"></td>
-                                    <td v-text="viviendas.direccion"></td>
-                                    <td>
-                                        <div v-if="viviendas.condicion=='1'">
-                                            <span class="badge badge-success">Activo</span>
-                                        </div>
-                                        <div v-else>
-                                            <span class="badge badge-danger">Inactivo</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Opciones</th>
+                                        <th>Numero de Vivienda</th>
+                                        <th>Fecha Inicial</th>
+                                        <th>Fecha de Actualizacion</th>
+                                        <th>Direccion</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="viviendas in arrayVivienda1" :key="viviendas.id">
+                                        <td>
+                                            <button type="button" @click="abrirModal('vivienda', 'actualizar', viviendas)" class="btn btn-warning btn-sm">
+                                            <i class="icon-pencil"></i>
+                                            </button> &nbsp;
+                                            <template v-if="viviendas.condicion">
+                                                <button type="button" class="btn btn-danger btn-sm" @click="desactivarVivienda(viviendas.id)">
+                                                <i class="icon-trash"></i>
+                                                </button>
+                                            </template>
+                                            <template v-else>
+                                                <button type="button" class="btn btn-info btn-sm" @click="activarVivienda(viviendas.id)">
+                                                <i class="icon-check"></i>
+                                                </button>
+                                            </template>
+                                        </td>
+                                        <td v-text="viviendas.numvivienda"></td>
+                                        <td v-text="viviendas.created_at"></td>
+                                        <td v-text="viviendas.updated_at"></td>
+                                        <td v-text="viviendas.direccion"></td>
+                                        <td>
+                                            <div v-if="viviendas.condicion=='1'">
+                                                <span class="badge badge-success">Activo</span>
+                                            </div>
+                                            <div v-else>
+                                                <span class="badge badge-danger">Inactivo</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
                         <nav>
                             <ul class="pagination">
                                 <li class="page-item" v-if="pagination_viv.current_page > 1">
@@ -102,19 +104,19 @@
                         <div class="modal-body">
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input">Numero de Vivienda</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Numero de Vivienda:</label>
                                     <div class="col-md-9">
                                         <input type="number" v-model="numvivienda" class="form-control" min="0">
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input">Direccion</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Direccion:</label>
                                     <div class="col-md-9">
                                         <input type="text" v-model="direccion" class="form-control" placeholder="Direccion de la Vivienda">
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input">Tenencia de la Vivienda</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Tenencia de la Vivienda:</label>
                                     <div class="col-md-5">
                                         <input type="radio" id="rd01" value="1" v-model="idtenencia" @click="habilitar('tbo01', false)"> <label for="rd01">Propia</label>
                                         <input type="radio" id="rd02" value="2" v-model="idtenencia" @click="habilitar('tbo01', false)"> <label for="rd02">Alquila</label>
@@ -126,14 +128,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input">Tipo Vivienda</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Tipo Vivienda:</label>
                                     <div class="col-md-9">
                                         <input type="radio" id="rd05" value="1" v-model="idtipovivienda"> <label for="rd05">Unifamiliar</label>
                                         <input type="radio" id="rd06" value="2" v-model="idtipovivienda"> <label for="rd06">Multifamiliar</label>
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input">Ambientes de la Vivienda</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Ambientes de la Vivienda:</label>
                                     <div class="col-md-9">
                                         <input type="radio" id="rd07" value="1" v-model="idambiente"> <label for="rd07">Ambiente unico</label>
                                         <input type="radio" id="rd08" value="2" v-model="idambiente"> <label for="rd08">Número de Ambientes Separados</label>
@@ -141,7 +143,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input">Tipo de cocina</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Tipo de cocina:</label>
                                     <div class="col-md-9">
                                         <label for="text-input">Dentro de la casa: </label>
                                         <input type="radio" id="rd10" value="1" v-model="idcocina"> <label for="rd10">Estufa de gas</label>
@@ -159,7 +161,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input">Techo</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Techo:</label>
                                     <div class="col-md-6">
                                         <input type="radio" id="rd18" value="1" v-model="idtecho" @click="habilitar('tbo02', false)"> <label for="rd18">Cemento</label>
                                         <input type="radio" id="rd19" value="2" v-model="idtecho" @click="habilitar('tbo02', false)"> <label for="rd19">Lámina</label>
@@ -173,7 +175,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input">Pared</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Pared:</label>
                                     <div class="col-md-9">
                                         <input type="radio" id="rd24" value="1" v-model="idpared" @click="habilitar('tbo03', false)"> <label for="rd24">Ladrillo</label>
                                         <input type="radio" id="rd25" value="2" v-model="idpared" @click="habilitar('tbo03', false)"> <label for="rd25">Block</label>
@@ -186,7 +188,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input">Piso</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Piso:</label>
                                     <div class="col-md-9">
                                         <input type="radio" id="rd30" value="1" v-model="idpiso" @click="habilitar('tbo04', false)"> <label for="rd30">Granito</label>
                                         <input type="radio" id="rd31" value="2" v-model="idpiso" @click="habilitar('tbo04', false)"> <label for="rd31">Cerámico</label>
@@ -198,7 +200,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input">Abastecimiento de Agua</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Abastecimiento de Agua:</label>
                                     <div class="col-md-9">
                                         <input type="radio" id="rd36" value="1" v-model="idaguaabast" @click="habilitar('tbo05', false)"> <label for="rd36">Chorro Propio</label>
                                         <input type="radio" id="rd37" value="2" v-model="idaguaabast" @click="habilitar('tbo05', false)"> <label for="rd37">Pozo propio</label>
@@ -210,7 +212,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input">Tratamiento de Aguas Servidas</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Tratamiento de Aguas Servidas:</label>
                                     <div class="col-md-9">
                                         <input type="radio" id="rd42" value="1" v-model="idaguatrat"> <label for="rd42">Drenaje/Alcantarillado</label>
                                         <input type="radio" id="rd43" value="2" v-model="idaguatrat"> <label for="rd43">Fosa Séptica</label>
@@ -219,7 +221,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input">Eliminación Final de Excretas</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Eliminación Final de Excretas:</label>
                                     <div class="col-md-9">
                                         <input type="radio" id="rd46" value="1" v-model="ideliminexcretas" @click="habilitar('tbo06', false)"> <label for="rd46">Cantidad</label>
                                         <input type="radio" id="rd47" value="2" v-model="ideliminexcretas" @click="habilitar('tbo06', false)"> <label for="rd47">En Uso</label>
@@ -230,7 +232,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input">Eliminación de Basura</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Eliminación de Basura:</label>
                                     <div class="col-md-9">
                                         <input type="radio" id="rd51" value="1" v-model="ideliminbasura" @click="habilitar('tbo07', false)"> <label for="rd51">Tren de aseo</label>
                                         <input type="radio" id="rd52" value="2" v-model="ideliminbasura" @click="habilitar('tbo07', false)"> <label for="rd52">Clasifican</label>
@@ -242,31 +244,31 @@
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input">Ubicación de los Animales Domésticos</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Ubicación de los Animales Domésticos:</label>
                                     <div class="col-md-9">
                                         <input type="radio" id="rd57" value="1" v-model="idanimalubic"> <label for="rd57">Adecuado</label>
                                         <input type="radio" id="rd58" value="2" v-model="idanimalubic"> <label for="rd58">Inadecuado</label>
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input">Condiciones del lugar de los Animales Domésticos</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Condiciones del lugar de los Animales Domésticos:</label>
                                     <div class="col-md-9">
                                         <input type="radio" id="rd59" value="1" v-model="idanimalcondlugar"> <label for="rd59">Adecuado</label>
                                         <input type="radio" id="rd60" value="2" v-model="idanimalcondlugar"> <label for="rd60">Inadecuado</label>
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input">No. de Perros</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">No. de Perros:</label>
                                     <div class="col-md-3">
                                         <input type="number" v-model="perros" class="form-control" min="0">
                                     </div>
-                                    <label class="col-md-3 form-control-label" for="text-input">No. de Gatos</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">No. de Gatos:</label>
                                     <div class="col-md-3">
                                         <input type="number" v-model="gatos" class="form-control" min="0">
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input">Otra informacion relacionada</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Otra informacion relacionada:</label>
                                     <div class="col-md-5">
                                         <input type="checkbox" id="cb1" value='true' v-model="electricidad"><label for="cb1">Energia electrica</label>
                                         <input type="checkbox" id="cb2" value='true' v-model="telefonia"><label for="cb2">Señal de telefonia móvil</label>
@@ -276,7 +278,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input">Otros servicios</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Otros servicios:</label>
                                     <div class="col-md-9">
                                         <input type="text" v-model="otroservicios" class="form-control" placeholder="Otros servicios que poseen">
                                     </div>
@@ -299,28 +301,6 @@
                 <!-- /.modal-dialog -->
             </div>
             <!--Fin del modal-->
-            <!-- Inicio del modal Eliminar -->
-            <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-                <div class="modal-dialog modal-danger" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Eliminar Categoría</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Estas seguro de eliminar la categoría?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-danger">Eliminar</button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
             <!-- Fin de Vivienda -->
 
             <!-- Inicio de Familia -->
@@ -340,8 +320,8 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <select class="form-control col-md-3" v-model="criterio_fam">
-                                        <option value="num_familia">Número de Familia</option>
-                                        <option value="num_vivienda">Numero de Vivienda</option>
+                                            <option value="num_familia">Número de Familia</option>
+                                            <option value="num_vivienda">Numero de Vivienda</option>
                                         </select>
                                         <input type="text" v-model="buscar_fam" @keyup.enter="listarFamilia(1,buscar_fam,criterio_fam)" class="form-control" placeholder="Texto a buscar">
                                         <button type="submit" @click="listarFamilia(1,buscar_fam,criterio_fam)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
@@ -367,8 +347,11 @@
                                     <tbody v-if="arrayFamilia.length">
                                         <tr v-for="familia in arrayFamilia" :key="familia.id">
                                             <td>
+                                                <button type="button" class="btn btn-success btn-sm" @click="verListadoFamilia(familia.id)">
+                                                    <i class="icon-eye"></i>
+                                                </button>
                                                 <button type="button" class="btn btn-warning btn-sm" @click="editarFamilia(familia.id)">
-                                                <i class="icon-pencil"></i>
+                                                    <i class="icon-pencil"></i>
                                                 </button> &nbsp;
                                                 <template v-if="familia.condicion">
                                                     <button type="button" class="btn btn-danger btn-sm" @click="desactivarFamilia(familia.id)">
@@ -422,43 +405,43 @@
                         <div class="card-body">
                             <div class="form-group row border">
                                 <div class="col-md-3">
-                                    <label for="">Numero familia</label>
+                                    <label for="">Numero familia:</label>
                                     <input type="number" min="0" class="form-control" v-model="num_familia">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="">Municipio</label>
-                                    <select class="form-control" v-model="municipio_id">
+                                    <label for="">Municipio:</label>
+                                    <select class="form-control" v-model="municipio_id" @change="MunicipioSelect()">
                                         <option value="0" disabled>Seleccione</option>
                                         <option v-for="municipios in arrayMunicipio" :key="municipios.id" :value="municipios.id" v-text="municipios.nombre"></option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="">Comunidad</label>
-                                    <select class="form-control" v-model="comunidad_id">
+                                    <label for="">Comunidad:</label>
+                                    <select class="form-control" v-model="comunidad_id" @change="ComunidadSelect()">
                                         <option value="0" disabled>Seleccione</option>
                                         <option v-for="comunidades in arrayComunidad" :key="comunidades.id" :value="comunidades.id" v-text="comunidades.nombre"></option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="">Distrito</label>
+                                    <label for="">Distrito:</label>
                                     <select class="form-control" v-model="distrito_id">
                                         <option value="0" disabled>Seleccione</option>
-                                        <option v-for="distritos in arrayDistrito" :key="distritos.id" :value="distritos.id" v-text="distritos.nombre_distrito"></option>
+                                        <option v-for="distritos in arrayDistrito" :key="distritos.id" :value="distritos.id" v-text="distritos.nombre"></option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label>Area de Salud</label>
+                                    <label>Area de Salud:</label>
                                     <select class="form-control" v-model="entidad_salud_id">
                                         <option value="0" disabled>Seleccione</option>
                                         <option v-for="entidades in arrayEntidad" :key="entidades.id" :value="entidades.id" v-text="entidades.nombre">Puesto de salud</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="">Sector</label>
+                                    <label for="">Sector:</label>
                                     <input type="text" class="form-control" v-model="sector">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="">Numero de Vivienda</label>
+                                    <label for="">Numero de Vivienda:</label>
                                     <select class="form-control" id="sel03" v-model="detalle_vivienda_id">
                                         <option value="0" disabled>Seleccione</option>
                                         <option v-for="viviendas in arrayVivienda2" :key="viviendas.id" :value="viviendas.id" v-text="viviendas.numvivienda"></option>
@@ -691,14 +674,14 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="">Municipio</label>
-                                    <select class="form-control" v-model="municipio_id">
+                                    <select class="form-control" v-model="municipio_id" @change="MunicipioSelect()">
                                         <option value="0" disabled>Seleccione</option>
                                         <option v-for="municipios in arrayMunicipio" :key="municipios.id" :value="municipios.id" v-text="municipios.nombre"></option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="">Comunidad</label>
-                                    <select class="form-control" v-model="comunidad_id">
+                                    <select class="form-control" v-model="comunidad_id" @change="ComunidadSelect()">
                                         <option value="0" disabled>Seleccione</option>
                                         <option v-for="comunidades in arrayComunidad" :key="comunidades.id" :value="comunidades.id" v-text="comunidades.nombre"></option>
                                     </select>
@@ -707,7 +690,7 @@
                                     <label for="">Distrito</label>
                                     <select class="form-control" v-model="distrito_id">
                                         <option value="0" disabled>Seleccione</option>
-                                        <option v-for="distritos in arrayDistrito" :key="distritos.id" :value="distritos.id" v-text="distritos.nombre_distrito"></option>
+                                        <option v-for="distritos in arrayDistrito" :key="distritos.id" :value="distritos.id" v-text="distritos.nombre"></option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
@@ -956,6 +939,121 @@
                         </div>
                     </template>
                     <!-- Fin detalle actuaualizar -->
+                    <!-- Listado detalle -->
+                    <template v-else-if="listado==3">
+                        <div class="card-body">
+                            <div class="form-group row border">
+                                <div class="col-md-3">
+                                    <label for="">Numero familia:</label>
+                                    <p v-text="num_familia"></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">Municipio:</label>
+                                    <p v-text="municipio_nombre"></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">Comunidad:</label>
+                                    <p v-text="comunidad_nombre"></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">Distrito:</label>
+                                    <p v-text="distrito_nombre"></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Area de Salud:</label>
+                                    <p v-text="entidad_salud_nombre"></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">Sector:</label>
+                                    <p v-text="sector"></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">Numero de Vivienda:</label>
+                                    <p v-text="num_vivienda"></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">Usuario:</label>
+                                    <p v-text="usuario_nombre"></p>
+                                </div>
+                            </div>
+                            <div class="form-group row border" style="direction: ltr; height: 250px; overflow: scroll;">
+                                <div class="table-responsive col-md-12">
+                                    <table class="table table-bordered table_stripered trable-sm" >
+                                        <thead>
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
+                                            <th>Apellido de Casada</th>
+                                            <th>Sexo</th>
+                                            <th>Fecha de Nacimiento</th>
+                                            <th>Edad</th>
+                                            <th>CUI</th>
+                                            <th>Lider</th>
+                                            <th>Puesto Comunidad</th>
+                                            <th>Parentesco</th>
+                                            <th>Pueblos</th>
+                                            <th>Comunidad Linguistica</th>
+                                            <th>Alfabetismo</th>
+                                            <th>Escolaridad</th>
+                                            <th>Discapacidad</th>
+                                            <th>Ocupacion</th>
+                                            <th>Migracion</th>
+                                            <th>Permanencia de Migracion</th>
+                                            <th>Comunidad de Migracion</th>
+                                            <th>Municipio de Migracion</th>
+                                            <th>Departamento de Migracion</th>
+                                            <th>Pais de Migracion</th>
+                                            <th>Mortalidad</th>
+                                            <th>Fecha Fallecimiento</th>
+                                        </thead>
+                                        <tbody v-if="arrayDetalle.length">
+                                            <tr v-for="detalle in arrayDetalle" :key="detalle.persona_id">
+                                                <td v-text="detalle.nombres"></td>
+                                                <td v-text="detalle.apellidos"></td>
+                                                <td v-text="detalle.apellido_casada"></td>
+                                                <td><div v-if="detalle.sexo=='0'">Mujer</div><div v-if="detalle.sexo=='1'">Hombre</div></td>
+                                                <td v-text="detalle.nacimiento"></td>
+                                                <td v-text="detalle.edad"></td>
+                                                <td v-text="detalle.CUI"></td>
+                                                <td><div v-if="detalle.lider=='0'">Falso</div><div v-if="detalle.lider=='1'">Verdadero</div></td>
+                                                <td v-text="detalle.puestocom_nombre"></td>
+                                                <td v-text="detalle.parentesco_nombre"></td>
+                                                <td v-text="detalle.pueblo_nombre"></td>
+                                                <td v-text="detalle.comlinguistica_nombre"></td>
+                                                <td><div v-if="detalle.alfabetismo=='0'">Falso</div><div v-if="detalle.alfabetismo=='1'">Es analfabeta</div></td>
+                                                <td v-text="detalle.escolaridad_nombre"></td>
+                                                <td v-text="detalle.discapacidad_nombre"></td>
+                                                <td v-text="detalle.ocupacion_nombre"></td>
+                                                <td><div v-if="detalle.migracion=='0'">No ha viajado</div><div v-if="detalle.migracion=='1'">Ha viajado</div></td>
+                                                <td v-text="detalle.permanencia_nombre"></td>
+                                                <td v-text="detalle.commigracion"></td>
+                                                <td v-text="detalle.munmigracion"></td>
+                                                <td v-text="detalle.depmigracion"></td>
+                                                <td v-text="detalle.pais_nombre"></td>
+                                                <td><div v-if="detalle.mortalidad=='0'">Falso</div><div v-if="detalle.mortalidad=='1'">Ha fallecido</div></td>
+                                                <td v-text="detalle.fechamortalidad"></td>
+                                            </tr>
+                                            <tr style="background-color: #CEECF5;">
+                                                <td colspan="23" align="right"><strong>Total de Personas</strong></td>
+                                                <td v-text="total_personas"></td>
+                                            </tr> 
+                                        </tbody>
+                                        <tbody v-else>
+                                            <tr>
+                                                <td colspan="24">No hay personas agregadas</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-secondary" @click="ocultarDetalle()">Cerrar</button>
+                                    <button type="button" class="btn btn-warning btn-sm" @click="editarFamilia(familia_id)">Editar Familia</button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <!-- Fin Listado detalle -->
                 </div>
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
@@ -982,7 +1080,12 @@
                 detalle_vivienda_id:0,
                 created_at:'',
                 updated_at:'',
-                arrayFamilia:[],
+                arrayFamilia:'',
+                usuario_nombre:'',
+                municipio_nombre:'',
+                comunidad_nombre:'',
+                distrito_nombre:'',
+                entidad_salud_nombre:'',
                 arrayUsuario:[],
                 arrayMunicipio:[],
                 arrayComunidad:[],
@@ -1176,835 +1279,6 @@
             }
         },
         methods : {
-            listarFamilia (page,buscar,criterio){
-                let me=this;
-                var url= '/familia?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayFamilia = respuesta.familias.data;
-                    me.pagination_fam = respuesta.pagination;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            cambiarPagina_fam(page,buscar,criterio){
-                let me = this;
-                //Actualiza la página actual
-                me.pagination_fam.current_page = page;
-                //Envia la petición para visualizar la data de esa página
-                me.listarFamilia(page,buscar,criterio);
-            },
-            selectMunicipio(){
-                let me=this;
-                var url= '/Municipiofam';
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayMunicipio = respuesta.municipios;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            selectComunidad(){
-                let me=this;
-                var url= '/Comunidadfam';
-                axios.get(url).then(function (response) {
-                    let respuesta= response.data;
-                    me.arrayComunidad=respuesta.comunidades;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            getDatosComunidad(val1){
-                let me = this;
-                me.loading = true
-                me.idcomunidad = val1.id;
-            },
-            selectDistrito(){
-                let me=this;
-                var url= '/Distritofam';
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayDistrito = respuesta.distritos;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            selectEntidad(){
-                let me=this;
-                var url= '/entidads';
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayEntidad = respuesta.entidades;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            selectVivienda(){
-                let me=this;
-                var url= '/vivienda/selectVivienda';
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayVivienda2 = respuesta.viviendas;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            selectParentesco(){
-                let me=this;
-                var url= '/Parentesco';
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayParentesco = respuesta.parentesco;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            selectPueblo(){
-                let me=this;
-                var url= '/Pueblo';
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayPueblo = respuesta.pueblo;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            selectComlinguistica(){
-                let me=this;
-                var url= '/Comlinguistica';
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayComlinguistica = respuesta.comlinguistica;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            selectEscolaridad(){
-                let me=this;
-                var url= '/Escolaridad';
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayEscolaridad = respuesta.escolaridad;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            selectDiscapacidad(){
-                let me=this;
-                var url= '/Discapacidad';
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayDiscapacidad = respuesta.discapacidad;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            selectOcupacion(){
-                let me=this;
-                var url= '/Ocupacion';
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayOcupacion = respuesta.ocupacion;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            selectPermanencia(){
-                let me=this;
-                var url= '/Permanencia';
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayPermanencia = respuesta.permanencia;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            selectPais(){
-                let me=this;
-                var url= '/Pais';
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayPais = respuesta.pais;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            selectPuestoCom(){
-                let me=this;
-                var url= '/PuestoCom';
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayPuestoCom = respuesta.puestocom;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            mostrarDetalle(){
-                let me = this;
-
-                this.listado=0;
-                this.permanencia_id = 6;
-                this.pais_id = 8;
-                this.puesto_comunidad_id = 3;
-                
-                me.sector='';
-                me.num_vivienda=0;
-                me.num_familia=0;
-                me.distrito=0;
-                me.entidad_salud_id=0;
-                me.detalle_vivienda_id=0;
-                me.arrayDetalle=[];
-                me.boolpersona='agregar';
-                
-                this.selectVivienda();
-                this.selectMunicipio();
-                this.selectComunidad();
-                this.selectDistrito();
-                this.selectEntidad();
-                this.selectParentesco();
-                this.selectPueblo();
-                this.selectComlinguistica();
-                this.selectEscolaridad();
-                this.selectDiscapacidad();
-                this.selectOcupacion();
-                this.selectPermanencia();
-                this.selectPais();
-                this.selectPuestoCom();
-            },
-            agregarDetalle(){
-                let me = this;
-
-                if((!me.CUI) || (!me.nombres) || (!me.apellidos) || (!me.nacimiento) || (me.parentesco_id==0) || (me.pueblo_id==0) || 
-                    (me.comlinguistica_id==0) || (me.escolaridad_id==0) || (me.discapacidad_id==0) || (me.ocupacion_id==0) || 
-                    (me.puesto_comunidad_id==0) || (me.migracion==1 && me.permanencia_id==6) || (me.migracion==1 && me.pais_id==8)){
-
-                }
-                else{
-
-                    if(me.encuentra(me.CUI)){
-                        swal.fire({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'Este numero de CUI ya se encuentra agregado!',
-                        })
-                    }
-                    else{
-                        me.parentesco_nombre = me.arrayParentesco[me.parentesco_id - 1].nombre;
-                        me.pueblo_nombre = me.arrayPueblo[me.pueblo_id - 1].nombre;
-                        me.comlinguistica_nombre = me.arrayComlinguistica[me.comlinguistica_id - 1].nombre;
-                        me.escolaridad_nombre = me.arrayEscolaridad[me.escolaridad_id - 1].nombre;
-                        me.discapacidad_nombre = me.arrayDiscapacidad[me.discapacidad_id - 1].nombre;
-                        me.ocupacion_nombre = me.arrayOcupacion[me.ocupacion_id - 1].nombre;
-                        me.permanencia_nombre = me.arrayPermanencia[me.permanencia_id - 1].nombre;
-                        me.pais_nombre = me.arrayPais[me.pais_id - 1].nombre;
-                        me.puestocom_nombre = me.arrayPuestoCom[me.puesto_comunidad_id - 1].nombre;
-
-                        me.edad = me.calcularEdad(me.nacimiento);
-
-                        me.arrayDetalle.push({
-                            nombres : me.nombres,
-                            apellidos : me.apellidos,
-                            apellido_casada : me.apellido_casada,
-                            lider : me.lider,
-                            sexo : me.sexo,
-                            nacimiento : me.nacimiento,
-                            edad : me.edad,
-                            CUI : me.CUI,
-                            parentesco_id : me.parentesco_id,
-                            parentesco_nombre : me.parentesco_nombre,
-                            pueblo_id : me.pueblo_id,
-                            pueblo_nombre : me.pueblo_nombre,
-                            comlinguistica_id : me.comlinguistica_id,
-                            comlinguistica_nombre : me.comlinguistica_nombre,
-                            alfabetismo : me.alfabetismo,
-                            escolaridad_id : me.escolaridad_id,
-                            escolaridad_nombre : me.escolaridad_nombre,
-                            discapacidad_id : me.discapacidad_id,
-                            discapacidad_nombre : me.discapacidad_nombre,
-                            ocupacion_id : me.ocupacion_id,
-                            ocupacion_nombre : me.ocupacion_nombre,
-                            migracion : me.migracion,
-                            permanencia_id : me.permanencia_id,
-                            permanencia_nombre : me.permanencia_nombre,
-                            commigracion : me.commigracion,
-                            munmigracion : me.munmigracion,
-                            depmigracion : me.depmigracion,
-                            pais_id : me.pais_id,
-                            pais_nombre : me.pais_nombre,
-                            puesto_comunidad_id : me.puesto_comunidad_id,
-                            puestocom_nombre : me.puestocom_nombre,
-                            mortalidad : me.mortalidad,
-                            fechamortalidad : me.fechamortalidad
-                        });
-
-                        me.nombres='';
-                        me.apellidos='';
-                        me.apellido_casada='';
-                        me.lider=0;
-                        me.sexo=0;
-                        me.nacimiento='';
-                        me.edad=0;
-                        me.CUI='';
-                        me.parentesco_id=0;
-                        me.parentesco_nombre='';
-                        me.pueblo_id=0;
-                        me.pueblo_nombre='';
-                        me.comlinguistica_id=0;
-                        me.comlinguistica_nombre='';
-                        me.alfabetismo=0;
-                        me.escolaridad_id=0;
-                        me.escolaridad_nombre='';
-                        me.discapacidad_id=0;
-                        me.discapacidad_nombre='';
-                        me.ocupacion_id=0;
-                        me.ocupacion_nombre='';
-                        me.migracion=0;
-                        me.permanencia_id=6;
-                        me.permanencia_nombre='';
-                        me.commigracion='';
-                        me.munmigracion='';
-                        me.depmigracion='';
-                        me.pais_id=8;
-                        me.pais_nombre='';
-                        me.puesto_comunidad_id=3;
-                        me.puestocom_nombre='';
-                        me.mortalidad=0;
-                        me.fechamortalidad='';
-                        me.total_personas++;
-                    }
-                }
-            },
-            encuentra(cui){
-                var sw=0;
-                for(var i=0;i<this.arrayDetalle.length;i++){
-                    if(this.arrayDetalle[i].CUI==cui){
-                        sw=true;
-                    }
-                }
-                return sw;
-            },
-            calcularEdad(fecha){
-                var hoy = new Date();
-                var cumple = new Date(fecha);
-                var edad = hoy.getFullYear() - cumple.getFullYear();
-                var m = hoy.getMonth() - cumple.getMonth();
-
-                if(m < 0 || (m === 0 && hoy.getDate() < cumple.getDate())){
-                    edad--;
-                }
-                return edad;
-            },
-            eliminarDetalle(index){
-                let me = this;
-                me.arrayDetalle.splice(index, 1);
-                me.total_personas--;
-            },
-            registrarFamilia(){
-                if (this.validarFamilia()){
-                    return;
-                }
-                
-                let me = this;
-
-                me.num_vivienda = me.arrayVivienda2[me.detalle_vivienda_id - 1].numvivienda;
-
-                axios.post('/familia/registrar',{
-                    'sector': this.sector,
-                    'num_vivienda': this.num_vivienda,
-                    'num_familia' : this.num_familia,
-                    'distrito_id' : this.distrito_id,
-                    'entidad_salud_id' : this.entidad_salud_id,
-                    'detalle_vivienda_id' : this.detalle_vivienda_id,
-                    'data' : this.arrayDetalle,
-                }).then(function (response) {
-                    me.listarFamilia(1,'','num_familia');
-                    me.ocultarDetalle();
-                    me.listado=1;
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            },
-            actualizarFamilia(){
-               if (this.validarFamilia()){
-                    return;
-                }
-                
-                let me = this;
-
-                me.num_vivienda = me.arrayVivienda2[me.detalle_vivienda_id - 1].numvivienda;
-
-                axios.put('/familia/actualizar',{
-                    'sector': this.sector,
-                    'num_vivienda': this.num_vivienda,
-                    'num_familia' : this.num_familia,
-                    'distrito_id' : this.distrito_id,
-                    'entidad_salud_id' : this.entidad_salud_id,
-                    'detalle_vivienda_id' : this.detalle_vivienda_id,
-                    'id' : this.familia_id
-                }).then(function (response) {
-                    me.cerrarModal();
-                    me.ocultarDetalle();
-                    me.listarFamilia('1', '', 'num_familia');
-                    me.listado=1;
-                }).catch(function (error) {
-                    console.log(error);
-                }); 
-            },
-            validarFamilia(){
-                this.errorFamilia=0;
-                this.errorMostrarMsjFamilia =[];
-
-                if (this.distrito_id==0) this.errorMostrarMsjFamilia.push("Seleccione un Distrito.");
-                if (this.entidad_salud_id==0) this.errorMostrarMsjFamilia.push("Seleccione una Entidad de Salud.");
-                if (this.detalle_vivienda_id==0) this.errorMostrarMsjFamilia.push("Seleccione un numero de Vivienda.");
-                if (!this.sector) this.errorMostrarMsjFamilia.push("El sector donde vive la familia no puede estar vacío.");
-                if (this.num_familia==0) this.errorMostrarMsjFamilia.push("El nombre de usuario no puede estar vacío.");
-                if (this.errorMostrarMsjFamilia.length) this.errorFamilia = 1;
-
-                return this.errorFamilia;
-            },
-            ocultarDetalle(){
-                let me = this;
-
-                this.listado=1;
-                this.num_familia=0;
-                this.municipio_id=0;
-                this.comunidad_id=0;
-                this.distrito_id=0;
-                this.entidad_salud_id=0;
-                this.sector=0;
-                this.detalle_vivienda_id=0;
-                this.num_vivienda=0;
-                this.arrayDetalle=[];
-
-                me.arrayPersona=[];
-                me.persona_id=0;
-                me.nombres='';
-                me.apellidos='';
-                me.apellido_casada='';
-                me.lider=0;
-                me.sexo=0;
-                me.nacimiento='';
-                me.edad=0;
-                me.CUI='';
-                me.parentesco_id=0;
-                me.parentesco_nombre='';
-                me.pueblo_id=0;
-                me.pueblo_nombre='';
-                me.comlinguistica_id=0;
-                me.comlinguistica_nombre='';
-                me.alfabetismo=0;
-                me.escolaridad_id=0;
-                me.escolaridad_nombre='';
-                me.discapacidad_id=0;
-                me.discapacidad_nombre='';
-                me.ocupacion_id=0;
-                me.ocupacion_nombre='';
-                me.migracion=0;
-                me.permanencia_id=6;
-                me.permanencia_nombre='';
-                me.commigracion='';
-                me.munmigracion='';
-                me.depmigracion='';
-                me.pais_id=8;
-                me.pais_nombre='';
-                me.puesto_comunidad_id=3;
-                me.puestocom_nombre='';
-                me.mortalidad=0;
-                me.fechamortalidad='';
-
-                me.boolpersona='agregar';
-            },
-            editarFamilia(id){
-                let me = this;
-                this.boolpersona='agregar';
-                this.permanencia_id = 6;
-                this.pais_id = 8;
-                this.puesto_comunidad_id = 3;
-
-                //Obtener datos de familia
-                var arrayFamiliaT=[];
-                var url= '/familia/obtenerFamilia?id=' + id;
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    arrayFamiliaT = respuesta.familias;
-
-                    me.familia_id = arrayFamiliaT[0]['familia_id'];
-                    me.num_familia = arrayFamiliaT[0]['num_familia'];
-                    me.municipio_id = arrayFamiliaT[0]['municipio_id'];
-                    me.comunidad_id = arrayFamiliaT[0]['comunidad_id'];
-                    me.distrito_id = arrayFamiliaT[0]['distrito_id'];
-                    me.entidad_salud_id = arrayFamiliaT[0]['entidad_salud_id'];
-                    me.sector = arrayFamiliaT[0]['sector'];
-                    me.detalle_vivienda_id = arrayFamiliaT[0]['detalle_vivienda_id'];
-                    me.num_vivienda = arrayFamiliaT[0]['num_vivienda'];
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
-                //Obtener datos de personas
-                var url= '/familia/obtenerPersonas?id=' + id;
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayDetalle = respuesta.personas;
-
-                    me.total_personas = me.arrayDetalle.length;
-
-                    for (let i = 0; i < me.arrayDetalle.length; i++) {
-                        me.edad = me.calcularEdad(me.arrayDetalle[i].nacimiento);
-                        me.arrayDetalle[i].edad = me.edad;
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
-                this.selectVivienda();
-                this.selectMunicipio();
-                this.selectComunidad();
-                this.selectDistrito();
-                this.selectEntidad();
-                this.selectParentesco();
-                this.selectPueblo();
-                this.selectComlinguistica();
-                this.selectEscolaridad();
-                this.selectDiscapacidad();
-                this.selectOcupacion();
-                this.selectPermanencia();
-                this.selectPais();
-                this.selectPuestoCom();
-
-                this.listado=2;
-            },
-            desactivarFamilia(id){
-                swal.fire({
-                title: 'Esta seguro de desactivar esta familia?',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Aceptar!',
-                cancelButtonText: 'Cancelar',
-                confirmButtonClass: 'btn btn-success',
-                cancelButtonClass: 'btn btn-danger',
-                buttonsStyling: false,
-                reverseButtons: true
-                }).then((result) => {
-                if (result.value) {
-                    let me = this;
-
-                    axios.put('/familia/desactivar',{
-                        'id' : id
-                    }).then(function (response) {
-                        me.listarFamilia(1,'','num_familia');
-                        swal.fire(
-                        'Desactivado!',
-                        'El registro ha sido desactivado con éxito.',
-                        'success'
-                        )
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-                    
-                    
-                } else if (
-                    // Read more about handling dismissals
-                    result.dismiss === swal.DismissReason.cancel
-                ) {
-                    
-                }
-                }) 
-            },
-            activarFamilia(id){
-                swal.fire({
-                title: 'Esta seguro de activar esta familia?',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Aceptar!',
-                cancelButtonText: 'Cancelar',
-                confirmButtonClass: 'btn btn-success',
-                cancelButtonClass: 'btn btn-danger',
-                buttonsStyling: false,
-                reverseButtons: true
-                }).then((result) => {
-                if (result.value) {
-                    let me = this;
-
-                    axios.put('/familia/activar',{
-                        'id': id
-                    }).then(function (response) {
-                        me.listarFamilia(1,'','num_vivienda');
-                        swal.fire(
-                        'Activado!',
-                        'El registro ha sido activado con éxito.',
-                        'success'
-                        )
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-                    
-                    
-                } else if (
-                    // Read more about handling dismissals
-                    result.dismiss === swal.DismissReason.cancel
-                ) {
-                    
-                }
-                }) 
-            },
-            habilitarmig(habil){
-                if(habil == true){
-                    document.getElementById("sel01").disabled = false;
-                    document.getElementById("tx01").disabled = false;
-                    document.getElementById("tx02").disabled = false;
-                    document.getElementById("tx03").disabled = false;
-                    document.getElementById("sel02").disabled = false;
-                }else if (habil == false){
-                    document.getElementById("sel01").disabled = true;
-                    document.getElementById("tx01").disabled = true;
-                    document.getElementById("tx02").disabled = true;
-                    document.getElementById("tx03").disabled = true;
-                    document.getElementById("sel02").disabled = true;
-                }else if (habil == 'todos'){
-                    // document.getElementById("tbo01").disabled = true;
-                    // document.getElementById("tbo02").disabled = true;
-                    // document.getElementById("tbo03").disabled = true;
-                    // document.getElementById("tbo04").disabled = true;
-                    // document.getElementById("tbo05").disabled = true;
-                    // document.getElementById("tbo06").disabled = true;
-                    // document.getElementById("tbo07").disabled = true;
-                }              
-            },
-            editarPersona(data=[]){
-                this.boolpersona = 'editar';
-
-                this.persona_id=data['persona_id'];
-                this.nombres=data['nombres'];
-                this.apellidos=data['apellidos'];
-                this.apellido_casada=data['apellido_casada'];
-                this.sexo=data['sexo'];
-                this.nacimiento=data['nacimiento'];
-                this.CUI=data['CUI'];
-                this.lider=data['lider'];
-                this.puesto_comunidad_id=data['puesto_comunidad_id'];
-                this.parentesco_id=data['parentesco_id'];
-                this.pueblo_id=data['pueblo_id'];
-                this.comlinguistica_id=data['comlinguistica_id'];
-                this.alfabetismo=data['alfabetismo_id'];
-                this.escolaridad_id=data['escolaridad_id'];
-                this.discapacidad_id=data['discapacidad_id'];
-                this.ocupacion_id=data['ocupacion_id'];
-                this.migracion=data['migracion'];
-                this.permanencia_id=data['permanencia_id'];
-                this.commigracion=data['commigracion'];
-                this.munmigracion=data['munmigracion'];
-                this.depmigracion=data['depmigracion'];
-                this.pais_id=data['pais_id'];
-                this.mortalidad=data['mortalidad'];
-                this.fechamortalidad=data['fechamortalidad'];
-            },
-            listadoPersona(){
-                let me = this;
-                this.permanencia_id = 6;
-                this.pais_id = 8;
-                this.puesto_comunidad_id = 3;
-                var url= '/familia/obtenerPersonas?id=' + me.familia_id;
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayDetalle = respuesta.personas;
-
-                    me.total_personas = me.arrayDetalle.length;
-
-                    for (let i = 0; i < me.arrayDetalle.length; i++) {
-                        me.edad = me.calcularEdad(me.arrayDetalle[i].nacimiento);
-                        me.arrayDetalle[i].edad = me.edad;
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            nuevaPersona(){
-                let me = this;
-
-                if((!me.CUI) || (!me.nombres) || (!me.apellidos) || (!me.nacimiento) || (me.parentesco_id==0) || (me.pueblo_id==0) || 
-                    (me.comlinguistica_id==0) || (me.escolaridad_id==0) || (me.discapacidad_id==0) || (me.ocupacion_id==0) || 
-                    (me.puesto_comunidad_id==0) || (me.migracion==1 && me.permanencia_id==6) || (me.migracion==1 && me.pais_id==8)){
-                }
-                else{
-                    
-                    let me = this;
-
-                    axios.post('/familia/nuevaPersona',{
-                        'nombres': this.nombres,
-                        'apellidos': this.apellidos,
-                        'apellido_casada' : this.apellido_casada,
-                        'sexo' : this.sexo,
-                        'nacimiento' : this.nacimiento,
-                        'CUI' : this.CUI,
-                        'lider' : this.lider,
-                        'puesto_comunidad_id': this.puesto_comunidad_id,
-                        'parentesco_id': this.parentesco_id,
-                        'pueblo_id': this.pueblo_id,
-                        'comlinguistica_id': this.comlinguistica_id,
-                        'alfabetismo': this.alfabetismo,
-                        'escolaridad_id': this.escolaridad_id,
-                        'discapacidad_id': this.discapacidad_id,
-                        'ocupacion_id': this.ocupacion_id,
-                        'migracion': this.migracion,
-                        'permanencia_id': this.permanencia_id,
-                        'commigracion': this.commigracion,
-                        'munmigracion': this.munmigracion,
-                        'depmigracion': this.depmigracion,
-                        'pais_id': this.pais_id,
-                        'mortalidad': this.mortalidad,
-                        'fechamortalidad': this.fechamortalidad,
-                        'familia_id': this.familia_id,
-                    }).then(function (response) {
-                        me.listadoPersona();
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-                }
-            },
-            actualizarPersona(){
-                let me = this;
-                this.alfabetismo=true;
-
-                if((!me.CUI) || (!me.nombres) || (!me.apellidos) || (!me.nacimiento) || (me.parentesco_id==0) || (me.pueblo_id==0) || 
-                    (me.comlinguistica_id==0) || (me.escolaridad_id==0) || (me.discapacidad_id==0) || (me.ocupacion_id==0) || 
-                    (me.puesto_comunidad_id==0) || (me.migracion==1 && me.permanencia_id==6) || (me.migracion==1 && me.pais_id==8)){
-
-                }
-                else{
-                    axios.put('/familia/editarPersona',{
-                        'nombres': this.nombres,
-                        'apellidos': this.apellidos,
-                        'apellido_casada' : this.apellido_casada,
-                        'sexo' : this.sexo,
-                        'nacimiento' : this.nacimiento,
-                        'CUI' : this.CUI,
-                        'lider' : this.lider,
-                        'puesto_comunidad_id': this.puesto_comunidad_id,
-                        'parentesco_id': this.parentesco_id,
-                        'pueblo_id': this.pueblo_id,
-                        'comlinguistica_id': this.comlinguistica_id,
-                        'alfabetismo': this.alfabetismo,
-                        'escolaridad_id': this.escolaridad_id,
-                        'discapacidad_id': this.discapacidad_id,
-                        'ocupacion_id': this.ocupacion_id,
-                        'migracion': this.migracion,
-                        'permanencia_id': this.permanencia_id,
-                        'commigracion': this.commigracion,
-                        'munmigracion': this.munmigracion,
-                        'depmigracion': this.depmigracion,
-                        'pais_id': this.pais_id,
-                        'mortalidad': this.mortalidad,
-                        'fechamortalidad': this.fechamortalidad,
-                        'id': this.persona_id
-                    }).then(function (response) {
-                        me.listadoPersona();
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-                }
-            },
-            desactivarPersona(id){
-                swal.fire({
-                title: 'Esta seguro de desactivar esta familia?',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Aceptar!',
-                cancelButtonText: 'Cancelar',
-                confirmButtonClass: 'btn btn-success',
-                cancelButtonClass: 'btn btn-danger',
-                buttonsStyling: false,
-                reverseButtons: true
-                }).then((result) => {
-                if (result.value) {
-                    let me = this;
-
-                    axios.put('/familia/desactivarPersona',{
-                        'id' : id
-                    }).then(function (response) {
-                        swal.fire(
-                        'Desactivado!',
-                        'El registro ha sido desactivado con éxito.',
-                        'success'
-                        )
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-                    
-                    
-                } else if (
-                    // Read more about handling dismissals
-                    result.dismiss === swal.DismissReason.cancel
-                ) {
-                    
-                }
-                }) 
-            },
-            activarPersona(id){
-                swal.fire({
-                title: 'Esta seguro de activar esta familia?',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Aceptar!',
-                cancelButtonText: 'Cancelar',
-                confirmButtonClass: 'btn btn-success',
-                cancelButtonClass: 'btn btn-danger',
-                buttonsStyling: false,
-                reverseButtons: true
-                }).then((result) => {
-                if (result.value) {
-                    let me = this;
-
-                    axios.put('/familia/activarPersona',{
-                        'id': id
-                    }).then(function (response) {
-                        swal.fire(
-                        'Activado!',
-                        'El registro ha sido activado con éxito.',
-                        'success'
-                        )
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-                    
-                    
-                } else if (
-                    // Read more about handling dismissals
-                    result.dismiss === swal.DismissReason.cancel
-                ) {
-                    
-                }
-                })
-            },
-
-            
             listarVivienda(page,buscar,criterio){
                 let me=this;
                 var url='/vivienda?page=' + page + '&buscar='+ buscar + '&criterio=' + criterio;
@@ -2362,8 +1636,962 @@
                     document.getElementById("tbo06").disabled = true;
                     document.getElementById("tbo07").disabled = true;
                 }              
-            }
+            },
 
+            listarFamilia (page,buscar,criterio){
+                let me=this;
+                var url= '/familia?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayFamilia = respuesta.familias.data;
+                    me.pagination_fam = respuesta.pagination;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            cambiarPagina_fam(page,buscar,criterio){
+                let me = this;
+                //Actualiza la página actual
+                me.pagination_fam.current_page = page;
+                //Envia la petición para visualizar la data de esa página
+                me.listarFamilia(page,buscar,criterio);
+            },
+            MunicipioSelect(){
+                this.municipio_id;
+                this.selectComunidad();
+            },
+            selectMunicipio(){
+                let me=this;
+                var url= '/Municipiofam';
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayMunicipio = respuesta.municipios;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            selectComunidad(){
+                let me=this;
+                var url= '/Comunidadfam/'+this.municipio_id+'/';
+                axios.get(url).then(function (response) {
+                    let respuesta= response.data;
+                    me.arrayComunidad=respuesta.comunidades;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            ComunidadSelect(){
+                this.comunidad_id;
+                this.selectDistrito();
+            },
+            selectDistrito(){
+                let me=this;
+                var url= '/Distritofam/'+this.comunidad_id+'/';
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayDistrito = respuesta.distritos;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            selectEntidad(){
+                let me=this;
+                var url= '/entidads';
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayEntidad = respuesta.entidades;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            selectVivienda(){
+                let me=this;
+                var url= '/vivienda/selectVivienda';
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayVivienda2 = respuesta.viviendas;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            selectUsuario(){
+                let me=this;
+                var url= '/entidads';
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayUsuario = respuesta.usuarios;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            selectParentesco(){
+                let me=this;
+                var url= '/Parentesco';
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayParentesco = respuesta.parentesco;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            selectPueblo(){
+                let me=this;
+                var url= '/Pueblo';
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayPueblo = respuesta.pueblo;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            selectComlinguistica(){
+                let me=this;
+                var url= '/Comlinguistica';
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayComlinguistica = respuesta.comlinguistica;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            selectEscolaridad(){
+                let me=this;
+                var url= '/Escolaridad';
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayEscolaridad = respuesta.escolaridad;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            selectDiscapacidad(){
+                let me=this;
+                var url= '/Discapacidad';
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayDiscapacidad = respuesta.discapacidad;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            selectOcupacion(){
+                let me=this;
+                var url= '/Ocupacion';
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayOcupacion = respuesta.ocupacion;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            selectPermanencia(){
+                let me=this;
+                var url= '/Permanencia';
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayPermanencia = respuesta.permanencia;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            selectPais(){
+                let me=this;
+                var url= '/Pais';
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayPais = respuesta.pais;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            selectPuestoCom(){
+                let me=this;
+                var url= '/PuestoCom';
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayPuestoCom = respuesta.puestocom;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            mostrarDetalle(){
+                let me = this;
+
+                this.listado=0;
+                this.permanencia_id = 6;
+                this.pais_id = 8;
+                this.puesto_comunidad_id = 3;
+                
+                me.sector='';
+                me.num_vivienda=0;
+                me.num_familia=0;
+                me.distrito=0;
+                me.entidad_salud_id=0;
+                me.detalle_vivienda_id=0;
+                me.arrayDetalle=[];
+                me.boolpersona='agregar';
+                
+                this.selectVivienda();
+                this.selectMunicipio();
+                this.selectEntidad();
+                this.selectParentesco();
+                this.selectPueblo();
+                this.selectComlinguistica();
+                this.selectEscolaridad();
+                this.selectDiscapacidad();
+                this.selectOcupacion();
+                this.selectPermanencia();
+                this.selectPais();
+                this.selectPuestoCom();
+            },
+            agregarDetalle(){
+                let me = this;
+
+                if((!me.CUI) || (!me.nombres) || (!me.apellidos) || (!me.nacimiento) || (me.parentesco_id==0) || (me.pueblo_id==0) || 
+                    (me.comlinguistica_id==0) || (me.escolaridad_id==0) || (me.discapacidad_id==0) || (me.ocupacion_id==0) || 
+                    (me.puesto_comunidad_id==0) || (me.migracion==1 && me.permanencia_id==6) || (me.migracion==1 && me.pais_id==8)){
+
+                }
+                else{
+
+                    if(me.encuentra(me.CUI)){
+                        swal.fire({
+                            type: 'error',
+                            title: 'Error...',
+                            text: 'Este numero de CUI ya se encuentra agregado!',
+                        })
+                    }
+                    else{
+                        me.parentesco_nombre = me.arrayParentesco[me.parentesco_id - 1].nombre;
+                        me.pueblo_nombre = me.arrayPueblo[me.pueblo_id - 1].nombre;
+                        me.comlinguistica_nombre = me.arrayComlinguistica[me.comlinguistica_id - 1].nombre;
+                        me.escolaridad_nombre = me.arrayEscolaridad[me.escolaridad_id - 1].nombre;
+                        me.discapacidad_nombre = me.arrayDiscapacidad[me.discapacidad_id - 1].nombre;
+                        me.ocupacion_nombre = me.arrayOcupacion[me.ocupacion_id - 1].nombre;
+                        me.permanencia_nombre = me.arrayPermanencia[me.permanencia_id - 1].nombre;
+                        me.pais_nombre = me.arrayPais[me.pais_id - 1].nombre;
+                        me.puestocom_nombre = me.arrayPuestoCom[me.puesto_comunidad_id - 1].nombre;
+
+                        me.edad = me.calcularEdad(me.nacimiento);
+
+                        me.arrayDetalle.push({
+                            nombres : me.nombres,
+                            apellidos : me.apellidos,
+                            apellido_casada : me.apellido_casada,
+                            lider : me.lider,
+                            sexo : me.sexo,
+                            nacimiento : me.nacimiento,
+                            edad : me.edad,
+                            CUI : me.CUI,
+                            parentesco_id : me.parentesco_id,
+                            parentesco_nombre : me.parentesco_nombre,
+                            pueblo_id : me.pueblo_id,
+                            pueblo_nombre : me.pueblo_nombre,
+                            comlinguistica_id : me.comlinguistica_id,
+                            comlinguistica_nombre : me.comlinguistica_nombre,
+                            alfabetismo : me.alfabetismo,
+                            escolaridad_id : me.escolaridad_id,
+                            escolaridad_nombre : me.escolaridad_nombre,
+                            discapacidad_id : me.discapacidad_id,
+                            discapacidad_nombre : me.discapacidad_nombre,
+                            ocupacion_id : me.ocupacion_id,
+                            ocupacion_nombre : me.ocupacion_nombre,
+                            migracion : me.migracion,
+                            permanencia_id : me.permanencia_id,
+                            permanencia_nombre : me.permanencia_nombre,
+                            commigracion : me.commigracion,
+                            munmigracion : me.munmigracion,
+                            depmigracion : me.depmigracion,
+                            pais_id : me.pais_id,
+                            pais_nombre : me.pais_nombre,
+                            puesto_comunidad_id : me.puesto_comunidad_id,
+                            puestocom_nombre : me.puestocom_nombre,
+                            mortalidad : me.mortalidad,
+                            fechamortalidad : me.fechamortalidad
+                        });
+
+                        me.nombres='';
+                        me.apellidos='';
+                        me.apellido_casada='';
+                        me.lider=0;
+                        me.sexo=0;
+                        me.nacimiento='';
+                        me.edad=0;
+                        me.CUI='';
+                        me.parentesco_id=0;
+                        me.parentesco_nombre='';
+                        me.pueblo_id=0;
+                        me.pueblo_nombre='';
+                        me.comlinguistica_id=0;
+                        me.comlinguistica_nombre='';
+                        me.alfabetismo=0;
+                        me.escolaridad_id=0;
+                        me.escolaridad_nombre='';
+                        me.discapacidad_id=0;
+                        me.discapacidad_nombre='';
+                        me.ocupacion_id=0;
+                        me.ocupacion_nombre='';
+                        me.migracion=0;
+                        me.permanencia_id=6;
+                        me.permanencia_nombre='';
+                        me.commigracion='';
+                        me.munmigracion='';
+                        me.depmigracion='';
+                        me.pais_id=8;
+                        me.pais_nombre='';
+                        me.puesto_comunidad_id=3;
+                        me.puestocom_nombre='';
+                        me.mortalidad=0;
+                        me.fechamortalidad='';
+                        me.total_personas++;
+                    }
+                }
+            },
+            encuentra(cui){
+                var sw=0;
+                for(var i=0;i<this.arrayDetalle.length;i++){
+                    if(this.arrayDetalle[i].CUI==cui){
+                        sw=true;
+                    }
+                }
+                return sw;
+            },
+            calcularEdad(fecha){
+                var hoy = new Date();
+                var cumple = new Date(fecha);
+                var edad = hoy.getFullYear() - cumple.getFullYear();
+                var m = hoy.getMonth() - cumple.getMonth();
+
+                if(m < 0 || (m === 0 && hoy.getDate() < cumple.getDate())){
+                    edad--;
+                }
+                return edad;
+            },
+            eliminarDetalle(index){
+                let me = this;
+                me.arrayDetalle.splice(index, 1);
+                me.total_personas--;
+            },
+            registrarFamilia(){
+                if (this.validarFamilia()){
+                    return;
+                }
+                
+                let me = this;
+
+                me.num_vivienda = me.arrayVivienda2[me.detalle_vivienda_id - 1].numvivienda;
+
+                axios.post('/familia/registrar',{
+                    'sector': this.sector,
+                    'num_vivienda': this.num_vivienda,
+                    'num_familia' : this.num_familia,
+                    'distrito_id' : this.distrito_id,
+                    'entidad_salud_id' : this.entidad_salud_id,
+                    'detalle_vivienda_id' : this.detalle_vivienda_id,
+                    'data' : this.arrayDetalle,
+                }).then(function (response) {
+                    me.listarFamilia(1,'','num_familia');
+                    me.ocultarDetalle();
+                    me.listado=1;
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            },
+            actualizarFamilia(){
+               if (this.validarFamilia()){
+                    return;
+                }
+                
+                let me = this;
+
+                me.num_vivienda = me.arrayVivienda2[me.detalle_vivienda_id - 1].numvivienda;
+
+                axios.put('/familia/actualizar',{
+                    'sector': this.sector,
+                    'num_vivienda': this.num_vivienda,
+                    'num_familia' : this.num_familia,
+                    'distrito_id' : this.distrito_id,
+                    'entidad_salud_id' : this.entidad_salud_id,
+                    'detalle_vivienda_id' : this.detalle_vivienda_id,
+                    'id' : this.familia_id
+                }).then(function (response) {
+                    me.cerrarModal();
+                    me.ocultarDetalle();
+                    me.listarFamilia('1', '', 'num_familia');
+                    me.listado=1;
+                }).catch(function (error) {
+                    console.log(error);
+                }); 
+            },
+            validarFamilia(){
+                this.errorFamilia=0;
+                this.errorMostrarMsjFamilia =[];
+
+                if (this.distrito_id==0) this.errorMostrarMsjFamilia.push("Seleccione un Distrito.");
+                if (this.entidad_salud_id==0) this.errorMostrarMsjFamilia.push("Seleccione una Entidad de Salud.");
+                if (this.detalle_vivienda_id==0) this.errorMostrarMsjFamilia.push("Seleccione un numero de Vivienda.");
+                if (!this.sector) this.errorMostrarMsjFamilia.push("El sector donde vive la familia no puede estar vacío.");
+                if (this.num_familia==0) this.errorMostrarMsjFamilia.push("El nombre de usuario no puede estar vacío.");
+                if (this.errorMostrarMsjFamilia.length) this.errorFamilia = 1;
+
+                return this.errorFamilia;
+            },
+            ocultarDetalle(){
+                let me = this;
+
+                this.listado=1;
+                this.familia_id=0;
+                this.num_familia=0;
+                this.municipio_id=0;
+                this.comunidad_id=0;
+                this.distrito_id=0;
+                this.entidad_salud_id=0;
+                this.sector=0;
+                this.detalle_vivienda_id=0;
+                this.num_vivienda=0;
+                this.arrayDetalle=[];
+                this.municipio_nombre='';
+                this.comunidad_nombre='';
+                this.distrito_nombre='';
+                this.usuario_nombre='';
+                this.entidad_salud_nombre='';
+
+                me.arrayPersona=[];
+                me.persona_id=0;
+                me.nombres='';
+                me.apellidos='';
+                me.apellido_casada='';
+                me.lider=0;
+                me.sexo=0;
+                me.nacimiento='';
+                me.edad=0;
+                me.CUI='';
+                me.parentesco_id=0;
+                me.parentesco_nombre='';
+                me.pueblo_id=0;
+                me.pueblo_nombre='';
+                me.comlinguistica_id=0;
+                me.comlinguistica_nombre='';
+                me.alfabetismo=0;
+                me.escolaridad_id=0;
+                me.escolaridad_nombre='';
+                me.discapacidad_id=0;
+                me.discapacidad_nombre='';
+                me.ocupacion_id=0;
+                me.ocupacion_nombre='';
+                me.migracion=0;
+                me.permanencia_id=6;
+                me.permanencia_nombre='';
+                me.commigracion='';
+                me.munmigracion='';
+                me.depmigracion='';
+                me.pais_id=8;
+                me.pais_nombre='';
+                me.puesto_comunidad_id=3;
+                me.puestocom_nombre='';
+                me.mortalidad=0;
+                me.fechamortalidad='';
+
+                me.boolpersona='agregar';
+            },
+            editarFamilia(id){
+                let me = this;
+                this.permanencia_id = 6;
+                this.pais_id = 8;
+                this.puesto_comunidad_id = 3;
+
+                this.selectVivienda();
+                this.selectEntidad();
+                this.selectParentesco();
+                this.selectPueblo();
+                this.selectComlinguistica();
+                this.selectEscolaridad();
+                this.selectDiscapacidad();
+                this.selectOcupacion();
+                this.selectPermanencia();
+                this.selectPais();
+                this.selectPuestoCom();
+
+                //Obtener datos de familia
+                var arrayFamiliaT=[];
+                var url= '/familia/obtenerFamilia?id=' + id;
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    arrayFamiliaT = respuesta.familias;
+
+                    me.familia_id = arrayFamiliaT[0]['familia_id'];
+                    me.num_familia = arrayFamiliaT[0]['num_familia'];
+                    me.municipio_id = arrayFamiliaT[0]['municipio_id'];
+                    me.comunidad_id = arrayFamiliaT[0]['comunidad_id'];
+                    me.distrito_id = arrayFamiliaT[0]['distrito_id'];
+                    me.entidad_salud_id = arrayFamiliaT[0]['entidad_salud_id'];
+                    me.sector = arrayFamiliaT[0]['sector'];
+                    me.detalle_vivienda_id = arrayFamiliaT[0]['detalle_vivienda_id'];
+                    me.num_vivienda = arrayFamiliaT[0]['num_vivienda'];
+                    
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+                
+                this.selectMunicipio();
+                this.municipio_id;
+                this.selectComunidad();
+                this.comunidad_id;
+                this.selectDistrito();
+
+                //Obtener datos de personas
+                var url= '/familia/obtenerPersonas?id=' + id;
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayDetalle = respuesta.personas;
+
+                    me.total_personas = me.arrayDetalle.length;
+
+                    for (let i = 0; i < me.arrayDetalle.length; i++) {
+                        me.edad = me.calcularEdad(me.arrayDetalle[i].nacimiento);
+                        me.arrayDetalle[i].edad = me.edad;
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+                this.listado=2;
+            },
+            verListadoFamilia(id){
+                let me = this;
+                this.permanencia_id = 6;
+                this.pais_id = 8;
+                this.puesto_comunidad_id = 3;
+
+                this.selectUsuario();
+                this.selectVivienda();
+                this.selectEntidad();
+                this.selectParentesco();
+                this.selectPueblo();
+                this.selectComlinguistica();
+                this.selectEscolaridad();
+                this.selectDiscapacidad();
+                this.selectOcupacion();
+                this.selectPermanencia();
+                this.selectPais();
+                this.selectPuestoCom();
+
+                //Obtener datos de familia
+                var arrayFamiliaT=[];
+                var url= '/familia/obtenerFamilia?id=' + id;
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    arrayFamiliaT = respuesta.familias;
+
+                    me.familia_id = arrayFamiliaT[0]['familia_id'];
+                    me.num_familia = arrayFamiliaT[0]['num_familia'];
+                    me.municipio_id = arrayFamiliaT[0]['municipio_id'];
+                    me.comunidad_id = arrayFamiliaT[0]['comunidad_id'];
+                    me.distrito_id = arrayFamiliaT[0]['distrito_id'];
+                    me.entidad_salud_id = arrayFamiliaT[0]['entidad_salud_id'];
+                    me.sector = arrayFamiliaT[0]['sector'];
+                    me.detalle_vivienda_id = arrayFamiliaT[0]['detalle_vivienda_id'];
+                    me.num_vivienda = arrayFamiliaT[0]['num_vivienda'];
+                    me.usuario_nombre = arrayFamiliaT[0]['CUI'] + ' ' + arrayFamiliaT[0]['nombre'] + ', '+ arrayFamiliaT[0]['correo'] + ', ' + arrayFamiliaT[0]['telefono'];
+                    me.municipio_nombre = arrayFamiliaT[0]['nombre_municipio'];
+                    me.comunidad_nombre = arrayFamiliaT[0]['nombre_comunidad'];
+                    me.distrito_nombre = arrayFamiliaT[0]['nombre_distrito'];
+                    me.entidad_salud_nombre = arrayFamiliaT[0]['nombre_entidad_salud'];
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+                this.selectMunicipio();
+                this.selectComunidad();
+                this.selectDistrito();
+
+                //Obtener datos de personas
+                var url= '/familia/obtenerPersonas?id=' + id;
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayDetalle = respuesta.personas;
+
+                    me.total_personas = me.arrayDetalle.length;
+
+                    for (let i = 0; i < me.arrayDetalle.length; i++) {
+                        me.edad = me.calcularEdad(me.arrayDetalle[i].nacimiento);
+                        me.arrayDetalle[i].edad = me.edad;
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+                this.listado=3;
+            },
+            desactivarFamilia(id){
+                swal.fire({
+                title: 'Esta seguro de desactivar esta familia?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+                    let me = this;
+
+                    axios.put('/familia/desactivar',{
+                        'id' : id
+                    }).then(function (response) {
+                        me.listarFamilia(1,'','num_familia');
+                        swal.fire(
+                        'Desactivado!',
+                        'El registro ha sido desactivado con éxito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                }) 
+            },
+            activarFamilia(id){
+                swal.fire({
+                title: 'Esta seguro de activar esta familia?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+                    let me = this;
+
+                    axios.put('/familia/activar',{
+                        'id': id
+                    }).then(function (response) {
+                        me.listarFamilia(1,'','num_vivienda');
+                        swal.fire(
+                        'Activado!',
+                        'El registro ha sido activado con éxito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                }) 
+            },
+            habilitarmig(habil){
+                if(habil == true){
+                    document.getElementById("sel01").disabled = false;
+                    document.getElementById("tx01").disabled = false;
+                    document.getElementById("tx02").disabled = false;
+                    document.getElementById("tx03").disabled = false;
+                    document.getElementById("sel02").disabled = false;
+                }else if (habil == false){
+                    document.getElementById("sel01").disabled = true;
+                    document.getElementById("tx01").disabled = true;
+                    document.getElementById("tx02").disabled = true;
+                    document.getElementById("tx03").disabled = true;
+                    document.getElementById("sel02").disabled = true;
+                }else if (habil == 'todos'){
+                    // document.getElementById("tbo01").disabled = true;
+                    // document.getElementById("tbo02").disabled = true;
+                    // document.getElementById("tbo03").disabled = true;
+                    // document.getElementById("tbo04").disabled = true;
+                    // document.getElementById("tbo05").disabled = true;
+                    // document.getElementById("tbo06").disabled = true;
+                    // document.getElementById("tbo07").disabled = true;
+                }              
+            },
+            editarPersona(data=[]){
+                this.boolpersona = 'editar';
+
+                this.persona_id=data['persona_id'];
+                this.nombres=data['nombres'];
+                this.apellidos=data['apellidos'];
+                this.apellido_casada=data['apellido_casada'];
+                this.sexo=data['sexo'];
+                this.nacimiento=data['nacimiento'];
+                this.CUI=data['CUI'];
+                this.lider=data['lider'];
+                this.puesto_comunidad_id=data['puesto_comunidad_id'];
+                this.parentesco_id=data['parentesco_id'];
+                this.pueblo_id=data['pueblo_id'];
+                this.comlinguistica_id=data['comlinguistica_id'];
+                this.alfabetismo=data['alfabetismo_id'];
+                this.escolaridad_id=data['escolaridad_id'];
+                this.discapacidad_id=data['discapacidad_id'];
+                this.ocupacion_id=data['ocupacion_id'];
+                this.migracion=data['migracion'];
+                this.permanencia_id=data['permanencia_id'];
+                this.commigracion=data['commigracion'];
+                this.munmigracion=data['munmigracion'];
+                this.depmigracion=data['depmigracion'];
+                this.pais_id=data['pais_id'];
+                this.mortalidad=data['mortalidad'];
+                this.fechamortalidad=data['fechamortalidad'];
+            },
+            listadoPersona(){
+                let me = this;
+                this.permanencia_id = 6;
+                this.pais_id = 8;
+                this.puesto_comunidad_id = 3;
+                var url= '/familia/obtenerPersonas?id=' + me.familia_id;
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayDetalle = respuesta.personas;
+
+                    me.total_personas = me.arrayDetalle.length;
+
+                    for (let i = 0; i < me.arrayDetalle.length; i++) {
+                        me.edad = me.calcularEdad(me.arrayDetalle[i].nacimiento);
+                        me.arrayDetalle[i].edad = me.edad;
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            nuevaPersona(){
+                let me = this;
+
+                if((!me.CUI) || (!me.nombres) || (!me.apellidos) || (!me.nacimiento) || (me.parentesco_id==0) || (me.pueblo_id==0) || 
+                    (me.comlinguistica_id==0) || (me.escolaridad_id==0) || (me.discapacidad_id==0) || (me.ocupacion_id==0) || 
+                    (me.puesto_comunidad_id==0) || (me.migracion==1 && me.permanencia_id==6) || (me.migracion==1 && me.pais_id==8)){
+                }
+                else{
+                    
+                    let me = this;
+
+                    axios.post('/familia/nuevaPersona',{
+                        'nombres': this.nombres,
+                        'apellidos': this.apellidos,
+                        'apellido_casada' : this.apellido_casada,
+                        'sexo' : this.sexo,
+                        'nacimiento' : this.nacimiento,
+                        'CUI' : this.CUI,
+                        'lider' : this.lider,
+                        'puesto_comunidad_id': this.puesto_comunidad_id,
+                        'parentesco_id': this.parentesco_id,
+                        'pueblo_id': this.pueblo_id,
+                        'comlinguistica_id': this.comlinguistica_id,
+                        'alfabetismo': this.alfabetismo,
+                        'escolaridad_id': this.escolaridad_id,
+                        'discapacidad_id': this.discapacidad_id,
+                        'ocupacion_id': this.ocupacion_id,
+                        'migracion': this.migracion,
+                        'permanencia_id': this.permanencia_id,
+                        'commigracion': this.commigracion,
+                        'munmigracion': this.munmigracion,
+                        'depmigracion': this.depmigracion,
+                        'pais_id': this.pais_id,
+                        'mortalidad': this.mortalidad,
+                        'fechamortalidad': this.fechamortalidad,
+                        'familia_id': this.familia_id,
+                    }).then(function (response) {
+                        me.listadoPersona();
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                }
+            },
+            actualizarPersona(){
+                let me = this;
+                this.alfabetismo=true;
+
+                if((!me.CUI) || (!me.nombres) || (!me.apellidos) || (!me.nacimiento) || (me.parentesco_id==0) || (me.pueblo_id==0) || 
+                    (me.comlinguistica_id==0) || (me.escolaridad_id==0) || (me.discapacidad_id==0) || (me.ocupacion_id==0) || 
+                    (me.puesto_comunidad_id==0) || (me.migracion==1 && me.permanencia_id==6) || (me.migracion==1 && me.pais_id==8)){
+
+                }
+                else{
+                    axios.put('/familia/editarPersona',{
+                        'nombres': this.nombres,
+                        'apellidos': this.apellidos,
+                        'apellido_casada' : this.apellido_casada,
+                        'sexo' : this.sexo,
+                        'nacimiento' : this.nacimiento,
+                        'CUI' : this.CUI,
+                        'lider' : this.lider,
+                        'puesto_comunidad_id': this.puesto_comunidad_id,
+                        'parentesco_id': this.parentesco_id,
+                        'pueblo_id': this.pueblo_id,
+                        'comlinguistica_id': this.comlinguistica_id,
+                        'alfabetismo': this.alfabetismo,
+                        'escolaridad_id': this.escolaridad_id,
+                        'discapacidad_id': this.discapacidad_id,
+                        'ocupacion_id': this.ocupacion_id,
+                        'migracion': this.migracion,
+                        'permanencia_id': this.permanencia_id,
+                        'commigracion': this.commigracion,
+                        'munmigracion': this.munmigracion,
+                        'depmigracion': this.depmigracion,
+                        'pais_id': this.pais_id,
+                        'mortalidad': this.mortalidad,
+                        'fechamortalidad': this.fechamortalidad,
+                        'id': this.persona_id
+                    }).then(function (response) {
+                        me.listadoPersona();
+                        me.persona_id=0;
+                        me.nombres='';
+                        me.apellidos='';
+                        me.apellido_casada='';
+                        me.lider=0;
+                        me.sexo=0;
+                        me.nacimiento='';
+                        me.edad=0;
+                        me.CUI='';
+                        me.parentesco_id=0;
+                        me.parentesco_nombre='';
+                        me.pueblo_id=0;
+                        me.pueblo_nombre='';
+                        me.comlinguistica_id=0;
+                        me.comlinguistica_nombre='';
+                        me.alfabetismo=0;
+                        me.escolaridad_id=0;
+                        me.escolaridad_nombre='';
+                        me.discapacidad_id=0;
+                        me.discapacidad_nombre='';
+                        me.ocupacion_id=0;
+                        me.ocupacion_nombre='';
+                        me.migracion=0;
+                        me.permanencia_id=6;
+                        me.permanencia_nombre='';
+                        me.commigracion='';
+                        me.munmigracion='';
+                        me.depmigracion='';
+                        me.pais_id=8;
+                        me.pais_nombre='';
+                        me.puesto_comunidad_id=3;
+                        me.puestocom_nombre='';
+                        me.mortalidad=0;
+                        me.fechamortalidad='';
+                        me.boolpersona='agregar';
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                }
+            },
+            desactivarPersona(id){
+                swal.fire({
+                title: 'Esta seguro de desactivar esta familia?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+                    let me = this;
+
+                    axios.put('/familia/desactivarPersona',{
+                        'id' : id
+                    }).then(function (response) {
+                        swal.fire(
+                        'Desactivado!',
+                        'El registro ha sido desactivado con éxito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                }) 
+            },
+            activarPersona(id){
+                swal.fire({
+                title: 'Esta seguro de activar esta familia?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+                    let me = this;
+
+                    axios.put('/familia/activarPersona',{
+                        'id': id
+                    }).then(function (response) {
+                        swal.fire(
+                        'Activado!',
+                        'El registro ha sido activado con éxito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                })
+            },
+
+            
         },
         mounted() {
             this.listarFamilia(1,this.buscar_fam,this.criterio_fam);

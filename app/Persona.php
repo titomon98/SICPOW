@@ -8,8 +8,8 @@ class Persona extends Model
 {
     protected $table = 'persona';
     protected $fillable = ['nombres', 'apellidos', 'apellido_casada', 'lider', 'sexo', 'nacimiento', 'CUI', 'familia', 'parentesco', 'pueblo', 
-        'comlinguistica', 'alfabetismo', 'escolaridad', 'discapacidad', 'ocupacion', 'migracion', 'permanencia', 'commigracion',
-        'munmigracion', 'depmigracion', 'pais', 'puesto_comunidad', 'mortalidad', 'fechamortalidad', 'created_at', 'updated_at'];
+        'comlinguistica', 'alfabetismo', 'escolaridad', 'discapaciodad', 'ocupacion', 'migracion', 'permanencia', 'commigracion',
+        'munmigracion', 'depmigracion', 'pais', 'puesto_comunidad', 'mortalidad', 'fechamortalidad'];
 
     public function familia()
     {

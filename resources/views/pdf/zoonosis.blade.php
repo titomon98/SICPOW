@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Reporte de servicios</title>
+    <title>Reporte de zoonosis</title>
     <style>
         body {
             margin: 0;
@@ -96,7 +96,8 @@
                     <th>Num. de Vivienda</th>
                     <th>Direccion</th>
                     <th>Lider de Familia</th>
-                    <th>{{$computado}}</th>
+                    <th>No. Perros</th>
+                    <th>No. Gatos</th>
                 </tr>
             </thead>
             <tbody>
@@ -110,7 +111,15 @@
                     <td>{{$serv->numvivienda}}</td>
                     <td>{{$serv->direccion}}</td>
                     <td>{{$serv->nombres." ".$serv->apellidos}}</td>
-                    <td>{{$serv->nombre}}</td>
+                    <td>{{$serv->perros}}</td>
+                    <td>{{$serv->gatos}}</td>
+                    <?php
+                        if (1==1)
+                        {
+                            $gatos = $gatos + $serv->gatos;
+                            $perros = $perros + $serv->perros;
+                        }
+                    ?>
                 </tr>
                 @endforeach
             </tbody>
@@ -118,6 +127,8 @@
     </div>
     <div class="izquierda">
         <p><strong>Total de viviendas registradas: </strong>{{$cont1}} </p>
+        <p><strong>Total de perros: </strong>{{$perros}} </p>
+        <p><strong>Total de gatos: </strong>{{$gatos}} </p>
     </div>
 </body>
 </html>

@@ -88,7 +88,7 @@ class FamiliaController extends Controller
                 'detalle_vivienda.id as detalle_vivienda_id', 'detalle_vivienda.numvivienda as num_vivienda',
                 'distrito.id as distrito_id', 'distrito.nombre as nombre_distrito', 
                 'comunidad.id as comunidad_id', 'comunidad.nombre as nombre_comunidad', 
-                'municipio.id as municipio_id', 'municipio.nombre as nombre_municipios',
+                'municipio.id as municipio_id', 'municipio.nombre as nombre_municipio',
                 'entidad_salud.id as entidad_salud_id', 'entidad_salud.nombre as nombre_entidad_salud') 
             ->where('familia.id', '=', $id)
             ->orderBy('familia.id', 'desc')->take(1)->get();
@@ -137,23 +137,20 @@ class FamiliaController extends Controller
         return['municipios'=>$municipios];
     }
 
-    public function selectComunidad(Request $request){
+    public function selectComunidad(Request $request, $id){
         if (!$request->ajax()) return redirect('/main');
-        //$filtro = $request->filtro;
-        $comunidades = Comunidad::join('municipio','comunidad.idmunicipio','=','municipio.id')
-        //->where('comunidad.idmunicipio', 'like', '%'.$filtro.'%')
-        ->select('comunidad.id', 'comunidad.nombre')
-        ->orderBy('comunidad.id', 'asc')->get();
+        $comunidades = Comunidad::where('condicion', '=', '1')
+        ->select('id', 'nombre')
+        ->where('idmunicipio', '=', $id)
+        ->orderBy('id', 'asc')->get();
         return['comunidades'=>$comunidades];
     }
 
-    public function selectDistrito(Request $request){
+    public function selectDistrito(Request $request, $id){
         if (!$request->ajax()) return redirect('/main');
-        //$filtro = $request->filtro;
-        $distritos = Distrito::join('comunidad', 'distrito.idcomunidad', '=', 'comunidad.id')
-        ->join('municipio', 'comunidad.idmunicipio', '=', 'municipio.id')
-        //->where('distrito.idcomunidad','=',$filtro)
-        ->select('distrito.id', 'distrito.nombre as nombre_distrito', 'comunidad.nombre as nombre_comunidad', 'municipio.nombre as nombre_municipio')
+        $distritos = Distrito::where('condicion', '=', '1')
+        ->select('id', 'nombre')
+        ->where('idcomunidad', '=', $id)
         ->orderBy('id', 'asc')->get();
         return['distritos'=>$distritos];
     }

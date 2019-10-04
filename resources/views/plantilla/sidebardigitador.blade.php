@@ -10,10 +10,8 @@
             <li @click="menu=1" class="nav-item nav-dropdown">
                 <a class="nav-link" href="#"><i class="icon-people"></i> Familias</a>
             </li>
-            <li @click="menu=2" class="nav-item nav-dropdown">
-                <a class="nav-link" href="#"><i class="icon-home"></i> Viviendas</a>
             </li>
-            <li @click="menu=10" class="nav-item">
+            <li @click="menu=9" class="nav-item">
                 <a class="nav-link" href="#"><i class="icon-info"></i> Acerca de...</a>
             </li>
         </ul>

@@ -42,9 +42,8 @@ class UsuarioController extends Controller
 
     public function selectUsuario(Request $request){
         if (!$request->ajax()) return redirect('/main');
-        $usuarios = Usuario::select('id','nombre','CUI')
-        ->where('condicion','=','1')
-        ->orderBy('nombre','asc')->get();
+        $usuarios = Comunidad::where('condicion','=','1')
+        ->select('id','nombre')->orderBy('nombre','asc')->get();
         return['usuarios'=>$usuarios];
     }
 

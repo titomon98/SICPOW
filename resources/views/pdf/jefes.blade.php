@@ -83,7 +83,7 @@
 <body>
     <img src="./img/logoDS.png" class="derecha"><br>
     <div>
-        <h3>Coordinación de Técnicos en Salud Rural</h3>
+        <h3>Dirección Departamental de Salud de Quetzaltenango</h3>
         <h3>Quetzaltenango</h3>
         <h3><span class="izquierda">{{now()}}</span></h3><br>
         <h3>Lista de jefes de familia</h3>
@@ -95,7 +95,6 @@
                     <th>Nombres</th>
                     <th>Apellidos</th>
                     <th>Direccion</th>
-                    <th>Municipio computado</th>
                     
                 </tr>
             </thead>
@@ -107,7 +106,6 @@
                     <td>{{$jefe->nombres}}</td>
                     <td>{{$jefe->apellidos}}</td>
                     <td>{{$jefe->direccion}}</td>
-                    <td>{{$jefe->nombre}}</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -115,6 +113,5 @@
     </div>
     <div class="izquierda">
         <p><strong>Total de registros: </strong>{{$cont}} </p>
-    </div>
 </body>
 </html>

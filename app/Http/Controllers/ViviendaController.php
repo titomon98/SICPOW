@@ -127,11 +127,10 @@ class ViviendaController extends Controller
         $animalcondlugares = Animalcondlugar::select('id','nombre')->orderBy('id','asc')->get();
         return['animalcondlugares'=>$animalcondlugares];
     }
-
     public function selectVivienda(Request $request){
-        //if (!$request->ajax()) return redirect('/main');
-        $viviendas = Detalle_vivienda::select('id','numvivienda')->orderBy('numvivienda','asc')
-        ->where('condicion','=','1')->get();
+        if (!$request->ajax()) return redirect('/main');
+        $viviendas = Detalle_vivienda::where('condicion','=','1')
+        ->select('id','numvivienda')->orderBy('numvivienda','asc')->get();
         return['viviendas'=>$viviendas];
     }
     public function store(Request $request)
@@ -175,8 +174,10 @@ class ViviendaController extends Controller
     public function update(Request $request)
     {
         if (!$request->ajax()) return redirect('/main');
+        $fechaactual = Carbon::now('America/Guatemala');
         $viviendas = Detalle_vivienda::findOrFail($request->id);
         $viviendas->numvivienda = $request->numvivienda;
+        $viviendas->fecha = $fechaactual->toDateString();
         $viviendas->direccion = $request->direccion;
         $viviendas->tenencia = $request->idtenencia;
         $viviendas->tipovivienda = $request->idtipovivienda;

@@ -96,7 +96,9 @@
                     <th>Num. de Vivienda</th>
                     <th>Direccion</th>
                     <th>Lider de Familia</th>
-                    <th>{{$computado}}</th>
+                    <th>Electricidad</th>
+                    <th>Telefonia</th>
+                    <th>Emisora radial</th>
                 </tr>
             </thead>
             <tbody>
@@ -110,7 +112,35 @@
                     <td>{{$serv->numvivienda}}</td>
                     <td>{{$serv->direccion}}</td>
                     <td>{{$serv->nombres." ".$serv->apellidos}}</td>
-                    <td>{{$serv->nombre}}</td>
+                    <td><?php 
+                        if ($serv->electricidad==1)
+                        {
+                            echo "Si";
+                            $electricidad++;
+                        }
+                        else {
+                            echo "No";
+                        }
+                             ?></td>
+                    <td><?php 
+                        if ($serv->telefonia==1)
+                        {
+                            echo "Si";
+                            $telefonia++;
+                        }
+                        else {
+                            echo "No";
+                        }
+                             ?></td>
+                    <td><?php 
+                        if ($serv->radio!=null)
+                        {
+                            echo strtoupper($serv->radio);
+                        }
+                        else {
+                            echo "No especifica";
+                        }
+                         ?></td>
                 </tr>
                 @endforeach
             </tbody>
@@ -118,6 +148,10 @@
     </div>
     <div class="izquierda">
         <p><strong>Total de viviendas registradas: </strong>{{$cont1}} </p>
+        <p><strong>Total de viviendas con electricidad: </strong>{{$electricidad}} </p>
+        <p><strong>Total de viviendas con telefonia: </strong>{{$telefonia}} </p>
+        <p><strong>Total de viviendas sin electricidad: </strong>{{$ne}} </p>
+        <p><strong>Total de viviendas sin telefonia: </strong>{{$nt}} </p>
     </div>
 </body>
 </html>

@@ -15,12 +15,16 @@ class DistritoController extends Controller
 
         if ($buscar==''){
             $distritos = Distrito::join('comunidad', 'distrito.idcomunidad', '=', 'comunidad.id')
-            ->select('distrito.id', 'distrito.nombre', 'distrito.condicion','distrito.idcomunidad', 'comunidad.nombre as nombre_comunidad')
+            ->join('municipio', 'comunidad.idmunicipio', '=', 'municipio.id')
+            ->select('distrito.id', 'distrito.nombre', 'distrito.condicion','distrito.idcomunidad', 'comunidad.nombre as nombre_comunidad',
+                     'comunidad.idmunicipio', 'municipio.nombre as nombre_municipio')
             ->orderBy('distrito.id', 'asc')->paginate(10);
         }
         else{
             $distritos = Distrito::join('comunidad', 'distrito.idcomunidad', '=', 'comunidad.id')
-            ->select('distrito.id', 'distrito.nombre', 'distrito.condicion','distrito.idcomunidad', 'comunidad.nombre as nombre_comunidad')
+            ->join('municipio', 'comunidad.idmunicipio', '=', 'municipio.id')
+            ->select('distrito.id', 'distrito.nombre', 'distrito.condicion','distrito.idcomunidad', 'comunidad.nombre as nombre_comunidad',
+                     'comunidad.idmunicipio', 'municipio.nombre as nombre_municipio')
             ->where('distrito.'.$criterio, 'like' , '%'. $buscar . '%')
             ->orderBy('distrito.id', 'asc')->paginate(10);
         }
@@ -48,7 +52,7 @@ class DistritoController extends Controller
         if (!$request->ajax()) return redirect('/main');
         $distritos = Distrito::where('condicion','=','1')
         ->select('id','nombre')
-        ->where('distrito.idcomunidad', '=', $id)
+        ->where('idcomunidad', '=', $id)
         ->orderBy('nombre','asc')->get();
         return['distritos'=>$distritos];
     }

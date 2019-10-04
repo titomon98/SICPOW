@@ -105,7 +105,7 @@
                         <div class="form-group row modalrow">
                             <label class="col-md-3 form-control-label" for="text-input">Numero de Vivienda</label>
                             <div class="col-md-9">
-                                <input type="number" min="0" v-model="numvivienda" class="form-control">
+                                <input type="number" v-model="numvivienda" class="form-control">
                             </div>
                         </div>
                         <div class="form-group row modalrow">
@@ -478,6 +478,7 @@
                     'otroelimbasura':this.otroelimbasura,
                     'otroservicios':this.otroservicios,
                     'id': this.id,
+
                 }).then(function (response) {
                     me.cerrarModal();
                     me.listarVivienda(1,'','numvivienda');

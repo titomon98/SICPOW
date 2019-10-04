@@ -46,11 +46,10 @@ class ComunidadController extends Controller
 
     public function selectComunidadD(Request $request, $id){
         if (!$request->ajax()) return redirect('/main');
-        $comunidades = Comunidad::join('municipio', 'comunidad.idmunicipio', '=', 'municipio.id')
-        ->select('comunidad.id','comunidad.nombre', 'municipio.nombre as municipio', 'municipio.id as munid')
-        ->where('comunidad.condicion','=','1')
-        ->where('comunidad.idmunicipio', '=', $id)
-        ->orderBy('comunidad.nombre','asc')->get();
+        $comunidades = Comunidad::select('id','nombre')
+        ->where('condicion','=','1')
+        ->where('idmunicipio', '=', $id)
+        ->orderBy('nombre','asc')->get();
         return['comunidades'=>$comunidades];
     }
 

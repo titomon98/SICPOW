@@ -34,6 +34,7 @@
                             <th>Opciones</th>
                             <th>Nombre</th>
                             <th>Comunidad</th>
+                            <th>Municipio</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
@@ -56,6 +57,7 @@
                             </td>
                             <td v-text="distritos.nombre"></td>
                             <td v-text="distritos.nombre_comunidad"></td>
+                            <td v-text="distritos.nombre_municipio"></td>
                             <td>
                                 <div v-if="distritos.condicion=='1'">
                                     <span class="badge badge-success">Activo</span>
@@ -98,11 +100,20 @@
                 <div class="modal-body" style="overflow: auto;">
                     <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                         <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Municipio</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idmunicipio"  @change="MunicipioS()">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="municipio in arrayMunicipio" :key="municipio.id" :value="municipio.id" v-text="municipio.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-md-3 form-control-label" for="text-input">Comunidad</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad">
                                     <option value="0" disabled>Seleccione</option>
-                                    <option v-for="comunidad in arrayComunidad" :key="comunidad.id" :value="comunidad.id" v-text="comunidad.nombre + '-' + comunidad.municipio"></option>
+                                    <option v-for="comunidad in arrayComunidad" :key="comunidad.id" :value="comunidad.id" v-text="comunidad.nombre"></option>
                                 </select>
                             </div>
                         </div>
@@ -161,7 +172,9 @@
                 offset : 3,
                 criterio : 'nombre',
                 buscar : '',
-                arrayComunidad:[]
+                arrayComunidad:[],
+                idmunicipio:0,
+                arrayMunicipio:[],
             }
         },
         computed : {
@@ -204,16 +217,29 @@
                     console.log(error);
                 });
             },
-            selectComunidad(){
+            MunicipioS(){
+                this.idmunicipio;
+                this.selectComunidad();
+            },
+            selectMunicipio(){
                 let me=this;
-                var url = '/comunidad/selectComunidadD';
+                var url = '/municipio/selectMunicipio';
                 axios.get(url).then(function (response){
                     var respuesta = response.data;
-                    me.arrayComunidad = respuesta.comunidades;
+                    me.arrayMunicipio = respuesta.municipios;
                 })
                 .catch(function (error){
                     console.log(error);
                 });
+            },
+            selectComunidad(){
+                let me=this;
+                var url = '/comunidad/selectComunidadD/'+this.idmunicipio+'/';
+                axios.get(url).then(function(response){
+                    var respuesta = response.data;
+                    me.arrayComunidad = respuesta.comunidades;
+                })
+
             },
             cambiarPagina(page,buscar,criterio){
                 let me = this;
@@ -354,14 +380,16 @@
                 if(this.errorMostrarMsjDistrito.length) this.errorDistrito=1;
                 return this.errorDistrito;
             },
-
             cerrarModal(){
                 this.modal = 0;
                 this.tituloModal = '';
                 this.idcomunidad=0;
+                this.idmunicipio=0;
                 this.tipoAccion = 0;
                 this.nombre = '';
                 this.errorDistrito=0;
+                this.arrayComunidad=[];
+                
             },
             abrirModal(modelo, accion, data=[]){
                 switch(modelo){
@@ -373,6 +401,7 @@
                                 this.modal = 1;
                                 this.tituloModal = 'Registrar distrito';
                                 this.idcomunidad=0;
+                                this.idmunicipio=0;
                                 this.nombre = '';
                                 this.tipoAccion = 1;
                                 break;
@@ -383,6 +412,7 @@
                                 this.tituloModal='Actualizar distrito';
                                 this.tipoAccion=2;
                                 this.id=data['id'];
+                                this.idmunicipio=data['idmunicipio'];
                                 this.idcomunidad=data['idcomunidad'];
                                 this.nombre=data['nombre'];
                                 break;
@@ -390,6 +420,7 @@
                         }
                     }
                 }
+                this.selectMunicipio();
                 this.selectComunidad();
             }
         },

@@ -145,13 +145,13 @@
                         <tr>
                             <td>Reporte de Servicios</td>
                             <td>
-                                <button type="button" @click="abrirModalM('servicios', 1)" class="btn btn-info">
+                                <button type="button" @click="abrirModalMServicios('servicios', 1)" class="btn btn-info">
                                     <i class="icon-doc"></i>&nbsp;Reporte por Municipio
                                 </button><br>
-                                <button type="button" @click="abrirModalC('servicios', 2)" class="btn btn-success">
+                                <button type="button" @click="abrirModalCServicios('servicios', 2)" class="btn btn-success">
                                     <i class="icon-doc"></i>&nbsp;Reporte por Comunidad
                                 </button><br>
-                                <button type="button" @click="abrirModalD('servicios', 3)" class="btn btn-info">
+                                <button type="button" @click="abrirModalDServicios('servicios', 3)" class="btn btn-info">
                                     <i class="icon-doc"></i>&nbsp;Reporte por Distrito
                                 </button>
                             </td>
@@ -360,6 +360,250 @@
     </div>
     <!--Fin del modal-->
 
+    <!--Inicio del modal municipio y servicios-->
+    <div class="modal fade" tabindex="-1" :class="{'mostrar' : modalServiciosM}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-primary modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" v-text="tituloModal"></h4>
+                    <button type="button" class="close"  @click="cerrarModal()" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Municipio</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idmunicipio">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="municipio in arrayMunicipio" :key="municipio.id" :value="municipio.id" v-text="municipio.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Servicios</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idservicios">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option value="1" >Tenencia de la vivienda</option>
+                                    <option value="2" >Tipo de vivienda</option>
+                                    <option value="3" >Separacion de ambientes</option>
+                                    <option value="4" >Ubicacion y tipo de cocina</option>
+                                    <option value="5" >Techo</option>
+                                    <option value="6" >Pared</option>
+                                    <option value="7" >Piso</option>
+                                    <option value="8" >Abastecimiento de agua</option>
+                                    <option value="9" >Tratamiento de aguas servidas</option>
+                                    <option value="10" >Eliminacion final de excretas</option>
+                                    <option value="11" >Eliminacion final de basura</option>
+                                    <option value="12" >Ubicacion de animales domesticos</option>
+                                    <option value="13" >Condiciones dell lugar de los animales domesticos</option>
+                                    <option value="14" >Zoonosis</option>
+                                    <option value="15" >Otros servicios</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div v-show="errorReporte" class="form-group row div-error">
+                            <div class="text-center text-error">
+                            <div v-for="error in errorMostrarMsjReporte" :key="error" v-text="error">
+
+                            </div>
+                            </div> 
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                    <button type="button" v-if="tipoAccion==1" class="btn btn-primary" @click="cargarRJefe()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==2" class="btn btn-primary" @click="cargarRViviendas()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==3" class="btn btn-primary" @click="cargarRSexo()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==4" class="btn btn-primary" @click="cargarREdad()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==5" class="btn btn-primary" @click="cargarRDiscapacidad()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==6" class="btn btn-primary" @click="cargarROcupacion()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==7" class="btn btn-primary" @click="cargarRMigracion()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==8" class="btn btn-primary" @click="cargarRFallecidos()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==9" class="btn btn-primary" @click="cargarRServicios()">Guardar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!--Fin del modal-->
+
+    <!--Inicio del modal comunidad-->
+    <div class="modal fade" tabindex="-1" :class="{'mostrar' : modalServiciosC}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-primary modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" v-text="tituloModal"></h4>
+                    <button type="button" class="close"  @click="cerrarModal()" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Municipio</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idmunicipio"  @change="MunicipioS()">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="municipio in arrayMunicipio" :key="municipio.id" :value="municipio.id" v-text="municipio.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Comunidad</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idcomunidad">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="comunidad in arrayComunidad" :key="comunidad.id" :value="comunidad.id" v-text="comunidad.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Servicios</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idservicios">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option value="1" >Tenencia de la vivienda</option>
+                                    <option value="2" >Tipo de vivienda</option>
+                                    <option value="3" >Separacion de ambientes</option>
+                                    <option value="4" >Ubicacion y tipo de cocina</option>
+                                    <option value="5" >Techo</option>
+                                    <option value="6" >Pared</option>
+                                    <option value="7" >Piso</option>
+                                    <option value="8" >Abastecimiento de agua</option>
+                                    <option value="9" >Tratamiento de aguas servidas</option>
+                                    <option value="10" >Eliminacion final de excretas</option>
+                                    <option value="11" >Eliminacion final de basura</option>
+                                    <option value="12" >Ubicacion de animales domesticos</option>
+                                    <option value="13" >Condiciones del lugar de los animales domesticos</option>
+                                    <option value="14" >Zoonosis</option>
+                                    <option value="15" >Otros servicios</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div v-show="errorReporte" class="form-group row div-error">
+                            <div class="text-center text-error">
+                            <div v-for="error in errorMostrarMsjReporte" :key="error" v-text="error">
+
+                            </div>
+                            </div> 
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                    <button type="button" v-if="tipoAccion==1" class="btn btn-primary" @click="cargarRJefe()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==2" class="btn btn-primary" @click="cargarRViviendas()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==3" class="btn btn-primary" @click="cargarRSexo()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==4" class="btn btn-primary" @click="cargarREdad()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==5" class="btn btn-primary" @click="cargarRDiscapacidad()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==6" class="btn btn-primary" @click="cargarROcupacion()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==7" class="btn btn-primary" @click="cargarRMigracion()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==8" class="btn btn-primary" @click="cargarRFallecidos()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==9" class="btn btn-primary" @click="cargarRServicios()">Guardar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!--Fin del modal-->
+
+
+    <!--Inicio del modal distrito-->
+    <div class="modal fade" tabindex="-1" :class="{'mostrar' : modalServiciosD}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-primary modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" v-text="tituloModal"></h4>
+                    <button type="button" class="close"  @click="cerrarModal()" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Municipio</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idmunicipio"  @change="MunicipioS()">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="municipio in arrayMunicipio" :key="municipio.id" :value="municipio.id" v-text="municipio.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Comunidad</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idcomunidad" @change="ComunidadS()">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="comunidad in arrayComunidad" :key="comunidad.id" :value="comunidad.id" v-text="comunidad.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                         <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Distrito</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="iddistrito">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="distrito in arrayDistrito" :key="distrito.id" :value="distrito.id" v-text="distrito.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Servicios</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idservicios">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option value="1" >Tenencia de la vivienda</option>
+                                    <option value="2" >Tipo de vivienda</option>
+                                    <option value="3" >Separacion de ambientes</option>
+                                    <option value="4" >Ubicacion y tipo de cocina</option>
+                                    <option value="5" >Techo</option>
+                                    <option value="6" >Pared</option>
+                                    <option value="7" >Piso</option>
+                                    <option value="8" >Abastecimiento de agua</option>
+                                    <option value="9" >Tratamiento de aguas servidas</option>
+                                    <option value="10" >Eliminacion final de excretas</option>
+                                    <option value="11" >Eliminacion final de basura</option>
+                                    <option value="12" >Ubicacion de animales domesticos</option>
+                                    <option value="13" >Condiciones dell lugar de los animales domesticos</option>
+                                    <option value="14" >Zoonosis</option>
+                                    <option value="15" >Otros servicios</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div v-show="errorReporte" class="form-group row div-error">
+                            <div class="text-center text-error">
+                            <div v-for="error in errorMostrarMsjReporte" :key="error" v-text="error">
+
+                            </div>
+                            </div> 
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                    <button type="button" v-if="tipoAccion==1" class="btn btn-primary" @click="cargarRJefe()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==2" class="btn btn-primary" @click="cargarRViviendas()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==3" class="btn btn-primary" @click="cargarRSexo()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==4" class="btn btn-primary" @click="cargarREdad()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==5" class="btn btn-primary" @click="cargarRDiscapacidad()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==6" class="btn btn-primary" @click="cargarROcupacion()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==7" class="btn btn-primary" @click="cargarRMigracion()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==8" class="btn btn-primary" @click="cargarRFallecidos()">Guardar</button>
+                    <button type="button" v-if="tipoAccion==9" class="btn btn-primary" @click="cargarRServicios()">Guardar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!--Fin del modal-->
+
 </main>
 <!--Fin del contenido principal-->
 </template>
@@ -374,13 +618,15 @@
                 modal : 0,
                 modalComunidad:0,
                 modalDistrito:0,
+                modalServiciosM:0,
+                modalServiciosC:0,
+                modalServiciosD:0,
                 tituloModal : '',
                 tipoAccion : 0,
                 errorReporte: 0,
                 errorMostrarMsjReporte : [],
                 offset : 3,
                 filtro:0,
-
 
                 //A partir de aqui traemos los datos que necesitaremos en los modales
                 idmunicipio:0,
@@ -389,10 +635,8 @@
                 arrayComunidad:[],
                 iddistrito:0,
                 arrayDistrito:[],
+
                 idservicios:0,
-                arrayServicios:[],
-
-
             }
         },
         computed : {
@@ -490,9 +734,23 @@
                     if(!this.idmunicipio) this.errorMostrarMsjReporte.push("La comunidad no puede estar vacia");
                     if(!this.idmunicipio) this.errorMostrarMsjReporte.push("El distrito no puede estar vacio");
                 }
-                else if (this.filtro ==4)
+                else if (this.filtro ==11)
                 {
                     if(!this.idmunicipio) this.errorMostrarMsjReporte.push("El municipio no puede estar vacio");
+                    if(!this.idservicios) this.errorMostrarMsjReporte.push("Debe elegir un servicio");
+                }
+                else if (this.filtro ==12)
+                {
+                    if(!this.idmunicipio) this.errorMostrarMsjReporte.push("El municipio no puede estar vacio");
+                    if(!this.idcomunidad) this.errorMostrarMsjReporte.push("La comunidad no puede estar vacia");
+                    if(!this.idservicios) this.errorMostrarMsjReporte.push("Debe elegir un servicio");
+                }
+                else if (this.filtro ==13)
+                {
+                    if(!this.idmunicipio) this.errorMostrarMsjReporte.push("El municipio no puede estar vacio");
+                    if(!this.idcomunidad) this.errorMostrarMsjReporte.push("La comunidad no puede estar vacia");
+                    if(!this.iddistrito) this.errorMostrarMsjReporte.push("El distrito no puede estar vacio");
+                    if(!this.idservicios) this.errorMostrarMsjReporte.push("Debe elegir un servicio");
                 }
 
                 if(this.errorMostrarMsjReporte.length) this.errorReporte=1;
@@ -503,7 +761,7 @@
                 this.selectComunidad();
             },
             ComunidadS(){
-                this.idcomunidad
+                this.idcomunidad;
                 this.selectDistrito();
             },
             cerrarModal(){
@@ -517,6 +775,9 @@
                 this.idservicios=0;
                 this.modalComunidad=0;
                 this.modalDistrito=0;
+                this.modalServiciosM=0;
+                this.modalServiciosC=0;
+                this.modalServiciosD=0;
                 this.arrayMunicipio=[];
                 this.arrayComunidad=[];
                 this.arrayDistrito=[];
@@ -779,6 +1040,53 @@
                 }
                 this.selectMunicipio();
             },
+
+            abrirModalMServicios(modelo, accion){
+                switch(modelo){
+                    case "servicios":
+                    {
+                        this.modalServiciosM = 1;
+                        this.tituloModal = 'Reporte Servicios';
+                        this.tipoAccion = 9;
+                        this.filtro = 11;
+                        break;
+                    }                    
+                }
+                this.selectMunicipio();
+            },
+
+            abrirModalCServicios(modelo, accion){
+                
+                switch(modelo){
+                    case "servicios":
+                    {
+                        this.modalServiciosC = 1;
+                        this.tituloModal = 'Reporte Servicios';
+                        this.tipoAccion = 9;
+                        this.filtro = 12;
+                        break;
+                    }
+                    
+                }
+                this.selectMunicipio();
+            },
+
+            abrirModalDServicios(modelo, accion){
+                
+                switch(modelo){
+                    case "servicios":
+                    {
+                        this.modalServiciosD = 1;
+                        this.tituloModal = 'Reporte Servicios';
+                        this.tipoAccion = 9;
+                        this.filtro = 13;
+                        break;
+                    }
+                }
+                this.selectMunicipio();
+            },
+
+
             //a partir de aqui vamos a jalar datos para los modales
             selectMunicipio(){
                 let me=this;

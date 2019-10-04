@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Reporte de servicios</title>
+    <title>Reporte de cocinas por ubicacion</title>
     <style>
         body {
             margin: 0;
@@ -93,10 +93,11 @@
             <thead> 
                 <tr>
                     <th>No.</th>
-                    <th>Num. de Vivienda</th>
+                    <th>Numero de Vivienda</th>
                     <th>Direccion</th>
                     <th>Lider de Familia</th>
                     <th>{{$computado}}</th>
+                    <th>Ubicacion</th>
                 </tr>
             </thead>
             <tbody>
@@ -111,6 +112,7 @@
                     <td>{{$serv->direccion}}</td>
                     <td>{{$serv->nombres." ".$serv->apellidos}}</td>
                     <td>{{$serv->nombre}}</td>
+                    <td>{{$serv->ubicacion}}</td>
                 </tr>
                 @endforeach
             </tbody>

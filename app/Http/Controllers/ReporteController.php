@@ -42,6 +42,10 @@ class ReporteController extends Controller
             ->where('lider', '=', '1')
             ->where('municipio.id', '=', $municip)
             ->count();
+
+            $ubic=DB::table('municipio')
+            ->select('municipio.nombre as municipio')
+            ->where('municipio.id', '=', $municip)->get();
         }
 
         else if ($filtro==2)
@@ -67,6 +71,14 @@ class ReporteController extends Controller
             ->where('municipio.id', '=', $municip)
             ->where('comunidad.id', '=', $comuni)
             ->count();
+
+            $ubic=DB::table('municipio')
+            ->select('municipio.nombre as municipio')
+            ->where('municipio.id', '=', $municip)->get();
+
+            $ubic2=DB::table('comunidad')
+            ->select('comunidad.nombre as comunidad')
+            ->where('comunidad.id', '=', $comuni)->get();
         }
 
         else if ($filtro == 3)
@@ -94,10 +106,19 @@ class ReporteController extends Controller
             ->where('comunidad.id', '=', $comuni)
             ->where('distrito.id', '=', $distri)
             ->count();
+
+            $ubic=DB::table('municipio')
+            ->join('comunidad', 'comunidad.idmunicipio', '=', 'municipio.id')
+            ->join('distrito','comunidad.id', '=', 'distrito.idcomunidad')
+            ->select('municipio.nombre as municipio', 'comunidad.nombre as comunidad',
+            'distrito.nombre as distrito')
+            ->where('comunidad.id', '=', $comuni)
+            ->where('municipio.id', '=', $municip)
+            ->where('distrito.id', '=', $distri)->get();
         }
 
 
-        $pdf = \PDF::loadView('pdf.jefes',['jefes'=>$jefes, 'cont'=>$cont, 'filtro'=>$filtro]);
+        $pdf = \PDF::loadView('pdf.jefes',['jefes'=>$jefes, 'cont'=>$cont, 'municip'=>$municip, 'comuni'=>$comuni, 'distri'=>$distri, 'ubic'=>$ubic]);
         return $pdf->stream('jefes.pdf');
     }
 
@@ -331,7 +352,7 @@ class ReporteController extends Controller
         $pdf = \PDF::loadView('pdf.sexo',['sexo'=>$sexo, 'cont1'=>$cont1, 'cont2'=>$cont2]);
         return $pdf->stream('sexo.pdf');
     }
-
+    //por periodo de tiempo flexible
     public function listarEdad(Request $request, $filtro, $id, $id2, $id3)
     {
         $municip = $id;
@@ -768,14 +789,1677 @@ class ReporteController extends Controller
         $municip = $id;
         $comuni = $id2;
         $distri = $id3;
-        //Tenencia, Tipo vivienda, separacion de ambientes
-        //ubicacion de cocina, techo, pared, piso
-        //abastecimiento de agua, tratamiento de aguas servidas
-        //eliminacion final de excretas
-        //eliminacion final de basura
-        //ubicacion de los animales domesticos
-        //condiciones del lugar de los animales domesticos
-        //zoonosis
-        //otra informacion relacionada
+        //filtros es igual a 11, 12 y 13
+        if($filtro == 11)
+        {
+            if($servicio == 1)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tenencia', 'tenencia.id', '=', 'detalle_vivienda.tenencia')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'tenencia.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('tenencia.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tenencia', 'tenencia.id', '=', 'detalle_vivienda.tenencia')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'tenencia.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Tenencia";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 2)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tipovivienda', 'tipovivienda.id', '=', 'detalle_vivienda.tipovivienda')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'tipovivienda.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('tipovivienda.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tipovivienda', 'tipovivienda.id', '=', 'detalle_vivienda.tipovivienda')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'tipovivienda.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Tipo de vivienda";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 3)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('ambiente', 'ambiente.id', '=', 'detalle_vivienda.ambiente')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'ambiente.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('ambiente.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('ambiente', 'ambiente.id', '=', 'detalle_vivienda.ambiente')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'ambiente.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Ambiente";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 4)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('cocina', 'cocina.id', '=', 'detalle_vivienda.cocina')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'cocina.nombre', 'cocina.ubicacion')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('cocina.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('cocina', 'cocina.id', '=', 'detalle_vivienda.cocina')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'cocina.nombre', 'cocina.ubicacion')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->count();
+
+                $computado="Tipo de cocina";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.cocina', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('cocina.pdf');
+            }
+
+            if($servicio == 5)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('techo', 'techo.id', '=', 'detalle_vivienda.techo')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'techo.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('techo.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('techo', 'techo.id', '=', 'detalle_vivienda.techo')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'techo.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Techo";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 6)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('pared', 'pared.id', '=', 'detalle_vivienda.pared')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'pared.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('pared.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('pared', 'pared.id', '=', 'detalle_vivienda.pared')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'pared.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Pared";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 7)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('piso', 'piso.id', '=', 'detalle_vivienda.piso')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'piso.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('piso.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('piso', 'piso.id', '=', 'detalle_vivienda.piso')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'piso.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Piso";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 8)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('aguaabastecimiento', 'aguaabastecimiento.id', '=', 'detalle_vivienda.aguaabastecimiento')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'aguaabastecimiento.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('aguaabastecimiento.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('aguaabastecimiento', 'aguaabastecimiento.id', '=', 'detalle_vivienda.aguaabastecimiento')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'aguaabastecimiento.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Abastecimiento de Agua";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 9)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('aguatrat', 'aguatrat.id', '=', 'detalle_vivienda.aguatrat')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'aguatrat.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('aguatrat.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('aguatrat', 'aguatrat.id', '=', 'detalle_vivienda.aguatrat')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'aguatrat.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Tratamiento de aguas";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 10)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('eliminexcretas', 'eliminexcretas.id', '=', 'detalle_vivienda.eliminexcretas')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'eliminexcretas.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('eliminexcretas.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('eliminexcretas', 'eliminexcretas.id', '=', 'detalle_vivienda.eliminexcretas')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'eliminexcretas.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Eliminacion de excretas";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 11)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('eliminbasura', 'eliminbasura.id', '=', 'detalle_vivienda.eliminbasura')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'eliminbasura.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('eliminbasura.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('eliminbasura', 'eliminbasura.id', '=', 'detalle_vivienda.eliminbasura')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'eliminbasura.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Eliminacion de basura";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 12)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('animalubic', 'animalubic.id', '=', 'detalle_vivienda.animalubic')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'animalubic.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('animalubic.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('animalubic', 'animalubic.id', '=', 'detalle_vivienda.animalubic')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'animalubic.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Ubicacion de animales";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 13)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('animalcondlugar', 'animalcondlugar.id', '=', 'detalle_vivienda.animalcondlugar')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'animalcondlugar.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('animalcondlugar.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('animalcondlugar', 'animalcondlugar.id', '=', 'detalle_vivienda.animalcondlugar')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'animalcondlugar.nombre')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Condiciones del lugar";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 14)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tenencia', 'tenencia.id', '=', 'detalle_vivienda.tenencia')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos', 'detalle_vivienda.perros', 'detalle_vivienda.gatos')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('detalle_vivienda.id', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tenencia', 'tenencia.id', '=', 'detalle_vivienda.tenencia')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos', 'detalle_vivienda.perros', 'detalle_vivienda.gatos')
+                ->where('municipio.id', '=', $municip)
+                ->where('persona.lider', '=', '1')
+                ->count();
+
+                $perros=0;
+                $gatos=0;
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.zoonosis', ['servicios'=>$servicios, 'cont1'=>$cont1, 'cantidad'=>$cantidad, 'gatos'=>$gatos, 'perros'=>$perros]);
+                return $pdf->stream('zoonosis.pdf');
+            }
+
+            if($servicio == 15)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tenencia', 'tenencia.id', '=', 'detalle_vivienda.tenencia')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos', 'detalle_vivienda.electricidad', 
+                'detalle_vivienda.telefonia', 'detalle_vivienda.radio')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('detalle_vivienda.radio', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tenencia', 'tenencia.id', '=', 'detalle_vivienda.tenencia')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos', 'detalle_vivienda.electricidad', 
+                'detalle_vivienda.telefonia', 'detalle_vivienda.radio')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->count();
+
+                $cantidad=0;
+                $electricidad=0;
+                $telefonia=0;
+                $ne=0;
+                $nt=0;
+
+                $pdf = \PDF::loadView('pdf.otroservicio', ['servicios'=>$servicios, 'cont1'=>$cont1, 'cantidad'=>$cantidad, 'electricidad'=>$electricidad, 'telefonia'=>$telefonia, 'ne'=>$ne, 'nt'=>$nt]);
+                return $pdf->stream('otroservicio.pdf');
+            }
+        }
+        else if($filtro == 12)
+        {
+            if($servicio == 1)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tenencia', 'tenencia.id', '=', 'detalle_vivienda.tenencia')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'tenencia.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('tenencia.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tenencia', 'tenencia.id', '=', 'detalle_vivienda.tenencia')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'tenencia.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Tenencia";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 2)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tipovivienda', 'tipovivienda.id', '=', 'detalle_vivienda.tipovivienda')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'tipovivienda.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('tipovivienda.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tipovivienda', 'tipovivienda.id', '=', 'detalle_vivienda.tipovivienda')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'tipovivienda.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Tipo de vivienda";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 3)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('ambiente', 'ambiente.id', '=', 'detalle_vivienda.ambiente')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'ambiente.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('ambiente.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('ambiente', 'ambiente.id', '=', 'detalle_vivienda.ambiente')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'ambiente.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Ambiente";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 4)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('cocina', 'cocina.id', '=', 'detalle_vivienda.cocina')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'cocina.nombre', 'cocina.ubicacion')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('cocina.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('cocina', 'cocina.id', '=', 'detalle_vivienda.cocina')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'cocina.nombre', 'cocina.ubicacion')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->count();
+
+                $computado="Tipo de cocina";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.cocina', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('cocina.pdf');
+            }
+
+            if($servicio == 5)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('techo', 'techo.id', '=', 'detalle_vivienda.techo')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'techo.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('techo.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('techo', 'techo.id', '=', 'detalle_vivienda.techo')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'techo.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Techo";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 6)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('pared', 'pared.id', '=', 'detalle_vivienda.pared')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'pared.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('pared.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('pared', 'pared.id', '=', 'detalle_vivienda.pared')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'pared.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Pared";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 7)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('piso', 'piso.id', '=', 'detalle_vivienda.piso')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'piso.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('piso.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('piso', 'piso.id', '=', 'detalle_vivienda.piso')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'piso.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Piso";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 8)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('aguaabastecimiento', 'aguaabastecimiento.id', '=', 'detalle_vivienda.aguaabastecimiento')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'aguaabastecimiento.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('aguaabastecimiento.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('aguaabastecimiento', 'aguaabastecimiento.id', '=', 'detalle_vivienda.aguaabastecimiento')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'aguaabastecimiento.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Abastecimiento de Agua";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 9)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('aguatrat', 'aguatrat.id', '=', 'detalle_vivienda.aguatrat')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'aguatrat.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('aguatrat.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('aguatrat', 'aguatrat.id', '=', 'detalle_vivienda.aguatrat')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'aguatrat.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Tratamiento de aguas";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 10)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('eliminexcretas', 'eliminexcretas.id', '=', 'detalle_vivienda.eliminexcretas')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'eliminexcretas.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('eliminexcretas.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('eliminexcretas', 'eliminexcretas.id', '=', 'detalle_vivienda.eliminexcretas')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'eliminexcretas.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Eliminacion de excretas";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 11)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('eliminbasura', 'eliminbasura.id', '=', 'detalle_vivienda.eliminbasura')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'eliminbasura.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('eliminbasura.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('eliminbasura', 'eliminbasura.id', '=', 'detalle_vivienda.eliminbasura')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'eliminbasura.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Eliminacion de basura";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 12)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('animalubic', 'animalubic.id', '=', 'detalle_vivienda.animalubic')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'animalubic.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('animalubic.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('animalubic', 'animalubic.id', '=', 'detalle_vivienda.animalubic')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'animalubic.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Ubicacion de animales";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 13)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('animalcondlugar', 'animalcondlugar.id', '=', 'detalle_vivienda.animalcondlugar')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'animalcondlugar.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('animalcondlugar.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('animalcondlugar', 'animalcondlugar.id', '=', 'detalle_vivienda.animalcondlugar')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'animalcondlugar.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Condiciones del lugar";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 14)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tenencia', 'tenencia.id', '=', 'detalle_vivienda.tenencia')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos', 'detalle_vivienda.perros', 'detalle_vivienda.gatos')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('detalle_vivienda.id', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tenencia', 'tenencia.id', '=', 'detalle_vivienda.tenencia')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos', 'detalle_vivienda.perros', 'detalle_vivienda.gatos')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->count();
+
+                $perros=0;
+                $gatos=0;
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.zoonosis', ['servicios'=>$servicios, 'cont1'=>$cont1, 'cantidad'=>$cantidad, 'gatos'=>$gatos, 'perros'=>$perros]);
+                return $pdf->stream('zoonosis.pdf');
+            }
+
+            if($servicio == 15)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tenencia', 'tenencia.id', '=', 'detalle_vivienda.tenencia')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos', 'detalle_vivienda.electricidad', 
+                'detalle_vivienda.telefonia', 'detalle_vivienda.radio')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('detalle_vivienda.radio', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tenencia', 'tenencia.id', '=', 'detalle_vivienda.tenencia')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos', 'detalle_vivienda.electricidad', 
+                'detalle_vivienda.telefonia', 'detalle_vivienda.radio')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('persona.lider', '=', '1')
+                ->count();
+
+                $cantidad=0;
+                $electricidad=0;
+                $telefonia=0;
+                $ne=0;
+                $nt=0;
+
+                $pdf = \PDF::loadView('pdf.otroservicio', ['servicios'=>$servicios, 'cont1'=>$cont1, 'cantidad'=>$cantidad, 'electricidad'=>$electricidad, 'telefonia'=>$telefonia, 'ne'=>$ne, 'nt'=>$nt]);
+                return $pdf->stream('otroservicio.pdf');
+            }
+        }
+        else if($filtro == 13)
+        {
+            if($servicio == 1)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tenencia', 'tenencia.id', '=', 'detalle_vivienda.tenencia')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'tenencia.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('tenencia.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tenencia', 'tenencia.id', '=', 'detalle_vivienda.tenencia')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'tenencia.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Tenencia";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 2)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tipovivienda', 'tipovivienda.id', '=', 'detalle_vivienda.tipovivienda')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'tipovivienda.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('tipovivienda.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tipovivienda', 'tipovivienda.id', '=', 'detalle_vivienda.tipovivienda')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'tipovivienda.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Tipo de vivienda";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 3)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('ambiente', 'ambiente.id', '=', 'detalle_vivienda.ambiente')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'ambiente.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('ambiente.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('ambiente', 'ambiente.id', '=', 'detalle_vivienda.ambiente')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'ambiente.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Ambiente";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 4)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('cocina', 'cocina.id', '=', 'detalle_vivienda.cocina')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'cocina.nombre', 'cocina.ubicacion')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('cocina.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('cocina', 'cocina.id', '=', 'detalle_vivienda.cocina')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'cocina.nombre', 'cocina.ubicacion')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->count();
+
+                $computado="Tipo de cocina";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.cocina', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('cocina.pdf');
+            }
+
+            if($servicio == 5)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('techo', 'techo.id', '=', 'detalle_vivienda.techo')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'techo.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('techo.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('techo', 'techo.id', '=', 'detalle_vivienda.techo')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'techo.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Techo";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 6)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('pared', 'pared.id', '=', 'detalle_vivienda.pared')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'pared.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('pared.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('pared', 'pared.id', '=', 'detalle_vivienda.pared')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'pared.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Pared";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 7)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('piso', 'piso.id', '=', 'detalle_vivienda.piso')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'piso.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('piso.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('piso', 'piso.id', '=', 'detalle_vivienda.piso')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'piso.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Piso";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 8)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('aguaabastecimiento', 'aguaabastecimiento.id', '=', 'detalle_vivienda.aguaabastecimiento')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'aguaabastecimiento.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('aguaabastecimiento.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('aguaabastecimiento', 'aguaabastecimiento.id', '=', 'detalle_vivienda.aguaabastecimiento')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'aguaabastecimiento.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Abastecimiento de Agua";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 9)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('aguatrat', 'aguatrat.id', '=', 'detalle_vivienda.aguatrat')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'aguatrat.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('aguatrat.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('aguatrat', 'aguatrat.id', '=', 'detalle_vivienda.aguatrat')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'aguatrat.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Tratamiento de aguas";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 10)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('eliminexcretas', 'eliminexcretas.id', '=', 'detalle_vivienda.eliminexcretas')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'eliminexcretas.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('eliminexcretas.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('eliminexcretas', 'eliminexcretas.id', '=', 'detalle_vivienda.eliminexcretas')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'eliminexcretas.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Eliminacion de excretas";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 11)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('eliminbasura', 'eliminbasura.id', '=', 'detalle_vivienda.eliminbasura')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'eliminbasura.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('eliminbasura.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('eliminbasura', 'eliminbasura.id', '=', 'detalle_vivienda.eliminbasura')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'eliminbasura.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Eliminacion de basura";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 12)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('animalubic', 'animalubic.id', '=', 'detalle_vivienda.animalubic')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'animalubic.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('animalubic.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('animalubic', 'animalubic.id', '=', 'detalle_vivienda.animalubic')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'animalubic.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Ubicacion de animales";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 13)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('animalcondlugar', 'animalcondlugar.id', '=', 'detalle_vivienda.animalcondlugar')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'animalcondlugar.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('animalcondlugar.nombre', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('animalcondlugar', 'animalcondlugar.id', '=', 'detalle_vivienda.animalcondlugar')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos',
+                'animalcondlugar.nombre')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->count();
+                $computado="Condiciones del lugar";
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.servicios', ['servicios'=>$servicios, 'cont1'=>$cont1, 'computado'=>$computado, 'cantidad'=>$cantidad]);
+                return $pdf->stream('servicios.pdf');
+            }
+
+            if($servicio == 14)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tenencia', 'tenencia.id', '=', 'detalle_vivienda.tenencia')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos', 'detalle_vivienda.perros', 'detalle_vivienda.gatos')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('detalle_vivienda.id', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tenencia', 'tenencia.id', '=', 'detalle_vivienda.tenencia')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos', 'detalle_vivienda.perros', 'detalle_vivienda.gatos')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->count();
+
+                $perros=0;
+                $gatos=0;
+                $cantidad=0;
+
+                $pdf = \PDF::loadView('pdf.zoonosis', ['servicios'=>$servicios, 'cont1'=>$cont1, 'cantidad'=>$cantidad, 'gatos'=>$gatos, 'perros'=>$perros]);
+                return $pdf->stream('zoonosis.pdf');
+            }
+
+            if($servicio == 15)
+            {
+                $servicios = DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tenencia', 'tenencia.id', '=', 'detalle_vivienda.tenencia')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos', 'detalle_vivienda.electricidad', 
+                'detalle_vivienda.telefonia', 'detalle_vivienda.radio')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->orderBy('detalle_vivienda.radio', 'asc')->get();
+
+                $cont1= DB::table('detalle_vivienda')
+                ->join('familia', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+                ->join('persona', 'persona.familia', '=', 'familia.id')
+                ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+                ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+                ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+                ->join('tenencia', 'tenencia.id', '=', 'detalle_vivienda.tenencia')
+                ->select('detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 
+                'persona.nombres', 'persona.apellidos', 'detalle_vivienda.electricidad', 
+                'detalle_vivienda.telefonia', 'detalle_vivienda.radio')
+                ->where('municipio.id', '=', $municip)->where('comunidad.id', '=', $comuni)
+                ->where('distrito.id', '=', $distri)
+                ->where('persona.lider', '=', '1')
+                ->count();
+
+                $cantidad=0;
+                $electricidad=0;
+                $telefonia=0;
+                $ne=0;
+                $nt=0;
+
+                $pdf = \PDF::loadView('pdf.otroservicio', ['servicios'=>$servicios, 'cont1'=>$cont1, 'cantidad'=>$cantidad, 'electricidad'=>$electricidad, 'telefonia'=>$telefonia, 'ne'=>$ne, 'nt'=>$nt]);
+                return $pdf->stream('otroservicio.pdf');
+            }
+        }
     }
 }
