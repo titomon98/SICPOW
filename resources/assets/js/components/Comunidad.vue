@@ -5,13 +5,13 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item">Home</li>
         <li class="breadcrumb-item"><a href="#">Admin</a></li>
-        <li class="breadcrumb-item active">Comunidad</li>
+        <li class="breadcrumb-item active">Sede de Territorio</li>
     </ol>
     <div class="container-fluid">
         <!-- Ejemplo de tabla Listado -->
         <div class="card">
             <div class="card-header">
-                <i class="fa fa-align-justify"></i> Comunidades
+                <i class="fa fa-align-justify"></i> Sede de Territorios
                 <button type="button" @click="abrirModal('comunidad', 'registrar')" class="btn btn-secondary">
                     <i class="icon-plus"></i>&nbsp;Nuevo
                 </button>
@@ -109,7 +109,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
                             <div class="col-md-9">
-                                <input type="text" v-model="nombre" class="form-control" placeholder="Nombre de Comunidad">
+                                <input type="text" v-model="nombre" class="form-control" placeholder="Nombre de Sede de Territorio">
                             </div>
                         </div>
                         <div v-show="errorComunidad" class="form-group row div-error">
@@ -257,7 +257,7 @@
             },
             desactivarComunidad(id){
                 swal.fire({
-                title: 'Esta seguro de desactivar esta comunidad?',
+                title: 'Esta seguro de desactivar esta sede de territorio?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -278,7 +278,7 @@
                         me.listarComunidad(1,'','nombre');
                         swal.fire(
                         'Desactivado!',
-                        'La comunidad ha sido desactivada con éxito.',
+                        'La sede de territorio ha sido desactivada con éxito.',
                         'success'
                         )
                     }).catch(function (error) {
@@ -292,7 +292,7 @@
                 ) {
                      swal.fire(
                     'Accion cancelada',
-                    'La comunidad sigue activa',
+                    'La sede de territorio sigue activa',
                     'error'
                     )
                 }
@@ -308,7 +308,7 @@
                 })
 
                 swalWithBootstrapButtons.fire({
-                title: 'Esta seguro que desea activar esta comunidad?',
+                title: 'Esta seguro que desea activar esta sede de territorio?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Aceptar',
@@ -325,7 +325,7 @@
                         me.listarComunidad(1,'','nombre');
                     swalWithBootstrapButtons.fire(
                         'Activado',
-                        'La comunidad ha a sido activada con exito.',
+                        'La sede de territorio ha a sido activada con exito.',
                         'success'
                     )
                     }).catch(function (error){
@@ -338,7 +338,7 @@
                 ) {
                  swal.fire(
                     'Accion cancelada',
-                    'La comunidad sigue inactiva',
+                    'La sede de territorio sigue inactiva',
                     'error'
                     )
                     }
@@ -349,7 +349,7 @@
                 this.errorMostrarMsjComunidad=[];
 
                 if(this.idmunicipio==0) this.errorMostrarMsjComunidad.push("Seleccione un municipio.");
-                if(!this.nombre) this.errorMostrarMsjComunidad.push("El nombre de la comunidad no puede estar vacio.");
+                if(!this.nombre) this.errorMostrarMsjComunidad.push("El nombre de la sede de territorio no puede estar vacio.");
 
                 if(this.errorMostrarMsjComunidad.length) this.errorComunidad=1;
                 return this.errorComunidad;
@@ -370,7 +370,7 @@
                             case 'registrar':
                             {
                                 this.modal = 1;
-                                this.tituloModal = 'Registrar Comunidad';
+                                this.tituloModal = 'Registrar Sede de Territorio';
                                 this.idmunicipio=0;
                                 this.nombre = '';
                                 this.tipoAccion = 1;
@@ -379,7 +379,7 @@
                             case 'actualizar':
                             {
                                 this.modal=1;
-                                this.tituloModal='Actualizar Comunidad';
+                                this.tituloModal='Actualizar Sede de Territorio';
                                 this.tipoAccion=2;
                                 this.id=data['id'];
                                 this.idmunicipio=data['idmunicipio'];

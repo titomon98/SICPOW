@@ -5,13 +5,13 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item">Home</li>
         <li class="breadcrumb-item"><a href="#">Admin</a></li>
-        <li class="breadcrumb-item active">Distrito</li>
+        <li class="breadcrumb-item active">Comunidad</li>
     </ol>
     <div class="container-fluid" >
         <!-- Ejemplo de tabla Listado -->
         <div class="card">
             <div class="card-header">
-                <i class="fa fa-align-justify"></i> Distritos
+                <i class="fa fa-align-justify"></i> Comunidades
                 <button type="button" @click="abrirModal('distrito', 'registrar')" class="btn btn-secondary">
                     <i class="icon-plus"></i>&nbsp;Nuevo
                 </button>
@@ -109,7 +109,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">Comunidad</label>
+                            <label class="col-md-3 form-control-label" for="text-input">Sede de Territorio</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad">
                                     <option value="0" disabled>Seleccione</option>
@@ -118,9 +118,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
+                            <label class="col-md-3 form-control-label" for="text-input">Nombre comunidad</label>
                             <div class="col-md-9">
-                                <input type="text" v-model="nombre" class="form-control" placeholder="Nombre de distrito">
+                                <input type="text" v-model="nombre" class="form-control" placeholder="Nombre de comunidad">
                                 
                             </div>
                         </div>
@@ -160,6 +160,7 @@
                 tituloModal : '',
                 tipoAccion : 0,
                 errorDistrito: 0,
+                errorMostrarMsjComunidad:[],
                 errorMostrarMsjDistrito : [],
                 pagination : {
                     'total' : 0,
@@ -283,7 +284,7 @@
             },
             desactivarDistrito(id){
                 swal.fire({
-                title: 'Esta seguro de desactivar este distrito',
+                title: 'Esta seguro de desactivar esta comunidad',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -304,7 +305,7 @@
                         me.listarDistrito(1,'','nombre');
                         swal.fire(
                         'Desactivado!',
-                        'El distrito ha sido desactivado con éxito.',
+                        'La comunidad ha sido desactivada con éxito.',
                         'success'
                         )
                     }).catch(function (error) {
@@ -318,7 +319,7 @@
                 ) {
                      swal.fire(
                     'Accion cancelada',
-                    'El distrito sigue activo',
+                    'La comunidad sigue activa',
                     'error'
                     )
                 }
@@ -334,7 +335,7 @@
                 })
 
                 swalWithBootstrapButtons.fire({
-                title: 'Esta seguro que desea activar este distrito?',
+                title: 'Esta seguro que desea activar esta comunidad?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Aceptar',
@@ -351,7 +352,7 @@
                         me.listarDistrito(1,'','nombre');
                     swalWithBootstrapButtons.fire(
                         'Activado',
-                        'El distrito a sido activado con exito.',
+                        'La comunidad a sido activada con exito.',
                         'success'
                     )
                     }).catch(function (error){
@@ -364,7 +365,7 @@
                 ) {
                 swal.fire(
                     'Accion cancelada',
-                    'El distrito sigue inactivo',
+                    'La comunidad sigue inactiva',
                     'error'
                     )
                     }
@@ -374,8 +375,8 @@
                 this.errorDistrito=0;
                 this.errorMostrarMsjDistrito=[];
 
-                if(this.idcomunidad==0) this.errorMostrarMsjComunidad.push("Seleccione una comunidad.");
-                if(!this.nombre) this.errorMostrarMsjDistrito.push("El nombre del distrito no puede estar vacio.");
+                if(this.idcomunidad==0) this.errorMostrarMsjComunidad.push("Seleccione una sede de territorio.");
+                if(!this.nombre) this.errorMostrarMsjDistrito.push("El nombre de la comunidad no puede estar vacio.");
 
                 if(this.errorMostrarMsjDistrito.length) this.errorDistrito=1;
                 return this.errorDistrito;
@@ -399,7 +400,7 @@
                             case 'registrar':
                             {
                                 this.modal = 1;
-                                this.tituloModal = 'Registrar distrito';
+                                this.tituloModal = 'Registrar comunidad';
                                 this.idcomunidad=0;
                                 this.idmunicipio=0;
                                 this.nombre = '';
@@ -409,7 +410,7 @@
                             case 'actualizar':
                             {
                                 this.modal=1;
-                                this.tituloModal='Actualizar distrito';
+                                this.tituloModal='Actualizar comunidad';
                                 this.tipoAccion=2;
                                 this.id=data['id'];
                                 this.idmunicipio=data['idmunicipio'];

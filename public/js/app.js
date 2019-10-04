@@ -1960,7 +1960,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       swal.fire({
-        title: 'Esta seguro de desactivar esta comunidad?',
+        title: 'Esta seguro de desactivar esta sede de territorio?',
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1978,13 +1978,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             'id': id
           }).then(function (response) {
             me.listarComunidad(1, '', 'nombre');
-            swal.fire('Desactivado!', 'La comunidad ha sido desactivada con éxito.', 'success');
+            swal.fire('Desactivado!', 'La sede de territorio ha sido desactivada con éxito.', 'success');
           })["catch"](function (error) {
             console.log(error);
           });
         } else if ( // Read more about handling dismissals
         result.dismiss === swal.DismissReason.cancel) {
-          swal.fire('Accion cancelada', 'La comunidad sigue activa', 'error');
+          swal.fire('Accion cancelada', 'La sede de territorio sigue activa', 'error');
         }
       });
     },
@@ -2000,7 +2000,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         buttonsStyling: false
       });
       swalWithBootstrapButtons.fire((_swalWithBootstrapBut = {
-        title: 'Esta seguro que desea activar esta comunidad?',
+        title: 'Esta seguro que desea activar esta sede de territorio?',
         type: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Aceptar',
@@ -2013,13 +2013,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             'id': id
           }).then(function (response) {
             me.listarComunidad(1, '', 'nombre');
-            swalWithBootstrapButtons.fire('Activado', 'La comunidad ha a sido activada con exito.', 'success');
+            swalWithBootstrapButtons.fire('Activado', 'La sede de territorio ha a sido activada con exito.', 'success');
           })["catch"](function (error) {
             console.log(error);
           });
         } else if ( // Read more about handling dismissals
         result.dismiss === Swal.DismissReason.cancel) {
-          swal.fire('Accion cancelada', 'La comunidad sigue inactiva', 'error');
+          swal.fire('Accion cancelada', 'La sede de territorio sigue inactiva', 'error');
         }
       });
     },
@@ -2027,7 +2027,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.errorComunidad = 0;
       this.errorMostrarMsjComunidad = [];
       if (this.idmunicipio == 0) this.errorMostrarMsjComunidad.push("Seleccione un municipio.");
-      if (!this.nombre) this.errorMostrarMsjComunidad.push("El nombre de la comunidad no puede estar vacio.");
+      if (!this.nombre) this.errorMostrarMsjComunidad.push("El nombre de la sede de territorio no puede estar vacio.");
       if (this.errorMostrarMsjComunidad.length) this.errorComunidad = 1;
       return this.errorComunidad;
     },
@@ -2049,7 +2049,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 'registrar':
                 {
                   this.modal = 1;
-                  this.tituloModal = 'Registrar Comunidad';
+                  this.tituloModal = 'Registrar Sede de Territorio';
                   this.idmunicipio = 0;
                   this.nombre = '';
                   this.tipoAccion = 1;
@@ -2059,7 +2059,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 'actualizar':
                 {
                   this.modal = 1;
-                  this.tituloModal = 'Actualizar Comunidad';
+                  this.tituloModal = 'Actualizar Sede de Territorio';
                   this.tipoAccion = 2;
                   this.id = data['id'];
                   this.idmunicipio = data['idmunicipio'];
@@ -2853,6 +2853,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       tituloModal: '',
       tipoAccion: 0,
       errorDistrito: 0,
+      errorMostrarMsjComunidad: [],
       errorMostrarMsjDistrito: [],
       pagination: {
         'total': 0,
@@ -2979,7 +2980,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       swal.fire({
-        title: 'Esta seguro de desactivar este distrito',
+        title: 'Esta seguro de desactivar esta comunidad',
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -2997,13 +2998,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             'id': id
           }).then(function (response) {
             me.listarDistrito(1, '', 'nombre');
-            swal.fire('Desactivado!', 'El distrito ha sido desactivado con éxito.', 'success');
+            swal.fire('Desactivado!', 'La comunidad ha sido desactivada con éxito.', 'success');
           })["catch"](function (error) {
             console.log(error);
           });
         } else if ( // Read more about handling dismissals
         result.dismiss === swal.DismissReason.cancel) {
-          swal.fire('Accion cancelada', 'El distrito sigue activo', 'error');
+          swal.fire('Accion cancelada', 'La comunidad sigue activa', 'error');
         }
       });
     },
@@ -3019,7 +3020,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         buttonsStyling: false
       });
       swalWithBootstrapButtons.fire((_swalWithBootstrapBut = {
-        title: 'Esta seguro que desea activar este distrito?',
+        title: 'Esta seguro que desea activar esta comunidad?',
         type: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Aceptar',
@@ -3032,21 +3033,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             'id': id
           }).then(function (response) {
             me.listarDistrito(1, '', 'nombre');
-            swalWithBootstrapButtons.fire('Activado', 'El distrito a sido activado con exito.', 'success');
+            swalWithBootstrapButtons.fire('Activado', 'La comunidad a sido activada con exito.', 'success');
           })["catch"](function (error) {
             console.log(error);
           });
         } else if ( // Read more about handling dismissals
         result.dismiss === Swal.DismissReason.cancel) {
-          swal.fire('Accion cancelada', 'El distrito sigue inactivo', 'error');
+          swal.fire('Accion cancelada', 'La comunidad sigue inactiva', 'error');
         }
       });
     },
     validarDistrito: function validarDistrito() {
       this.errorDistrito = 0;
       this.errorMostrarMsjDistrito = [];
-      if (this.idcomunidad == 0) this.errorMostrarMsjComunidad.push("Seleccione una comunidad.");
-      if (!this.nombre) this.errorMostrarMsjDistrito.push("El nombre del distrito no puede estar vacio.");
+      if (this.idcomunidad == 0) this.errorMostrarMsjComunidad.push("Seleccione una sede de territorio.");
+      if (!this.nombre) this.errorMostrarMsjDistrito.push("El nombre de la comunidad no puede estar vacio.");
       if (this.errorMostrarMsjDistrito.length) this.errorDistrito = 1;
       return this.errorDistrito;
     },
@@ -3070,7 +3071,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 'registrar':
                 {
                   this.modal = 1;
-                  this.tituloModal = 'Registrar distrito';
+                  this.tituloModal = 'Registrar comunidad';
                   this.idcomunidad = 0;
                   this.idmunicipio = 0;
                   this.nombre = '';
@@ -3081,7 +3082,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 'actualizar':
                 {
                   this.modal = 1;
-                  this.tituloModal = 'Actualizar distrito';
+                  this.tituloModal = 'Actualizar comunidad';
                   this.tipoAccion = 2;
                   this.id = data['id'];
                   this.idmunicipio = data['idmunicipio'];
@@ -44860,7 +44861,7 @@ var render = function() {
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header" }, [
           _c("i", { staticClass: "fa fa-align-justify" }),
-          _vm._v(" Comunidades\n                "),
+          _vm._v(" Sede de Territorios\n                "),
           _c(
             "button",
             {
@@ -45295,7 +45296,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            placeholder: "Nombre de Comunidad"
+                            placeholder: "Nombre de Sede de Territorio"
                           },
                           domProps: { value: _vm.nombre },
                           on: {
@@ -45407,7 +45408,9 @@ var staticRenderFns = [
         _c("a", { attrs: { href: "#" } }, [_vm._v("Admin")])
       ]),
       _vm._v(" "),
-      _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("Comunidad")])
+      _c("li", { staticClass: "breadcrumb-item active" }, [
+        _vm._v("Sede de Territorio")
+      ])
     ])
   },
   function() {
@@ -45648,7 +45651,7 @@ var render = function() {
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header" }, [
           _c("i", { staticClass: "fa fa-align-justify" }),
-          _vm._v(" Distritos\n                "),
+          _vm._v(" Comunidades\n                "),
           _c(
             "button",
             {
@@ -46083,7 +46086,7 @@ var render = function() {
                             staticClass: "col-md-3 form-control-label",
                             attrs: { for: "text-input" }
                           },
-                          [_vm._v("Comunidad")]
+                          [_vm._v("Sede de Territorio")]
                         ),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-9" }, [
@@ -46145,7 +46148,7 @@ var render = function() {
                             staticClass: "col-md-3 form-control-label",
                             attrs: { for: "text-input" }
                           },
-                          [_vm._v("Nombre")]
+                          [_vm._v("Nombre comunidad")]
                         ),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-9" }, [
@@ -46161,7 +46164,7 @@ var render = function() {
                             staticClass: "form-control",
                             attrs: {
                               type: "text",
-                              placeholder: "Nombre de distrito"
+                              placeholder: "Nombre de comunidad"
                             },
                             domProps: { value: _vm.nombre },
                             on: {
@@ -46276,7 +46279,7 @@ var staticRenderFns = [
         _c("a", { attrs: { href: "#" } }, [_vm._v("Admin")])
       ]),
       _vm._v(" "),
-      _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("Distrito")])
+      _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("Comunidad")])
     ])
   },
   function() {
@@ -75203,7 +75206,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\JoshuaDIH\Documents\Universidad\Proyecto de Carrera\Ministerio_Salud\resources\assets\js\app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\josea\Desktop\Proyecto Censo\VersionFinal\SICPOW\resources\assets\js\app.js */"./resources/assets/js/app.js");
 
 
 /***/ })
