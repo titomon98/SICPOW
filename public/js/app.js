@@ -4403,9 +4403,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -49718,28 +49715,6 @@ var render = function() {
                                         [_c("i", { staticClass: "icon-eye" })]
                                       ),
                                       _vm._v(" "),
-                                      _c(
-                                        "button",
-                                        {
-                                          staticClass: "btn btn-warning btn-sm",
-                                          attrs: { type: "button" },
-                                          on: {
-                                            click: function($event) {
-                                              return _vm.editarFamilia(
-                                                familia.id
-                                              )
-                                            }
-                                          }
-                                        },
-                                        [
-                                          _c("i", {
-                                            staticClass: "icon-pencil"
-                                          })
-                                        ]
-                                      ),
-                                      _vm._v(
-                                        "  \n                                        "
-                                      ),
                                       familia.condicion
                                         ? [
                                             _c(

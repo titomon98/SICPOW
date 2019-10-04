@@ -350,9 +350,6 @@
                                                 <button type="button" class="btn btn-success btn-sm" @click="verListadoFamilia(familia.id)">
                                                     <i class="icon-eye"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-warning btn-sm" @click="editarFamilia(familia.id)">
-                                                    <i class="icon-pencil"></i>
-                                                </button> &nbsp;
                                                 <template v-if="familia.condicion">
                                                     <button type="button" class="btn btn-danger btn-sm" @click="desactivarFamilia(familia.id)">
                                                         <i class="icon-trash"></i>

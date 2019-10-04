@@ -30,7 +30,7 @@
           <div class="card-body text-center">
             <div>
               <h2>Sistema para conteo poblacional</h2>
-              <h4>Aqui va un logotipo</h4><br>
+              <img src="./img/logoTSR.png" class="derecha"><br>
               <p>Salud rural</p>
             </div>
           </div>
