@@ -46,6 +46,9 @@
                     </li>
                 </ul>
             </li>
+            <li @click="menu=11" class="nav-item">
+                <a class="nav-link" href="#"><i class="fa fa-file"></i> Manuales</a>
+            </li>
             <li @click="menu=10" class="nav-item">
                 <a class="nav-link" href="#"><i class="icon-info"></i> Acerca de...</a>
             </li>

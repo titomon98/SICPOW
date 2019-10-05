@@ -28,6 +28,15 @@
         <municipio></municipio>
     </template>
     <template v-if="menu==9">
-        <h1>Contenido del menu de manuales de usuario</h1>
+        <acerca></acerca>
+    </template>
+    <template v-if="menu==10">
+        <manuales></manuales>
+    </template>
+    <template v-if="menu==11">
+        <manuales2></manuales2>
+    </template>
+    <template v-if="menu==12">
+        <manuales3></manuales3>
     </template>
 @endsection

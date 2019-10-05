@@ -28,6 +28,10 @@ Vue.component('vivienda', require('./components/Vivienda.vue').default);
 Vue.component('rol', require('./components/Rol.vue').default);
 Vue.component('reporte', require('./components/Reporte.vue').default);
 Vue.component('dashboard', require('./components/Dashboard.vue').default);
+Vue.component('manuales', require('./components/Manuales.vue').default);
+Vue.component('manuales2', require('./components/Manuales2.vue').default);
+Vue.component('manuales3', require('./components/Manuales3.vue').default);
+Vue.component('acerca', require('./components/Acerca.vue').default);
 
 const app = new Vue({
     el: '#app',
