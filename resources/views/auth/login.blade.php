@@ -5,7 +5,7 @@
     <div class="col-md-8">
       <div class="card-group mb-0">
         <div class="card p-4">
-          <form class="form-horizontal was-validated" method="POST" action="{{ route('login')}}">
+          <form class="form-horizontal was-validated" method="POST" action="{{ route('login2')}}">
           {{ csrf_field() }}
             <div class="card-body">
               <h1>Acceder</h1>

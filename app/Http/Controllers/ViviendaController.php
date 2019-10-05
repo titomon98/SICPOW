@@ -63,7 +63,7 @@ class ViviendaController extends Controller
     }
 
     public function selectAmbiente(Request $request){
-        if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/main');
         $ambientes = Ambiente::select('id','nombre')->orderBy('id','asc')->get();
         return['ambientes'=>$ambientes];
     }

@@ -314,7 +314,7 @@
                 confirmButtonText: 'Aceptar',
                 cancelButtonText: 'Cancelar',
                 confirmButtonClass:'btn btn-success',
-                confirmButtonClass:'btn btn-danger',
+                cancelButtonClass:'btn btn-danger',
                 reverseButtons: true
                 }).then((result) => {
                 if (result.value) {

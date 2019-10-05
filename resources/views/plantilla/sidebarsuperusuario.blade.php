@@ -8,7 +8,7 @@
                 Mantenimiento
             </li>
             <li @click="menu=1" class="nav-item nav-dropdown">
-                <a class="nav-link" href="#"><i class="icon-people"></i> Familias</a>
+                <a class="nav-link" href="#"><i class="icon-people"></i> Registro</a>
             </li>
             </li>
             <li @click="menu=2" class="nav-item nav-dropdown">

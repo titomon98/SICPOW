@@ -1697,8 +1697,6 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -1989,8 +1987,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     activarComunidad: function activarComunidad(id) {
-      var _swalWithBootstrapBut,
-          _this2 = this;
+      var _this2 = this;
 
       var swalWithBootstrapButtons = swal.mixin({
         customClass: {
@@ -1999,14 +1996,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         },
         buttonsStyling: false
       });
-      swalWithBootstrapButtons.fire((_swalWithBootstrapBut = {
+      swalWithBootstrapButtons.fire({
         title: 'Esta seguro que desea activar esta sede de territorio?',
         type: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Aceptar',
         cancelButtonText: 'Cancelar',
-        confirmButtonClass: 'btn btn-success'
-      }, _defineProperty(_swalWithBootstrapBut, "confirmButtonClass", 'btn btn-danger'), _defineProperty(_swalWithBootstrapBut, "reverseButtons", true), _swalWithBootstrapBut)).then(function (result) {
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        reverseButtons: true
+      }).then(function (result) {
         if (result.value) {
           var me = _this2;
           axios.put('/comunidad/activar', {
@@ -2690,8 +2689,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -3009,8 +3006,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     activarDistrito: function activarDistrito(id) {
-      var _swalWithBootstrapBut,
-          _this2 = this;
+      var _this2 = this;
 
       var swalWithBootstrapButtons = swal.mixin({
         customClass: {
@@ -3019,14 +3015,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         },
         buttonsStyling: false
       });
-      swalWithBootstrapButtons.fire((_swalWithBootstrapBut = {
+      swalWithBootstrapButtons.fire({
         title: 'Esta seguro que desea activar esta comunidad?',
         type: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Aceptar',
         cancelButtonText: 'Cancelar',
-        confirmButtonClass: 'btn btn-success'
-      }, _defineProperty(_swalWithBootstrapBut, "confirmButtonClass", 'btn btn-danger'), _defineProperty(_swalWithBootstrapBut, "reverseButtons", true), _swalWithBootstrapBut)).then(function (result) {
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        reverseButtons: true
+      }).then(function (result) {
         if (result.value) {
           var me = _this2;
           axios.put('/distrito/activar', {
@@ -74261,7 +74259,6 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 // const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/assets/js/components/ExampleComponent.vue")["default"]);
 Vue.component('municipio', __webpack_require__(/*! ./components/Municipio.vue */ "./resources/assets/js/components/Municipio.vue")["default"]);

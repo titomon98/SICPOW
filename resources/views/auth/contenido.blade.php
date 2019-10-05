@@ -9,7 +9,7 @@
   <meta name="author" content="Grupo 1">
   <meta name="keyword" content="Sistema TSR Xela">
 
-  <title>Login MSPAS</title>
+  <title>Login Sistema de Conteo Poblacional</title>
 
   <link href="css/plantilla.css" rel="stylesheet">
 
