@@ -757,10 +757,13 @@
                 return this.errorReporte;
             },
             MunicipioS(){
+                this.idcomunidad=0;
+                this.iddistrito=0;
                 this.idmunicipio;
                 this.selectComunidad();
             },
             ComunidadS(){
+                this.iddistrito=0;
                 this.idcomunidad;
                 this.selectDistrito();
             },
@@ -1089,6 +1092,7 @@
 
             //a partir de aqui vamos a jalar datos para los modales
             selectMunicipio(){
+                
                 let me=this;
                 var url = '/municipio/selectMunicipio';
                 axios.get(url).then(function (response){
@@ -1100,6 +1104,7 @@
                 });
             },
             selectComunidad(){
+                
                 let me=this;
                 var url = '/comunidad/selectComunidadD/'+this.idmunicipio+'/';
                 axios.get(url).then(function(response){

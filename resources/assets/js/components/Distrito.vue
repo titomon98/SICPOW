@@ -33,7 +33,7 @@
                         <tr>
                             <th>Opciones</th>
                             <th>Nombre</th>
-                            <th>Comunidad</th>
+                            <th>Sede de Territorio</th>
                             <th>Municipio</th>
                             <th>Estado</th>
                         </tr>
