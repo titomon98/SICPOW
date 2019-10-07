@@ -45293,7 +45293,7 @@ var staticRenderFns = [
                     _vm._v(" "),
                     _c("td", [
                       _c("span", { staticClass: "badge badge-secondary" }, [
-                        _vm._v("Fallecido")
+                        _vm._v("Vivo (pero con la novia)")
                       ])
                     ])
                   ])
@@ -50508,7 +50508,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-3" }, [
                       _c("label", { attrs: { for: "" } }, [
-                        _vm._v("Comunidad:")
+                        _vm._v("Sede de Territorio:")
                       ]),
                       _vm._v(" "),
                       _c(
@@ -50567,7 +50567,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-3" }, [
                       _c("label", { attrs: { for: "" } }, [
-                        _vm._v("Distrito:")
+                        _vm._v("Comunidad:")
                       ]),
                       _vm._v(" "),
                       _c(

@@ -413,14 +413,14 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="">Comunidad:</label>
+                                    <label for="">Sede de Territorio:</label>
                                     <select class="form-control" v-model="comunidad_id" @change="ComunidadSelect()">
                                         <option value="0" disabled>Seleccione</option>
                                         <option v-for="comunidades in arrayComunidad" :key="comunidades.id" :value="comunidades.id" v-text="comunidades.nombre"></option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="">Distrito:</label>
+                                    <label for="">Comunidad:</label>
                                     <select class="form-control" v-model="distrito_id">
                                         <option value="0" disabled>Seleccione</option>
                                         <option v-for="distritos in arrayDistrito" :key="distritos.id" :value="distritos.id" v-text="distritos.nombre"></option>

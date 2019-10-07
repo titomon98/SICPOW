@@ -70,8 +70,8 @@
     
 
     <footer class="app-footer">
-        <span><a href="/acerca">Acerca De</a> &copy; 2019</span>
-        <span class="ml-auto">Desarrollado por <a href="https://www.mesoamericana.edu.gt/">Grupo #1</a></span>
+        <span>2019</span>
+        
     </footer>
     
     <script src="/js/app.js"></script>

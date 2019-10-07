@@ -75,7 +75,7 @@
                             <td>julio@gmail.com</td>
                             <td>El enamorado</td>
                             <td>
-                                <span class="badge badge-secondary">Fallecido</span>
+                                <span class="badge badge-secondary">Vivo (pero con la novia)</span>
                             </td>
                         </tr>
                     </tbody>
