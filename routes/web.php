@@ -120,11 +120,11 @@ Route::group(['middleware'=>['auth']], function(){
         Route::get('/RJefes/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarJefe')->name('jefes_pdf');
         Route::get('/RViviendas/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarVivienda')->name('viviendas_pdf');
         Route::get('/RSexo/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarSexo')->name('sexo_pdf');
-        Route::get('/REdad/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarEdad')->name('edad_pdf');
+        Route::get('/REdad/{fil}/{id}/{id2}/{id3}/{edad1}/{edad2}', 'ReporteController@listarEdad')->name('edad_pdf');
         Route::get('/RDiscapacidad/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarDiscapacidad')->name('discapacidad_pdf');
         Route::get('/ROcupacion/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarOcupacion')->name('ocupacion_pdf');
         Route::get('/RMigracion/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarMigrantes')->name('migrantes_pdf');
-        Route::get('/RFallecidos/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarFallecidos')->name('fallecidos_pdf');
+        Route::get('/RFallecidos/{fil}/{id}/{id2}/{id3}/{fecha1}/{fecha2}', 'ReporteController@listarFallecidos')->name('fallecidos_pdf');
         Route::get('/RServicios/{fil}/{id}/{id2}/{id3}/{servicio}', 'ReporteController@listarServicio')->name('servicios_pdf');
     });
 
@@ -192,11 +192,11 @@ Route::group(['middleware'=>['auth']], function(){
         Route::get('/RJefes/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarJefe')->name('jefes_pdf');
         Route::get('/RViviendas/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarVivienda')->name('viviendas_pdf');
         Route::get('/RSexo/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarSexo')->name('sexo_pdf');
-        Route::get('/REdad/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarEdad')->name('edad_pdf');
+        Route::get('/REdad/{fil}/{id}/{id2}/{id3}/{edad1}/{edad2}', 'ReporteController@listarEdad')->name('edad_pdf');
         Route::get('/RDiscapacidad/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarDiscapacidad')->name('discapacidad_pdf');
         Route::get('/ROcupacion/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarOcupacion')->name('ocupacion_pdf');
         Route::get('/RMigracion/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarMigrantes')->name('migrantes_pdf');
-        Route::get('/RFallecidos/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarFallecidos')->name('fallecidos_pdf');
+        Route::get('/RFallecidos/{fil}/{id}/{id2}/{id3}/{fecha1}/{fecha2}', 'ReporteController@listarFallecidos')->name('fallecidos_pdf');
         Route::get('/RServicios/{fil}/{id}/{id2}/{id3}/{servicio}', 'ReporteController@listarServicio')->name('servicios_pdf');
     });
 

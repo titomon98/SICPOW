@@ -70,13 +70,13 @@
                         <tr>
                             <td>Reporte de Edades</td>
                             <td>
-                                <button type="button" @click="abrirModalM('edad', 1)" class="btn btn-info">
+                                <button type="button" @click="abrirModalMEdades('edad', 1)" class="btn btn-info">
                                     <i class="icon-doc"></i>&nbsp;Reporte por Municipio
                                 </button><br>
-                                <button type="button" @click="abrirModalC('edad', 2)" class="btn btn-success">
+                                <button type="button" @click="abrirModalCEdades('edad', 2)" class="btn btn-success">
                                     <i class="icon-doc"></i>&nbsp;Reporte por Comunidad
                                 </button><br>
-                                <button type="button" @click="abrirModalD('edad', 3)" class="btn btn-info">
+                                <button type="button" @click="abrirModalDEdades('edad', 3)" class="btn btn-info">
                                     <i class="icon-doc"></i>&nbsp;Reporte por Distrito
                                 </button>
                             </td>
@@ -130,13 +130,13 @@
                         <tr>
                             <td>Reporte de Fallecidos</td>
                             <td>
-                                <button type="button" @click="abrirModalM('fallecidos', 1)" class="btn btn-info">
+                                <button type="button" @click="abrirModalMFallecidos('fallecidos', 1)" class="btn btn-info">
                                     <i class="icon-doc"></i>&nbsp;Reporte por Municipio
                                 </button><br>
-                                <button type="button" @click="abrirModalC('fallecidos', 2)" class="btn btn-success">
+                                <button type="button" @click="abrirModalCFallecidos('fallecidos', 2)" class="btn btn-success">
                                     <i class="icon-doc"></i>&nbsp;Reporte por Comunidad
                                 </button><br>
-                                <button type="button" @click="abrirModalD('fallecidos', 3)" class="btn btn-info">
+                                <button type="button" @click="abrirModalDFallecidos('fallecidos', 3)" class="btn btn-info">
                                     <i class="icon-doc"></i>&nbsp;Reporte por Distrito
                                 </button>
                             </td>
@@ -604,6 +604,372 @@
     </div>
     <!--Fin del modal-->
 
+
+    <!--Inicio del modal municipio y edades-->
+    <div class="modal fade" tabindex="-1" :class="{'mostrar' : modalEdadesM}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-primary modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" v-text="tituloModal"></h4>
+                    <button type="button" class="close"  @click="cerrarModal()" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Municipio</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idmunicipio">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="municipio in arrayMunicipio" :key="municipio.id" :value="municipio.id" v-text="municipio.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Edad inicial</label>
+                            <div class="col-md-3">
+                                <input type="number" v-model="edad1" class="form-control" min="0">
+                            </div>
+                            <label class="col-md-3 form-control-label" for="text-input">Edad final</label>
+                            <div class="col-md-3">
+                                <input type="number" v-model="edad2" class="form-control" min="0">
+                            </div>
+                        </div>
+                        <div v-show="errorReporte" class="form-group row div-error">
+                            <div class="text-center text-error">
+                            <div v-for="error in errorMostrarMsjReporte" :key="error" v-text="error">
+
+                            </div>
+                            </div> 
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                    <button type="button" v-if="tipoAccion==4" class="btn btn-primary" @click="cargarREdad()">Guardar</button>
+
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!--Fin del modal-->
+
+    <!--Inicio del modal comunidad-->
+    <div class="modal fade" tabindex="-1" :class="{'mostrar' : modalEdadesC}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-primary modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" v-text="tituloModal"></h4>
+                    <button type="button" class="close"  @click="cerrarModal()" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Municipio</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idmunicipio"  @change="MunicipioS()">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="municipio in arrayMunicipio" :key="municipio.id" :value="municipio.id" v-text="municipio.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Comunidad</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idcomunidad">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="comunidad in arrayComunidad" :key="comunidad.id" :value="comunidad.id" v-text="comunidad.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Edad inicial</label>
+                            <div class="col-md-3">
+                                <input type="number" v-model="edad1" class="form-control" min="0">
+                            </div>
+                            <label class="col-md-3 form-control-label" for="text-input">Edad final</label>
+                            <div class="col-md-3">
+                                <input type="number" v-model="edad2" class="form-control" min="0">
+                            </div>
+                        </div>
+                        <div v-show="errorReporte" class="form-group row div-error">
+                            <div class="text-center text-error">
+                            <div v-for="error in errorMostrarMsjReporte" :key="error" v-text="error">
+
+                            </div>
+                            </div> 
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                    <button type="button" v-if="tipoAccion==4" class="btn btn-primary" @click="cargarREdad()">Guardar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!--Fin del modal-->
+
+
+    <!--Inicio del modal distrito-->
+    <div class="modal fade" tabindex="-1" :class="{'mostrar' : modalEdadesD}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-primary modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" v-text="tituloModal"></h4>
+                    <button type="button" class="close"  @click="cerrarModal()" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Municipio</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idmunicipio"  @change="MunicipioS()">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="municipio in arrayMunicipio" :key="municipio.id" :value="municipio.id" v-text="municipio.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Comunidad</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idcomunidad" @change="ComunidadS()">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="comunidad in arrayComunidad" :key="comunidad.id" :value="comunidad.id" v-text="comunidad.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                         <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Distrito</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="iddistrito">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="distrito in arrayDistrito" :key="distrito.id" :value="distrito.id" v-text="distrito.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Edad inicial</label>
+                            <div class="col-md-3">
+                                <input type="number" v-model="edad1" class="form-control" min="0">
+                            </div>
+                            <label class="col-md-3 form-control-label" for="text-input">Edad final</label>
+                            <div class="col-md-3">
+                                <input type="number" v-model="edad2" class="form-control" min="0">
+                            </div>
+                        </div>
+                        <div v-show="errorReporte" class="form-group row div-error">
+                            <div class="text-center text-error">
+                            <div v-for="error in errorMostrarMsjReporte" :key="error" v-text="error">
+
+                            </div>
+                            </div> 
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                    <button type="button" v-if="tipoAccion==4" class="btn btn-primary" @click="cargarREdad()">Guardar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!--Fin del modal-->
+
+
+    <!--Inicio del modal municipio y edades-->
+    <div class="modal fade" tabindex="-1" :class="{'mostrar' : modalFallecidosM}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-primary modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" v-text="tituloModal"></h4>
+                    <button type="button" class="close"  @click="cerrarModal()" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Municipio</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idmunicipio">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="municipio in arrayMunicipio" :key="municipio.id" :value="municipio.id" v-text="municipio.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Fecha inicial</label>
+                            <div class="col-md-3">
+                                <input type="date" v-model="fecha1" class="form-control" min="0">
+                            </div>
+                            <label class="col-md-3 form-control-label" for="text-input">Fecha final</label>
+                            <div class="col-md-3">
+                                <input type="date" v-model="fecha2" class="form-control" min="0">
+                            </div>
+                        </div>
+                        <div v-show="errorReporte" class="form-group row div-error">
+                            <div class="text-center text-error">
+                            <div v-for="error in errorMostrarMsjReporte" :key="error" v-text="error">
+
+                            </div>
+                            </div> 
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                    <button type="button" v-if="tipoAccion==8" class="btn btn-primary" @click="cargarRFallecidos()">Guardar</button>
+
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!--Fin del modal-->
+
+    <!--Inicio del modal comunidad-->
+    <div class="modal fade" tabindex="-1" :class="{'mostrar' : modalFallecidosC}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-primary modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" v-text="tituloModal"></h4>
+                    <button type="button" class="close"  @click="cerrarModal()" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Municipio</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idmunicipio"  @change="MunicipioS()">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="municipio in arrayMunicipio" :key="municipio.id" :value="municipio.id" v-text="municipio.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Comunidad</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idcomunidad">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="comunidad in arrayComunidad" :key="comunidad.id" :value="comunidad.id" v-text="comunidad.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Fecha inicial</label>
+                            <div class="col-md-3">
+                                <input type="date" v-model="fecha1" class="form-control" min="0">
+                            </div>
+                            <label class="col-md-3 form-control-label" for="text-input">Fecha final</label>
+                            <div class="col-md-3">
+                                <input type="date" v-model="fecha2" class="form-control" min="0">
+                            </div>
+                        </div>
+                        <div v-show="errorReporte" class="form-group row div-error">
+                            <div class="text-center text-error">
+                            <div v-for="error in errorMostrarMsjReporte" :key="error" v-text="error">
+
+                            </div>
+                            </div> 
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                    <button type="button" v-if="tipoAccion==8" class="btn btn-primary" @click="cargarRFallecidos()">Guardar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!--Fin del modal-->
+
+
+    <!--Inicio del modal distrito-->
+    <div class="modal fade" tabindex="-1" :class="{'mostrar' : modalFallecidosD}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-primary modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" v-text="tituloModal"></h4>
+                    <button type="button" class="close"  @click="cerrarModal()" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Municipio</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idmunicipio"  @change="MunicipioS()">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="municipio in arrayMunicipio" :key="municipio.id" :value="municipio.id" v-text="municipio.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Comunidad</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="idcomunidad" @change="ComunidadS()">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="comunidad in arrayComunidad" :key="comunidad.id" :value="comunidad.id" v-text="comunidad.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                         <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Distrito</label>
+                            <div class="col-md-9">
+                                <select class="form-control" v-model="iddistrito">
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option v-for="distrito in arrayDistrito" :key="distrito.id" :value="distrito.id" v-text="distrito.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Fecha inicial</label>
+                            <div class="col-md-3">
+                                <input type="date" v-model="fecha1" class="form-control" min="0">
+                            </div>
+                            <label class="col-md-3 form-control-label" for="text-input">Fecha final</label>
+                            <div class="col-md-3">
+                                <input type="date" v-model="fecha2" class="form-control" min="0">
+                            </div>
+                        </div>
+                        <div v-show="errorReporte" class="form-group row div-error">
+                            <div class="text-center text-error">
+                            <div v-for="error in errorMostrarMsjReporte" :key="error" v-text="error">
+
+                            </div>
+                            </div> 
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                    <button type="button" v-if="tipoAccion==8" class="btn btn-primary" @click="cargarRFallecidos()">Guardar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!--Fin del modal-->
+
 </main>
 <!--Fin del contenido principal-->
 </template>
@@ -621,6 +987,12 @@
                 modalServiciosM:0,
                 modalServiciosC:0,
                 modalServiciosD:0,
+                modalEdadesM:0,
+                modalEdadesC:0,
+                modalEdadesD:0,
+                modalFallecidosM:0,
+                modalFallecidosC:0,
+                modalFallecidosD:0,
                 tituloModal : '',
                 tipoAccion : 0,
                 errorReporte: 0,
@@ -637,6 +1009,13 @@
                 arrayDistrito:[],
 
                 idservicios:0,
+
+                edad1:0,
+                edad2:0,
+
+
+                fecha1:'',
+                fecha2:'',
             }
         },
         computed : {
@@ -672,7 +1051,7 @@
                     return;
                 }
                 let me = this;
-                window.open('http://localhost:8000/REdad/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+                window.open('http://localhost:8000/REdad/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+'/'+this.edad1+'/'+this.edad2+','+'_blank');
                 me.cerrarModal();
             },
             cargarRDiscapacidad(){
@@ -704,7 +1083,7 @@
                     return;
                 }
                 let me = this;
-                window.open('http://localhost:8000/RFallecidos/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+                window.open('http://localhost:8000/RFallecidos/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+'/'+this.fecha1+'/'+this.fecha2+','+'_blank');
                 me.cerrarModal();
             },
             cargarRServicios(){
@@ -753,6 +1132,51 @@
                     if(!this.idservicios) this.errorMostrarMsjReporte.push("Debe elegir un servicio");
                 }
 
+                else if (this.filtro ==14)
+                {
+                    if(!this.idmunicipio) this.errorMostrarMsjReporte.push("El municipio no puede estar vacio");
+                    if(this.edad1>this.edad2) this.errorMostrarMsjReporte.push("La edad inicial es mayor que la edad final");
+                }
+                else if (this.filtro ==15)
+                {
+                    if(!this.idmunicipio) this.errorMostrarMsjReporte.push("El municipio no puede estar vacio");
+                    if(!this.idcomunidad) this.errorMostrarMsjReporte.push("La comunidad no puede estar vacia");
+                    if(this.edad1>this.edad2) this.errorMostrarMsjReporte.push("La edad inicial es mayor que la edad final");
+                }
+                else if (this.filtro ==16)
+                {
+                    if(!this.idmunicipio) this.errorMostrarMsjReporte.push("El municipio no puede estar vacio");
+                    if(!this.idcomunidad) this.errorMostrarMsjReporte.push("La comunidad no puede estar vacia");
+                    if(!this.iddistrito) this.errorMostrarMsjReporte.push("El distrito no puede estar vacio");
+                    if(this.edad1>this.edad2) this.errorMostrarMsjReporte.push("La edad inicial es mayor que la edad final");
+                }
+                else if (this.filtro == 17)
+                {
+                    if(!this.idmunicipio) this.errorMostrarMsjReporte.push("El municipio no puede estar vacio");
+                    if(this.fecha1>this.fecha2) this.errorMostrarMsjReporte.push("La fecha inicial es mayor que la fecha final");
+                    if(!this.fecha1) this.errorMostrarMsjReporte.push("La fecha inicial no puede estar vacia");
+                    if(!this.fecha2) this.errorMostrarMsjReporte.push("La fecha final no puede estar vacia");
+                }
+                else if (this.filtro == 18)
+                {
+                    if(!this.idmunicipio) this.errorMostrarMsjReporte.push("El municipio no puede estar vacio");
+                    if(!this.idcomunidad) this.errorMostrarMsjReporte.push("La comunidad no puede estar vacia");
+                    if(this.fecha1>this.fecha2) this.errorMostrarMsjReporte.push("La fecha inicial es mayor que la fecha final");
+                    if(!this.fecha1) this.errorMostrarMsjReporte.push("La fecha inicial no puede estar vacia");
+                    if(!this.fecha2) this.errorMostrarMsjReporte.push("La fecha final no puede estar vacia");
+                }
+                else if (this.filtro == 19)
+                {
+                    if(!this.idmunicipio) this.errorMostrarMsjReporte.push("El municipio no puede estar vacio");
+                    if(!this.idcomunidad) this.errorMostrarMsjReporte.push("La comunidad no puede estar vacia");
+                    if(!this.iddistrito) this.errorMostrarMsjReporte.push("El distrito no puede estar vacio");
+                    if(this.fecha1>this.fecha2) this.errorMostrarMsjReporte.push("La fecha inicial es mayor que la fecha final");
+                    if(!this.fecha1) this.errorMostrarMsjReporte.push("La fecha inicial no puede estar vacia");
+                    if(!this.fecha2) this.errorMostrarMsjReporte.push("La fecha final no puede estar vacia");
+                }
+
+
+
                 if(this.errorMostrarMsjReporte.length) this.errorReporte=1;
                 return this.errorReporte;
             },
@@ -781,6 +1205,17 @@
                 this.modalServiciosM=0;
                 this.modalServiciosC=0;
                 this.modalServiciosD=0;
+                this.modalEdadesC=0;
+                this.modalEdadesM=0;
+                this.modalEdadesD=0;
+                this.modalFallecidosM=0;
+                this.modalFallecidosC=0;
+                this.modalFallecidosD=0;
+                this.edad1=0;
+                this.edad2=0;
+                this.fecha1='';
+                this.fecha2='';
+                this.errorMostrarMsjReporte='';
                 this.arrayMunicipio=[];
                 this.arrayComunidad=[];
                 this.arrayDistrito=[];
@@ -818,16 +1253,6 @@
                         break;
                     }
 
-                    case "edad":
-                    {
-                        this.modal = 1;
-                        this.tituloModal = 'Reporte de Edad';
-                        this.nombre = '';
-                        this.tipoAccion = 4;
-                        this.filtro = 1;
-                        break;
-                    }
-
                     case "discapacidad":
                     {
                         this.modal = 1;
@@ -858,16 +1283,6 @@
                         break;
                     }
 
-                    case "fallecidos":
-                    {
-                        this.modal = 1;
-                        this.tituloModal = 'Reporte de Fallecidos';
-                        this.nombre = '';
-                        this.tipoAccion = 8;
-                        this.filtro = 1;
-                        break;
-                    }
-                    
                 }
                 this.selectMunicipio();
             },
@@ -904,16 +1319,6 @@
                         break;
                     }
 
-                    case "edad":
-                    {
-                        this.modalComunidad = 1;
-                        this.tituloModal = 'Reporte de Edad';
-                        this.nombre = '';
-                        this.tipoAccion = 4;
-                        this.filtro = 1;
-                        break;
-                    }
-
                     case "discapacidad":
                     {
                         this.modalComunidad = 1;
@@ -940,16 +1345,6 @@
                         this.tituloModal = 'Reporte de Migracion';
                         this.nombre = '';
                         this.tipoAccion = 7;
-                        this.filtro = 1;
-                        break;
-                    }
-
-                    case "fallecidos":
-                    {
-                        this.modalComunidad = 1;
-                        this.tituloModal = 'Reporte de Fallecidos';
-                        this.nombre = '';
-                        this.tipoAccion = 8;
                         this.filtro = 1;
                         break;
                     }
@@ -990,15 +1385,7 @@
                         break;
                     }
 
-                    case "edad":
-                    {
-                        this.modalDistrito = 1;
-                        this.tituloModal = 'Reporte de Edad';
-                        this.nombre = '';
-                        this.tipoAccion = 4;
-                        this.filtro = 1;
-                        break;
-                    }
+                    
 
                     case "discapacidad":
                     {
@@ -1026,16 +1413,6 @@
                         this.tituloModal = 'Reporte de Migracion';
                         this.nombre = '';
                         this.tipoAccion = 7;
-                        this.filtro = 1;
-                        break;
-                    }
-
-                    case "fallecidos":
-                    {
-                        this.modalDistrito = 1;
-                        this.tituloModal = 'Reporte de Fallecidos';
-                        this.nombre = '';
-                        this.tipoAccion = 8;
                         this.filtro = 1;
                         break;
                     }
@@ -1083,6 +1460,102 @@
                         this.tituloModal = 'Reporte Servicios';
                         this.tipoAccion = 9;
                         this.filtro = 13;
+                        break;
+                    }
+                }
+                this.selectMunicipio();
+            },
+
+            abrirModalMEdades(modelo, accion){
+                switch(modelo){
+                    case "edad":
+                    {
+                        this.modalEdadesM = 1;
+                        this.tituloModal = 'Reporte de Edad';
+                        this.nombre = '';
+                        this.tipoAccion = 4;
+                        this.filtro = 14;
+                        break;
+                    }                    
+                }
+                this.selectMunicipio();
+            },
+
+            abrirModalCEdades(modelo, accion){
+                
+                switch(modelo){
+                    case "edad":
+                    {
+                        this.modalEdadesC = 1;
+                        this.tituloModal = 'Reporte de Edad';
+                        this.nombre = '';
+                        this.tipoAccion = 4;
+                        this.filtro = 15;
+                        break;
+                    }
+                    
+                }
+                this.selectMunicipio();
+            },
+
+            abrirModalDEdades(modelo, accion){
+                
+                switch(modelo){
+                    case "edad":
+                    {
+                        this.modalEdadesD = 1;
+                        this.tituloModal = 'Reporte de Edad';
+                        this.nombre = '';
+                        this.tipoAccion = 4;
+                        this.filtro = 16;
+                        break;
+                    }
+                }
+                this.selectMunicipio();
+            },
+
+            abrirModalMFallecidos(modelo, accion){
+                switch(modelo){
+                    case "fallecidos":
+                    {
+                        this.modalFallecidosM = 1;
+                        this.tituloModal = 'Reporte de Fallecidos';
+                        this.nombre = '';
+                        this.tipoAccion = 8;
+                        this.filtro = 17;
+                        break;
+                    }              
+                }
+                this.selectMunicipio();
+            },
+
+            abrirModalCFallecidos(modelo, accion){
+                
+                switch(modelo){
+                    case "fallecidos":
+                    {
+                        this.modalFallecidosC = 1;
+                        this.tituloModal = 'Reporte de Fallecidos';
+                        this.nombre = '';
+                        this.tipoAccion = 8;
+                        this.filtro = 18;
+                        break;
+                    }
+                    
+                }
+                this.selectMunicipio();
+            },
+
+            abrirModalDFallecidos(modelo, accion){
+                
+                switch(modelo){
+                    case "fallecidos":
+                    {
+                        this.modalFallecidosD = 1;
+                        this.tituloModal = 'Reporte de Fallecidos';
+                        this.nombre = '';
+                        this.tipoAccion = 8;
+                        this.filtro = 19;
                         break;
                     }
                 }

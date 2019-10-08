@@ -9,6 +9,7 @@ class DashboardController extends Controller
 {
     public function __invoke(Request $request)
     {
+        if (!$request->ajax()) return redirect('/main');
          $anio=date('Y');
 
          $mujeres=DB::table('persona as p')
@@ -48,7 +49,7 @@ class DashboardController extends Controller
          DB::raw('COUNT(p.mortalidad) as fallecidos'))
          ->whereYear('p.created_at', $anio)
          ->where('p.mortalidad', '=', '1')
-         ->groupBy(DB::raw('MONTH(p.fechamortalidad)'), DB::raw('YEAR(p.created_at)'))
+         ->groupBy(DB::raw('MONTH(p.fechamortalidad)'))
          ->get();
 
          $municipios=DB::table('persona as p')

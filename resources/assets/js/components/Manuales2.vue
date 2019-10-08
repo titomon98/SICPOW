@@ -24,7 +24,7 @@
                                Manual de Usuario
                             
                             </td>
-                            <td><a href="./img/ManualSuperUsr.pdf" target="blank">
+                            <td><a href="./img/ManualEstadista.pdf" target="blank">
                                 Descargar
                             </a>
                             </td>
@@ -33,7 +33,7 @@
                             <td>
                                Lineamientos para llenado de conteo poblacional
                             </td>
-                            <td><a href="#">
+                            <td><a href="./img/Lineamientos.pdf" target="blank">
                                 Descargar
                             </a>
                             </td>

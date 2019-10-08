@@ -353,14 +353,19 @@ class ReporteController extends Controller
         return $pdf->stream('sexo.pdf');
     }
     //por periodo de tiempo flexible
-    public function listarEdad(Request $request, $filtro, $id, $id2, $id3)
+    public function listarEdad(Request $request, $filtro, $id, $id2, $id3, $edad1, $edad2)
     {
         $municip = $id;
         $comuni = $id2;
         $distri = $id3;
         $edad=[];
+
+        $anio = date('Y');
+
+        $fecha1F = $anio - (int)$edad1; // esta va a ser el año más cercano
+        $fecha2F = $anio - (int)$edad2; //esta va a ser el año más lejano
         
-        if($filtro==1)
+        if($filtro==14)
         {
             $edad = Persona::join('familia', 'familia.id', '=', 'persona.familia')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
@@ -368,10 +373,26 @@ class ReporteController extends Controller
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
             ->select('persona.nombres', 'persona.apellidos', 'persona.nacimiento')
             ->where('municipio.id', '=', $municip)
+            ->whereYear('persona.nacimiento', '>=', $fecha2F)
+            ->whereYear('persona.nacimiento', '<=', $fecha1F)
             ->orderBy('persona.apellidos', 'asc')->get();
         }
 
-        else if($filtro==2)
+        else if($filtro==15)
+        {
+            $edad = Persona::join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+            ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+            ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+            ->select('persona.nombres', 'persona.apellidos', 'persona.nacimiento')
+            ->where('municipio.id', '=', $municip)
+            ->where('comunidad.id', '=', $comuni)
+            ->whereYear('persona.nacimiento', '>=', $fecha2F)
+            ->whereYear('persona.nacimiento', '<=', $fecha1F)
+            ->orderBy('persona.apellidos', 'asc')->get();
+        }
+
+        else if($filtro==16)
         {
             $edad = Persona::join('familia', 'familia.id', '=', 'persona.familia')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
@@ -381,19 +402,8 @@ class ReporteController extends Controller
             ->where('municipio.id', '=', $municip)
             ->where('comunidad.id', '=', $comuni)
             ->where('distrito.id', '=', $distri)
-            ->orderBy('persona.apellidos', 'asc')->get();
-        }
-
-        else if($filtro==3)
-        {
-            $edad = Persona::join('familia', 'familia.id', '=', 'persona.familia')
-            ->join('distrito', 'familia.distrito', '=', 'distrito.id')
-            ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
-            ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
-            ->select('persona.nombres', 'persona.apellidos', 'persona.nacimiento')
-            ->where('municipio.id', '=', $municip)
-            ->where('comunidad.id', '=', $comuni)
-            ->where('distrito.id', '=', $distri)
+            ->whereYear('persona.nacimiento', '>=', $fecha2F)
+            ->whereYear('persona.nacimiento', '<=', $fecha1F)
             ->orderBy('persona.apellidos', 'asc')->get();
         }
 
@@ -696,7 +706,7 @@ class ReporteController extends Controller
     }
     
     //listado de personas fallecidas por periodo de tiempo flexible
-    public function listarFallecidos(Request $request, $filtro, $id, $id2, $id3)
+    public function listarFallecidos(Request $request, $filtro, $id, $id2, $id3, $fecha1, $fecha2)
     {
         $municip = $id;
         $comuni = $id2;
@@ -704,7 +714,7 @@ class ReporteController extends Controller
         $fallecidos=[];
         $cont=0;
 
-        if($filtro==1)
+        if($filtro==17)
         {
             $fallecidos = Persona::join('familia', 'familia.id', '=', 'persona.familia')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
@@ -714,6 +724,8 @@ class ReporteController extends Controller
             'persona.fechamortalidad')
             ->where('persona.mortalidad', '=', '1')
             ->where('municipio.id', '=', $municip)
+            ->whereYear('persona.fechamortalidad', '>=', $fecha1)
+            ->whereYear('persona.fechamortalidad', '<=', $fecha2)
             ->orderBy('persona.apellidos', 'asc')->get();
 
             $cont=DB::table('persona')
@@ -723,10 +735,12 @@ class ReporteController extends Controller
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
             ->where('persona.mortalidad', '=', '1')
             ->where('municipio.id', '=', $municip)
+            ->whereYear('persona.fechamortalidad', '>=', $fecha1)
+            ->whereYear('persona.fechamortalidad', '<=', $fecha2)
             ->count();
         }
 
-        else if($filtro==2)
+        else if($filtro==18)
         {
             $fallecidos = Persona::join('familia', 'familia.id', '=', 'persona.familia')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
@@ -737,6 +751,8 @@ class ReporteController extends Controller
             ->where('persona.mortalidad', '=', '1')
             ->where('municipio.id', '=', $municip)
             ->where('comunidad.id', '=', $comuni)
+            ->whereYear('persona.fechamortalidad', '>=', $fecha1)
+            ->whereYear('persona.fechamortalidad', '<=', $fecha2)
             ->orderBy('persona.apellidos', 'asc')->get();
 
             $cont=DB::table('persona')
@@ -747,10 +763,12 @@ class ReporteController extends Controller
             ->where('persona.mortalidad', '=', '1')
             ->where('municipio.id', '=', $municip)
             ->where('comunidad.id', '=', $comuni)
+            ->whereYear('persona.fechamortalidad', '>=', $fecha1)
+            ->whereYear('persona.fechamortalidad', '<=', $fecha2)
             ->count();
         }
 
-        else if($filtro==3)
+        else if($filtro==19)
         {
             $fallecidos = Persona::join('familia', 'familia.id', '=', 'persona.familia')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
@@ -762,6 +780,8 @@ class ReporteController extends Controller
             ->where('municipio.id', '=', $municip)
             ->where('comunidad.id', '=', $comuni)
             ->where('distrito.id', '=', $distri)
+            ->whereYear('persona.fechamortalidad', '>=', $fecha1)
+            ->whereYear('persona.fechamortalidad', '<=', $fecha2)
             ->orderBy('persona.apellidos', 'asc')->get();
 
             $cont=DB::table('persona')
@@ -773,6 +793,8 @@ class ReporteController extends Controller
             ->where('municipio.id', '=', $municip)
             ->where('comunidad.id', '=', $comuni)
             ->where('distrito.id', '=', $distri)
+            ->whereYear('persona.fechamortalidad', '>=', $fecha1)
+            ->whereYear('persona.fechamortalidad', '<=', $fecha2)
             ->count();
         }
        

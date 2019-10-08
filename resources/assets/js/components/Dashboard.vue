@@ -40,21 +40,7 @@
                                 
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="card-header">
-                                <h4>Fallecidos</h4>
-                            </div>
-                            <div class="card-content">
-                                <div class="ct-chart">
-                                    <canvas id="fallecidos"></canvas>
-                                </div>
-                                
-                            </div>
-                            <div class="card-footer">
-                                <p>Fallecidos registrados a nivel departamental por mes de fallecimiento</p>
-                                
-                            </div>
-                        </div>
+                        
                         
                         <div class="col-md-6">
                             <div class="card-header">

@@ -33,7 +33,7 @@
                             <td>
                                Lineamientos para llenado de conteo poblacional
                             </td>
-                            <td><a href="#">
+                            <td><a href="./img/Lineamientos.pdf" target="blank">
                                 Descargar
                             </a>
                             </td>
