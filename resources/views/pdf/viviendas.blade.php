@@ -123,6 +123,7 @@
     <div class="izquierda">
         <p><strong>Total de viviendas habitadas: </strong>{{$cont1}} </p>
         <p><strong>Total de viviendas deshabitadas: </strong>{{$cont2}} </p>
+        <p><strong>Total de viviendas: </strong>{{$cont1 + $cont2}} </p>
     </div>
 </body>
 </html>

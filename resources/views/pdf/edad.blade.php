@@ -93,7 +93,8 @@
         <table class="table table-bordered table-striped table-sm">
             <thead>
                 <tr>
-                    <th>Nombre completo</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
                     <th>No. de Vivienda</th>
                     <th>Ubicacion</th>
                     <th>Direccion</th>
@@ -103,7 +104,8 @@
             <tbody>
                 @foreach ($edad as $s)
                 <tr>
-                    <td>{{$s->nombres.' '.$s->apellidos}}</td>
+                    <td>{{$s->nombres}}</td>
+                    <td>{{$s->apellidos}}</td>
                     <td>{{$s->numvivienda}}</td>
                     <td>{{$s->municipio . ', ' . $s->comunidad . ', ' . $s->distrito}}</td>
                     <td>{{$s->direccion}}</td>
@@ -118,13 +120,25 @@
             </tbody>
         </table>
     </div>
+    <div class="izquierda">
+            <?php 
+            $fechaorg1=$fecha1;
+                $fechanueva1=date("d/m/Y", strtotime($fechaorg1));
+
+                $fechaorg2=$fecha2;
+                $fechanueva2=date("d/m/Y", strtotime($fechaorg2));
+                ?>
+        <p><strong>Total de mujeres en el rango de edad de </strong>{{ $fechanueva1.' a '.  $fechanueva2.': ' .$cont1}} </p>
+        
+    </div><br><br>
 
     <div>
         <h2>Masculino</h2>
         <table class="table table-bordered table-striped table-sm">
             <thead>
                 <tr>
-                    <th>Nombre completo</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
                     <th>No. de Vivienda</th>
                     <th>Ubicacion</th>
                     <th>Direccion</th>
@@ -134,7 +148,8 @@
             <tbody>
                 @foreach ($edad2 as $s)
                 <tr>
-                    <td>{{$s->nombres.' '.$s->apellidos}}</td>
+                    <td>{{$s->nombres}}</td>
+                    <td>{{$s->apellidos}}</td>
                     <td>{{$s->numvivienda}}</td>
                     <td>{{$s->municipio . ', ' . $s->comunidad . ', ' . $s->distrito}}</td>
                     <td>{{$s->direccion}}</td>
@@ -157,7 +172,6 @@
                 $fechaorg2=$fecha2;
                 $fechanueva2=date("d/m/Y", strtotime($fechaorg2));
                 ?>
-        <p><strong>Total de mujeres en el rango de edad de </strong>{{ $fechanueva1.' a '.  $fechanueva2.': ' .$cont1}} </p>
         <p><strong>Total de hombres en el rango de edad de: </strong>{{ $fechanueva1.' a '.  $fechanueva2.': ' .$cont2}} </p>
         
     </div>

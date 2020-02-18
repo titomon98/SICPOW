@@ -45,7 +45,7 @@ class FamiliaController extends Controller
             ->where('persona.lider', '=', 1)
             ->orderBy('familia.id', 'asc')->paginate(10);
         }
-        else{
+        else if ($criterio=='num_vivienda'){
             $familias = Familia::join('persona', 'familia.id', '=', 'persona.familia')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
@@ -57,6 +57,48 @@ class FamiliaController extends Controller
                 'distrito.nombre as ubicacion1', 'comunidad.nombre as ubicacion2', 'municipio.nombre as ubicacion3') 
             ->where('persona.lider', '=', 1)
             ->where('familia.'.$criterio, 'like', '%'. $buscar . '%')
+            ->orderBy('familia.id', 'asc')->paginate(10);
+        }
+        else if ($criterio=='num_familia'){
+            $familias = Familia::join('persona', 'familia.id', '=', 'persona.familia')
+            ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+            ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+            ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+            ->join('detalle_vivienda', 'detalle_vivienda.id', '=', 'familia.detalle_vivienda')
+            ->select('familia.id','familia.num_familia','familia.num_vivienda', 'familia.fecha_inicial', 'familia.sector', 'familia.condicion', 'familia.updated_at',
+                'persona.CUI', 'persona.nombres', 'persona.apellidos', //Aqui debemos concatenar nombres y apellidos
+                'detalle_vivienda.numvivienda as detalle_vivienda_id', 'detalle_vivienda.direccion',
+                'distrito.nombre as ubicacion1', 'comunidad.nombre as ubicacion2', 'municipio.nombre as ubicacion3') 
+            ->where('persona.lider', '=', 1)
+            ->where('familia.'.$criterio, 'like', '%'. $buscar . '%')
+            ->orderBy('familia.id', 'asc')->paginate(10);
+        }
+        else if ($criterio=='jefeN'){
+            $familias = Familia::join('persona', 'familia.id', '=', 'persona.familia')
+            ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+            ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+            ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+            ->join('detalle_vivienda', 'detalle_vivienda.id', '=', 'familia.detalle_vivienda')
+            ->select('familia.id','familia.num_familia','familia.num_vivienda', 'familia.fecha_inicial', 'familia.sector', 'familia.condicion', 'familia.updated_at',
+                'persona.CUI', 'persona.nombres', 'persona.apellidos', //Aqui debemos concatenar nombres y apellidos
+                'detalle_vivienda.numvivienda as detalle_vivienda_id', 'detalle_vivienda.direccion',
+                'distrito.nombre as ubicacion1', 'comunidad.nombre as ubicacion2', 'municipio.nombre as ubicacion3', 'persona.nombres') 
+            ->where('persona.lider', '=', 1)
+            ->where('persona.nombres', 'like', '%'. $buscar . '%')
+            ->orderBy('familia.id', 'asc')->paginate(10);
+        }
+        else if ($criterio=='jefeA'){
+            $familias = Familia::join('persona', 'familia.id', '=', 'persona.familia')
+            ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+            ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+            ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+            ->join('detalle_vivienda', 'detalle_vivienda.id', '=', 'familia.detalle_vivienda')
+            ->select('familia.id','familia.num_familia','familia.num_vivienda', 'familia.fecha_inicial', 'familia.sector', 'familia.condicion', 'familia.updated_at',
+                'persona.CUI', 'persona.nombres', 'persona.apellidos', //Aqui debemos concatenar nombres y apellidos
+                'detalle_vivienda.numvivienda as detalle_vivienda_id', 'detalle_vivienda.direccion',
+                'distrito.nombre as ubicacion1', 'comunidad.nombre as ubicacion2', 'municipio.nombre as ubicacion3', 'persona.nombres') 
+            ->where('persona.lider', '=', 1)
+            ->where('persona.apellidos', 'like', '%'. $buscar . '%')
             ->orderBy('familia.id', 'asc')->paginate(10);
         }
 

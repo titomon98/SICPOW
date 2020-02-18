@@ -3855,6 +3855,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5663,6 +5665,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_0__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -9733,7 +9737,8 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       var me = this;
-      window.open('https://sicpowquetzaltenango.com/RViviendas/' + this.filtro + '/' + this.idmunicipio + '/' + this.idcomunidad + '/' + this.iddistrito + ',' + '_blank');
+      window.open('https://sicpowquetzaltenango.com/RViviendas/' + this.filtro + '/' + this.idmunicipio + '/' + this.idcomunidad + '/' + this.iddistrito + ',' + '_blank'); //window.open('http://localhost:8000/RViviendas/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+
       me.cerrarModal();
     },
     cargarRSexo: function cargarRSexo() {
@@ -51487,11 +51492,19 @@ var render = function() {
                           },
                           [
                             _c("option", { attrs: { value: "num_familia" } }, [
-                              _vm._v("Número de Familia")
+                              _vm._v("Número de familia")
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "num_vivienda" } }, [
-                              _vm._v("Numero de Vivienda")
+                              _vm._v("Número de vivienda")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "jefeN" } }, [
+                              _vm._v("Nombre de jefe de familia")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "jefeA" } }, [
+                              _vm._v("Apellidos de jefe de familia")
                             ])
                           ]
                         ),
@@ -59861,6 +59874,14 @@ var render = function() {
                             _vm._v(" "),
                             _c("option", { attrs: { value: "num_vivienda" } }, [
                               _vm._v("Número de vivienda")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "jefeN" } }, [
+                              _vm._v("Nombre de jefe de familia")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "jefeA" } }, [
+                              _vm._v("Apellidos de jefe de familia")
                             ])
                           ]
                         ),
@@ -66864,7 +66885,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("sede de territorio")]
+                        [_vm._v("Sede de territorio")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -67275,7 +67296,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("sede de territorio")]
+                        [_vm._v("Sede de territorio")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -68181,7 +68202,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("sede de territorio")]
+                        [_vm._v("Sede de territorio")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -68676,7 +68697,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("sede de territorio")]
+                        [_vm._v("Sede de territorio")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -69494,7 +69515,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("sede de territorio")]
+                        [_vm._v("Sede de territorio")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -69817,7 +69838,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("sede de territorio")]
+                        [_vm._v("Sede de territorio")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -70463,7 +70484,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("sede de territorio")]
+                        [_vm._v("Sede de territorio")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -70786,7 +70807,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("sede de territorio")]
+                        [_vm._v("Sede de territorio")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [

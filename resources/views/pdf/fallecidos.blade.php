@@ -94,6 +94,7 @@
             <thead>
                 <tr>
                     <th>Nombres</th>
+                    <th>Apellidos</th>
                     <th>No.Vivienda</th>
                     <th>Fecha de fallecimiento </th>
                 </tr>
@@ -103,7 +104,8 @@
                     
 
                 <tr>
-                    <td>{{$fall->nombres. ' ' . $fall->apellidos}}</td>
+                    <td>{{$fall->nombres}}</td>
+                    <td>{{$fall->apellidos}}</td>
                     <td>{{$fall->numvivienda}}</td>
                     <td><?php 
                         $fechaorg=$fall->fechamortalidad;

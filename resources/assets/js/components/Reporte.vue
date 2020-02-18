@@ -242,7 +242,7 @@
                             </div> 
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">sede de territorio</label>
+                            <label class="col-md-3 form-control-label" for="text-input">Sede de territorio</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad">
                                     <option value="0" disabled>Seleccione</option>
@@ -308,7 +308,7 @@
                             </div> 
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">sede de territorio</label>
+                            <label class="col-md-3 form-control-label" for="text-input">Sede de territorio</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad" @change="ComunidadS()">
                                     <option value="0" disabled>Seleccione</option>
@@ -454,7 +454,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">sede de territorio</label>
+                            <label class="col-md-3 form-control-label" for="text-input">Sede de territorio</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad">
                                     <option value="0" disabled>Seleccione</option>
@@ -536,7 +536,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">sede de territorio</label>
+                            <label class="col-md-3 form-control-label" for="text-input">Sede de territorio</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad" @change="ComunidadS()">
                                     <option value="0" disabled>Seleccione</option>
@@ -679,7 +679,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">sede de territorio</label>
+                            <label class="col-md-3 form-control-label" for="text-input">Sede de territorio</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad">
                                     <option value="0" disabled>Seleccione</option>
@@ -740,7 +740,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">sede de territorio</label>
+                            <label class="col-md-3 form-control-label" for="text-input">Sede de territorio</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad" @change="ComunidadS()">
                                     <option value="0" disabled>Seleccione</option>
@@ -862,7 +862,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">sede de territorio</label>
+                            <label class="col-md-3 form-control-label" for="text-input">Sede de territorio</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad">
                                     <option value="0" disabled>Seleccione</option>
@@ -923,7 +923,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">sede de territorio</label>
+                            <label class="col-md-3 form-control-label" for="text-input">Sede de territorio</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad" @change="ComunidadS()">
                                     <option value="0" disabled>Seleccione</option>
@@ -1037,6 +1037,7 @@
                 }
                 let me = this;
                 window.open('https://sicpowquetzaltenango.com/RViviendas/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+                //window.open('http://localhost:8000/RViviendas/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
                 me.cerrarModal();
             },
             cargarRSexo(){

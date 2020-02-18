@@ -92,7 +92,8 @@
         <table class="table table-bordered table-striped table-sm">
             <thead>
                 <tr>
-                    <th>Nombre completo</th>
+                    <th>Nombres</th>
+                    <th>Apellido</th>
                     <th>Capacidades diferentes</th>
                     <th>No. de Vivienda</th>
                     <th>Direccion</th>
@@ -104,7 +105,8 @@
                     
 
                 <tr>
-                    <td>{{$dis->nombres. ' '. $dis->apellidos }}</td>
+                    <td>{{$dis->nombres }}</td>
+                    <td>{{$dis->apellidos}}</td>
                     <td>{{$dis->nombre}}</td>
                     <td>{{$dis->numvivienda}}</td>
                     <td>{{$dis->direccion}}</td>

@@ -93,7 +93,8 @@
         <table class="table table-bordered table-striped table-sm">
             <thead>
                 <tr>
-                    <th>Nombre completo</th>
+                    <th>Nombres</th>
+                    <td>Apellidos</td>
                     <th>No. de Vivienda</th>
                     <th>Ubicacion</th>
                     <th>Direccion</th>
@@ -103,7 +104,8 @@
             <tbody>
                 @foreach ($sexo as $s)
                 <tr>
-                    <td>{{$s->nombres.' '.$s->apellidos}}</td>
+                    <td>{{$s->nombres}}</td>
+                    <td>{{$s->apellidos}}</td>
                     <td>{{$s->numvivienda}}</td>
                     <td>{{$s->municipio . ', ' . $s->comunidad . ', ' . $s->distrito}}</td>
                     <td>{{$s->direccion}}</td>

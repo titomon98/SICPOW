@@ -336,8 +336,10 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <select class="form-control col-md-3" v-model="criterio_fam">
-                                            <option value="num_familia">Número de Familia</option>
-                                            <option value="num_vivienda">Numero de Vivienda</option>
+                                            <option value="num_familia">Número de familia</option>
+                                            <option value="num_vivienda">Número de vivienda</option>
+                                            <option value="jefeN">Nombre de jefe de familia</option>
+                                            <option value="jefeA">Apellidos de jefe de familia</option>
                                         </select>
                                         <input type="text" v-model="buscar_fam" @keyup.enter="listarFamilia(1,buscar_fam,criterio_fam)" class="form-control" placeholder="Texto a buscar">
                                         <button type="submit" @click="listarFamilia(1,buscar_fam,criterio_fam)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
