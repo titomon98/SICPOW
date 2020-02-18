@@ -89,7 +89,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="card-header">
-                                <h4>Entidades de salud</h4>
+                                <h4>Servicios de salud</h4>
                             </div>
                             <div class="card-content">
                                 <div class="ct-chart">

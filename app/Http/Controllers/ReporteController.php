@@ -8,6 +8,7 @@ use App\Persona;
 use App\Familia;
 use App\Detalle_vivienda;
 use App\Municipio;
+use App\Distrito;
 use Illuminate\Support\Facades\DB;
 
 class ReporteController extends Controller
@@ -28,8 +29,8 @@ class ReporteController extends Controller
             ->join('distrito','distrito.id', '=', 'familia.distrito')
             ->join('comunidad', 'distrito.idcomunidad', '=', 'comunidad.id')
             ->join('municipio', 'comunidad.idmunicipio', '=', 'municipio.id')
-            ->select('persona.nombres', 'persona.apellidos', 'detalle_vivienda.direccion', 
-            'municipio.nombre')
+            ->select('persona.nombres', 'persona.apellidos', 'detalle_vivienda.direccion', 'detalle_vivienda.numvivienda', 'persona.nacimiento', 
+            'municipio.nombre as municipio', 'comunidad.nombre as comunidad', 'distrito.nombre as distrito')
             ->where('persona.lider', '=' , '1')
             ->where('municipio.id', '=', $municip)
             ->orderBy('persona.apellidos', 'asc')->get();
@@ -55,8 +56,8 @@ class ReporteController extends Controller
             ->join('distrito','distrito.id', '=', 'familia.distrito')
             ->join('comunidad', 'distrito.idcomunidad', '=', 'comunidad.id')
             ->join('municipio', 'comunidad.idmunicipio', '=', 'municipio.id')
-            ->select('persona.nombres', 'persona.apellidos', 'detalle_vivienda.direccion', 
-            'municipio.nombre')
+            ->select('persona.nombres', 'persona.apellidos', 'detalle_vivienda.direccion', 'detalle_vivienda.numvivienda', 'persona.nacimiento', 
+            'municipio.nombre as municipio', 'comunidad.nombre as comunidad', 'distrito.nombre as distrito')
             ->where('persona.lider', '=' , '1')
             ->where('municipio.id', '=', $municip)
             ->where('comunidad.id', '=', $comuni)
@@ -88,8 +89,8 @@ class ReporteController extends Controller
             ->join('distrito','distrito.id', '=', 'familia.distrito')
             ->join('comunidad', 'distrito.idcomunidad', '=', 'comunidad.id')
             ->join('municipio', 'comunidad.idmunicipio', '=', 'municipio.id')
-            ->select('persona.nombres', 'persona.apellidos', 'detalle_vivienda.direccion', 
-            'municipio.nombre')
+            ->select('persona.nombres', 'persona.apellidos', 'detalle_vivienda.direccion', 'detalle_vivienda.numvivienda', 'persona.nacimiento', 
+            'municipio.nombre as municipio', 'comunidad.nombre as comunidad', 'distrito.nombre as distrito')
             ->where('persona.lider', '=' , '1')
             ->where('municipio.id', '=', $municip)
             ->where('comunidad.id', '=', $comuni)
@@ -255,8 +256,21 @@ class ReporteController extends Controller
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
-            ->select('persona.nombres', 'persona.apellidos', 'detalle_vivienda.direccion')
+            ->select('persona.nombres', 'persona.apellidos', 'detalle_vivienda.direccion', 'persona.sexo', 'detalle_vivienda.numvivienda', 'persona.nacimiento', 
+            'municipio.nombre as municipio', 'comunidad.nombre as comunidad', 'distrito.nombre as distrito')
             ->where('municipio.id', '=', $municip)
+            ->where('sexo', '=', '0')
+            ->orderBy('persona.apellidos', 'asc')->get();
+
+            $sexo2 = Persona::join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+            ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+            ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+            ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+            ->select('persona.nombres', 'persona.apellidos', 'detalle_vivienda.direccion', 'persona.sexo', 'detalle_vivienda.numvivienda', 'persona.nacimiento', 
+            'municipio.nombre as municipio', 'comunidad.nombre as comunidad', 'distrito.nombre as distrito')
+            ->where('municipio.id', '=', $municip)
+            ->where('sexo', '=', '1')
             ->orderBy('persona.apellidos', 'asc')->get();
     
             $cont1=DB::table('persona')
@@ -286,9 +300,23 @@ class ReporteController extends Controller
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
-            ->select('persona.nombres', 'persona.apellidos', 'detalle_vivienda.direccion')
+            ->select('persona.nombres', 'persona.apellidos', 'detalle_vivienda.direccion', 'persona.sexo', 'detalle_vivienda.numvivienda', 'persona.nacimiento', 
+            'municipio.nombre as municipio', 'comunidad.nombre as comunidad', 'distrito.nombre as distrito')
             ->where('municipio.id', '=', $municip)
             ->where('comunidad.id', '=', $comuni)
+            ->where('sexo', '=', '0')
+            ->orderBy('persona.apellidos', 'asc')->get();
+
+            $sexo2 = Persona::join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+            ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+            ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+            ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+            ->select('persona.nombres', 'persona.apellidos', 'detalle_vivienda.direccion', 'persona.sexo', 'detalle_vivienda.numvivienda', 'persona.nacimiento', 
+            'municipio.nombre as municipio', 'comunidad.nombre as comunidad', 'distrito.nombre as distrito')
+            ->where('municipio.id', '=', $municip)
+            ->where('comunidad.id', '=', $comuni)
+            ->where('sexo', '=', '1')
             ->orderBy('persona.apellidos', 'asc')->get();
     
             $cont1=DB::table('persona')
@@ -319,10 +347,25 @@ class ReporteController extends Controller
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
-            ->select('persona.nombres', 'persona.apellidos', 'detalle_vivienda.direccion')
+            ->select('persona.nombres', 'persona.apellidos', 'detalle_vivienda.direccion', 'persona.sexo', 'detalle_vivienda.numvivienda', 'persona.nacimiento', 
+            'municipio.nombre as municipio', 'comunidad.nombre as comunidad', 'distrito.nombre as distrito')
             ->where('municipio.id', '=', $municip)
             ->where('comunidad.id', '=', $comuni)
             ->where('distrito.id', '=', $distri)
+            ->where('sexo', '=', '0')
+            ->orderBy('persona.apellidos', 'asc')->get();
+
+            $sexo2 = Persona::join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+            ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+            ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+            ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+            ->select('persona.nombres', 'persona.apellidos', 'detalle_vivienda.direccion', 'persona.sexo', 'detalle_vivienda.numvivienda', 'persona.nacimiento', 
+            'municipio.nombre as municipio', 'comunidad.nombre as comunidad', 'distrito.nombre as distrito')
+            ->where('municipio.id', '=', $municip)
+            ->where('comunidad.id', '=', $comuni)
+            ->where('distrito.id', '=', $distri)
+            ->where('sexo', '=', '1')
             ->orderBy('persona.apellidos', 'asc')->get();
     
             $cont1=DB::table('persona')
@@ -349,69 +392,115 @@ class ReporteController extends Controller
         }
 
         
-        $pdf = \PDF::loadView('pdf.sexo',['sexo'=>$sexo, 'cont1'=>$cont1, 'cont2'=>$cont2]);
+        $pdf = \PDF::loadView('pdf.sexo',['sexo'=>$sexo, 'cont1'=>$cont1, 'cont2'=>$cont2, 'sexo2'=>$sexo2]);
         return $pdf->stream('sexo.pdf');
     }
     //por periodo de tiempo flexible
-    public function listarEdad(Request $request, $filtro, $id, $id2, $id3, $edad1, $edad2)
+    public function listarEdad(Request $request, $filtro, $id, $id2, $id3, $fecha1, $fecha2, $edad1)
     {
         $municip = $id;
         $comuni = $id2;
         $distri = $id3;
         $edad=[];
-
-        $anio = date('Y');
-
-        $fecha1F = $anio - (int)$edad1; // esta va a ser el año más cercano
-        $fecha2F = $anio - (int)$edad2; //esta va a ser el año más lejano
         
         if($filtro==14)
         {
             $edad = Persona::join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
-            ->select('persona.nombres', 'persona.apellidos', 'persona.nacimiento')
+            ->select('persona.nombres', 'persona.apellidos', 'persona.nacimiento', 'detalle_vivienda.direccion', 'detalle_vivienda.numvivienda', 
+            'municipio.nombre as municipio', 'comunidad.nombre as comunidad', 'distrito.nombre as distrito')
             ->where('municipio.id', '=', $municip)
-            ->whereYear('persona.nacimiento', '>=', $fecha2F)
-            ->whereYear('persona.nacimiento', '<=', $fecha1F)
-            ->orderBy('persona.apellidos', 'asc')->get();
+            ->where('persona.sexo', '=', '0')
+            ->where('persona.nacimiento', '>=', $fecha1)
+            ->where('persona.nacimiento', '<=', $fecha2)
+            ->orderBy('persona.nacimiento', 'asc')->get();
+
+            $edad2 = Persona::join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+            ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+            ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+            ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+            ->select('persona.nombres', 'persona.apellidos', 'persona.nacimiento', 'detalle_vivienda.direccion', 'detalle_vivienda.numvivienda', 
+            'municipio.nombre as municipio', 'comunidad.nombre as comunidad', 'distrito.nombre as distrito')
+            ->where('municipio.id', '=', $municip)
+            ->where('persona.sexo', '=', '1')
+            ->where('persona.nacimiento', '>=', $fecha1)
+            ->where('persona.nacimiento', '<=', $fecha2)
+            ->orderBy('persona.nacimiento', 'asc')->get();
         }
 
         else if($filtro==15)
         {
             $edad = Persona::join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
-            ->select('persona.nombres', 'persona.apellidos', 'persona.nacimiento')
+            ->select('persona.nombres', 'persona.apellidos', 'persona.nacimiento', 'detalle_vivienda.direccion', 'detalle_vivienda.numvivienda', 
+            'municipio.nombre as municipio', 'comunidad.nombre as comunidad', 'distrito.nombre as distrito')
             ->where('municipio.id', '=', $municip)
             ->where('comunidad.id', '=', $comuni)
-            ->whereYear('persona.nacimiento', '>=', $fecha2F)
-            ->whereYear('persona.nacimiento', '<=', $fecha1F)
-            ->orderBy('persona.apellidos', 'asc')->get();
+            ->where('persona.sexo', '=', '0')
+            ->where('persona.nacimiento', '>=', $fecha1)
+            ->where('persona.nacimiento', '<=', $fecha2)
+            ->orderBy('persona.nacimiento', 'asc')->get();
+
+            $edad2 = Persona::join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+            ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+            ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+            ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+            ->select('persona.nombres', 'persona.apellidos', 'persona.nacimiento', 'detalle_vivienda.direccion', 'detalle_vivienda.numvivienda', 
+            'municipio.nombre as municipio', 'comunidad.nombre as comunidad', 'distrito.nombre as distrito')
+            ->where('municipio.id', '=', $municip)
+            ->where('comunidad.id', '=', $comuni)
+            ->where('persona.sexo', '=', '1')
+            ->where('persona.nacimiento', '>=', $fecha1)
+            ->where('persona.nacimiento', '<=', $fecha2)
+            ->orderBy('persona.nacimiento', 'asc')->get();
         }
 
         else if($filtro==16)
         {
             $edad = Persona::join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
-            ->select('persona.nombres', 'persona.apellidos', 'persona.nacimiento')
+            ->select('persona.nombres', 'persona.apellidos', 'persona.nacimiento', 'detalle_vivienda.direccion', 'detalle_vivienda.numvivienda', 
+            'municipio.nombre as municipio', 'comunidad.nombre as comunidad', 'distrito.nombre as distrito')
             ->where('municipio.id', '=', $municip)
             ->where('comunidad.id', '=', $comuni)
             ->where('distrito.id', '=', $distri)
-            ->whereYear('persona.nacimiento', '>=', $fecha2F)
-            ->whereYear('persona.nacimiento', '<=', $fecha1F)
-            ->orderBy('persona.apellidos', 'asc')->get();
+            ->where('persona.sexo', '=', '0')
+            ->where('persona.nacimiento', '>=', $fecha1)
+            ->where('persona.nacimiento', '<=', $fecha2)
+            ->orderBy('persona.nacimiento', 'asc')->get();
+
+            $edad2 = Persona::join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
+            ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+            ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
+            ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
+            ->select('persona.nombres', 'persona.apellidos', 'persona.nacimiento', 'detalle_vivienda.direccion', 'detalle_vivienda.numvivienda', 
+            'municipio.nombre as municipio', 'comunidad.nombre as comunidad', 'distrito.nombre as distrito')
+            ->where('municipio.id', '=', $municip)
+            ->where('comunidad.id', '=', $comuni)
+            ->where('distrito.id', '=', $distri)
+            ->where('persona.sexo', '=', '1')
+            ->where('persona.nacimiento', '>=', $fecha1)
+            ->where('persona.nacimiento', '<=', $fecha2)
+            ->orderBy('persona.nacimiento', 'asc')->get();
         }
 
         $cont1=0;
 
         $cont2=0;
 
-        $pdf = \PDF::loadView('pdf.edad',['edad'=>$edad, 'cont1'=>$cont1, 'cont2'=>$cont2]);
+        $pdf = \PDF::loadView('pdf.edad',['edad'=>$edad, 'cont1'=>$cont1, 'cont2'=>$cont2, 'edad2'=>$edad2, 'fecha1'=>$fecha1, 'fecha2'=>$fecha2]);
         return $pdf->stream('edad.pdf');
     }
 
@@ -429,12 +518,13 @@ class ReporteController extends Controller
         {
             $discapacidad = Persona::join('discapacidad', 'discapacidad.id', '=', 'persona.discapacidad')
             ->join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
-            ->select('persona.nombres', 'persona.apellidos', 'discapacidad.nombre')
+            ->select('persona.nombres', 'persona.apellidos', 'discapacidad.nombre', 'detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 'persona.nacimiento')
             ->where('municipio.id', '=', $municip)
-            ->orderBy('persona.apellidos', 'asc')->get();
+            ->orderBy('discapacidad.nombre', 'asc')->get();
 
             $cont1=DB::table('persona')
             ->join('familia', 'familia.id', '=', 'persona.familia')
@@ -459,12 +549,13 @@ class ReporteController extends Controller
         {
             $discapacidad = Persona::join('discapacidad', 'discapacidad.id', '=', 'persona.discapacidad')
             ->join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
-            ->select('persona.nombres', 'persona.apellidos', 'discapacidad.nombre')
+            ->select('persona.nombres', 'persona.apellidos', 'discapacidad.nombre', 'detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 'persona.nacimiento')
             ->where('municipio.id', '=', $municip)
-            ->orderBy('persona.apellidos', 'asc')->get();
+            ->orderBy('discapacidad.nombre', 'asc')->get();
 
             $cont1=DB::table('persona')
             ->join('familia', 'familia.id', '=', 'persona.familia')
@@ -491,14 +582,15 @@ class ReporteController extends Controller
         {
             $discapacidad = Persona::join('discapacidad', 'discapacidad.id', '=', 'persona.discapacidad')
             ->join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
-            ->select('persona.nombres', 'persona.apellidos', 'discapacidad.nombre')
+            ->select('persona.nombres', 'persona.apellidos', 'discapacidad.nombre', 'detalle_vivienda.numvivienda', 'detalle_vivienda.direccion', 'persona.nacimiento')
             ->where('municipio.id', '=', $municip)
             ->where('comunidad.id', '=', $comuni)
             ->where('distrito.id', '=', $distri)
-            ->orderBy('persona.apellidos', 'asc')->get();
+            ->orderBy('discapacidad.nombre', 'asc')->get();
 
             $cont1=DB::table('persona')
             ->join('familia', 'familia.id', '=', 'persona.familia')
@@ -540,10 +632,11 @@ class ReporteController extends Controller
         {
             $ocupacion = Persona::join('ocupacion', 'ocupacion.id', '=', 'persona.ocupacion')
             ->join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
-            ->select('persona.nombres', 'persona.apellidos', 'ocupacion.nombre')
+            ->select('persona.nombres', 'persona.apellidos', 'ocupacion.nombre', 'detalle_vivienda.direccion', 'detalle_vivienda.numvivienda', 'persona.nacimiento')
             ->where('municipio.id', '=', $municip)
             ->orderBy('persona.apellidos', 'asc')->get();
 
@@ -560,10 +653,11 @@ class ReporteController extends Controller
         {
             $ocupacion = Persona::join('ocupacion', 'ocupacion.id', '=', 'persona.ocupacion')
             ->join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
-            ->select('persona.nombres', 'persona.apellidos', 'ocupacion.nombre')
+            ->select('persona.nombres', 'persona.apellidos', 'ocupacion.nombre', 'detalle_vivienda.direccion', 'detalle_vivienda.numvivienda', 'persona.nacimiento')
             ->where('municipio.id', '=', $municip)
             ->where('comunidad.id', '=', $comuni)
             ->orderBy('persona.apellidos', 'asc')->get();
@@ -583,9 +677,10 @@ class ReporteController extends Controller
             $ocupacion = Persona::join('ocupacion', 'ocupacion.id', '=', 'persona.ocupacion')
             ->join('familia', 'familia.id', '=', 'persona.familia')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
-            ->select('persona.nombres', 'persona.apellidos', 'ocupacion.nombre')
+            ->select('persona.nombres', 'persona.apellidos', 'ocupacion.nombre', 'detalle_vivienda.direccion', 'detalle_vivienda.numvivienda', 'persona.nacimiento')
             ->where('municipio.id', '=', $municip)
             ->where('comunidad.id', '=', $comuni)
             ->where('distrito.id', '=', $distri)
@@ -601,10 +696,17 @@ class ReporteController extends Controller
             ->where('distrito.id', '=', $distri)
             ->count();
         }
-
+        $ama=0;
+        $agri=0;
+        $alba=0;
+        $carpin=0;
+        $comer=0;
+        $prof=0;
+        $est=0;
+        $otros=0;
         
 
-        $pdf = \PDF::loadView('pdf.ocupacion',['ocupacion'=>$ocupacion, 'cont'=>$cont]);
+        $pdf = \PDF::loadView('pdf.ocupacion',['ocupacion'=>$ocupacion, 'cont'=>$cont, 'ama'=>$ama, 'agri'=>$agri, 'alba'=>$alba, 'carpin'=>$carpin, 'comer'=>$comer, 'prof'=>$prof, 'est'=>$est, 'otros'=>$otros]);
         return $pdf->stream('ocupacion.pdf');
     }
 
@@ -622,11 +724,12 @@ class ReporteController extends Controller
             $migrantes = Persona::join('permanencia', 'permanencia.id', '=', 'persona.permanencia')
             ->join('paismigracion', 'paismigracion.id', '=', 'persona.pais')
             ->join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
             ->select('persona.nombres', 'persona.apellidos',
-            'permanencia.nombre', 'persona.commigracion', 'persona.munmigracion', 
+            'permanencia.nombre', 'persona.commigracion', 'persona.munmigracion', 'detalle_vivienda.numvivienda', 'persona.nacimiento',
             'persona.depmigracion', 'paismigracion.nombre as pais')
             ->where('persona.migracion', '=', '1')
             ->where('municipio.id', '=', $municip)
@@ -647,11 +750,12 @@ class ReporteController extends Controller
             $migrantes = Persona::join('permanencia', 'permanencia.id', '=', 'persona.permanencia')
             ->join('paismigracion', 'paismigracion.id', '=', 'persona.pais')
             ->join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
             ->select('persona.nombres', 'persona.apellidos',
-            'permanencia.nombre', 'persona.commigracion', 'persona.munmigracion', 
+            'permanencia.nombre', 'persona.commigracion', 'persona.munmigracion', 'detalle_vivienda.numvivienda', 'persona.nacimiento',
             'persona.depmigracion', 'paismigracion.nombre as pais')
             ->where('persona.migracion', '=', '1')
             ->where('municipio.id', '=', $municip)
@@ -674,11 +778,12 @@ class ReporteController extends Controller
             $migrantes = Persona::join('permanencia', 'permanencia.id', '=', 'persona.permanencia')
             ->join('paismigracion', 'paismigracion.id', '=', 'persona.pais')
             ->join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
             ->select('persona.nombres', 'persona.apellidos',
-            'permanencia.nombre', 'persona.commigracion', 'persona.munmigracion', 
+            'permanencia.nombre', 'persona.commigracion', 'persona.munmigracion', 'detalle_vivienda.numvivienda', 'persona.nacimiento',
             'persona.depmigracion', 'paismigracion.nombre as pais')
             ->where('persona.migracion', '=', '1')
             ->where('municipio.id', '=', $municip)
@@ -717,15 +822,16 @@ class ReporteController extends Controller
         if($filtro==17)
         {
             $fallecidos = Persona::join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
             ->select('persona.nombres', 'persona.apellidos', 
-            'persona.fechamortalidad')
+            'persona.fechamortalidad',  'detalle_vivienda.direccion', 'detalle_vivienda.numvivienda')
             ->where('persona.mortalidad', '=', '1')
             ->where('municipio.id', '=', $municip)
-            ->whereYear('persona.fechamortalidad', '>=', $fecha1)
-            ->whereYear('persona.fechamortalidad', '<=', $fecha2)
+            ->where('persona.fechamortalidad', '>=', $fecha1)
+            ->where('persona.fechamortalidad', '<=', $fecha2)
             ->orderBy('persona.apellidos', 'asc')->get();
 
             $cont=DB::table('persona')
@@ -743,16 +849,17 @@ class ReporteController extends Controller
         else if($filtro==18)
         {
             $fallecidos = Persona::join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
             ->select('persona.nombres', 'persona.apellidos', 
-            'persona.fechamortalidad')
+            'persona.fechamortalidad',  'detalle_vivienda.direccion', 'detalle_vivienda.numvivienda')
             ->where('persona.mortalidad', '=', '1')
             ->where('municipio.id', '=', $municip)
             ->where('comunidad.id', '=', $comuni)
-            ->whereYear('persona.fechamortalidad', '>=', $fecha1)
-            ->whereYear('persona.fechamortalidad', '<=', $fecha2)
+            ->where('persona.fechamortalidad', '>=', $fecha1)
+            ->where('persona.fechamortalidad', '<=', $fecha2)
             ->orderBy('persona.apellidos', 'asc')->get();
 
             $cont=DB::table('persona')
@@ -763,19 +870,20 @@ class ReporteController extends Controller
             ->where('persona.mortalidad', '=', '1')
             ->where('municipio.id', '=', $municip)
             ->where('comunidad.id', '=', $comuni)
-            ->whereYear('persona.fechamortalidad', '>=', $fecha1)
-            ->whereYear('persona.fechamortalidad', '<=', $fecha2)
+            ->where('persona.fechamortalidad', '>=', $fecha1)
+            ->where('persona.fechamortalidad', '<=', $fecha2)
             ->count();
         }
 
         else if($filtro==19)
         {
             $fallecidos = Persona::join('familia', 'familia.id', '=', 'persona.familia')
+            ->join('detalle_vivienda', 'familia.detalle_vivienda', '=', 'detalle_vivienda.id')
             ->join('distrito', 'familia.distrito', '=', 'distrito.id')
             ->join('comunidad', 'comunidad.id', '=', 'distrito.idcomunidad')
             ->join('municipio', 'municipio.id', '=', 'comunidad.idmunicipio')
             ->select('persona.nombres', 'persona.apellidos', 
-            'persona.fechamortalidad')
+            'persona.fechamortalidad',  'detalle_vivienda.direccion', 'detalle_vivienda.numvivienda')
             ->where('persona.mortalidad', '=', '1')
             ->where('municipio.id', '=', $municip)
             ->where('comunidad.id', '=', $comuni)

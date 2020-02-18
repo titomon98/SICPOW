@@ -8,9 +8,9 @@ class Detalle_vivienda extends Model
 {
     protected $table = 'detalle_vivienda';
     protected $fillable = ['numvivienda', 'fecha', 'condicion', 'direccion', 'tenencia', 'tipovivienda', 'ambiente', 'cocina', 
-        'techo', 'pared', 'piso', 'aguaabastecimiento', 'aguatrat', 'eliminexcretas', 'eliminbasura', 'animalubic', 'animalcondlugar',
-        'perros', 'gatos', 'electricidad', 'telefonia', 'radio', 'otratenencia', 'otrotecho', 'otrapared', 'otropiso', 'otroabastagua',
-        'otroelimexcretas', 'otroelimbasura', 'otroservicios', 'created_at', 'updated_at'];
+        'techo', 'pared', 'piso', 'aguaabastecimiento', 'aguatrat', 'eliminexcretas', 'inodoro_cantidad', 'inodoro_enuso', 'inodoro_higiene',
+        'eliminbasura', 'animalubic', 'animalcondlugar', 'perros', 'gatos', 'electricidad', 'telefonia', 'radio', 'otratenencia', 'otrotecho', 
+        'otrapared', 'otropiso', 'otroabastagua', 'otroelimexcretas', 'otroelimbasura', 'otroservicios', 'created_at', 'updated_at'];
 
     public function familia()
     {

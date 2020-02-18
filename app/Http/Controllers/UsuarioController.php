@@ -17,6 +17,7 @@ class UsuarioController extends Controller
             $usuarios = Usuario::join('rol', 'usuario.idrol', '=', 'rol.id')
             ->select('usuario.id','usuario.nombre', 'usuario.correo', 'usuario.CUI', 'usuario.direccion', 'usuario.telefono','usuario.idrol', 'rol.nombre as nombre_rol',
                 'usuario.condicion')
+                ->where('usuario.id', '>', '1')
             ->orderBy('usuario.id', 'asc')->paginate(10);
         }
         else{
@@ -24,6 +25,7 @@ class UsuarioController extends Controller
             ->select('usuario.id','usuario.nombre', 'usuario.correo', 'usuario.CUI', 'usuario.direccion', 'usuario.telefono','usuario.idrol', 'rol.nombre as nombre_rol',
                 'usuario.condicion')
             ->where('usuario.'.$criterio, 'like', '%'. $buscar . '%')
+            ->where('usuario.id', '>', '1')
             ->orderBy('usuario.id', 'asc')->paginate(10);
         }
 
@@ -42,7 +44,7 @@ class UsuarioController extends Controller
 
     public function selectUsuario(Request $request){
         if (!$request->ajax()) return redirect('/main');
-        $usuarios = Comunidad::where('condicion','=','1')
+        $usuarios = Usuario::where('condicion','=','1')
         ->select('id','nombre')->orderBy('nombre','asc')->get();
         return['usuarios'=>$usuarios];
     }

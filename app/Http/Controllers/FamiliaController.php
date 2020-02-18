@@ -133,7 +133,7 @@ class FamiliaController extends Controller
 
     public function selectMunicipio(Request $request){
         if (!$request->ajax()) return redirect('/main');
-        $municipios = Municipio::select('id', 'nombre')->orderBy('id', 'asc')->get();
+        $municipios = Municipio::select('id', 'nombre')->orderBy('nombre', 'asc')->get();
         return['municipios'=>$municipios];
     }
 
@@ -142,7 +142,7 @@ class FamiliaController extends Controller
         $comunidades = Comunidad::where('condicion', '=', '1')
         ->select('id', 'nombre')
         ->where('idmunicipio', '=', $id)
-        ->orderBy('id', 'asc')->get();
+        ->orderBy('nombre', 'asc')->get();
         return['comunidades'=>$comunidades];
     }
 
@@ -151,7 +151,7 @@ class FamiliaController extends Controller
         $distritos = Distrito::where('condicion', '=', '1')
         ->select('id', 'nombre')
         ->where('idcomunidad', '=', $id)
-        ->orderBy('id', 'asc')->get();
+        ->orderBy('nombre', 'asc')->get();
         return['distritos'=>$distritos];
     }
 

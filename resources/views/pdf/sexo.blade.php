@@ -89,25 +89,54 @@
         <h3>Lista de personas segun sexo</h3>
     </div>
     <div>
+        <h2>Femenino</h2>
         <table class="table table-bordered table-striped table-sm">
             <thead>
                 <tr>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
-                    <th>Sexo</th>
+                    <th>Nombre completo</th>
+                    <th>No. de Vivienda</th>
+                    <th>Ubicacion</th>
+                    <th>Direccion</th>
+                    <th>Fecha de nacimiento</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($sexo as $s)
-                    
-
                 <tr>
-                    <td>{{$s->nombres}}</td>
-                    <td>{{$s->apellidos}}</td>
-                    <td><?php if ($s->sexo == 0)
-                        echo "Femenino";
-                        else
-                        echo "Masculino" ?></td>
+                    <td>{{$s->nombres.' '.$s->apellidos}}</td>
+                    <td>{{$s->numvivienda}}</td>
+                    <td>{{$s->municipio . ', ' . $s->comunidad . ', ' . $s->distrito}}</td>
+                    <td>{{$s->direccion}}</td>
+                    <td>{{$s->nacimiento}}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <h2>Masculino</h2>
+        <table class="table table-bordered table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Nombre completo</th>
+                    <th>No. de Vivienda</th>
+                    <th>Ubicacion</th>
+                    <th>Direccion</th>
+                    <th>Fecha de nacimiento</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($sexo2 as $s)
+                <tr>
+                    <td>{{$s->nombres.' '.$s->apellidos}}</td>
+                    <td>{{$s->numvivienda}}</td>
+                    <td>{{$s->municipio . ', ' . $s->comunidad . ', ' . $s->distrito}}</td>
+                    <td>{{$s->direccion}}</td>
+                    <td><?php 
+                        $fechaorg=$s->nacimiento;
+                        $fechanueva=date("d/m/Y", strtotime($fechaorg));
+                        echo $fechanueva;
+                        ?></td>
                 </tr>
                 @endforeach
             </tbody>

@@ -5,13 +5,13 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item">Home</li>
         <li class="breadcrumb-item"><a href="#">Admin</a></li>
-        <li class="breadcrumb-item active">Sede de Territorio</li>
+        <li class="breadcrumb-item active">Sede de territorio</li>
     </ol>
     <div class="container-fluid">
         <!-- Ejemplo de tabla Listado -->
         <div class="card">
             <div class="card-header">
-                <i class="fa fa-align-justify"></i> Sede de Territorios
+                <i class="fa fa-align-justify"></i> Sede de territorios
                 <button type="button" @click="abrirModal('comunidad', 'registrar')" class="btn btn-secondary">
                     <i class="icon-plus"></i>&nbsp;Nuevo
                 </button>
@@ -28,46 +28,48 @@
                         </div>
                     </div>
                 </div>
-                <table class="table table-bordered table-striped table-sm">
-                    <thead>
-                        <tr>
-                            <th>Opciones</th>
-                            <th>Nombre</th>
-                            <th>Municipio</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="comunidades in arrayComunidad" :key="comunidades.id">
-                            <td>
-                                <button type="button" @click="abrirModal('comunidad', 'actualizar', comunidades)" class="btn btn-warning btn-sm">
-                                  <i class="icon-pencil"></i>
-                                </button> &nbsp;
-                                <template v-if="comunidades.condicion">
-                                    <button type="button" class="btn btn-danger btn-sm" @click="desactivarComunidad(comunidades.id)">
-                                     <i class="icon-trash"></i>
-                                    </button>
-                                </template>
-                                <template v-else>
-                                    <button type="button" class="btn btn-info btn-sm" @click="activarComunidad(comunidades.id)">
-                                     <i class="icon-check"></i>
-                                    </button>
-                                </template>
-                            </td>
-                            <td v-text="comunidades.nombre"></td>
-                            <td v-text="comunidades.nombre_municipio"></td>
-                            <td>
-                                <div v-if="comunidades.condicion=='1'">
-                                    <span class="badge badge-success">Activo</span>
-                                </div>
-                                <div v-else>
-                                    <span class="badge badge-danger">Inactivo</span>
-                                </div>
-                            </td>
-                        </tr>
-                        
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>Opciones</th>
+                                <th>Nombre</th>
+                                <th>Municipio</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="comunidades in arrayComunidad" :key="comunidades.id">
+                                <td>
+                                    <button type="button" @click="abrirModal('comunidad', 'actualizar', comunidades)" class="btn btn-warning btn-sm">
+                                    <i class="icon-pencil"></i>
+                                    </button> &nbsp;
+                                    <template v-if="comunidades.condicion">
+                                        <button type="button" class="btn btn-danger btn-sm" @click="desactivarComunidad(comunidades.id)">
+                                        <i class="icon-trash"></i>
+                                        </button>
+                                    </template>
+                                    <template v-else>
+                                        <button type="button" class="btn btn-info btn-sm" @click="activarComunidad(comunidades.id)">
+                                        <i class="icon-check"></i>
+                                        </button>
+                                    </template>
+                                </td>
+                                <td v-text="comunidades.nombre"></td>
+                                <td v-text="comunidades.nombre_municipio"></td>
+                                <td>
+                                    <div v-if="comunidades.condicion=='1'">
+                                        <span class="badge badge-success">Activo</span>
+                                    </div>
+                                    <div v-else>
+                                        <span class="badge badge-danger">Inactivo</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
                 <nav>
                     <ul class="pagination">
                         <li class="page-item" v-if="pagination.current_page > 1">
@@ -109,7 +111,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
                             <div class="col-md-9">
-                                <input type="text" v-model="nombre" class="form-control" placeholder="Nombre de Sede de Territorio">
+                                <input type="text" v-model="nombre" class="form-control" placeholder="Nombre de sede de territorio">
                             </div>
                         </div>
                         <div v-show="errorComunidad" class="form-group row div-error">
@@ -160,7 +162,8 @@
                 offset : 3,
                 criterio : 'nombre',
                 buscar : '',
-                arrayMunicipio:[]
+                arrayMunicipio:[],
+                controlingreso:0,
             }
         },
         computed : {
@@ -192,6 +195,7 @@
         },
         methods : {
             listarComunidad(page,buscar,criterio){
+                this.controlingreso=0;
                 let me=this;
                 var url = '/comunidad?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response){
@@ -222,21 +226,28 @@
                 me.listarComunidad(page,buscar,criterio);
             },
             registrarComunidad(){
-                if(this.validarComunidad()){
-                    return;
+                if(!this.validarComunidad()){
+                    this.controlingreso++;
+                    if (this.controlingreso==1)
+                    {
+                        
+                            
+                        
+
+                        let me = this;
+                        axios.post('/comunidad/registrar',{
+                            'idmunicipio':this.idmunicipio,
+                            'nombre': this.nombre,
+
+                        }).then(function (response) {
+                            me.cerrarModal();
+                            me.listarComunidad(1,'','nombre');
+                        }).catch(function (error){
+                            console.log(error);
+                        });
+                    }
                 }
-
-                let me = this;
-                axios.post('/comunidad/registrar',{
-                    'idmunicipio':this.idmunicipio,
-                    'nombre': this.nombre,
-
-                }).then(function (response) {
-                    me.cerrarModal();
-                    me.listarComunidad(1,'','nombre');
-                }).catch(function (error){
-                    console.log(error);
-                });
+                
             },
             actualizarComunidad(){
                 if(this.validarComunidad()){
@@ -370,7 +381,7 @@
                             case 'registrar':
                             {
                                 this.modal = 1;
-                                this.tituloModal = 'Registrar Sede de Territorio';
+                                this.tituloModal = 'Registrar Sede de territorio';
                                 this.idmunicipio=0;
                                 this.nombre = '';
                                 this.tipoAccion = 1;
@@ -379,7 +390,7 @@
                             case 'actualizar':
                             {
                                 this.modal=1;
-                                this.tituloModal='Actualizar Sede de Territorio';
+                                this.tituloModal='Actualizar Sede de territorio';
                                 this.tipoAccion=2;
                                 this.id=data['id'];
                                 this.idmunicipio=data['idmunicipio'];

@@ -28,48 +28,50 @@
                         </div>
                     </div>
                 </div>
-                <table class="table table-bordered table-striped table-sm">
-                    <thead>
-                        <tr>
-                            <th>Opciones</th>
-                            <th>Nombre</th>
-                            <th>Sede de Territorio</th>
-                            <th>Municipio</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="distritos in arrayDistrito" :key="distritos.id">
-                            <td>
-                                <button type="button" @click="abrirModal('distrito', 'actualizar', distritos)" class="btn btn-warning btn-sm">
-                                  <i class="icon-pencil"></i>
-                                </button> &nbsp;
-                                <template v-if="distritos.condicion">
-                                    <button type="button" class="btn btn-danger btn-sm" @click="desactivarDistrito(distritos.id)">
-                                     <i class="icon-trash"></i>
-                                    </button>
-                                </template>
-                                <template v-else>
-                                    <button type="button" class="btn btn-info btn-sm" @click="activarDistrito(distritos.id)">
-                                     <i class="icon-check"></i>
-                                    </button>
-                                </template>
-                            </td>
-                            <td v-text="distritos.nombre"></td>
-                            <td v-text="distritos.nombre_comunidad"></td>
-                            <td v-text="distritos.nombre_municipio"></td>
-                            <td>
-                                <div v-if="distritos.condicion=='1'">
-                                    <span class="badge badge-success">Activo</span>
-                                </div>
-                                <div v-else>
-                                    <span class="badge badge-danger">Inactivo</span>
-                                </div>
-                            </td>
-                        </tr>
-                        
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>Opciones</th>
+                                <th>Nombre</th>
+                                <th>Sede de territorio</th>
+                                <th>Municipio</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="distritos in arrayDistrito" :key="distritos.id">
+                                <td>
+                                    <button type="button" @click="abrirModal('distrito', 'actualizar', distritos)" class="btn btn-warning btn-sm">
+                                    <i class="icon-pencil"></i>
+                                    </button> &nbsp;
+                                    <template v-if="distritos.condicion">
+                                        <button type="button" class="btn btn-danger btn-sm" @click="desactivarDistrito(distritos.id)">
+                                        <i class="icon-trash"></i>
+                                        </button>
+                                    </template>
+                                    <template v-else>
+                                        <button type="button" class="btn btn-info btn-sm" @click="activarDistrito(distritos.id)">
+                                        <i class="icon-check"></i>
+                                        </button>
+                                    </template>
+                                </td>
+                                <td v-text="distritos.nombre"></td>
+                                <td v-text="distritos.nombre_comunidad"></td>
+                                <td v-text="distritos.nombre_municipio"></td>
+                                <td>
+                                    <div v-if="distritos.condicion=='1'">
+                                        <span class="badge badge-success">Activo</span>
+                                    </div>
+                                    <div v-else>
+                                        <span class="badge badge-danger">Inactivo</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
                 <nav>
                     <ul class="pagination">
                         <li class="page-item" v-if="pagination.current_page > 1">
@@ -109,7 +111,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">Sede de Territorio</label>
+                            <label class="col-md-3 form-control-label" for="text-input">Sede de territorio</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad">
                                     <option value="0" disabled>Seleccione</option>
@@ -176,6 +178,7 @@
                 arrayComunidad:[],
                 idmunicipio:0,
                 arrayMunicipio:[],
+                controlingreso:0,
             }
         },
         computed : {
@@ -207,6 +210,7 @@
         },
         methods : {
             listarDistrito(page,buscar,criterio){
+                this.controlingreso=0;
                 let me=this;
                 var url = '/distrito?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response){
@@ -250,20 +254,26 @@
                 me.listarDistrito(page,buscar,criterio);
             },
             registrarDistrito(){
-                if(this.validarDistrito()){
-                    return;
+                if (!this.validarDistrito())
+                {
+                    this.controlingreso++;
+                    if (this.controlingreso==1)
+                    {
+
+                        let me = this;
+                        axios.post('/distrito/registrar',{
+                            'idcomunidad':this.idcomunidad,
+                            'nombre': this.nombre
+                        }).then(function (response) {
+                            me.cerrarModal();
+                            me.listarDistrito(1,'','nombre');
+                        }).catch(function (error){
+                            console.log(error);
+                        });
+                    }
                 }
 
-                let me = this;
-                axios.post('/distrito/registrar',{
-                    'idcomunidad':this.idcomunidad,
-                    'nombre': this.nombre
-                }).then(function (response) {
-                    me.cerrarModal();
-                    me.listarDistrito(1,'','nombre');
-                }).catch(function (error){
-                    console.log(error);
-                });
+                
             },
             actualizarDistrito(){
                 if(this.validarDistrito()){

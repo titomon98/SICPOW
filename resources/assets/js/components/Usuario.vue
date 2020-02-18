@@ -31,54 +31,56 @@
                         </div>
                     </div>
                 </div>
-                <table class="table table-bordered table-striped table-sm">
-                    <thead>
-                        <tr>
-                            <th>Opciones</th>
-                            <th>CUI</th>
-                            <th>Nombre</th>
-                            <th>Correo</th>
-                            <th>Direccion</th>
-                            <th>Telefono</th>
-                            <th>Rol</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="usuarios in arrayUsuario" :key="usuarios.id">
-                            <td>
-                                <button type="button" @click="abrirModal('usuario', 'actualizar', usuarios)" class="btn btn-warning btn-sm">
-                                  <i class="icon-pencil"></i>
-                                </button> &nbsp;
-                                <template v-if="usuarios.condicion">
-                                    <button type="button" class="btn btn-danger btn-sm" @click="desactivarUsuario(usuarios.id)">
-                                     <i class="icon-trash"></i>
-                                    </button>
-                                </template>
-                                <template v-else>
-                                    <button type="button" class="btn btn-info btn-sm" @click="activarUsuario(usuarios.id)">
-                                     <i class="icon-check"></i>
-                                    </button>
-                                </template>
-                            </td>
-                            <td v-text="usuarios.CUI"></td>
-                            <td v-text="usuarios.nombre"></td>
-                            <td v-text="usuarios.correo"></td>
-                            <td v-text="usuarios.direccion"></td>
-                            <td v-text="usuarios.telefono"></td>
-                            <td v-text="usuarios.nombre_rol"></td>
-                            <td>
-                                <div v-if="usuarios.condicion=='1'">
-                                    <span class="badge badge-success">Activo</span>
-                                </div>
-                                <div v-else>
-                                    <span class="badge badge-danger">Inactivo</span>
-                                </div>
-                            </td>
-                        </tr>
-                        
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>Opciones</th>
+                                <th>CUI</th>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th>Direccion</th>
+                                <th>Telefono</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="usuarios in arrayUsuario" :key="usuarios.id">
+                                <td>
+                                    <button type="button" @click="abrirModal('usuario', 'actualizar', usuarios)" class="btn btn-warning btn-sm">
+                                    <i class="icon-pencil"></i>
+                                    </button> &nbsp;
+                                    <template v-if="usuarios.condicion">
+                                        <button type="button" class="btn btn-danger btn-sm" @click="desactivarUsuario(usuarios.id)">
+                                        <i class="icon-trash"></i>
+                                        </button>
+                                    </template>
+                                    <template v-else>
+                                        <button type="button" class="btn btn-info btn-sm" @click="activarUsuario(usuarios.id)">
+                                        <i class="icon-check"></i>
+                                        </button>
+                                    </template>
+                                </td>
+                                <td v-text="usuarios.CUI"></td>
+                                <td v-text="usuarios.nombre"></td>
+                                <td v-text="usuarios.correo"></td>
+                                <td v-text="usuarios.direccion"></td>
+                                <td v-text="usuarios.telefono"></td>
+                                <td v-text="usuarios.nombre_rol"></td>
+                                <td>
+                                    <div v-if="usuarios.condicion=='1'">
+                                        <span class="badge badge-success">Activo</span>
+                                    </div>
+                                    <div v-else>
+                                        <span class="badge badge-danger">Inactivo</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
                 <nav>
                     <ul class="pagination">
                         <li class="page-item" v-if="pagination.current_page > 1">
@@ -213,6 +215,7 @@
                 offset : 3,
                 criterio : 'nombre',
                 buscar : '',
+                controlingreso:0,
             }
         },
         computed : {
@@ -244,6 +247,7 @@
         },
         methods : {
             listarUsuario(page,buscar,criterio){
+                this.controlingreso=0;
                 let me=this;
                 var url = '/usuario?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response){
@@ -274,25 +278,30 @@
                 me.listarUsuario(page,buscar,criterio);
             },
             registrarUsuario(){
-                if(this.validarUsuario()){
-                    return;
+                
+                if(!this.validarUsuario())
+                {
+                    this.controlingreso++;
+                    if(this.controlingreso==1){
+                        
+                        let me = this;
+                        axios.post('/usuario/registrar',{
+                            'CUI': this.CUI,
+                            'nombre': this.nombre,
+                            'correo': this.correo,
+                            'password' : this.password,
+                            'idrol' : this.idrol,
+                            'direccion' : this.direccion,
+                            'telefono' : this.telefono
+                        }).then(function (response) {
+                            me.cerrarModal();
+                            me.listarUsuario(1,'','nombre');
+                        }).catch(function (error){
+                            console.log(error);
+                        });
+                    }
+                    
                 }
-
-                let me = this;
-                axios.post('/usuario/registrar',{
-                    'CUI': this.CUI,
-                    'nombre': this.nombre,
-                    'correo': this.correo,
-                    'password' : this.password,
-                    'idrol' : this.idrol,
-                    'direccion' : this.direccion,
-                    'telefono' : this.telefono
-                }).then(function (response) {
-                    me.cerrarModal();
-                    me.listarUsuario(1,'','nombre');
-                }).catch(function (error){
-                    console.log(error);
-                });
             },
             actualizarUsuario(){
                 if(this.validarUsuario()){

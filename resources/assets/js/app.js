@@ -18,7 +18,7 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i);
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
 Vue.component('municipio', require('./components/Municipio.vue').default);
 Vue.component('comunidad', require('./components/Comunidad.vue').default);
 Vue.component('distrito', require('./components/Distrito.vue').default);
@@ -32,6 +32,7 @@ Vue.component('manuales', require('./components/Manuales.vue').default);
 Vue.component('manuales2', require('./components/Manuales2.vue').default);
 Vue.component('manuales3', require('./components/Manuales3.vue').default);
 Vue.component('acerca', require('./components/Acerca.vue').default);
+Vue.component('digitador', require('./components/Digitador.vue').default);
 
 const app = new Vue({
     el: '#app',

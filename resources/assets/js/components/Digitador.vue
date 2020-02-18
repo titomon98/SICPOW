@@ -32,7 +32,6 @@
                             <table class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
-                                        <th>Opciones</th>
                                         <th>Numero de Vivienda</th>
                                         <th>Fecha Inicial</th>
                                         <th>Fecha de Actualizacion</th>
@@ -42,21 +41,6 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="viviendas in arrayVivienda1" :key="viviendas.id">
-                                        <td>
-                                            <button type="button" @click="abrirModal('vivienda', 'actualizar', viviendas)" class="btn btn-warning btn-sm">
-                                            <i class="icon-pencil"></i>
-                                            </button> &nbsp;
-                                            <template v-if="viviendas.condicion">
-                                                <button type="button" class="btn btn-danger btn-sm" @click="desactivarVivienda(viviendas.id)">
-                                                <i class="icon-trash"></i>
-                                                </button>
-                                            </template>
-                                            <template v-else>
-                                                <button type="button" class="btn btn-info btn-sm" @click="activarVivienda(viviendas.id)">
-                                                <i class="icon-check"></i>
-                                                </button>
-                                            </template>
-                                        </td>
                                         <td v-text="viviendas.numvivienda"></td>
                                         <td v-text="viviendas.created_at"></td>
                                         <td v-text="viviendas.updated_at"></td>
@@ -92,7 +76,7 @@
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
             <!--Inicio del modal agregar/actualizar-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+                        <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -366,7 +350,8 @@
                                         <tr>
                                             <th>Opciones</th>
                                             <th>Numero de Familia</th>                                        
-                                            <th>Jefe de familia</th>
+                                            <th>Numero de Vivienda</th>
+                                            <th>Lider de Familia</th>
                                             <th>Sector</th>
                                             <th>Ubicacion</th>
                                             <th>Dirección</th>
@@ -381,18 +366,9 @@
                                                 <button type="button" class="btn btn-success btn-sm" @click="verListadoFamilia(familia.id)">
                                                     <i class="icon-eye"></i>
                                                 </button>
-                                                <template v-if="familia.condicion">
-                                                    <button type="button" class="btn btn-danger btn-sm" @click="desactivarFamilia(familia.id)">
-                                                        <i class="icon-trash"></i>
-                                                    </button>
-                                                </template>
-                                                <template v-else>
-                                                    <button type="button" class="btn btn-info btn-sm" @click="activarFamilia(familia.id)">
-                                                        <i class="icon-check"></i>
-                                                    </button>
-                                                </template>
                                             </td>
                                             <td v-text="familia.num_familia"></td>
+                                            <td v-text="familia.detalle_vivienda_id"></td>
                                             <td v-text="familia.nombres + ' ' + familia.apellidos"></td>
                                             <td v-text="familia.sector"></td>
                                             <td v-text="familia.ubicacion1 + ', ' + familia.ubicacion2 + ', ' + familia.ubicacion3"></td>
@@ -517,7 +493,7 @@
                                         <input type="text" class="form-control" v-model="CUI">
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label for="cb5">Jefe de familia: </label>
+                                        <label for="cb5">Lider de Familia</label>
                                         <input type="checkbox" id="cb5" value='true' v-model="lider">
                                     </div>
                                     <div class="form-group col-md-9">
@@ -786,7 +762,7 @@
                                         <input type="text" class="form-control" v-model="CUI">
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label for="cb5">Jefe de familia</label>
+                                        <label for="cb5">Lider de Familia</label>
                                         <input type="checkbox" id="cb5" value='true' v-model="lider">
                                     </div>
                                     <div class="form-group col-md-9">
@@ -829,7 +805,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label for="">Discapacidad: <span style="color:red;" v-show="discapacidad_id==0">(*Seleccione)</span></label>
+                                        <label for="">Capacidades diferentes: <span style="color:red;" v-show="discapacidad_id==0">(*Seleccione)</span></label>
                                         <select class="form-control" v-model="discapacidad_id">
                                             <option value="0" disabled>Seleccione</option>
                                             <option v-for="discapacidades in arrayDiscapacidad" :key="discapacidades.id" :value="discapacidades.id" v-text="discapacidades.nombre"></option>
@@ -1009,7 +985,7 @@
                                     <p v-text="num_vivienda"></p>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="">Usuario: (Nombre, correo y teléfono)</label>
+                                    <label for="">Usuario:</label>
                                     <p v-text="usuario_nombre"></p>
                                 </div>
                             </div>
@@ -1791,6 +1767,7 @@
                 });
             },
             selectVivienda(){
+
                     let me=this;
                     var url= '/vivienda/selectVivienda/';
                     axios.get(url).then(function (response) {
@@ -1800,6 +1777,7 @@
                     .catch(function (error) {
                         console.log(error);
                     });
+
             },
             selectUsuario(){
                 let me=this;
@@ -2300,7 +2278,7 @@
                     me.sector = arrayFamiliaT[0]['sector'];
                     me.detalle_vivienda_id = arrayFamiliaT[0]['detalle_vivienda_id'];
                     me.num_vivienda = arrayFamiliaT[0]['num_vivienda'];
-                    me.usuario_nombre = arrayFamiliaT[0]['nombre'] + ', '+ arrayFamiliaT[0]['correo'] + ', ' + arrayFamiliaT[0]['telefono'];
+                    me.usuario_nombre = arrayFamiliaT[0]['CUI'] + ' ' + arrayFamiliaT[0]['nombre'] + ', '+ arrayFamiliaT[0]['correo'] + ', ' + arrayFamiliaT[0]['telefono'];
                     me.municipio_nombre = arrayFamiliaT[0]['nombre_municipio'];
                     me.comunidad_nombre = arrayFamiliaT[0]['nombre_comunidad'];
                     me.distrito_nombre = arrayFamiliaT[0]['nombre_distrito'];

@@ -92,9 +92,11 @@
         <table class="table table-bordered table-striped table-sm">
             <thead>
                 <tr>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
+                    <th>Nombre Completo</th>
+                    <th>No. de Vivienda</th>
+                    <th>Ubicacion</th>
                     <th>Direccion</th>
+
                     
                 </tr>
             </thead>
@@ -103,8 +105,11 @@
                     
 
                 <tr>
-                    <td>{{$jefe->nombres}}</td>
-                    <td>{{$jefe->apellidos}}</td>
+                    <td>{{$jefe->nombres.' '.$jefe->apellidos}}</td>
+                    <td>{{$jefe->numvivienda}}</td>
+                    
+                    
+                    <td>{{$jefe->municipio . ', ' . $jefe->comunidad . ', ' . $jefe->distrito}}</td>
                     <td>{{$jefe->direccion}}</td>
                 </tr>
                 @endforeach

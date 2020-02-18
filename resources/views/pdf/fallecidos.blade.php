@@ -94,7 +94,7 @@
             <thead>
                 <tr>
                     <th>Nombres</th>
-                    <th>Apellidos</th>
+                    <th>No.Vivienda</th>
                     <th>Fecha de fallecimiento </th>
                 </tr>
             </thead>
@@ -103,9 +103,13 @@
                     
 
                 <tr>
-                    <td>{{$fall->nombres}}</td>
-                    <td>{{$fall->apellidos}}</td>
-                    <td>{{$fall->fechamortalidad}}</td>
+                    <td>{{$fall->nombres. ' ' . $fall->apellidos}}</td>
+                    <td>{{$fall->numvivienda}}</td>
+                    <td><?php 
+                        $fechaorg=$fall->fechamortalidad;
+                        $fechanueva=date("d/m/Y", strtotime($fechaorg));
+                        echo $fechanueva;
+                        ?></td>
                    
                 </tr>
                 @endforeach

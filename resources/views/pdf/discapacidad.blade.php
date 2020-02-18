@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Reporte de discapacidades</title>
+    <title>Reporte de capacidades diferentes</title>
     <style>
         body {
             margin: 0;
@@ -86,15 +86,17 @@
             <h3>Dirección Departamental de Salud de Quetzaltenango</h3>
             <h3>Quetzaltenango</h3>
             <h3><span class="izquierda">{{now()}}</span></h3><br>
-            <h3>Lista de discapacidades</h3>
+            <h3>Lista de capacidades diferentes</h3>
     </div>
     <div>
         <table class="table table-bordered table-striped table-sm">
             <thead>
                 <tr>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
-                    <th>Discapacidad</th>
+                    <th>Nombre completo</th>
+                    <th>Capacidades diferentes</th>
+                    <th>No. de Vivienda</th>
+                    <th>Direccion</th>
+                    <th>Fecha de nacimiento</th>
                 </tr>
             </thead>
             <tbody>
@@ -102,17 +104,23 @@
                     
 
                 <tr>
-                    <td>{{$dis->nombres}}</td>
-                    <td>{{$dis->apellidos}}</td>
+                    <td>{{$dis->nombres. ' '. $dis->apellidos }}</td>
                     <td>{{$dis->nombre}}</td>
+                    <td>{{$dis->numvivienda}}</td>
+                    <td>{{$dis->direccion}}</td>
+                    <td><?php 
+                        $fechaorg=$dis->nacimiento;
+                        $fechanueva=date("d/m/Y", strtotime($fechaorg));
+                        echo $fechanueva;
+                        ?></td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
     <div class="izquierda">
-        <p><strong>Total de personas sin discapacidad: </strong>{{$cont1}} </p>
-        <p><strong>Total de personas con discapacidad: </strong>{{$cont2}} </p>
+        <p><strong>Total de personas sin capacidades diferentes: </strong>{{$cont1}} </p>
+        <p><strong>Total de personas con capacidades diferentes: </strong>{{$cont2}} </p>
     </div>
 </body>
 </html>

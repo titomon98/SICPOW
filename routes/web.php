@@ -13,7 +13,7 @@
 
 Route::group(['middleware'=>['guest']], function(){
     Route::post('/login2', 'Auth\LoginController@login')->name('login2');
-
+    Route::get('/', 'Auth\LoginController@showLoginForm');
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 });
 
@@ -120,7 +120,7 @@ Route::group(['middleware'=>['auth']], function(){
         Route::get('/RJefes/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarJefe')->name('jefes_pdf');
         Route::get('/RViviendas/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarVivienda')->name('viviendas_pdf');
         Route::get('/RSexo/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarSexo')->name('sexo_pdf');
-        Route::get('/REdad/{fil}/{id}/{id2}/{id3}/{edad1}/{edad2}', 'ReporteController@listarEdad')->name('edad_pdf');
+        Route::get('/REdad/{fil}/{id}/{id2}/{id3}/{fecha1}/{fecha2}/{edad1}', 'ReporteController@listarEdad')->name('edad_pdf');
         Route::get('/RDiscapacidad/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarDiscapacidad')->name('discapacidad_pdf');
         Route::get('/ROcupacion/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarOcupacion')->name('ocupacion_pdf');
         Route::get('/RMigracion/{fil}/{id}/{id2}/{id3}', 'ReporteController@listarMigrantes')->name('migrantes_pdf');

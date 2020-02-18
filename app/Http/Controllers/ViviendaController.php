@@ -151,6 +151,9 @@ class ViviendaController extends Controller
         $viviendas->aguaabastecimiento = $request->idaguaabast;
         $viviendas->aguatrat = $request->idaguatrat;
         $viviendas->eliminexcretas = $request->ideliminexcretas;
+        $viviendas->inodoro_cantidad = $request->inodoro_cantidad;
+        $viviendas->inodoro_enuso = $request->inodoro_enuso;
+        $viviendas->inodoro_higiene = $request->inodoro_higiene;
         $viviendas->eliminbasura = $request->ideliminbasura;
         $viviendas->animalubic = $request->idanimalubic;
         $viviendas->animalcondlugar = $request->idanimalcondlugar;
@@ -189,6 +192,9 @@ class ViviendaController extends Controller
         $viviendas->aguaabastecimiento = $request->idaguaabast;
         $viviendas->aguatrat = $request->idaguatrat;
         $viviendas->eliminexcretas = $request->ideliminexcretas;
+        $viviendas->inodoro_cantidad = $request->inodoro_cantidad;
+        $viviendas->inodoro_enuso = $request->inodoro_enuso;
+        $viviendas->inodoro_higiene = $request->inodoro_higiene;
         $viviendas->eliminbasura = $request->ideliminbasura;
         $viviendas->animalubic = $request->idanimalubic;
         $viviendas->animalcondlugar = $request->idanimalcondlugar;

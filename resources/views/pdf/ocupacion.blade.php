@@ -92,8 +92,10 @@
         <table class="table table-bordered table-striped table-sm">
             <thead>
                 <tr>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
+                    <th>Nombre completo</th>
+                    <th>No. de vivienda</th>
+                    <th>Direccion</th>
+                    <th>Fecha de nacimiento</th>
                     <th>Ocupacion</th>
                 </tr>
             </thead>
@@ -102,9 +104,49 @@
                     
 
                 <tr>
-                    <td>{{$dis->nombres}}</td>
-                    <td>{{$dis->apellidos}}</td>
-                    <td>{{$dis->nombre}}</td>
+                    <td>{{$dis->nombres . ' ' . $dis->apellidos}}</td>
+                    <td>{{$dis->numvivienda}}</td>
+                    <td>{{$dis->direccion}}</td>
+                    <td><?php 
+                        $fechaorg=$dis->nacimiento;
+                        $fechanueva=date("d/m/Y", strtotime($fechaorg));
+                        echo $fechanueva;
+                        ?></td>
+                    <td><?php
+                    if ($dis->nombre == "Agricultor")
+                    {
+                        $agri++;
+                    }
+                    else if ($dis->nombre == "Ama de casa")
+                    {
+                        $ama++;
+                    }
+                    else if ($dis->nombre == "Albañil")
+                    {
+                        $alba++;
+                    }
+                    else if ($dis->nombre == "Carpintero")
+                    {
+                        $carpin++;
+                    }
+                    else if ($dis->nombre == "Comerciante")
+                    {
+                        $comer++;
+                    }
+                    else if ($dis->nombre == "Profesional universitario")
+                    {
+                        $prof++;
+                    }
+                    else if ($dis->nombre == "Estudiante")
+                    {
+                        $est++;
+                    }
+                    else if ($dis->nombre == "Otros")
+                    {
+                        $otros++;
+                    }
+                    echo $dis->nombre;
+                    ?></td>
                 </tr>
                 @endforeach
             </tbody>
@@ -112,6 +154,14 @@
     </div>
     <div class="izquierda">
         <p><strong>Total de registros: </strong>{{$cont}} </p>
+        <p><strong>Total de amas de casa: </strong>{{$ama}} </p>
+        <p><strong>Total de agricultores: </strong>{{$agri}} </p>
+        <p><strong>Total de albañiles: </strong>{{$alba}} </p>
+        <p><strong>Total de carpintero: </strong>{{$carpin}} </p>
+        <p><strong>Total de comerciante: </strong>{{$comer}} </p>
+        <p><strong>Total de profesionales universitarios: </strong>{{$prof}} </p>
+        <p><strong>Total de estudiantes: </strong>{{$est}} </p>
+        <p><strong>Total de personas con otras ocupaciones: </strong>{{$otros}} </p>
     </div>
 </body>
 </html>

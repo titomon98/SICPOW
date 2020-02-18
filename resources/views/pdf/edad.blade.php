@@ -89,54 +89,77 @@
         <h3>Lista de personas por edad</h3>
     </div>
     <div>
+        <h2>Femenino</h2>
         <table class="table table-bordered table-striped table-sm">
             <thead>
                 <tr>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
-                    <th>Edad</th>
+                    <th>Nombre completo</th>
+                    <th>No. de Vivienda</th>
+                    <th>Ubicacion</th>
+                    <th>Direccion</th>
+                    <th>Fecha de nacimiento</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($edad as $e)
-                    
-
+                @foreach ($edad as $s)
                 <tr>
-                    <td>{{$e->nombres}}</td>
-                    <td>{{$e->apellidos}}</td>
+                    <td>{{$s->nombres.' '.$s->apellidos}}</td>
+                    <td>{{$s->numvivienda}}</td>
+                    <td>{{$s->municipio . ', ' . $s->comunidad . ', ' . $s->distrito}}</td>
+                    <td>{{$s->direccion}}</td>
                     <td><?php 
-                    $anio = date('Y'); 
-                    $year = date('Y', strtotime($e->nacimiento));
+                        $fechaorg=$s->nacimiento;
+                        $fechanueva=date("d/m/Y", strtotime($fechaorg));
+                        echo $fechanueva;
+                        $cont1++;
+                        ?></td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
-                    $mes = date('m');
-                    $month = date('m', strtotime($e->nacimiento));
-
-                    $dia = date('d');
-                    $day = date('d', strtotime($e->nacimiento));
-
-                    $difa = $anio - $year;
-                    $difm = $mes - $month;
-                    $difd = $dia - $day;
-
-                    if ($difm < 0 || $difd < 0)
-                        $difa--;
-
-                    echo $difa;
-                    if ($difa > 17)
-                    $cont1 = $cont1 + 1;
-                    else
-                    $cont2 = $cont2 + 1;
-
-
-                    ?></td>
+    <div>
+        <h2>Masculino</h2>
+        <table class="table table-bordered table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Nombre completo</th>
+                    <th>No. de Vivienda</th>
+                    <th>Ubicacion</th>
+                    <th>Direccion</th>
+                    <th>Fecha de nacimiento</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($edad2 as $s)
+                <tr>
+                    <td>{{$s->nombres.' '.$s->apellidos}}</td>
+                    <td>{{$s->numvivienda}}</td>
+                    <td>{{$s->municipio . ', ' . $s->comunidad . ', ' . $s->distrito}}</td>
+                    <td>{{$s->direccion}}</td>
+                    <td><?php 
+                        $fechaorg=$s->nacimiento;
+                            $fechanueva=date("d/m/Y", strtotime($fechaorg));
+                            echo $fechanueva;
+                            $cont2++;
+                            ?></td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
     <div class="izquierda">
-        <p><strong>Total de mayores de edad: </strong>{{$cont1}} </p>
-        <p><strong>Total de menores de edad: </strong>{{$cont2}} </p>
+            <?php 
+            $fechaorg1=$fecha1;
+                $fechanueva1=date("d/m/Y", strtotime($fechaorg1));
+
+                $fechaorg2=$fecha2;
+                $fechanueva2=date("d/m/Y", strtotime($fechaorg2));
+                ?>
+        <p><strong>Total de mujeres en el rango de edad de </strong>{{ $fechanueva1.' a '.  $fechanueva2.': ' .$cont1}} </p>
+        <p><strong>Total de hombres en el rango de edad de: </strong>{{ $fechanueva1.' a '.  $fechanueva2.': ' .$cont2}} </p>
+        
     </div>
 </body>
 </html>

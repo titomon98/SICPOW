@@ -148,7 +148,8 @@
                 },
                 offset : 3,
                 criterio : 'nombre',
-                buscar : ''
+                buscar : '',
+                controlingreso:0,
             }
         },
         computed : {
@@ -180,6 +181,7 @@
         },
         methods : {
             listarMunicipio(page,buscar,criterio){
+                this.controlingreso=0; 
                 let me=this;
                 var url = '/municipio?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response){
@@ -199,19 +201,28 @@
                 me.listarMunicipio(page,buscar,criterio);
             },
             registrarMunicipio(){
-                if(this.validarMunicipio()){
-                    return;
+                
+                if (!this.validarMunicipio())
+                {
+                    this.controlingreso++;
+                    if(this.controlingreso==1){
+                        let me = this;
+                        axios.post('/municipio/registrar',{
+                            'nombre': this.nombre
+                        }).then(function (response) {
+                            me.cerrarModal();
+                            me.listarMunicipio(1,'','nombre');
+                        }).catch(function (error){
+                            console.log(error);
+                        });
+                    }
+                    
+                    
                 }
-
-                let me = this;
-                axios.post('/municipio/registrar',{
-                    'nombre': this.nombre
-                }).then(function (response) {
-                    me.cerrarModal();
-                    me.listarMunicipio(1,'','nombre');
-                }).catch(function (error){
-                    console.log(error);
-                });
+                else if (this.controlingreso == 3)
+                {
+                    console.log("Arturo, Rodolfo, Ischiu, Julio e Isra les desean lo mejor en sus arduas labores");
+                }
             },
             actualizarMunicipio(){
                 if(this.validarMunicipio()){

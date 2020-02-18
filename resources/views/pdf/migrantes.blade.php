@@ -9,7 +9,7 @@
         body {
             margin: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            font-size: 0.875rem;
+            font-size: 0.7rem;
             font-weight: normal;
             line-height: 1.5;
             color: #151b1e;           
@@ -92,8 +92,9 @@
         <table class="table table-bordered table-striped table-sm">
             <thead>
                 <tr>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
+                    <th>Nombre completo</th>
+                    <th>No. Vivienda</th>
+                    <th>Fecha de nacimiento</th>
                     <th>Permanencia</th>
                     <th>Comunidad</th>
                     <th>Municipio</th>
@@ -103,11 +104,16 @@
             </thead>
             <tbody>
                 @foreach ($migrantes as $mig)
-                    
+                
 
                 <tr>
-                    <td>{{$mig->nombres}}</td>
-                    <td>{{$mig->apellidos}}</td>
+                    <td>{{$mig->nombres . ' ' . $mig->apellidos}}</td>
+                    <td>{{$mig->numvivienda}}</td>
+                    <td><?php 
+                    $fechaorg=$mig->nacimiento;
+                    $fechanueva=date("d/m/Y", strtotime($fechaorg));
+                    echo $fechanueva;
+                    ?></td>
                     <td>{{$mig->nombre}}</td>
                     <td><?php if ($mig->commigracion == null)
                         echo "No Disponible"; 
