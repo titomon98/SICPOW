@@ -24,7 +24,7 @@
                               <option value="nombre">Nombre</option>
                               <option value="CUI">CUI</option>
                               <option value="correo">Correo</option>
-                              <option value="telefono">Telefono</option>
+                              <option value="telefono">Teléfono</option>
                             </select>
                             <input type="text" v-model="buscar" @keyup.enter="listarUsuario(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
                             <button type="submit" @click="listarUsuario(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
@@ -39,8 +39,8 @@
                                 <th>CUI</th>
                                 <th>Nombre</th>
                                 <th>Correo</th>
-                                <th>Direccion</th>
-                                <th>Telefono</th>
+                                <th>Dirección</th>
+                                <th>Teléfono</th>
                                 <th>Rol</th>
                                 <th>Estado</th>
                             </tr>
@@ -148,16 +148,16 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">Direccion</label>
+                            <label class="col-md-3 form-control-label" for="text-input">Dirección</label>
                             <div class="col-md-9">
-                                <input type="text" v-model="direccion" class="form-control" placeholder="Direccion de la persona">
+                                <input type="text" v-model="direccion" class="form-control" placeholder="Dirección de la persona">
                                 
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">Telefono</label>
+                            <label class="col-md-3 form-control-label" for="text-input">Teléfono</label>
                             <div class="col-md-9">
-                                <input type="text" v-model="telefono" class="form-control" placeholder="Telefono de la persona">
+                                <input type="text" v-model="telefono" class="form-control" placeholder="Teléfono de la persona">
                                 
                             </div>
                         </div>
@@ -420,8 +420,8 @@
                 if(!this.correo) this.errorMostrarMsjUsuario.push("El correo de la persona no puede estar vacio.");
                 if(!this.password) this.errorMostrarMsjUsuario.push("La contraseña del usuario no puede estar vacio.");
                 if(this.idrol == 0) this.errorMostrarMsjUsuario.push("Debe elegir un rol para el usuario");
-                if(!this.direccion) this.errorMostrarMsjUsuario.push("La direccion de la persona no puede estar vacia.");
-                if(!this.telefono) this.errorMostrarMsjUsuario.push("El telefono de la persona no puede estar vacia.");
+                if(!this.direccion) this.errorMostrarMsjUsuario.push("La dirección de la persona no puede estar vacia.");
+                if(!this.telefono) this.errorMostrarMsjUsuario.push("El teléfono de la persona no puede estar vacia.");
 
                 if(this.errorMostrarMsjUsuario.length) this.errorUsuario=1;
                 return this.errorUsuario;

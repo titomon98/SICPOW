@@ -21,7 +21,7 @@
                                 <div class="input-group">
                                     <select class="form-control col-md-3" id="opcion" name="opcion" v-model="criterio_viv">
                                         <option value="numvivienda">Numero de Vivienda</option>
-                                        <option value="direccion">Direccion</option>
+                                        <option value="direccion">Dirección</option>
                                     </select>
                                     <input type="text" v-model="buscar_viv" @keyup.enter="listarVivienda(1,buscar_viv,criterio_viv)" class="form-control" placeholder="Vivienda a buscar">
                                     <button type="submit" @click="listarVivienda(1,buscar_viv,criterio_viv)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
@@ -35,7 +35,7 @@
                                         <th>Numero de Vivienda</th>
                                         <th>Fecha Inicial</th>
                                         <th>Fecha de Actualizacion</th>
-                                        <th>Direccion</th>
+                                        <th>Dirección</th>
                                         <th>Estado</th>
                                     </tr>
                                 </thead>
@@ -94,9 +94,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input"><b>Direccion:</b></label>
+                                    <label class="col-md-3 form-control-label" for="text-input"><b>Dirección:</b></label>
                                     <div class="col-md-9">
-                                        <input type="text" v-model="direccion" class="form-control" placeholder="Direccion de la Vivienda">
+                                        <input type="text" v-model="direccion" class="form-control" placeholder="Dirección de la Vivienda">
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
@@ -349,14 +349,14 @@
                                     <thead>
                                         <tr>
                                             <th>Opciones</th>
-                                            <th>Numero de Familia</th>                                        
-                                            <th>Numero de Vivienda</th>
-                                            <th>Lider de Familia</th>
+                                            <th>Numero de familia</th>                                        
+                                            <th>Numero de vivienda</th>
+                                            <th>Lider de familia</th>
                                             <th>Sector</th>
-                                            <th>Ubicacion</th>
+                                            <th>Ubicación</th>
                                             <th>Dirección</th>
-                                            <th>Fecha Inicial</th>
-                                            <th>Fecha de Actualizacion</th>
+                                            <th>Fecha inicial</th>
+                                            <th>Fecha de actualizacion</th>
                                             <th>Estado</th>
                                         </tr>
                                     </thead>
@@ -1505,7 +1505,7 @@
                 this.errorMostrarMsjVivienda=[];
 
                 if(!this.numvivienda) this.errorMostrarMsjVivienda.push("El numero de la vivienda no puede estar vacio.");
-                if(!this.direccion) this.errorMostrarMsjVivienda.push("La direccion de la vivienda no puede estar vacia.");
+                if(!this.direccion) this.errorMostrarMsjVivienda.push("La dirección de la vivienda no puede estar vacia.");
                 if(this.idtenencia==0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de tenencia de la vivienda.");
                 if(this.idtipovivienda==0) this.errorMostrarMsjVivienda.push("Seleccione un tipo de la vivienda.");
                 if(this.idambiente==0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de ambiente de la vivienda.");
@@ -1517,7 +1517,7 @@
                 if(this.idaguatrat==0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de tratamiento de agua.");
                 if(this.ideliminexcretas==0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de eliminacion de excretas.");
                 if(this.ideliminbasura==0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de eliminacion de basura.");
-                if(this.idanimalubic==0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de ubicacion de la mascota/s.");
+                if(this.idanimalubic==0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de ubicación de la mascota/s.");
                 if(this.idanimalcondlugar==0) this.errorMostrarMsjVivienda.push("Seleccione la condicion del lugar de la mascota/s.");
                 if((this.idtenencia==4)&&(!this.otratenencia)) this.errorMostrarMsjVivienda.push("Especifique la tenencia de la vivienda.");
                 if((this.idtenencia!=4)&&(this.otratenencia)) this.errorMostrarMsjVivienda.push("Elimine lo que coloco en otro tipo de tenecia");

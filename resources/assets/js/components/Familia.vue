@@ -20,8 +20,8 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <select class="form-control col-md-3" id="opcion" name="opcion" v-model="criterio_viv">
-                                        <option value="numvivienda">Numero de Vivienda</option>
-                                        <option value="direccion">Direccion</option>
+                                        <option value="numvivienda">Número de vivienda</option>
+                                        <option value="direccion">Dirección</option>
                                     </select>
                                     <input type="text" v-model="buscar_viv" @keyup.enter="listarVivienda(1,buscar_viv,criterio_viv)" class="form-control" placeholder="Vivienda a buscar">
                                     <button type="submit" @click="listarVivienda(1,buscar_viv,criterio_viv)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
@@ -33,10 +33,10 @@
                                 <thead>
                                     <tr>
                                         <th>Opciones</th>
-                                        <th>Numero de Vivienda</th>
+                                        <th>Número de Vivienda</th>
                                         <th>Fecha Inicial</th>
                                         <th>Fecha de Actualizacion</th>
-                                        <th>Direccion</th>
+                                        <th>Dirección</th>
                                         <th>Estado</th>
                                     </tr>
                                 </thead>
@@ -104,19 +104,19 @@
                         <div class="modal-body">
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input"><b>Numero de Vivienda:</b></label>
+                                    <label class="col-md-3 form-control-label" for="text-input"><b>Número de vivienda:</b></label>
                                     <div class="col-md-9">
                                         <input type="number" v-model="numvivienda" class="form-control" min="0">
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input"><b>Direccion:</b></label>
+                                    <label class="col-md-3 form-control-label" for="text-input"><b>Dirección:</b></label>
                                     <div class="col-md-9">
-                                        <input type="text" v-model="direccion" class="form-control" placeholder="Direccion de la Vivienda">
+                                        <input type="text" v-model="direccion" class="form-control" placeholder="Dirección de la Vivienda">
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input"><b>Tenencia de la Vivienda:</b></label>
+                                    <label class="col-md-3 form-control-label" for="text-input"><b>Tenencia de la vivienda:</b></label>
                                     <div class="col-md-5">
                                         <input type="radio" id="rd01" value="1" v-model="idtenencia" @click="habilitar('tbo01', false)"> <label for="rd01">Propia</label>
                                         <input type="radio" id="rd02" value="2" v-model="idtenencia" @click="habilitar('tbo01', false)"> <label for="rd02">Alquila</label>
@@ -128,14 +128,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input"><b>Tipo Vivienda:</b></label>
+                                    <label class="col-md-3 form-control-label" for="text-input"><b>Tipo vivienda:</b></label>
                                     <div class="col-md-9">
                                         <input type="radio" id="rd05" value="1" v-model="idtipovivienda"> <label for="rd05">Unifamiliar</label>
                                         <input type="radio" id="rd06" value="2" v-model="idtipovivienda"> <label for="rd06">Multifamiliar</label>
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input"><b>Ambientes de la Vivienda:</b></label>
+                                    <label class="col-md-3 form-control-label" for="text-input"><b>Ambientes de la vivienda:</b></label>
                                     <div class="col-md-9">
                                         <input type="radio" id="rd07" value="1" v-model="idambiente"> <label for="rd07">Ambiente unico</label>
                                         <input type="radio" id="rd08" value="2" v-model="idambiente"> <label for="rd08">Ambientes Separados</label>
@@ -200,7 +200,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input"><b>Abastecimiento de Agua:</b></label>
+                                    <label class="col-md-3 form-control-label" for="text-input"><b>Abastecimiento de agua:</b></label>
                                     <div class="col-md-9">
                                         <input type="radio" id="rd36" value="1" v-model="idaguaabast" @click="habilitar('tbo05', false)"> <label for="rd36">Chorro Propio</label>
                                         <input type="radio" id="rd37" value="2" v-model="idaguaabast" @click="habilitar('tbo05', false)"> <label for="rd37">Pozo propio</label>
@@ -212,7 +212,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input"><b>Tratamiento de Aguas Servidas:</b></label>
+                                    <label class="col-md-3 form-control-label" for="text-input"><b>Tratamiento de aguas servidas:</b></label>
                                     <div class="col-md-9">
                                         <input type="radio" id="rd42" value="1" v-model="idaguatrat"> <label for="rd42">Drenaje/Alcantarillado</label>
                                         <input type="radio" id="rd43" value="2" v-model="idaguatrat"> <label for="rd43">Fosa Séptica</label>
@@ -221,7 +221,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input"><b>Eliminación Final de Excretas:</b></label>
+                                    <label class="col-md-3 form-control-label" for="text-input"><b>Eliminación final de excretas:</b></label>
                                     <div class="col-md-9">
                                         <label for="rd46">Letrina/Inodoro: </label><input type="radio" id="rd46" value="2" v-model="ideliminexcretas" @click="habilitarexc(2)">
                                     </div>
@@ -234,7 +234,7 @@
                                     </div>
                                     <label class="col-md-3 form-control-label" for="text-input"></label>
                                     <div class="col-md-9">
-                                        <label class="col-md-2 form-control-label" for="text-input">En Uso:</label>
+                                        <label class="col-md-2 form-control-label" for="text-input">En uso:</label>
                                         <div class="col-md-4">
                                             <input type="number" id="nb02" v-model="inodoro_enuso" class="form-control" min="0" disabled>
                                         </div> 
@@ -257,7 +257,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input"><b>Eliminación de Basura:</b></label>
+                                    <label class="col-md-3 form-control-label" for="text-input"><b>Eliminación de basura:</b></label>
                                     <div class="col-md-9">
                                         <label for="text-input">Adecuado: </label>
                                         <input type="radio" id="rd51" value="1" v-model="ideliminbasura" @click="habilitar('tbo07', false)"> <label for="rd51">Tren de aseo</label>
@@ -276,25 +276,25 @@
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input"><b>Ubicación de los Animales Domésticos:</b></label>
+                                    <label class="col-md-3 form-control-label" for="text-input"><b>Ubicación de los animales domésticos:</b></label>
                                     <div class="col-md-9">
                                         <input type="radio" id="rd57" value="1" v-model="idanimalubic"> <label for="rd57">Adecuado</label>
                                         <input type="radio" id="rd58" value="2" v-model="idanimalubic"> <label for="rd58">Inadecuado</label>
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input"><b>Condiciones del lugar de los Animales Domésticos:</b></label>
+                                    <label class="col-md-3 form-control-label" for="text-input"><b>Condiciones del lugar de los animales domésticos:</b></label>
                                     <div class="col-md-9">
                                         <input type="radio" id="rd59" value="1" v-model="idanimalcondlugar"> <label for="rd59">Adecuado</label>
                                         <input type="radio" id="rd60" value="2" v-model="idanimalcondlugar"> <label for="rd60">Inadecuado</label>
                                     </div>
                                 </div>
                                 <div class="form-group row modalrow">
-                                    <label class="col-md-3 form-control-label" for="text-input"><b>No. de Perros:</b></label>
+                                    <label class="col-md-3 form-control-label" for="text-input"><b>No. de perros:</b></label>
                                     <div class="col-md-3">
                                         <input type="number" v-model="perros" class="form-control" min="0">
                                     </div>
-                                    <label class="col-md-3 form-control-label" for="text-input"><b>No. de Gatos:</b></label>
+                                    <label class="col-md-3 form-control-label" for="text-input"><b>No. de gatos:</b></label>
                                     <div class="col-md-3">
                                         <input type="number" v-model="gatos" class="form-control" min="0">
                                     </div>
@@ -302,7 +302,7 @@
                                 <div class="form-group row modalrow">
                                     <label class="col-md-3 form-control-label" for="text-input"><b>Otra informacion relacionada:</b></label>
                                     <div class="col-md-5">
-                                        <input type="checkbox" id="cb1" value='true' v-model="electricidad"><label for="cb1">Energia electrica</label>
+                                        <input type="checkbox" id="cb1" value='true' v-model="electricidad"><label for="cb1">Energia eléctrica</label>
                                         <input type="checkbox" id="cb2" value='true' v-model="telefonia"><label for="cb2">Señal de telefonia móvil</label>
                                     </div>
                                     <div class="col-md-4">
@@ -352,8 +352,8 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <select class="form-control col-md-3" v-model="criterio_fam">
-                                            <option value="num_familia">Número de Familia</option>
-                                            <option value="num_vivienda">Numero de Vivienda</option>
+                                            <option value="num_familia">Número de familia</option>
+                                            <option value="num_vivienda">Número de vivienda</option>
                                         </select>
                                         <input type="text" v-model="buscar_fam" @keyup.enter="listarFamilia(1,buscar_fam,criterio_fam)" class="form-control" placeholder="Texto a buscar">
                                         <button type="submit" @click="listarFamilia(1,buscar_fam,criterio_fam)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
@@ -365,13 +365,13 @@
                                     <thead>
                                         <tr>
                                             <th>Opciones</th>
-                                            <th>Numero de Familia</th>                                        
+                                            <th>Número de familia</th>                                        
                                             <th>Jefe de familia</th>
                                             <th>Sector</th>
-                                            <th>Ubicacion</th>
+                                            <th>Ubicación</th>
                                             <th>Dirección</th>
-                                            <th>Fecha Inicial</th>
-                                            <th>Fecha de Actualizacion</th>
+                                            <th>Fecha inicial</th>
+                                            <th>Fecha de actualizacion</th>
                                             <th>Estado</th>
                                         </tr>
                                     </thead>
@@ -432,7 +432,7 @@
                         <div class="card-body">
                             <div class="form-group row border">
                                 <div class="col-md-3">
-                                    <label for="">Numero familia:</label>
+                                    <label for="">Número familia:</label>
                                     <input type="number" min="0" class="form-control" v-model="num_familia">
                                 </div>
                                 <div class="col-md-3">
@@ -457,7 +457,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label>Servicio de Salud:</label>
+                                    <label>Servicio de salud:</label>
                                     <select class="form-control" v-model="entidad_salud_id">
                                         <option value="0" disabled>Seleccione</option>
                                         <option value="1">Puesto de Salud</option>
@@ -473,7 +473,7 @@
                                     <input type="text" class="form-control" v-model="sector">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="">Numero de Vivienda:</label>
+                                    <label for="">Número de vivienda:</label>
                                     <select class="form-control" id="sel03" v-model="detalle_vivienda_id">
                                         <option value="0" disabled>Seleccione</option>
                                         <option v-for="viviendas in arrayVivienda2" :key="viviendas.id" :value="viviendas.id" v-text="viviendas.numvivienda"></option>
@@ -509,7 +509,7 @@
                                         <span style="color:orange;">(* Chequee si es hombre, sin chequear si es mujer)</span>
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label>Fecha de Nacimiento: <span style="color:red;" v-show="!nacimiento">(*Ingrese)</span></label>
+                                        <label>Fecha de nacimiento: <span style="color:red;" v-show="!nacimiento">(*Ingrese)</span></label>
                                         <input type="date" class="form-control" v-model="nacimiento">
                                     </div>
                                     <div class="form-group col-md-9">
@@ -521,7 +521,7 @@
                                         <input type="checkbox" id="cb5" value='true' v-model="lider">
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label for="">Puesto de Comunidad:</label>
+                                        <label for="">Puesto de comunidad:</label>
                                         <select class="form-control" v-model="puesto_comunidad_id">
                                             <option value="0" disabled>Seleccione</option>
                                             <option v-for="puestocoms in arrayPuestoCom" :key="puestocoms.id" :value="puestocoms.id" v-text="puestocoms.nombre"></option>
@@ -542,7 +542,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label for="">Comunidad Linguistica: <span style="color:red;" v-show="comlinguistica_id==0">(*Seleccione)</span></label>
+                                        <label for="">Comunidad linguistica: <span style="color:red;" v-show="comlinguistica_id==0">(*Seleccione)</span></label>
                                         <select class="form-control" v-model="comlinguistica_id">
                                             <option value="0" disabled>Seleccione</option>
                                             <option v-for="comlinguisticas in arrayComlinguistica" :key="comlinguisticas.id" :value="comlinguisticas.id" v-text="comlinguisticas.nombre"></option>
@@ -567,37 +567,37 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label for="">Ocupacion: <span style="color:red;" v-show="ocupacion_id==0">(*Seleccione)</span></label>
+                                        <label for="">Ocupación: <span style="color:red;" v-show="ocupacion_id==0">(*Seleccione)</span></label>
                                         <select class="form-control" v-model="ocupacion_id">
                                             <option value="0" disabled>Seleccione</option>
                                             <option v-for="ocupaciones in arrayOcupacion" :key="ocupaciones.id" :value="ocupaciones.id" v-text="ocupaciones.nombre"></option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label for="cb7">Migracion:</label>
+                                        <label for="cb7">Migración:</label>
                                         <input type="checkbox" id="cb7" value='true' v-model="migracion" @click="habilitarmig(!migracion)">
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label for="">Permanencia de Migracion:</label>
+                                        <label for="">Permanencia de migración:</label>
                                         <select class="form-control" id="sel01" v-model="permanencia_id" disabled>
                                             <option value="0" disabled>Seleccione</option>
                                             <option v-for="permanencias in arrayPermanencia" :key="permanencias.id" :value="permanencias.id" v-text="permanencias.nombre"></option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label>Comunidad de Migracion:</label>
+                                        <label>Comunidad de migración:</label>
                                         <input type="text" id="tx01" class="form-control" v-model="commigracion" disabled>
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label>Municipio de Migracion:</label>
+                                        <label>Municipio de migración:</label>
                                         <input type="text" id="tx02" class="form-control" v-model="munmigracion" disabled>
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label>Departamento de Migracion:</label>
+                                        <label>Departamento de migración:</label>
                                         <input type="text" id="tx03" class="form-control" v-model="depmigracion" disabled>
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label for="">Pais de Migracion:</label>
+                                        <label for="">País de migración:</label>
                                         <select class="form-control" id="sel02" v-model="pais_id" disabled>
                                             <option value="0" disabled>Seleccione</option>
                                             <option v-for="paises in arrayPais" :key="paises.id" :value="paises.id" v-text="paises.nombre"></option>
@@ -623,28 +623,28 @@
                                             <th>Opciones</th>
                                             <th>Nombres</th>
                                             <th>Apellidos</th>
-                                            <th>Apellido de Casada</th>
+                                            <th>Apellido de casada</th>
                                             <th>Sexo</th>
-                                            <th>Fecha de Nacimiento</th>
+                                            <th>Fecha de nacimiento</th>
                                             <th>Edad</th>
                                             <th>CUI</th>
                                             <th>Lider</th>
-                                            <th>Puesto Comunidad</th>
+                                            <th>Puesto comunidad</th>
                                             <th>Parentesco</th>
                                             <th>Pueblos</th>
-                                            <th>Comunidad Linguistica</th>
+                                            <th>Comunidad linguistica</th>
                                             <th>Alfabetismo</th>
                                             <th>Escolaridad</th>
                                             <th>Capacidades diferentes</th>
-                                            <th>Ocupacion</th>
-                                            <th>Migracion</th>
-                                            <th>Permanencia de Migracion</th>
-                                            <th>Comunidad de Migracion</th>
-                                            <th>Municipio de Migracion</th>
-                                            <th>Departamento de Migracion</th>
-                                            <th>Pais de Migracion</th>
+                                            <th>Ocupación</th>
+                                            <th>Migración</th>
+                                            <th>Permanencia de migración</th>
+                                            <th>Comunidad de migración</th>
+                                            <th>Municipio de migración</th>
+                                            <th>Departamento de migración</th>
+                                            <th>País de migración</th>
                                             <th>Mortalidad</th>
-                                            <th>Fecha Fallecimiento</th>
+                                            <th>Fecha fallecimiento</th>
                                         </thead>
                                         <tbody v-if="arrayDetalle.length">
                                             <tr v-for="(detalle,index) in arrayDetalle" :key="detalle.id">
@@ -675,7 +675,7 @@
                                                 <td v-text="detalle.fechamortalidad"></td>
                                             </tr>
                                             <tr style="background-color: #CEECF5;">
-                                                <td colspan="24" align="right"><strong>Total de Personas</strong></td>
+                                                <td colspan="24" align="right"><strong>Total de personas</strong></td>
                                                 <td v-text="total_personas"></td>
                                             </tr> 
                                         </tbody>
@@ -690,7 +690,7 @@
                             <div class="form-group row">
                                 <div class="col-md-12">
                                     <button type="button" class="btn btn-secondary" @click="ocultarDetalle()">Cerrar</button>
-                                    <button type="button" class="btn btn-primary" @click="registrarFamilia()">Registrar Familia</button>
+                                    <button type="button" class="btn btn-primary" @click="registrarFamilia()">Registrar familia</button>
                                 </div>
                             </div>
                         </div>
@@ -701,7 +701,7 @@
                         <div class="card-body">
                             <div class="form-group row border">
                                 <div class="col-md-3">
-                                    <label for="">Numero familia</label>
+                                    <label for="">Número familia</label>
                                     <input type="number" min="0" class="form-control" v-model="num_familia">
                                 </div>
                                 <div class="col-md-3">
@@ -726,7 +726,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label>Servicio de Salud</label>
+                                    <label>Servicio de salud</label>
                                     <select class="form-control" v-model="entidad_salud_id">
                                         <option value="0" disabled>Seleccione</option>
                                         <option value="1">Puesto de Salud</option>
@@ -742,7 +742,7 @@
                                     <input type="text" class="form-control" v-model="sector">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="">Numero de Vivienda</label>
+                                    <label for="">Número de vivienda</label>
                                     <select class="form-control" id="sel03" v-model="detalle_vivienda_id">
                                         <option value="0" disabled>Seleccione</option>
                                         <option v-for="viviendas in arrayVivienda2" :key="viviendas.id" :value="viviendas.id" v-text="viviendas.numvivienda"></option>
@@ -778,7 +778,7 @@
                                         <span style="color:orange;">(* Chequee si es hombre, sin chequear si es mujer)</span>
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label>Fecha de Nacimiento: <span style="color:red;" v-show="!nacimiento">(*Ingrese)</span></label>
+                                        <label>Fecha de nacimiento: <span style="color:red;" v-show="!nacimiento">(*Ingrese)</span></label>
                                         <input type="date" class="form-control" v-model="nacimiento">
                                     </div>
                                     <div class="form-group col-md-9">
@@ -790,7 +790,7 @@
                                         <input type="checkbox" id="cb5" value='true' v-model="lider">
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label for="">Puesto de Comunidad:</label>
+                                        <label for="">Puesto de comunidad:</label>
                                         <select class="form-control" v-model="puesto_comunidad_id">
                                             <option value="0" disabled>Seleccione</option>
                                             <option v-for="puestocoms in arrayPuestoCom" :key="puestocoms.id" :value="puestocoms.id" v-text="puestocoms.nombre"></option>
@@ -811,7 +811,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label for="">Comunidad Linguistica: <span style="color:red;" v-show="comlinguistica_id==0">(*Seleccione)</span></label>
+                                        <label for="">Comunidad linguistica: <span style="color:red;" v-show="comlinguistica_id==0">(*Seleccione)</span></label>
                                         <select class="form-control" v-model="comlinguistica_id">
                                             <option value="0" disabled>Seleccione</option>
                                             <option v-for="comlinguisticas in arrayComlinguistica" :key="comlinguisticas.id" :value="comlinguisticas.id" v-text="comlinguisticas.nombre"></option>
@@ -836,37 +836,37 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label for="">Ocupacion: <span style="color:red;" v-show="ocupacion_id==0">(*Seleccione)</span></label>
+                                        <label for="">Ocupación: <span style="color:red;" v-show="ocupacion_id==0">(*Seleccione)</span></label>
                                         <select class="form-control" v-model="ocupacion_id">
                                             <option value="0" disabled>Seleccione</option>
                                             <option v-for="ocupaciones in arrayOcupacion" :key="ocupaciones.id" :value="ocupaciones.id" v-text="ocupaciones.nombre"></option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label for="cb7">Migracion:</label>
+                                        <label for="cb7">Migración:</label>
                                         <input type="checkbox" id="cb7" value='true' v-model="migracion" @click="habilitarmig(!migracion)">
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label for="">Permanencia de Migracion:</label>
+                                        <label for="">Permanencia de migración:</label>
                                         <select class="form-control" id="sel01" v-model="permanencia_id" disabled>
                                             <option value="0" disabled>Seleccione</option>
                                             <option v-for="permanencias in arrayPermanencia" :key="permanencias.id" :value="permanencias.id" v-text="permanencias.nombre"></option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label>Comunidad de Migracion:</label>
+                                        <label>Comunidad de migración:</label>
                                         <input type="text" id="tx01" class="form-control" v-model="commigracion" disabled>
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label>Municipio de Migracion:</label>
+                                        <label>Municipio de migración:</label>
                                         <input type="text" id="tx02" class="form-control" v-model="munmigracion" disabled>
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label>Departamento de Migracion:</label>
+                                        <label>Departamento de migración:</label>
                                         <input type="text" id="tx03" class="form-control" v-model="depmigracion" disabled>
                                     </div>
                                     <div class="form-group col-md-9">
-                                        <label for="">Pais de Migracion:</label>
+                                        <label for="">País de migración:</label>
                                         <select class="form-control" id="sel02" v-model="pais_id" disabled>
                                             <option value="0" disabled>Seleccione</option>
                                             <option v-for="paises in arrayPais" :key="paises.id" :value="paises.id" v-text="paises.nombre"></option>
@@ -895,28 +895,28 @@
                                             <th>Opciones</th>
                                             <th>Nombres</th>
                                             <th>Apellidos</th>
-                                            <th>Apellido de Casada</th>
+                                            <th>Apellido de casada</th>
                                             <th>Sexo</th>
-                                            <th>Fecha de Nacimiento</th>
+                                            <th>Fecha de nacimiento</th>
                                             <th>Edad</th>
                                             <th>CUI</th>
                                             <th>Lider</th>
-                                            <th>Puesto Comunidad</th>
+                                            <th>Puesto comunidad</th>
                                             <th>Parentesco</th>
                                             <th>Pueblos</th>
-                                            <th>Comunidad Linguistica</th>
+                                            <th>Comunidad linguistica</th>
                                             <th>Alfabetismo</th>
                                             <th>Escolaridad</th>
                                             <th>Capacidades diferentes</th>
-                                            <th>Ocupacion</th>
-                                            <th>Migracion</th>
-                                            <th>Permanencia de Migracion</th>
-                                            <th>Comunidad de Migracion</th>
-                                            <th>Municipio de Migracion</th>
-                                            <th>Departamento de Migracion</th>
-                                            <th>Pais de Migracion</th>
+                                            <th>Ocupación</th>
+                                            <th>Migración</th>
+                                            <th>Permanencia de migración</th>
+                                            <th>Comunidad de migración</th>
+                                            <th>Municipio de migración</th>
+                                            <th>Departamento de migración</th>
+                                            <th>País de migración</th>
                                             <th>Mortalidad</th>
-                                            <th>Fecha Fallecimiento</th>
+                                            <th>Fecha fallecimiento</th>
                                         </thead>
                                         <tbody v-if="arrayDetalle.length">
                                             <tr v-for="detalle in arrayDetalle" :key="detalle.persona_id">
@@ -955,7 +955,7 @@
                                                 <td v-text="detalle.fechamortalidad"></td>
                                             </tr>
                                             <tr style="background-color: #CEECF5;">
-                                                <td colspan="24" align="right"><strong>Total de Personas</strong></td>
+                                                <td colspan="24" align="right"><strong>Total de personas</strong></td>
                                                 <td v-text="total_personas"></td>
                                             </tr> 
                                         </tbody>
@@ -981,7 +981,7 @@
                         <div class="card-body">
                             <div class="form-group row border">
                                 <div class="col-md-3">
-                                    <label for="">Numero familia:</label>
+                                    <label for="">Número familia:</label>
                                     <p v-text="num_familia"></p>
                                 </div>
                                 <div class="col-md-3">
@@ -997,7 +997,7 @@
                                     <p v-text="distrito_nombre"></p>
                                 </div>
                                 <div class="col-md-3">
-                                    <label>Servicio de Salud:</label>
+                                    <label>Servicio de salud:</label>
                                     <p v-text="entidad_salud_nombre"></p>
                                 </div>
                                 <div class="col-md-3">
@@ -1005,7 +1005,7 @@
                                     <p v-text="sector"></p>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="">Numero de Vivienda:</label>
+                                    <label for="">Número de vivienda:</label>
                                     <p v-text="num_vivienda"></p>
                                 </div>
                                 <div class="col-md-3">
@@ -1019,28 +1019,28 @@
                                         <thead>
                                             <th>Nombres</th>
                                             <th>Apellidos</th>
-                                            <th>Apellido de Casada</th>
+                                            <th>Apellido de casada</th>
                                             <th>Sexo</th>
-                                            <th>Fecha de Nacimiento</th>
+                                            <th>Fecha de nacimiento</th>
                                             <th>Edad</th>
                                             <th>CUI</th>
                                             <th>Lider</th>
-                                            <th>Puesto Comunidad</th>
+                                            <th>Puesto comunidad</th>
                                             <th>Parentesco</th>
                                             <th>Pueblos</th>
-                                            <th>Comunidad Linguistica</th>
+                                            <th>Comunidad linguistica</th>
                                             <th>Alfabetismo</th>
                                             <th>Escolaridad</th>
                                             <th>Capacidades diferentes</th>
-                                            <th>Ocupacion</th>
-                                            <th>Migracion</th>
-                                            <th>Permanencia de Migracion</th>
-                                            <th>Comunidad de Migracion</th>
-                                            <th>Municipio de Migracion</th>
-                                            <th>Departamento de Migracion</th>
-                                            <th>Pais de Migracion</th>
+                                            <th>Ocupación</th>
+                                            <th>Migración</th>
+                                            <th>Permanencia de migración</th>
+                                            <th>Comunidad de migración</th>
+                                            <th>Municipio de migración</th>
+                                            <th>Departamento de migración</th>
+                                            <th>País de migración</th>
                                             <th>Mortalidad</th>
-                                            <th>Fecha Fallecimiento</th>
+                                            <th>Fecha fallecimiento</th>
                                         </thead>
                                         <tbody v-if="arrayDetalle.length">
                                             <tr v-for="detalle in arrayDetalle" :key="detalle.persona_id">
@@ -1070,7 +1070,7 @@
                                                 <td v-text="detalle.fechamortalidad"></td>
                                             </tr>
                                             <tr style="background-color: #CEECF5;">
-                                                <td colspan="23" align="right"><strong>Total de Personas</strong></td>
+                                                <td colspan="23" align="right"><strong>Total de personas</strong></td>
                                                 <td v-text="total_personas"></td>
                                             </tr> 
                                         </tbody>
@@ -1528,8 +1528,8 @@
                 this.errorVivienda=0;
                 this.errorMostrarMsjVivienda=[];
 
-                if(!this.numvivienda) this.errorMostrarMsjVivienda.push("El numero de la vivienda no puede estar vacio.");
-                if(!this.direccion) this.errorMostrarMsjVivienda.push("La direccion de la vivienda no puede estar vacia.");
+                if(!this.numvivienda) this.errorMostrarMsjVivienda.push("El número de la vivienda no puede estar vacio.");
+                if(!this.direccion) this.errorMostrarMsjVivienda.push("La dirección de la vivienda no puede estar vacia.");
                 if(this.idtenencia==0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de tenencia de la vivienda.");
                 if(this.idtipovivienda==0) this.errorMostrarMsjVivienda.push("Seleccione un tipo de la vivienda.");
                 if(this.idambiente==0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de ambiente de la vivienda.");
@@ -1541,7 +1541,7 @@
                 if(this.idaguatrat==0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de tratamiento de agua.");
                 if(this.ideliminexcretas==0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de eliminacion de excretas.");
                 if(this.ideliminbasura==0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de eliminacion de basura.");
-                if(this.idanimalubic==0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de ubicacion de la mascota/s.");
+                if(this.idanimalubic==0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de ubicación de la mascota/s.");
                 if(this.idanimalcondlugar==0) this.errorMostrarMsjVivienda.push("Seleccione la condicion del lugar de la mascota/s.");
                 if((this.idtenencia==4)&&(!this.otratenencia)) this.errorMostrarMsjVivienda.push("Especifique la tenencia de la vivienda.");
                 if((this.idtenencia!=4)&&(this.otratenencia)) this.errorMostrarMsjVivienda.push("Elimine lo que coloco en otro tipo de tenecia");
@@ -1954,7 +1954,7 @@
                         swal.fire({
                             type: 'error',
                             title: 'Error...',
-                            text: 'Este numero de CUI ya se encuentra agregado!',
+                            text: 'Este número de CUI ya se encuentra agregado!',
                         })
                     }
                     else{
@@ -2135,9 +2135,9 @@
                 this.errorFamilia=0;
                 this.errorMostrarMsjFamilia =[];
 
-                if (this.distrito_id==0) this.errorMostrarMsjFamilia.push("Seleccione un Distrito.");
-                if (this.entidad_salud_id==0) this.errorMostrarMsjFamilia.push("Seleccione una Entidad de Salud.");
-                if (this.detalle_vivienda_id==0) this.errorMostrarMsjFamilia.push("Seleccione un numero de Vivienda.");
+                if (this.distrito_id==0) this.errorMostrarMsjFamilia.push("Seleccione un distrito.");
+                if (this.entidad_salud_id==0) this.errorMostrarMsjFamilia.push("Seleccione una entidad de salud.");
+                if (this.detalle_vivienda_id==0) this.errorMostrarMsjFamilia.push("Seleccione un número de vivienda.");
                 if (!this.sector) this.errorMostrarMsjFamilia.push("El sector donde vive la familia no puede estar vacío.");
                 if (this.num_familia==0) this.errorMostrarMsjFamilia.push("El nombre de usuario no puede estar vacío.");
                 if (this.errorMostrarMsjFamilia.length) this.errorFamilia = 1;

@@ -23,136 +23,136 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Reporte de Jefes de Familia</td>
+                            <td>Reporte de jefes de familia</td>
                             <td>
                                 <button type="button" @click="abrirModalM('jefe', 1)" class="btn btn-info">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Municipio
+                                    <i class="icon-doc"></i>&nbsp;Reporte por municipio
                                 </button><br>
                                 <button type="button" @click="abrirModalC('jefe', 2)" class="btn btn-success">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Sede de territorio
+                                    <i class="icon-doc"></i>&nbsp;Reporte por sede de territorio
                                 </button><br>
                                 <button type="button" @click="abrirModalD('jefe', 3)" class="btn btn-info">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Comunidad
+                                    <i class="icon-doc"></i>&nbsp;Reporte por comunidad
                                 </button>
                             </td>
                             
                         </tr>
                         <tr>
-                            <td>Reporte de Viviendas</td>
+                            <td>Reporte de viviendas</td>
                             <td>
                                 <button type="button" @click="abrirModalM('viviendas', 1)" class="btn btn-info">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Municipio
+                                    <i class="icon-doc"></i>&nbsp;Reporte por municipio
                                 </button><br>
                                 <button type="button" @click="abrirModalC('viviendas', 2)" class="btn btn-success">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Sede de territorio
+                                    <i class="icon-doc"></i>&nbsp;Reporte por sede de territorio
                                 </button><br>
                                 <button type="button" @click="abrirModalD('viviendas', 3)" class="btn btn-info">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Comunidad
+                                    <i class="icon-doc"></i>&nbsp;Reporte por comunidad
                                 </button>
                             </td>
                             
                         </tr>
                         <tr>
-                            <td>Reporte de Sexo de la persona</td>
+                            <td>Reporte de sexo de la persona</td>
                             <td>
                                 <button type="button" @click="abrirModalM('sexo', 1)" class="btn btn-info">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Municipio
+                                    <i class="icon-doc"></i>&nbsp;Reporte por municipio
                                 </button><br>
                                 <button type="button" @click="abrirModalC('sexo', 2)" class="btn btn-success">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Sede de territorio
+                                    <i class="icon-doc"></i>&nbsp;Reporte por sede de territorio
                                 </button><br>
                                 <button type="button" @click="abrirModalD('sexo', 3)" class="btn btn-info">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Comunidad
+                                    <i class="icon-doc"></i>&nbsp;Reporte por comunidad
                                 </button>
                             </td>
                             
                         </tr>
                         <tr>
-                            <td>Reporte de Edades</td>
+                            <td>Reporte de edades</td>
                             <td>
                                 <button type="button" @click="abrirModalMEdades('edad', 1)" class="btn btn-info">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Municipio
+                                    <i class="icon-doc"></i>&nbsp;Reporte por municipio
                                 </button><br>
                                 <button type="button" @click="abrirModalCEdades('edad', 2)" class="btn btn-success">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Sede de territorio
+                                    <i class="icon-doc"></i>&nbsp;Reporte por sede de territorio
                                 </button><br>
                                 <button type="button" @click="abrirModalDEdades('edad', 3)" class="btn btn-info">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Comunidad
+                                    <i class="icon-doc"></i>&nbsp;Reporte por comunidad
                                 </button>
                             </td>
                             
                         </tr>
                         <tr>
-                            <td>Reporte de Capacidades diferentes</td>
+                            <td>Reporte de capacidades diferentes</td>
                             <td>
                                 <button type="button" @click="abrirModalM('discapacidad', 1)" class="btn btn-info">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Municipio
+                                    <i class="icon-doc"></i>&nbsp;Reporte por municipio
                                 </button><br>
                                 <button type="button" @click="abrirModalC('discapacidad', 1)" class="btn btn-success">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Sede de territorio
+                                    <i class="icon-doc"></i>&nbsp;Reporte por sede de territorio
                                 </button><br>
                                 <button type="button" @click="abrirModalD('discapacidad', 1)" class="btn btn-info">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Comunidad
+                                    <i class="icon-doc"></i>&nbsp;Reporte por comunidad
                                 </button>
                             </td>
                             
                         </tr>
                         <tr>
-                            <td>Reporte de Ocupacion</td>
+                            <td>Reporte de ocupación</td>
                             <td>
                                 <button type="button" @click="abrirModalM('ocupacion', 1)" class="btn btn-info">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Municipio
+                                    <i class="icon-doc"></i>&nbsp;Reporte por municipio
                                 </button><br>
                                 <button type="button" @click="abrirModalC('ocupacion', 2)" class="btn btn-success">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Sede de territorio
+                                    <i class="icon-doc"></i>&nbsp;Reporte por sede de territorio
                                 </button><br>
                                 <button type="button" @click="abrirModalD('ocupacion', 3)" class="btn btn-info">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Comunidad
+                                    <i class="icon-doc"></i>&nbsp;Reporte por comunidad
                                 </button>
                             </td>
                             
                         </tr>
                         <tr>
-                            <td>Reporte de Migracion</td>
+                            <td>Reporte de migración</td>
                             <td>
                                 <button type="button" @click="abrirModalM('migracion', 1)" class="btn btn-info">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Municipio
+                                    <i class="icon-doc"></i>&nbsp;Reporte por municipio
                                 </button><br>
                                 <button type="button" @click="abrirModalC('migracion', 2)" class="btn btn-success">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Sede de territorio
+                                    <i class="icon-doc"></i>&nbsp;Reporte por sede de territorio
                                 </button><br>
                                 <button type="button" @click="abrirModalD('migracion', 3)" class="btn btn-info">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Comunidad
+                                    <i class="icon-doc"></i>&nbsp;Reporte por comunidad
                                 </button>
                             </td>
                             
                         </tr>
                         <tr>
-                            <td>Reporte de Fallecidos</td>
+                            <td>Reporte de fallecidos</td>
                             <td>
                                 <button type="button" @click="abrirModalMFallecidos('fallecidos', 1)" class="btn btn-info">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Municipio
+                                    <i class="icon-doc"></i>&nbsp;Reporte por municipio
                                 </button><br>
                                 <button type="button" @click="abrirModalCFallecidos('fallecidos', 2)" class="btn btn-success">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Sede de territorio
+                                    <i class="icon-doc"></i>&nbsp;Reporte por sede de territorio
                                 </button><br>
                                 <button type="button" @click="abrirModalDFallecidos('fallecidos', 3)" class="btn btn-info">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Comunidad
+                                    <i class="icon-doc"></i>&nbsp;Reporte por comunidad
                                 </button>
                             </td>
                             
                         </tr>
                         <tr>
-                            <td>Reporte de Servicios</td>
+                            <td>Reporte de servicios</td>
                             <td>
                                 <button type="button" @click="abrirModalMServicios('servicios', 1)" class="btn btn-info">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Municipio
+                                    <i class="icon-doc"></i>&nbsp;Reporte por municipio
                                 </button><br>
                                 <button type="button" @click="abrirModalCServicios('servicios', 2)" class="btn btn-success">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Sede de territorio
+                                    <i class="icon-doc"></i>&nbsp;Reporte por sede de territorio
                                 </button><br>
                                 <button type="button" @click="abrirModalDServicios('servicios', 3)" class="btn btn-info">
-                                    <i class="icon-doc"></i>&nbsp;Reporte por Comunidad
+                                    <i class="icon-doc"></i>&nbsp;Reporte por comunidad
                                 </button>
                             </td>
                             
@@ -242,7 +242,7 @@
                             </div> 
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">Sede de territorio</label>
+                            <label class="col-md-3 form-control-label" for="text-input">sede de territorio</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad">
                                     <option value="0" disabled>Seleccione</option>
@@ -308,7 +308,7 @@
                             </div> 
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">Sede de territorio</label>
+                            <label class="col-md-3 form-control-label" for="text-input">sede de territorio</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad" @change="ComunidadS()">
                                     <option value="0" disabled>Seleccione</option>
@@ -454,7 +454,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">Sede de territorio</label>
+                            <label class="col-md-3 form-control-label" for="text-input">sede de territorio</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad">
                                     <option value="0" disabled>Seleccione</option>
@@ -536,7 +536,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">Sede de territorio</label>
+                            <label class="col-md-3 form-control-label" for="text-input">sede de territorio</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad" @change="ComunidadS()">
                                     <option value="0" disabled>Seleccione</option>
@@ -679,7 +679,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">Sede de territorio</label>
+                            <label class="col-md-3 form-control-label" for="text-input">sede de territorio</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad">
                                     <option value="0" disabled>Seleccione</option>
@@ -740,7 +740,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">Sede de territorio</label>
+                            <label class="col-md-3 form-control-label" for="text-input">sede de territorio</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad" @change="ComunidadS()">
                                     <option value="0" disabled>Seleccione</option>
@@ -862,7 +862,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">Sede de territorio</label>
+                            <label class="col-md-3 form-control-label" for="text-input">sede de territorio</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad">
                                     <option value="0" disabled>Seleccione</option>
@@ -923,7 +923,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">Sede de territorio</label>
+                            <label class="col-md-3 form-control-label" for="text-input">sede de territorio</label>
                             <div class="col-md-9">
                                 <select class="form-control" v-model="idcomunidad" @change="ComunidadS()">
                                     <option value="0" disabled>Seleccione</option>
@@ -1027,8 +1027,8 @@
                     return;
                 }
                 let me = this;
-                //window.open('https://sicpowquetzaltenango.com/RJefes/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
-                window.open('http://localhost:8000/RJefes/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+                window.open('https://sicpowquetzaltenango.com/RJefes/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+                //window.open('http://localhost:8000/RJefes/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
                 me.cerrarModal();
             },
             cargarRViviendas(){
@@ -1044,8 +1044,8 @@
                     return;
                 }
                 let me = this;
-                //window.open('https://sicpowquetzaltenango.com/RSexo/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
-                window.open('http://localhost:8000/RSexo/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+                window.open('https://sicpowquetzaltenango.com/RSexo/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+                //window.open('http://localhost:8000/RSexo/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
                 me.cerrarModal();
             },
             cargarREdad(){
@@ -1053,8 +1053,8 @@
                     return;
                 }
                 let me = this;
-                //window.open('https://sicpowquetzaltenango.com/REdad/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+'/'+this.fecha1+'/'+this.fecha2+','+'_blank');
-                window.open('http://localhost:8000/REdad/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+'/'+this.fecha1+'/'+this.fecha2+'/'+this.edad1+','+'_blank');
+                window.open('https://sicpowquetzaltenango.com/REdad/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+'/'+this.fecha1+'/'+this.fecha2+','+'_blank');
+                //window.open('http://localhost:8000/REdad/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+'/'+this.fecha1+'/'+this.fecha2+'/'+this.edad1+','+'_blank');
                 me.cerrarModal();
             },
             cargarRDiscapacidad(){
@@ -1062,8 +1062,8 @@
                     return;
                 }
                 let me = this;
-                //window.open('https://sicpowquetzaltenango.com/RDiscapacidad/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
-                window.open('http://localhost:8000/RDiscapacidad/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+                window.open('https://sicpowquetzaltenango.com/RDiscapacidad/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+                //window.open('http://localhost:8000/RDiscapacidad/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
                 me.cerrarModal();
             },
             cargarROcupacion(){
@@ -1071,8 +1071,8 @@
                     return;
                 }
                 let me = this;
-                //window.open('https://sicpowquetzaltenango.com/ROcupacion/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
-                window.open('http://localhost:8000/ROcupacion/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+                window.open('https://sicpowquetzaltenango.com/ROcupacion/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+                //window.open('http://localhost:8000/ROcupacion/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
                 me.cerrarModal();
             },
             cargarRMigracion(){
@@ -1080,8 +1080,8 @@
                     return;
                 }
                 let me = this;
-                //window.open('https://sicpowquetzaltenango.com/RMigracion/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
-                window.open('http://localhost:8000/RMigracion/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+                window.open('https://sicpowquetzaltenango.com/RMigracion/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+                //window.open('http://localhost:8000/RMigracion/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
                 me.cerrarModal();
             },
             cargarRFallecidos(){
@@ -1089,8 +1089,8 @@
                     return;
                 }
                 let me = this;
-                //window.open('https://sicpowquetzaltenango.com/RFallecidos/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+'/'+this.fecha1+'/'+this.fecha2+','+'_blank');
-                window.open('http://localhost:8000/RFallecidos/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+'/'+this.fecha1+'/'+this.fecha2+','+'_blank');
+                window.open('https://sicpowquetzaltenango.com/RFallecidos/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+'/'+this.fecha1+'/'+this.fecha2+','+'_blank');
+                //window.open('http://localhost:8000/RFallecidos/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+'/'+this.fecha1+'/'+this.fecha2+','+'_blank');
                 me.cerrarModal();
             },
             cargarRServicios(){
@@ -1240,7 +1240,7 @@
                     case "jefe":
                     {
                         this.modal = 1;
-                        this.tituloModal = 'Reporte Jefes de Familia';
+                        this.tituloModal = 'Reporte jefes de familia';
                         this.tipoAccion = 1;
                         this.filtro = 1;
                         break;
@@ -1249,7 +1249,7 @@
                     case "viviendas":
                     {
                         this.modal = 1;
-                        this.tituloModal = 'Reporte de Viviendas';
+                        this.tituloModal = 'Reporte de viviendas';
                         this.nombre = '';
                         this.tipoAccion = 2;
                         this.filtro = 1;
@@ -1259,7 +1259,7 @@
                     case "sexo":
                     {
                         this.modal = 1;
-                        this.tituloModal = 'Reporte de Sexo de las personas';
+                        this.tituloModal = 'Reporte de sexo de las personas';
                         this.nombre = '';
                         this.tipoAccion = 3;
                         this.filtro = 1;
@@ -1269,7 +1269,7 @@
                     case "discapacidad":
                     {
                         this.modal = 1;
-                        this.tituloModal = 'Reporte de Discapacidad';
+                        this.tituloModal = 'Reporte de discapacidad';
                         this.nombre = '';
                         this.tipoAccion = 5;
                         this.filtro = 1;
@@ -1279,7 +1279,7 @@
                     case "ocupacion":
                     {
                         this.modal = 1;
-                        this.tituloModal = 'Reporte de Ocupacion u Oficio';
+                        this.tituloModal = 'Reporte de ocupación u oficio';
                         this.nombre = '';
                         this.tipoAccion = 6;
                         this.filtro = 1;
@@ -1289,7 +1289,7 @@
                     case "migracion":
                     {
                         this.modal = 1;
-                        this.tituloModal = 'Reporte de Migracion';
+                        this.tituloModal = 'Reporte de migración';
                         this.nombre = '';
                         this.tipoAccion = 7;
                         this.filtro = 1;
@@ -1306,7 +1306,7 @@
                     case "jefe":
                     {
                         this.modalComunidad = 1;
-                        this.tituloModal = 'Reporte Jefes de Familia';
+                        this.tituloModal = 'Reporte jefes de familia';
                         this.tipoAccion = 1;
                         this.filtro = 2;
                         break;
@@ -1315,7 +1315,7 @@
                     case "viviendas":
                     {
                         this.modalComunidad = 1;
-                        this.tituloModal = 'Reporte de Viviendas';
+                        this.tituloModal = 'Reporte de viviendas';
                         this.nombre = '';
                         this.tipoAccion = 2;
                         this.filtro = 2;
@@ -1325,7 +1325,7 @@
                     case "sexo":
                     {
                         this.modalComunidad = 1;
-                        this.tituloModal = 'Reporte de Sexo de las personas';
+                        this.tituloModal = 'Reporte de sexo de las personas';
                         this.nombre = '';
                         this.tipoAccion = 3;
                         this.filtro = 2;
@@ -1335,7 +1335,7 @@
                     case "discapacidad":
                     {
                         this.modalComunidad = 1;
-                        this.tituloModal = 'Reporte de Discapacidad';
+                        this.tituloModal = 'Reporte de discapacidad';
                         this.nombre = '';
                         this.tipoAccion = 5;
                         this.filtro = 2;
@@ -1345,7 +1345,7 @@
                     case "ocupacion":
                     {
                         this.modalComunidad = 1;
-                        this.tituloModal = 'Reporte de Ocupacion u Oficio';
+                        this.tituloModal = 'Reporte de ocupación u oficio';
                         this.nombre = '';
                         this.tipoAccion = 6;
                         this.filtro = 2;
@@ -1355,7 +1355,7 @@
                     case "migracion":
                     {
                         this.modalComunidad = 1;
-                        this.tituloModal = 'Reporte de Migracion';
+                        this.tituloModal = 'Reporte de migración';
                         this.nombre = '';
                         this.tipoAccion = 7;
                         this.filtro = 2;
@@ -1372,7 +1372,7 @@
                     case "jefe":
                     {
                         this.modalDistrito = 1;
-                        this.tituloModal = 'Reporte Jefes de Familia';
+                        this.tituloModal = 'Reporte jefes de familia';
                         this.tipoAccion = 1;
                         this.filtro = 3;
                         break;
@@ -1381,7 +1381,7 @@
                     case "viviendas":
                     {
                         this.modalDistrito = 1;
-                        this.tituloModal = 'Reporte de Viviendas';
+                        this.tituloModal = 'Reporte de viviendas';
                         this.nombre = '';
                         this.tipoAccion = 2;
                         this.filtro = 3;
@@ -1391,7 +1391,7 @@
                     case "sexo":
                     {
                         this.modalDistrito = 1;
-                        this.tituloModal = 'Reporte de Sexo de las personas';
+                        this.tituloModal = 'Reporte de sexo de las personas';
                         this.nombre = '';
                         this.tipoAccion = 3;
                         this.filtro = 3;
@@ -1403,7 +1403,7 @@
                     case "discapacidad":
                     {
                         this.modalDistrito = 1;
-                        this.tituloModal = 'Reporte de Discapacidad';
+                        this.tituloModal = 'Reporte de discapacidad';
                         this.nombre = '';
                         this.tipoAccion = 5;
                         this.filtro = 3;
@@ -1413,7 +1413,7 @@
                     case "ocupacion":
                     {
                         this.modalDistrito = 1;
-                        this.tituloModal = 'Reporte de Ocupacion u Oficio';
+                        this.tituloModal = 'Reporte de ocupación u oficio';
                         this.nombre = '';
                         this.tipoAccion = 6;
                         this.filtro = 3;
@@ -1423,7 +1423,7 @@
                     case "migracion":
                     {
                         this.modalDistrito = 1;
-                        this.tituloModal = 'Reporte de Migracion';
+                        this.tituloModal = 'Reporte de migración';
                         this.nombre = '';
                         this.tipoAccion = 7;
                         this.filtro = 3;
@@ -1439,7 +1439,7 @@
                     case "servicios":
                     {
                         this.modalServiciosM = 1;
-                        this.tituloModal = 'Reporte Servicios';
+                        this.tituloModal = 'Reporte servicios';
                         this.tipoAccion = 9;
                         this.filtro = 11;
                         break;
@@ -1454,7 +1454,7 @@
                     case "servicios":
                     {
                         this.modalServiciosC = 1;
-                        this.tituloModal = 'Reporte Servicios';
+                        this.tituloModal = 'Reporte servicios';
                         this.tipoAccion = 9;
                         this.filtro = 12;
                         break;
@@ -1470,7 +1470,7 @@
                     case "servicios":
                     {
                         this.modalServiciosD = 1;
-                        this.tituloModal = 'Reporte Servicios';
+                        this.tituloModal = 'Reporte servicios';
                         this.tipoAccion = 9;
                         this.filtro = 13;
                         break;
@@ -1484,7 +1484,7 @@
                     case "edad":
                     {
                         this.modalEdadesM = 1;
-                        this.tituloModal = 'Reporte de Edad';
+                        this.tituloModal = 'Reporte de edad';
                         this.nombre = '';
                         this.tipoAccion = 4;
                         this.filtro = 14;
@@ -1500,7 +1500,7 @@
                     case "edad":
                     {
                         this.modalEdadesC = 1;
-                        this.tituloModal = 'Reporte de Edad';
+                        this.tituloModal = 'Reporte de edad';
                         this.nombre = '';
                         this.tipoAccion = 4;
                         this.filtro = 15;
@@ -1517,7 +1517,7 @@
                     case "edad":
                     {
                         this.modalEdadesD = 1;
-                        this.tituloModal = 'Reporte de Edad';
+                        this.tituloModal = 'Reporte de edad';
                         this.nombre = '';
                         this.tipoAccion = 4;
                         this.filtro = 16;
@@ -1532,7 +1532,7 @@
                     case "fallecidos":
                     {
                         this.modalFallecidosM = 1;
-                        this.tituloModal = 'Reporte de Fallecidos';
+                        this.tituloModal = 'Reporte de fallecidos';
                         this.nombre = '';
                         this.tipoAccion = 8;
                         this.filtro = 17;
@@ -1548,7 +1548,7 @@
                     case "fallecidos":
                     {
                         this.modalFallecidosC = 1;
-                        this.tituloModal = 'Reporte de Fallecidos';
+                        this.tituloModal = 'Reporte de fallecidos';
                         this.nombre = '';
                         this.tipoAccion = 8;
                         this.filtro = 18;
@@ -1565,7 +1565,7 @@
                     case "fallecidos":
                     {
                         this.modalFallecidosD = 1;
-                        this.tituloModal = 'Reporte de Fallecidos';
+                        this.tituloModal = 'Reporte de fallecidos';
                         this.nombre = '';
                         this.tipoAccion = 8;
                         this.filtro = 19;

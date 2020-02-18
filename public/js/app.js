@@ -4193,7 +4193,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.errorVivienda = 0;
       this.errorMostrarMsjVivienda = [];
       if (!this.numvivienda) this.errorMostrarMsjVivienda.push("El numero de la vivienda no puede estar vacio.");
-      if (!this.direccion) this.errorMostrarMsjVivienda.push("La direccion de la vivienda no puede estar vacia.");
+      if (!this.direccion) this.errorMostrarMsjVivienda.push("La dirección de la vivienda no puede estar vacia.");
       if (this.idtenencia == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de tenencia de la vivienda.");
       if (this.idtipovivienda == 0) this.errorMostrarMsjVivienda.push("Seleccione un tipo de la vivienda.");
       if (this.idambiente == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de ambiente de la vivienda.");
@@ -4205,7 +4205,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (this.idaguatrat == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de tratamiento de agua.");
       if (this.ideliminexcretas == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de eliminacion de excretas.");
       if (this.ideliminbasura == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de eliminacion de basura.");
-      if (this.idanimalubic == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de ubicacion de la mascota/s.");
+      if (this.idanimalubic == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de ubicación de la mascota/s.");
       if (this.idanimalcondlugar == 0) this.errorMostrarMsjVivienda.push("Seleccione la condicion del lugar de la mascota/s.");
       if (this.idtenencia == 4 && !this.otratenencia) this.errorMostrarMsjVivienda.push("Especifique la tenencia de la vivienda.");
       if (this.idtenencia != 4 && this.otratenencia) this.errorMostrarMsjVivienda.push("Elimine lo que coloco en otro tipo de tenecia");
@@ -7100,8 +7100,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     validarVivienda: function validarVivienda() {
       this.errorVivienda = 0;
       this.errorMostrarMsjVivienda = [];
-      if (!this.numvivienda) this.errorMostrarMsjVivienda.push("El numero de la vivienda no puede estar vacio.");
-      if (!this.direccion) this.errorMostrarMsjVivienda.push("La direccion de la vivienda no puede estar vacia.");
+      if (!this.numvivienda) this.errorMostrarMsjVivienda.push("El número de la vivienda no puede estar vacio.");
+      if (!this.direccion) this.errorMostrarMsjVivienda.push("La dirección de la vivienda no puede estar vacia.");
       if (this.idtenencia == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de tenencia de la vivienda.");
       if (this.idtipovivienda == 0) this.errorMostrarMsjVivienda.push("Seleccione un tipo de la vivienda.");
       if (this.idambiente == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de ambiente de la vivienda.");
@@ -7113,7 +7113,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (this.idaguatrat == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de tratamiento de agua.");
       if (this.ideliminexcretas == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de eliminacion de excretas.");
       if (this.ideliminbasura == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de eliminacion de basura.");
-      if (this.idanimalubic == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de ubicacion de la mascota/s.");
+      if (this.idanimalubic == 0) this.errorMostrarMsjVivienda.push("Seleccione el tipo de ubicación de la mascota/s.");
       if (this.idanimalcondlugar == 0) this.errorMostrarMsjVivienda.push("Seleccione la condicion del lugar de la mascota/s.");
       if (this.idtenencia == 4 && !this.otratenencia) this.errorMostrarMsjVivienda.push("Especifique la tenencia de la vivienda.");
       if (this.idtenencia != 4 && this.otratenencia) this.errorMostrarMsjVivienda.push("Elimine lo que coloco en otro tipo de tenecia");
@@ -7443,7 +7443,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           swal.fire({
             type: 'error',
             title: 'Error...',
-            text: 'Este numero de CUI ya se encuentra agregado!'
+            text: 'Este número de CUI ya se encuentra agregado!'
           });
         } else {
           me.parentesco_nombre = me.arrayParentesco[me.parentesco_id - 1].nombre;
@@ -7615,9 +7615,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     validarFamilia: function validarFamilia() {
       this.errorFamilia = 0;
       this.errorMostrarMsjFamilia = [];
-      if (this.distrito_id == 0) this.errorMostrarMsjFamilia.push("Seleccione un Distrito.");
-      if (this.entidad_salud_id == 0) this.errorMostrarMsjFamilia.push("Seleccione una Entidad de Salud.");
-      if (this.detalle_vivienda_id == 0) this.errorMostrarMsjFamilia.push("Seleccione un numero de Vivienda.");
+      if (this.distrito_id == 0) this.errorMostrarMsjFamilia.push("Seleccione un distrito.");
+      if (this.entidad_salud_id == 0) this.errorMostrarMsjFamilia.push("Seleccione una entidad de salud.");
+      if (this.detalle_vivienda_id == 0) this.errorMostrarMsjFamilia.push("Seleccione un número de vivienda.");
       if (!this.sector) this.errorMostrarMsjFamilia.push("El sector donde vive la familia no puede estar vacío.");
       if (this.num_familia == 0) this.errorMostrarMsjFamilia.push("El nombre de usuario no puede estar vacío.");
       if (this.errorMostrarMsjFamilia.length) this.errorFamilia = 1;
@@ -9722,9 +9722,9 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      var me = this; //window.open('https://sicpowquetzaltenango.com/RJefes/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+      var me = this;
+      window.open('https://sicpowquetzaltenango.com/RJefes/' + this.filtro + '/' + this.idmunicipio + '/' + this.idcomunidad + '/' + this.iddistrito + ',' + '_blank'); //window.open('http://localhost:8000/RJefes/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
 
-      window.open('http://localhost:8000/RJefes/' + this.filtro + '/' + this.idmunicipio + '/' + this.idcomunidad + '/' + this.iddistrito + ',' + '_blank');
       me.cerrarModal();
     },
     cargarRViviendas: function cargarRViviendas() {
@@ -9741,9 +9741,9 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      var me = this; //window.open('https://sicpowquetzaltenango.com/RSexo/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+      var me = this;
+      window.open('https://sicpowquetzaltenango.com/RSexo/' + this.filtro + '/' + this.idmunicipio + '/' + this.idcomunidad + '/' + this.iddistrito + ',' + '_blank'); //window.open('http://localhost:8000/RSexo/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
 
-      window.open('http://localhost:8000/RSexo/' + this.filtro + '/' + this.idmunicipio + '/' + this.idcomunidad + '/' + this.iddistrito + ',' + '_blank');
       me.cerrarModal();
     },
     cargarREdad: function cargarREdad() {
@@ -9751,9 +9751,9 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      var me = this; //window.open('https://sicpowquetzaltenango.com/REdad/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+'/'+this.fecha1+'/'+this.fecha2+','+'_blank');
+      var me = this;
+      window.open('https://sicpowquetzaltenango.com/REdad/' + this.filtro + '/' + this.idmunicipio + '/' + this.idcomunidad + '/' + this.iddistrito + '/' + this.fecha1 + '/' + this.fecha2 + ',' + '_blank'); //window.open('http://localhost:8000/REdad/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+'/'+this.fecha1+'/'+this.fecha2+'/'+this.edad1+','+'_blank');
 
-      window.open('http://localhost:8000/REdad/' + this.filtro + '/' + this.idmunicipio + '/' + this.idcomunidad + '/' + this.iddistrito + '/' + this.fecha1 + '/' + this.fecha2 + '/' + this.edad1 + ',' + '_blank');
       me.cerrarModal();
     },
     cargarRDiscapacidad: function cargarRDiscapacidad() {
@@ -9761,9 +9761,9 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      var me = this; //window.open('https://sicpowquetzaltenango.com/RDiscapacidad/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+      var me = this;
+      window.open('https://sicpowquetzaltenango.com/RDiscapacidad/' + this.filtro + '/' + this.idmunicipio + '/' + this.idcomunidad + '/' + this.iddistrito + ',' + '_blank'); //window.open('http://localhost:8000/RDiscapacidad/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
 
-      window.open('http://localhost:8000/RDiscapacidad/' + this.filtro + '/' + this.idmunicipio + '/' + this.idcomunidad + '/' + this.iddistrito + ',' + '_blank');
       me.cerrarModal();
     },
     cargarROcupacion: function cargarROcupacion() {
@@ -9771,9 +9771,9 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      var me = this; //window.open('https://sicpowquetzaltenango.com/ROcupacion/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+      var me = this;
+      window.open('https://sicpowquetzaltenango.com/ROcupacion/' + this.filtro + '/' + this.idmunicipio + '/' + this.idcomunidad + '/' + this.iddistrito + ',' + '_blank'); //window.open('http://localhost:8000/ROcupacion/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
 
-      window.open('http://localhost:8000/ROcupacion/' + this.filtro + '/' + this.idmunicipio + '/' + this.idcomunidad + '/' + this.iddistrito + ',' + '_blank');
       me.cerrarModal();
     },
     cargarRMigracion: function cargarRMigracion() {
@@ -9781,9 +9781,9 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      var me = this; //window.open('https://sicpowquetzaltenango.com/RMigracion/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
+      var me = this;
+      window.open('https://sicpowquetzaltenango.com/RMigracion/' + this.filtro + '/' + this.idmunicipio + '/' + this.idcomunidad + '/' + this.iddistrito + ',' + '_blank'); //window.open('http://localhost:8000/RMigracion/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+','+'_blank');
 
-      window.open('http://localhost:8000/RMigracion/' + this.filtro + '/' + this.idmunicipio + '/' + this.idcomunidad + '/' + this.iddistrito + ',' + '_blank');
       me.cerrarModal();
     },
     cargarRFallecidos: function cargarRFallecidos() {
@@ -9791,9 +9791,9 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      var me = this; //window.open('https://sicpowquetzaltenango.com/RFallecidos/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+'/'+this.fecha1+'/'+this.fecha2+','+'_blank');
+      var me = this;
+      window.open('https://sicpowquetzaltenango.com/RFallecidos/' + this.filtro + '/' + this.idmunicipio + '/' + this.idcomunidad + '/' + this.iddistrito + '/' + this.fecha1 + '/' + this.fecha2 + ',' + '_blank'); //window.open('http://localhost:8000/RFallecidos/'+this.filtro+'/'+this.idmunicipio+'/'+this.idcomunidad+'/'+this.iddistrito+'/'+this.fecha1+'/'+this.fecha2+','+'_blank');
 
-      window.open('http://localhost:8000/RFallecidos/' + this.filtro + '/' + this.idmunicipio + '/' + this.idcomunidad + '/' + this.iddistrito + '/' + this.fecha1 + '/' + this.fecha2 + ',' + '_blank');
       me.cerrarModal();
     },
     cargarRServicios: function cargarRServicios() {
@@ -9917,7 +9917,7 @@ __webpack_require__.r(__webpack_exports__);
         case "jefe":
           {
             this.modal = 1;
-            this.tituloModal = 'Reporte Jefes de Familia';
+            this.tituloModal = 'Reporte jefes de familia';
             this.tipoAccion = 1;
             this.filtro = 1;
             break;
@@ -9926,7 +9926,7 @@ __webpack_require__.r(__webpack_exports__);
         case "viviendas":
           {
             this.modal = 1;
-            this.tituloModal = 'Reporte de Viviendas';
+            this.tituloModal = 'Reporte de viviendas';
             this.nombre = '';
             this.tipoAccion = 2;
             this.filtro = 1;
@@ -9936,7 +9936,7 @@ __webpack_require__.r(__webpack_exports__);
         case "sexo":
           {
             this.modal = 1;
-            this.tituloModal = 'Reporte de Sexo de las personas';
+            this.tituloModal = 'Reporte de sexo de las personas';
             this.nombre = '';
             this.tipoAccion = 3;
             this.filtro = 1;
@@ -9946,7 +9946,7 @@ __webpack_require__.r(__webpack_exports__);
         case "discapacidad":
           {
             this.modal = 1;
-            this.tituloModal = 'Reporte de Discapacidad';
+            this.tituloModal = 'Reporte de discapacidad';
             this.nombre = '';
             this.tipoAccion = 5;
             this.filtro = 1;
@@ -9956,7 +9956,7 @@ __webpack_require__.r(__webpack_exports__);
         case "ocupacion":
           {
             this.modal = 1;
-            this.tituloModal = 'Reporte de Ocupacion u Oficio';
+            this.tituloModal = 'Reporte de ocupación u oficio';
             this.nombre = '';
             this.tipoAccion = 6;
             this.filtro = 1;
@@ -9966,7 +9966,7 @@ __webpack_require__.r(__webpack_exports__);
         case "migracion":
           {
             this.modal = 1;
-            this.tituloModal = 'Reporte de Migracion';
+            this.tituloModal = 'Reporte de migración';
             this.nombre = '';
             this.tipoAccion = 7;
             this.filtro = 1;
@@ -9981,7 +9981,7 @@ __webpack_require__.r(__webpack_exports__);
         case "jefe":
           {
             this.modalComunidad = 1;
-            this.tituloModal = 'Reporte Jefes de Familia';
+            this.tituloModal = 'Reporte jefes de familia';
             this.tipoAccion = 1;
             this.filtro = 2;
             break;
@@ -9990,7 +9990,7 @@ __webpack_require__.r(__webpack_exports__);
         case "viviendas":
           {
             this.modalComunidad = 1;
-            this.tituloModal = 'Reporte de Viviendas';
+            this.tituloModal = 'Reporte de viviendas';
             this.nombre = '';
             this.tipoAccion = 2;
             this.filtro = 2;
@@ -10000,7 +10000,7 @@ __webpack_require__.r(__webpack_exports__);
         case "sexo":
           {
             this.modalComunidad = 1;
-            this.tituloModal = 'Reporte de Sexo de las personas';
+            this.tituloModal = 'Reporte de sexo de las personas';
             this.nombre = '';
             this.tipoAccion = 3;
             this.filtro = 2;
@@ -10010,7 +10010,7 @@ __webpack_require__.r(__webpack_exports__);
         case "discapacidad":
           {
             this.modalComunidad = 1;
-            this.tituloModal = 'Reporte de Discapacidad';
+            this.tituloModal = 'Reporte de discapacidad';
             this.nombre = '';
             this.tipoAccion = 5;
             this.filtro = 2;
@@ -10020,7 +10020,7 @@ __webpack_require__.r(__webpack_exports__);
         case "ocupacion":
           {
             this.modalComunidad = 1;
-            this.tituloModal = 'Reporte de Ocupacion u Oficio';
+            this.tituloModal = 'Reporte de ocupación u oficio';
             this.nombre = '';
             this.tipoAccion = 6;
             this.filtro = 2;
@@ -10030,7 +10030,7 @@ __webpack_require__.r(__webpack_exports__);
         case "migracion":
           {
             this.modalComunidad = 1;
-            this.tituloModal = 'Reporte de Migracion';
+            this.tituloModal = 'Reporte de migración';
             this.nombre = '';
             this.tipoAccion = 7;
             this.filtro = 2;
@@ -10045,7 +10045,7 @@ __webpack_require__.r(__webpack_exports__);
         case "jefe":
           {
             this.modalDistrito = 1;
-            this.tituloModal = 'Reporte Jefes de Familia';
+            this.tituloModal = 'Reporte jefes de familia';
             this.tipoAccion = 1;
             this.filtro = 3;
             break;
@@ -10054,7 +10054,7 @@ __webpack_require__.r(__webpack_exports__);
         case "viviendas":
           {
             this.modalDistrito = 1;
-            this.tituloModal = 'Reporte de Viviendas';
+            this.tituloModal = 'Reporte de viviendas';
             this.nombre = '';
             this.tipoAccion = 2;
             this.filtro = 3;
@@ -10064,7 +10064,7 @@ __webpack_require__.r(__webpack_exports__);
         case "sexo":
           {
             this.modalDistrito = 1;
-            this.tituloModal = 'Reporte de Sexo de las personas';
+            this.tituloModal = 'Reporte de sexo de las personas';
             this.nombre = '';
             this.tipoAccion = 3;
             this.filtro = 3;
@@ -10074,7 +10074,7 @@ __webpack_require__.r(__webpack_exports__);
         case "discapacidad":
           {
             this.modalDistrito = 1;
-            this.tituloModal = 'Reporte de Discapacidad';
+            this.tituloModal = 'Reporte de discapacidad';
             this.nombre = '';
             this.tipoAccion = 5;
             this.filtro = 3;
@@ -10084,7 +10084,7 @@ __webpack_require__.r(__webpack_exports__);
         case "ocupacion":
           {
             this.modalDistrito = 1;
-            this.tituloModal = 'Reporte de Ocupacion u Oficio';
+            this.tituloModal = 'Reporte de ocupación u oficio';
             this.nombre = '';
             this.tipoAccion = 6;
             this.filtro = 3;
@@ -10094,7 +10094,7 @@ __webpack_require__.r(__webpack_exports__);
         case "migracion":
           {
             this.modalDistrito = 1;
-            this.tituloModal = 'Reporte de Migracion';
+            this.tituloModal = 'Reporte de migración';
             this.nombre = '';
             this.tipoAccion = 7;
             this.filtro = 3;
@@ -10109,7 +10109,7 @@ __webpack_require__.r(__webpack_exports__);
         case "servicios":
           {
             this.modalServiciosM = 1;
-            this.tituloModal = 'Reporte Servicios';
+            this.tituloModal = 'Reporte servicios';
             this.tipoAccion = 9;
             this.filtro = 11;
             break;
@@ -10123,7 +10123,7 @@ __webpack_require__.r(__webpack_exports__);
         case "servicios":
           {
             this.modalServiciosC = 1;
-            this.tituloModal = 'Reporte Servicios';
+            this.tituloModal = 'Reporte servicios';
             this.tipoAccion = 9;
             this.filtro = 12;
             break;
@@ -10137,7 +10137,7 @@ __webpack_require__.r(__webpack_exports__);
         case "servicios":
           {
             this.modalServiciosD = 1;
-            this.tituloModal = 'Reporte Servicios';
+            this.tituloModal = 'Reporte servicios';
             this.tipoAccion = 9;
             this.filtro = 13;
             break;
@@ -10151,7 +10151,7 @@ __webpack_require__.r(__webpack_exports__);
         case "edad":
           {
             this.modalEdadesM = 1;
-            this.tituloModal = 'Reporte de Edad';
+            this.tituloModal = 'Reporte de edad';
             this.nombre = '';
             this.tipoAccion = 4;
             this.filtro = 14;
@@ -10166,7 +10166,7 @@ __webpack_require__.r(__webpack_exports__);
         case "edad":
           {
             this.modalEdadesC = 1;
-            this.tituloModal = 'Reporte de Edad';
+            this.tituloModal = 'Reporte de edad';
             this.nombre = '';
             this.tipoAccion = 4;
             this.filtro = 15;
@@ -10181,7 +10181,7 @@ __webpack_require__.r(__webpack_exports__);
         case "edad":
           {
             this.modalEdadesD = 1;
-            this.tituloModal = 'Reporte de Edad';
+            this.tituloModal = 'Reporte de edad';
             this.nombre = '';
             this.tipoAccion = 4;
             this.filtro = 16;
@@ -10196,7 +10196,7 @@ __webpack_require__.r(__webpack_exports__);
         case "fallecidos":
           {
             this.modalFallecidosM = 1;
-            this.tituloModal = 'Reporte de Fallecidos';
+            this.tituloModal = 'Reporte de fallecidos';
             this.nombre = '';
             this.tipoAccion = 8;
             this.filtro = 17;
@@ -10211,7 +10211,7 @@ __webpack_require__.r(__webpack_exports__);
         case "fallecidos":
           {
             this.modalFallecidosC = 1;
-            this.tituloModal = 'Reporte de Fallecidos';
+            this.tituloModal = 'Reporte de fallecidos';
             this.nombre = '';
             this.tipoAccion = 8;
             this.filtro = 18;
@@ -10226,7 +10226,7 @@ __webpack_require__.r(__webpack_exports__);
         case "fallecidos":
           {
             this.modalFallecidosD = 1;
-            this.tituloModal = 'Reporte de Fallecidos';
+            this.tituloModal = 'Reporte de fallecidos';
             this.nombre = '';
             this.tipoAccion = 8;
             this.filtro = 19;
@@ -10834,8 +10834,8 @@ __webpack_require__.r(__webpack_exports__);
       if (!this.correo) this.errorMostrarMsjUsuario.push("El correo de la persona no puede estar vacio.");
       if (!this.password) this.errorMostrarMsjUsuario.push("La contraseña del usuario no puede estar vacio.");
       if (this.idrol == 0) this.errorMostrarMsjUsuario.push("Debe elegir un rol para el usuario");
-      if (!this.direccion) this.errorMostrarMsjUsuario.push("La direccion de la persona no puede estar vacia.");
-      if (!this.telefono) this.errorMostrarMsjUsuario.push("El telefono de la persona no puede estar vacia.");
+      if (!this.direccion) this.errorMostrarMsjUsuario.push("La dirección de la persona no puede estar vacia.");
+      if (!this.telefono) this.errorMostrarMsjUsuario.push("El teléfono de la persona no puede estar vacia.");
       if (this.errorMostrarMsjUsuario.length) this.errorUsuario = 1;
       return this.errorUsuario;
     },
@@ -47986,7 +47986,7 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("p", { attrs: { align: "justify" } }, [
               _vm._v(
-                "El sistema de conteo poblacional fue desarrollado gracias al apoyo\n                    de las autoridades de turno de la coordinación de Técnicos en Salud\n                    Rural y la Dirección Departamental de Salud de Quetzaltenango, en el\n                    periodo de Junio-Octubre 2019\n                "
+                "El sistema de conteo poblacional fue desarrollado gracias al apoyo\n                    de las autoridades de turno de la coordinación de Técnicos en Salud\n                    Rural y la Dirección Departamental de Salud de Quetzaltenango, en el\n                    periodo de Junio-Noviembre 2019\n                "
               )
             ]),
             _vm._v(" "),
@@ -48017,7 +48017,7 @@ var staticRenderFns = [
                       _vm._v(" "),
                       _c("td", [_vm._v("arturomonterroso3@gmail.com")]),
                       _vm._v(" "),
-                      _c("td", [_vm._v("Lider de proyecto")])
+                      _c("td", [_vm._v("Líder de proyecto")])
                     ]),
                     _vm._v(" "),
                     _c("tr", [
@@ -48845,7 +48845,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("h6", [
             _vm._v(
-              "Para informacion detallada, consultar el apartado de reportes"
+              "Para información detallada, consultar el apartado de reportes"
             )
           ])
         ])
@@ -48939,7 +48939,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("option", { attrs: { value: "direccion" } }, [
-                      _vm._v("Direccion")
+                      _vm._v("Dirección")
                     ])
                   ]
                 ),
@@ -49241,7 +49241,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            placeholder: "Direccion de la Vivienda"
+                            placeholder: "Dirección de la Vivienda"
                           },
                           domProps: { value: _vm.direccion },
                           on: {
@@ -55962,7 +55962,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Fecha de Actualizacion")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Direccion")]),
+        _c("th", [_vm._v("Dirección")]),
         _vm._v(" "),
         _c("th", [_vm._v("Estado")])
       ])
@@ -55991,7 +55991,7 @@ var staticRenderFns = [
         staticClass: "col-md-3 form-control-label",
         attrs: { for: "text-input" }
       },
-      [_c("b", [_vm._v("Direccion:")])]
+      [_c("b", [_vm._v("Dirección:")])]
     )
   },
   function() {
@@ -56239,21 +56239,21 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Opciones")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Numero de Familia")]),
+        _c("th", [_vm._v("Numero de familia")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Numero de Vivienda")]),
+        _c("th", [_vm._v("Numero de vivienda")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Lider de Familia")]),
+        _c("th", [_vm._v("Lider de familia")]),
         _vm._v(" "),
         _c("th", [_vm._v("Sector")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Ubicacion")]),
+        _c("th", [_vm._v("Ubicación")]),
         _vm._v(" "),
         _c("th", [_vm._v("Dirección")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Fecha Inicial")]),
+        _c("th", [_vm._v("Fecha inicial")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Fecha de Actualizacion")]),
+        _c("th", [_vm._v("Fecha de actualizacion")]),
         _vm._v(" "),
         _c("th", [_vm._v("Estado")])
       ])
@@ -57246,11 +57246,11 @@ var render = function() {
                   },
                   [
                     _c("option", { attrs: { value: "numvivienda" } }, [
-                      _vm._v("Numero de Vivienda")
+                      _vm._v("Número de vivienda")
                     ]),
                     _vm._v(" "),
                     _c("option", { attrs: { value: "direccion" } }, [
-                      _vm._v("Direccion")
+                      _vm._v("Dirección")
                     ])
                   ]
                 ),
@@ -57610,7 +57610,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            placeholder: "Direccion de la Vivienda"
+                            placeholder: "Dirección de la Vivienda"
                           },
                           domProps: { value: _vm.direccion },
                           on: {
@@ -59020,7 +59020,7 @@ var render = function() {
                             staticClass: "col-md-2 form-control-label",
                             attrs: { for: "text-input" }
                           },
-                          [_vm._v("En Uso:")]
+                          [_vm._v("En uso:")]
                         ),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-4" }, [
@@ -59606,7 +59606,7 @@ var render = function() {
                           }
                         }),
                         _c("label", { attrs: { for: "cb1" } }, [
-                          _vm._v("Energia electrica")
+                          _vm._v("Energia eléctrica")
                         ]),
                         _vm._v(" "),
                         _c("input", {
@@ -59856,11 +59856,11 @@ var render = function() {
                           },
                           [
                             _c("option", { attrs: { value: "num_familia" } }, [
-                              _vm._v("Número de Familia")
+                              _vm._v("Número de familia")
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "num_vivienda" } }, [
-                              _vm._v("Numero de Vivienda")
+                              _vm._v("Número de vivienda")
                             ])
                           ]
                         ),
@@ -60189,7 +60189,7 @@ var render = function() {
                   _c("div", { staticClass: "form-group row border" }, [
                     _c("div", { staticClass: "col-md-3" }, [
                       _c("label", { attrs: { for: "" } }, [
-                        _vm._v("Numero familia:")
+                        _vm._v("Número familia:")
                       ]),
                       _vm._v(" "),
                       _c("input", {
@@ -60388,7 +60388,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-3" }, [
-                      _c("label", [_vm._v("Servicio de Salud:")]),
+                      _c("label", [_vm._v("Servicio de salud:")]),
                       _vm._v(" "),
                       _c(
                         "select",
@@ -60480,7 +60480,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-3" }, [
                       _c("label", { attrs: { for: "" } }, [
-                        _vm._v("Numero de Vivienda:")
+                        _vm._v("Número de vivienda:")
                       ]),
                       _vm._v(" "),
                       _c(
@@ -60736,7 +60736,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
                         _c("label", [
-                          _vm._v("Fecha de Nacimiento: "),
+                          _vm._v("Fecha de nacimiento: "),
                           _c(
                             "span",
                             {
@@ -60866,7 +60866,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
                         _c("label", { attrs: { for: "" } }, [
-                          _vm._v("Puesto de Comunidad:")
+                          _vm._v("Puesto de comunidad:")
                         ]),
                         _vm._v(" "),
                         _c(
@@ -61058,7 +61058,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
                         _c("label", { attrs: { for: "" } }, [
-                          _vm._v("Comunidad Linguistica: "),
+                          _vm._v("Comunidad linguistica: "),
                           _c(
                             "span",
                             {
@@ -61316,7 +61316,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
                         _c("label", { attrs: { for: "" } }, [
-                          _vm._v("Ocupacion: "),
+                          _vm._v("Ocupación: "),
                           _c(
                             "span",
                             {
@@ -61385,7 +61385,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
                         _c("label", { attrs: { for: "cb7" } }, [
-                          _vm._v("Migracion:")
+                          _vm._v("Migración:")
                         ]),
                         _vm._v(" "),
                         _c("input", {
@@ -61432,7 +61432,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
                         _c("label", { attrs: { for: "" } }, [
-                          _vm._v("Permanencia de Migracion:")
+                          _vm._v("Permanencia de migración:")
                         ]),
                         _vm._v(" "),
                         _c(
@@ -61488,7 +61488,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
-                        _c("label", [_vm._v("Comunidad de Migracion:")]),
+                        _c("label", [_vm._v("Comunidad de migración:")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -61514,7 +61514,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
-                        _c("label", [_vm._v("Municipio de Migracion:")]),
+                        _c("label", [_vm._v("Municipio de migración:")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -61540,7 +61540,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
-                        _c("label", [_vm._v("Departamento de Migracion:")]),
+                        _c("label", [_vm._v("Departamento de migración:")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -61567,7 +61567,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
                         _c("label", { attrs: { for: "" } }, [
-                          _vm._v("Pais de Migracion:")
+                          _vm._v("País de migración:")
                         ]),
                         _vm._v(" "),
                         _c(
@@ -62031,7 +62031,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Registrar Familia")]
+                        [_vm._v("Registrar familia")]
                       )
                     ])
                   ])
@@ -62043,7 +62043,7 @@ var render = function() {
                   _c("div", { staticClass: "form-group row border" }, [
                     _c("div", { staticClass: "col-md-3" }, [
                       _c("label", { attrs: { for: "" } }, [
-                        _vm._v("Numero familia")
+                        _vm._v("Número familia")
                       ]),
                       _vm._v(" "),
                       _c("input", {
@@ -62240,7 +62240,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-3" }, [
-                      _c("label", [_vm._v("Servicio de Salud")]),
+                      _c("label", [_vm._v("Servicio de salud")]),
                       _vm._v(" "),
                       _c(
                         "select",
@@ -62332,7 +62332,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-3" }, [
                       _c("label", { attrs: { for: "" } }, [
-                        _vm._v("Numero de Vivienda")
+                        _vm._v("Número de vivienda")
                       ]),
                       _vm._v(" "),
                       _c(
@@ -62588,7 +62588,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
                         _c("label", [
-                          _vm._v("Fecha de Nacimiento: "),
+                          _vm._v("Fecha de nacimiento: "),
                           _c(
                             "span",
                             {
@@ -62718,7 +62718,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
                         _c("label", { attrs: { for: "" } }, [
-                          _vm._v("Puesto de Comunidad:")
+                          _vm._v("Puesto de comunidad:")
                         ]),
                         _vm._v(" "),
                         _c(
@@ -62910,7 +62910,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
                         _c("label", { attrs: { for: "" } }, [
-                          _vm._v("Comunidad Linguistica: "),
+                          _vm._v("Comunidad linguistica: "),
                           _c(
                             "span",
                             {
@@ -63168,7 +63168,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
                         _c("label", { attrs: { for: "" } }, [
-                          _vm._v("Ocupacion: "),
+                          _vm._v("Ocupación: "),
                           _c(
                             "span",
                             {
@@ -63237,7 +63237,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
                         _c("label", { attrs: { for: "cb7" } }, [
-                          _vm._v("Migracion:")
+                          _vm._v("Migración:")
                         ]),
                         _vm._v(" "),
                         _c("input", {
@@ -63284,7 +63284,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
                         _c("label", { attrs: { for: "" } }, [
-                          _vm._v("Permanencia de Migracion:")
+                          _vm._v("Permanencia de migración:")
                         ]),
                         _vm._v(" "),
                         _c(
@@ -63340,7 +63340,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
-                        _c("label", [_vm._v("Comunidad de Migracion:")]),
+                        _c("label", [_vm._v("Comunidad de migración:")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -63366,7 +63366,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
-                        _c("label", [_vm._v("Municipio de Migracion:")]),
+                        _c("label", [_vm._v("Municipio de migración:")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -63392,7 +63392,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
-                        _c("label", [_vm._v("Departamento de Migracion:")]),
+                        _c("label", [_vm._v("Departamento de migración:")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -63419,7 +63419,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-9" }, [
                         _c("label", { attrs: { for: "" } }, [
-                          _vm._v("Pais de Migracion:")
+                          _vm._v("País de migración:")
                         ]),
                         _vm._v(" "),
                         _c(
@@ -63972,7 +63972,7 @@ var render = function() {
                   _c("div", { staticClass: "form-group row border" }, [
                     _c("div", { staticClass: "col-md-3" }, [
                       _c("label", { attrs: { for: "" } }, [
-                        _vm._v("Numero familia:")
+                        _vm._v("Número familia:")
                       ]),
                       _vm._v(" "),
                       _c("p", {
@@ -64011,7 +64011,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-3" }, [
-                      _c("label", [_vm._v("Servicio de Salud:")]),
+                      _c("label", [_vm._v("Servicio de salud:")]),
                       _vm._v(" "),
                       _c("p", {
                         domProps: {
@@ -64028,7 +64028,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-3" }, [
                       _c("label", { attrs: { for: "" } }, [
-                        _vm._v("Numero de Vivienda:")
+                        _vm._v("Número de vivienda:")
                       ]),
                       _vm._v(" "),
                       _c("p", {
@@ -64371,13 +64371,13 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Opciones")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Numero de Vivienda")]),
+        _c("th", [_vm._v("Número de Vivienda")]),
         _vm._v(" "),
         _c("th", [_vm._v("Fecha Inicial")]),
         _vm._v(" "),
         _c("th", [_vm._v("Fecha de Actualizacion")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Direccion")]),
+        _c("th", [_vm._v("Dirección")]),
         _vm._v(" "),
         _c("th", [_vm._v("Estado")])
       ])
@@ -64393,7 +64393,7 @@ var staticRenderFns = [
         staticClass: "col-md-3 form-control-label",
         attrs: { for: "text-input" }
       },
-      [_c("b", [_vm._v("Numero de Vivienda:")])]
+      [_c("b", [_vm._v("Número de vivienda:")])]
     )
   },
   function() {
@@ -64406,7 +64406,7 @@ var staticRenderFns = [
         staticClass: "col-md-3 form-control-label",
         attrs: { for: "text-input" }
       },
-      [_c("b", [_vm._v("Direccion:")])]
+      [_c("b", [_vm._v("Dirección:")])]
     )
   },
   function() {
@@ -64419,7 +64419,7 @@ var staticRenderFns = [
         staticClass: "col-md-3 form-control-label",
         attrs: { for: "text-input" }
       },
-      [_c("b", [_vm._v("Tenencia de la Vivienda:")])]
+      [_c("b", [_vm._v("Tenencia de la vivienda:")])]
     )
   },
   function() {
@@ -64432,7 +64432,7 @@ var staticRenderFns = [
         staticClass: "col-md-3 form-control-label",
         attrs: { for: "text-input" }
       },
-      [_c("b", [_vm._v("Tipo Vivienda:")])]
+      [_c("b", [_vm._v("Tipo vivienda:")])]
     )
   },
   function() {
@@ -64445,7 +64445,7 @@ var staticRenderFns = [
         staticClass: "col-md-3 form-control-label",
         attrs: { for: "text-input" }
       },
-      [_c("b", [_vm._v("Ambientes de la Vivienda:")])]
+      [_c("b", [_vm._v("Ambientes de la vivienda:")])]
     )
   },
   function() {
@@ -64526,7 +64526,7 @@ var staticRenderFns = [
         staticClass: "col-md-3 form-control-label",
         attrs: { for: "text-input" }
       },
-      [_c("b", [_vm._v("Abastecimiento de Agua:")])]
+      [_c("b", [_vm._v("Abastecimiento de agua:")])]
     )
   },
   function() {
@@ -64539,7 +64539,7 @@ var staticRenderFns = [
         staticClass: "col-md-3 form-control-label",
         attrs: { for: "text-input" }
       },
-      [_c("b", [_vm._v("Tratamiento de Aguas Servidas:")])]
+      [_c("b", [_vm._v("Tratamiento de aguas servidas:")])]
     )
   },
   function() {
@@ -64552,7 +64552,7 @@ var staticRenderFns = [
         staticClass: "col-md-3 form-control-label",
         attrs: { for: "text-input" }
       },
-      [_c("b", [_vm._v("Eliminación Final de Excretas:")])]
+      [_c("b", [_vm._v("Eliminación final de excretas:")])]
     )
   },
   function() {
@@ -64565,7 +64565,7 @@ var staticRenderFns = [
         staticClass: "col-md-3 form-control-label",
         attrs: { for: "text-input" }
       },
-      [_c("b", [_vm._v("Eliminación de Basura:")])]
+      [_c("b", [_vm._v("Eliminación de basura:")])]
     )
   },
   function() {
@@ -64578,7 +64578,7 @@ var staticRenderFns = [
         staticClass: "col-md-3 form-control-label",
         attrs: { for: "text-input" }
       },
-      [_c("b", [_vm._v("Ubicación de los Animales Domésticos:")])]
+      [_c("b", [_vm._v("Ubicación de los animales domésticos:")])]
     )
   },
   function() {
@@ -64591,7 +64591,7 @@ var staticRenderFns = [
         staticClass: "col-md-3 form-control-label",
         attrs: { for: "text-input" }
       },
-      [_c("b", [_vm._v("Condiciones del lugar de los Animales Domésticos:")])]
+      [_c("b", [_vm._v("Condiciones del lugar de los animales domésticos:")])]
     )
   },
   function() {
@@ -64604,7 +64604,7 @@ var staticRenderFns = [
         staticClass: "col-md-3 form-control-label",
         attrs: { for: "text-input" }
       },
-      [_c("b", [_vm._v("No. de Perros:")])]
+      [_c("b", [_vm._v("No. de perros:")])]
     )
   },
   function() {
@@ -64617,7 +64617,7 @@ var staticRenderFns = [
         staticClass: "col-md-3 form-control-label",
         attrs: { for: "text-input" }
       },
-      [_c("b", [_vm._v("No. de Gatos:")])]
+      [_c("b", [_vm._v("No. de gatos:")])]
     )
   },
   function() {
@@ -64654,19 +64654,19 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Opciones")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Numero de Familia")]),
+        _c("th", [_vm._v("Número de familia")]),
         _vm._v(" "),
         _c("th", [_vm._v("Jefe de familia")]),
         _vm._v(" "),
         _c("th", [_vm._v("Sector")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Ubicacion")]),
+        _c("th", [_vm._v("Ubicación")]),
         _vm._v(" "),
         _c("th", [_vm._v("Dirección")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Fecha Inicial")]),
+        _c("th", [_vm._v("Fecha inicial")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Fecha de Actualizacion")]),
+        _c("th", [_vm._v("Fecha de actualizacion")]),
         _vm._v(" "),
         _c("th", [_vm._v("Estado")])
       ])
@@ -64683,11 +64683,11 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Apellidos")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Apellido de Casada")]),
+      _c("th", [_vm._v("Apellido de casada")]),
       _vm._v(" "),
       _c("th", [_vm._v("Sexo")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Fecha de Nacimiento")]),
+      _c("th", [_vm._v("Fecha de nacimiento")]),
       _vm._v(" "),
       _c("th", [_vm._v("Edad")]),
       _vm._v(" "),
@@ -64695,13 +64695,13 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Lider")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Puesto Comunidad")]),
+      _c("th", [_vm._v("Puesto comunidad")]),
       _vm._v(" "),
       _c("th", [_vm._v("Parentesco")]),
       _vm._v(" "),
       _c("th", [_vm._v("Pueblos")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Comunidad Linguistica")]),
+      _c("th", [_vm._v("Comunidad linguistica")]),
       _vm._v(" "),
       _c("th", [_vm._v("Alfabetismo")]),
       _vm._v(" "),
@@ -64709,23 +64709,23 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Capacidades diferentes")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Ocupacion")]),
+      _c("th", [_vm._v("Ocupación")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Migracion")]),
+      _c("th", [_vm._v("Migración")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Permanencia de Migracion")]),
+      _c("th", [_vm._v("Permanencia de migración")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Comunidad de Migracion")]),
+      _c("th", [_vm._v("Comunidad de migración")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Municipio de Migracion")]),
+      _c("th", [_vm._v("Municipio de migración")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Departamento de Migracion")]),
+      _c("th", [_vm._v("Departamento de migración")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Pais de Migracion")]),
+      _c("th", [_vm._v("País de migración")]),
       _vm._v(" "),
       _c("th", [_vm._v("Mortalidad")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Fecha Fallecimiento")])
+      _c("th", [_vm._v("Fecha fallecimiento")])
     ])
   },
   function() {
@@ -64733,7 +64733,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("td", { attrs: { colspan: "24", align: "right" } }, [
-      _c("strong", [_vm._v("Total de Personas")])
+      _c("strong", [_vm._v("Total de personas")])
     ])
   },
   function() {
@@ -64757,11 +64757,11 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Apellidos")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Apellido de Casada")]),
+      _c("th", [_vm._v("Apellido de casada")]),
       _vm._v(" "),
       _c("th", [_vm._v("Sexo")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Fecha de Nacimiento")]),
+      _c("th", [_vm._v("Fecha de nacimiento")]),
       _vm._v(" "),
       _c("th", [_vm._v("Edad")]),
       _vm._v(" "),
@@ -64769,13 +64769,13 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Lider")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Puesto Comunidad")]),
+      _c("th", [_vm._v("Puesto comunidad")]),
       _vm._v(" "),
       _c("th", [_vm._v("Parentesco")]),
       _vm._v(" "),
       _c("th", [_vm._v("Pueblos")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Comunidad Linguistica")]),
+      _c("th", [_vm._v("Comunidad linguistica")]),
       _vm._v(" "),
       _c("th", [_vm._v("Alfabetismo")]),
       _vm._v(" "),
@@ -64783,23 +64783,23 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Capacidades diferentes")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Ocupacion")]),
+      _c("th", [_vm._v("Ocupación")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Migracion")]),
+      _c("th", [_vm._v("Migración")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Permanencia de Migracion")]),
+      _c("th", [_vm._v("Permanencia de migración")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Comunidad de Migracion")]),
+      _c("th", [_vm._v("Comunidad de migración")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Municipio de Migracion")]),
+      _c("th", [_vm._v("Municipio de migración")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Departamento de Migracion")]),
+      _c("th", [_vm._v("Departamento de migración")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Pais de Migracion")]),
+      _c("th", [_vm._v("País de migración")]),
       _vm._v(" "),
       _c("th", [_vm._v("Mortalidad")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Fecha Fallecimiento")])
+      _c("th", [_vm._v("Fecha fallecimiento")])
     ])
   },
   function() {
@@ -64807,7 +64807,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("td", { attrs: { colspan: "24", align: "right" } }, [
-      _c("strong", [_vm._v("Total de Personas")])
+      _c("strong", [_vm._v("Total de personas")])
     ])
   },
   function() {
@@ -64829,11 +64829,11 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Apellidos")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Apellido de Casada")]),
+      _c("th", [_vm._v("Apellido de casada")]),
       _vm._v(" "),
       _c("th", [_vm._v("Sexo")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Fecha de Nacimiento")]),
+      _c("th", [_vm._v("Fecha de nacimiento")]),
       _vm._v(" "),
       _c("th", [_vm._v("Edad")]),
       _vm._v(" "),
@@ -64841,13 +64841,13 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Lider")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Puesto Comunidad")]),
+      _c("th", [_vm._v("Puesto comunidad")]),
       _vm._v(" "),
       _c("th", [_vm._v("Parentesco")]),
       _vm._v(" "),
       _c("th", [_vm._v("Pueblos")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Comunidad Linguistica")]),
+      _c("th", [_vm._v("Comunidad linguistica")]),
       _vm._v(" "),
       _c("th", [_vm._v("Alfabetismo")]),
       _vm._v(" "),
@@ -64855,23 +64855,23 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Capacidades diferentes")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Ocupacion")]),
+      _c("th", [_vm._v("Ocupación")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Migracion")]),
+      _c("th", [_vm._v("Migración")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Permanencia de Migracion")]),
+      _c("th", [_vm._v("Permanencia de migración")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Comunidad de Migracion")]),
+      _c("th", [_vm._v("Comunidad de migración")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Municipio de Migracion")]),
+      _c("th", [_vm._v("Municipio de migración")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Departamento de Migracion")]),
+      _c("th", [_vm._v("Departamento de migración")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Pais de Migracion")]),
+      _c("th", [_vm._v("País de migración")]),
       _vm._v(" "),
       _c("th", [_vm._v("Mortalidad")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Fecha Fallecimiento")])
+      _c("th", [_vm._v("Fecha fallecimiento")])
     ])
   },
   function() {
@@ -64879,7 +64879,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("td", { attrs: { colspan: "23", align: "right" } }, [
-      _c("strong", [_vm._v("Total de Personas")])
+      _c("strong", [_vm._v("Total de personas")])
     ])
   },
   function() {
@@ -64953,7 +64953,7 @@ var staticRenderFns = [
                   _c("tr", [
                     _c("td", [
                       _vm._v(
-                        "\n                               Manual de Usuario\n                            \n                            "
+                        "\n                               Manual de usuario\n                            \n                            "
                       )
                     ]),
                     _vm._v(" "),
@@ -65068,7 +65068,7 @@ var staticRenderFns = [
                   _c("tr", [
                     _c("td", [
                       _vm._v(
-                        "\n                               Manual de Usuario\n                            \n                            "
+                        "\n                               Manual de usuario\n                            \n                            "
                       )
                     ]),
                     _vm._v(" "),
@@ -65183,7 +65183,7 @@ var staticRenderFns = [
                   _c("tr", [
                     _c("td", [
                       _vm._v(
-                        "\n                               Manual de Usuario\n                            \n                            "
+                        "\n                               Manual de usuario\n                            \n                            "
                       )
                     ]),
                     _vm._v(" "),
@@ -65798,7 +65798,7 @@ var render = function() {
             _vm._v(" "),
             _c("tbody", [
               _c("tr", [
-                _c("td", [_vm._v("Reporte de Jefes de Familia")]),
+                _c("td", [_vm._v("Reporte de jefes de familia")]),
                 _vm._v(" "),
                 _c("td", [
                   _c(
@@ -65815,7 +65815,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Municipio\n                                "
+                        " Reporte por municipio\n                                "
                       )
                     ]
                   ),
@@ -65835,7 +65835,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Sede de territorio\n                                "
+                        " Reporte por sede de territorio\n                                "
                       )
                     ]
                   ),
@@ -65855,7 +65855,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Comunidad\n                                "
+                        " Reporte por comunidad\n                                "
                       )
                     ]
                   )
@@ -65863,7 +65863,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("tr", [
-                _c("td", [_vm._v("Reporte de Viviendas")]),
+                _c("td", [_vm._v("Reporte de viviendas")]),
                 _vm._v(" "),
                 _c("td", [
                   _c(
@@ -65880,7 +65880,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Municipio\n                                "
+                        " Reporte por municipio\n                                "
                       )
                     ]
                   ),
@@ -65900,7 +65900,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Sede de territorio\n                                "
+                        " Reporte por sede de territorio\n                                "
                       )
                     ]
                   ),
@@ -65920,7 +65920,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Comunidad\n                                "
+                        " Reporte por comunidad\n                                "
                       )
                     ]
                   )
@@ -65928,7 +65928,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("tr", [
-                _c("td", [_vm._v("Reporte de Sexo de la persona")]),
+                _c("td", [_vm._v("Reporte de sexo de la persona")]),
                 _vm._v(" "),
                 _c("td", [
                   _c(
@@ -65945,7 +65945,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Municipio\n                                "
+                        " Reporte por municipio\n                                "
                       )
                     ]
                   ),
@@ -65965,7 +65965,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Sede de territorio\n                                "
+                        " Reporte por sede de territorio\n                                "
                       )
                     ]
                   ),
@@ -65985,7 +65985,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Comunidad\n                                "
+                        " Reporte por comunidad\n                                "
                       )
                     ]
                   )
@@ -65993,7 +65993,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("tr", [
-                _c("td", [_vm._v("Reporte de Edades")]),
+                _c("td", [_vm._v("Reporte de edades")]),
                 _vm._v(" "),
                 _c("td", [
                   _c(
@@ -66010,7 +66010,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Municipio\n                                "
+                        " Reporte por municipio\n                                "
                       )
                     ]
                   ),
@@ -66030,7 +66030,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Sede de territorio\n                                "
+                        " Reporte por sede de territorio\n                                "
                       )
                     ]
                   ),
@@ -66050,7 +66050,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Comunidad\n                                "
+                        " Reporte por comunidad\n                                "
                       )
                     ]
                   )
@@ -66058,7 +66058,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("tr", [
-                _c("td", [_vm._v("Reporte de Capacidades diferentes")]),
+                _c("td", [_vm._v("Reporte de capacidades diferentes")]),
                 _vm._v(" "),
                 _c("td", [
                   _c(
@@ -66075,7 +66075,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Municipio\n                                "
+                        " Reporte por municipio\n                                "
                       )
                     ]
                   ),
@@ -66095,7 +66095,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Sede de territorio\n                                "
+                        " Reporte por sede de territorio\n                                "
                       )
                     ]
                   ),
@@ -66115,7 +66115,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Comunidad\n                                "
+                        " Reporte por comunidad\n                                "
                       )
                     ]
                   )
@@ -66123,7 +66123,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("tr", [
-                _c("td", [_vm._v("Reporte de Ocupacion")]),
+                _c("td", [_vm._v("Reporte de ocupación")]),
                 _vm._v(" "),
                 _c("td", [
                   _c(
@@ -66140,7 +66140,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Municipio\n                                "
+                        " Reporte por municipio\n                                "
                       )
                     ]
                   ),
@@ -66160,7 +66160,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Sede de territorio\n                                "
+                        " Reporte por sede de territorio\n                                "
                       )
                     ]
                   ),
@@ -66180,7 +66180,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Comunidad\n                                "
+                        " Reporte por comunidad\n                                "
                       )
                     ]
                   )
@@ -66188,7 +66188,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("tr", [
-                _c("td", [_vm._v("Reporte de Migracion")]),
+                _c("td", [_vm._v("Reporte de migración")]),
                 _vm._v(" "),
                 _c("td", [
                   _c(
@@ -66205,7 +66205,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Municipio\n                                "
+                        " Reporte por municipio\n                                "
                       )
                     ]
                   ),
@@ -66225,7 +66225,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Sede de territorio\n                                "
+                        " Reporte por sede de territorio\n                                "
                       )
                     ]
                   ),
@@ -66245,7 +66245,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Comunidad\n                                "
+                        " Reporte por comunidad\n                                "
                       )
                     ]
                   )
@@ -66253,7 +66253,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("tr", [
-                _c("td", [_vm._v("Reporte de Fallecidos")]),
+                _c("td", [_vm._v("Reporte de fallecidos")]),
                 _vm._v(" "),
                 _c("td", [
                   _c(
@@ -66270,7 +66270,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Municipio\n                                "
+                        " Reporte por municipio\n                                "
                       )
                     ]
                   ),
@@ -66290,7 +66290,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Sede de territorio\n                                "
+                        " Reporte por sede de territorio\n                                "
                       )
                     ]
                   ),
@@ -66310,7 +66310,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Comunidad\n                                "
+                        " Reporte por comunidad\n                                "
                       )
                     ]
                   )
@@ -66318,7 +66318,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("tr", [
-                _c("td", [_vm._v("Reporte de Servicios")]),
+                _c("td", [_vm._v("Reporte de servicios")]),
                 _vm._v(" "),
                 _c("td", [
                   _c(
@@ -66335,7 +66335,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Municipio\n                                "
+                        " Reporte por municipio\n                                "
                       )
                     ]
                   ),
@@ -66355,7 +66355,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Sede de territorio\n                                "
+                        " Reporte por sede de territorio\n                                "
                       )
                     ]
                   ),
@@ -66375,7 +66375,7 @@ var render = function() {
                     [
                       _c("i", { staticClass: "icon-doc" }),
                       _vm._v(
-                        " Reporte por Comunidad\n                                "
+                        " Reporte por comunidad\n                                "
                       )
                     ]
                   )
@@ -66864,7 +66864,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Sede de territorio")]
+                        [_vm._v("sede de territorio")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -67275,7 +67275,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Sede de territorio")]
+                        [_vm._v("sede de territorio")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -68181,7 +68181,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Sede de territorio")]
+                        [_vm._v("sede de territorio")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -68676,7 +68676,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Sede de territorio")]
+                        [_vm._v("sede de territorio")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -69494,7 +69494,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Sede de territorio")]
+                        [_vm._v("sede de territorio")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -69817,7 +69817,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Sede de territorio")]
+                        [_vm._v("sede de territorio")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -70463,7 +70463,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Sede de territorio")]
+                        [_vm._v("sede de territorio")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -70786,7 +70786,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Sede de territorio")]
+                        [_vm._v("sede de territorio")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -71445,7 +71445,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("option", { attrs: { value: "telefono" } }, [
-                      _vm._v("Telefono")
+                      _vm._v("Teléfono")
                     ])
                   ]
                 ),
@@ -71979,7 +71979,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Direccion")]
+                        [_vm._v("Dirección")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -71995,7 +71995,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            placeholder: "Direccion de la persona"
+                            placeholder: "Dirección de la persona"
                           },
                           domProps: { value: _vm.direccion },
                           on: {
@@ -72017,7 +72017,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Telefono")]
+                        [_vm._v("Teléfono")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -72033,7 +72033,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            placeholder: "Telefono de la persona"
+                            placeholder: "Teléfono de la persona"
                           },
                           domProps: { value: _vm.telefono },
                           on: {
@@ -72162,9 +72162,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Correo")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Direccion")]),
+        _c("th", [_vm._v("Dirección")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Telefono")]),
+        _c("th", [_vm._v("Teléfono")]),
         _vm._v(" "),
         _c("th", [_vm._v("Rol")]),
         _vm._v(" "),
@@ -87958,15 +87958,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************!*\
   !*** ./resources/assets/js/components/Reporte.vue ***!
   \****************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Reporte_vue_vue_type_template_id_32da2d4a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Reporte.vue?vue&type=template&id=32da2d4a& */ "./resources/assets/js/components/Reporte.vue?vue&type=template&id=32da2d4a&");
 /* harmony import */ var _Reporte_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Reporte.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Reporte.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Reporte_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Reporte_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _Reporte_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Reporte.vue?vue&type=style&index=0&lang=css& */ "./resources/assets/js/components/Reporte.vue?vue&type=style&index=0&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Reporte_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Reporte.vue?vue&type=style&index=0&lang=css& */ "./resources/assets/js/components/Reporte.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -87998,7 +87997,7 @@ component.options.__file = "resources/assets/js/components/Reporte.vue"
 /*!*****************************************************************************!*\
   !*** ./resources/assets/js/components/Reporte.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -88310,7 +88309,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\josea\Desktop\Proyecto Censo\PorLaGran\Correcciones\resources\assets\js\app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\josea\Desktop\Carpeta Personal\Proyecto Censo\Recursos\Defensa\Correcciones\resources\assets\js\app.js */"./resources/assets/js/app.js");
 
 
 /***/ })

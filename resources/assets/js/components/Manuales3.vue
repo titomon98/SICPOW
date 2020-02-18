@@ -21,7 +21,7 @@
                     <tbody>
                         <tr>
                             <td>
-                               Manual de Usuario
+                               Manual de usuario
                             
                             </td>
                             <td><a href="./img/ManualUsr.pdf" target="blank">

@@ -105,7 +105,7 @@
 
                     </div>
                 </div>
-                <h6>Para informacion detallada, consultar el apartado de reportes</h6>
+                <h6>Para información detallada, consultar el apartado de reportes</h6>
             </div>
         </div>
         

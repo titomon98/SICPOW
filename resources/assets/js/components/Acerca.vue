@@ -15,7 +15,7 @@
                 <p align="justify">El sistema de conteo poblacional fue desarrollado gracias al apoyo
                     de las autoridades de turno de la coordinación de Técnicos en Salud
                     Rural y la Dirección Departamental de Salud de Quetzaltenango, en el
-                    periodo de Junio-Octubre 2019
+                    periodo de Junio-Noviembre 2019
                 </p>
                 <h3>Acerca de los desarrolladores</h3>
                 <div class="table-responsive">
@@ -33,7 +33,7 @@
                                     José Arturo Monterroso Muñoz
                                 </td>
                                 <td>arturomonterroso3@gmail.com</td>
-                                <td>Lider de proyecto</td>
+                                <td>Líder de proyecto</td>
                             </tr>
                             <tr>
                                 <td>
